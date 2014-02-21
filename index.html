@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<title>SOS 2.0 Navigator</title>
+		<script src="lib/require-2.1.11.min.js" data-main="modules/index.js"> </script>
+		<script src="config.js"></script>
+		<style>
+			.top {
+				overflow: hidden;
+			}
+			table.results {
+				clear: both;
+				border: 1px solid black;
+				margin-left: 200px;
+				margin-top: 24px;
+			}
+			table.results td {
+				background: #DDD;
+				color: #333;
+				padding: 3px;
+				text-align: left;
+			}
+			table.results th {
+				background: #333;
+				color: #DDD;
+				padding: 3px;
+			}
+			div.select {
+				padding: 3px;
+			}
+			div.select label {
+				display: inline-block;
+				width: 190px;
+				text-align: right;
+				vertical-align: top;
+			}
+			div.select select {
+				display: inline-block;
+				width: 360px;
+			}
+			div.select select[multiple] {
+				height: 180px !important;
+			}
+
+			#navigator {
+				float: left;
+			}
+			#raw {
+				background: #DDD;
+				border: 1px solid gray;
+				padding: 14px;
+				margin: 0 25px;
+				font-size: 8px;
+				width: 600px;
+				height: 400px;
+				overflow: scroll;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 id="title">SOS 2.0 Navigator</h1>
+		<div class="top">
+			<div id="navigator">
+				<div class="select">
+					<label for="services">Service:</label>
+					<select id="services">
+					</select>
+				</div>
+				<div class="select">
+					<label for="offerings">Offering:</label>
+					<select id="offerings">
+					</select>
+				</div>
+				<div class="select">
+					<label for="features">Features (multiselect):</label>
+					<select multiple id="features">
+					</select>
+				</div>
+				<div class="select">
+					<label for="properties">Properties (multiselect):</label>
+					<select multiple id="properties">
+					</select>
+				</div>
+			</div>
+			<pre id="raw">
+			</pre>
+		</div>
+		<div id="table">
+		</div>
+	</body>
+</html>
