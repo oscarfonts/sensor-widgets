@@ -11,9 +11,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   width="512"
-   height="512"
    id="svg3510"
+   viewBox="0 0 512 512"
    inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="MyGauge.svg">
   <sodipodi:namedview
@@ -459,8 +458,7 @@
   <g
      style="opacity:0.7"
      id="rose"
-     transform="translate(0,-540.36218)"
-     onclick="sadf">
+     transform="translate(0,-540.36218)">
     <g
        style="opacity:0.25"
        id="g8686">

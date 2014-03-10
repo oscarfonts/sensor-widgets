@@ -22,7 +22,6 @@ define(['XML'], function(XML) {
 	    },
 
 	    describeSensor: function(procedure, callback) {
-
 	        var request = {
 	            request: "DescribeSensor",
 	            procedure: procedure,
@@ -38,7 +37,6 @@ define(['XML'], function(XML) {
 	    },
 	
 	    getFeatureOfInterest: function(procedure, callback) {
-
 	        var request = {
 	            request: "GetFeatureOfInterest",
 	            procedure: procedure
@@ -49,7 +47,7 @@ define(['XML'], function(XML) {
 	        });
 	    },
 	
-	    getObservation: function(offering, features, properties, callback) {
+	    getObservation: function(offering, features, properties, time, callback) {
 	        var request = {
 	            "request": "GetObservation"
 	        };
@@ -65,7 +63,24 @@ define(['XML'], function(XML) {
 	        if (properties && properties.length) {
 	            request["observedProperty"] = properties;
 	        }
-	
+	        
+	        if (time) {
+	        	var operation;
+	        	if (time.length && time.length == 2) {
+	        		// Time Range
+	        		operation = "during";
+	        	} else {
+	        		// Time Instant
+	        		operation = "equals";
+				}
+				filter = {};
+				filter[operation] = {
+		            "ref": "om:phenomenonTime",
+		            "value": time
+				};
+				request["temporalFilter"] = [filter];
+        	}
+
 	        this._send(request, function(response) {
 	            callback(response.observations);
 	        });

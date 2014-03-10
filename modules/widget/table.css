@@ -1,0 +1,19 @@
+table.results {
+	clear: both;
+	border: 1px solid black;
+	margin-left: 200px;
+	margin-top: 24px;
+}
+
+table.results td {
+	background: #DDD;
+	color: #333;
+	padding: 3px;
+	text-align: left;
+}
+
+table.results th {
+	background: #333;
+	color: #DDD;
+	padding: 3px;
+}

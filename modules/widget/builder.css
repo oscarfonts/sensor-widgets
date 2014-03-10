@@ -1,0 +1,23 @@
+#editor {
+	float: left;
+}
+
+div.select {
+	padding: 3px;
+}
+
+div.select label {
+	display: inline-block;
+	width: 190px;
+	text-align: right;
+	vertical-align: top;
+}
+
+div.select select {
+	display: inline-block;
+	width: 360px;
+}
+
+div.select select[multiple] {
+	height: 180px !important;
+}

@@ -42,6 +42,10 @@ div.select select[multiple] {
 	height: 180px !important;
 }
 
+div.select input {
+	width: 169px;
+}
+
 #navigator {
 	float: left;
 }

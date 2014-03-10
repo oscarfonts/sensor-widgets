@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['jquery', 'SOS'], function($, SOS) {
+define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 	$(function() {
-		var featureNames = {};
-		var propertyNames = {};
+		var featureNames = {},
+			propertyNames = {};
 
 		setServices([
 			"http://localhost:8080/52n-sos/sos/json",
@@ -19,9 +19,40 @@ define(['jquery', 'SOS'], function($, SOS) {
 		$('#offerings').change(function() {
 			setProperties($('#offerings option:selected').data("procedure"));
 			setFeatures($('#offerings option:selected').data("procedure"));
+			setDateRange();
 		});
 
-		$('#properties').change(function() {
+		$('#features').change(loadData);
+
+		$('#properties').change(loadData);
+		
+		$('#date_range').dateRangePicker({
+			separator: ' to ',
+			language: 'en',
+			startOfWeek: 'monday',
+			format: 'YYYY-MM-DD[T]HH:mm:ss[Z]',
+			//startDate: X, // TODO getDataAvailability
+			//endDate: X, // TODO getDataAvailability
+			shortcuts: {
+				'prev-days': [1,3,5],
+				'prev' : ['week']
+			},
+			time: {
+				enabled: true
+			},
+			getValue: function() {
+				if ($('#date_from').val() && $('#date_to').val())
+					return $('#date_from').val() + ' to ' + $('#date_to').val();
+				else
+					return '';
+			},
+			setValue: function(s, date1, date2) {
+				$('#date_from').val(date1);
+				$('#date_to').val(date2);
+			}
+		}).bind('datepicker-change', loadData);
+
+		function loadData() {
 			var offering = $('#offerings option:selected').attr("id");
 			var features = $('#features option:selected').map(function() {
 				return this.id;
@@ -29,19 +60,11 @@ define(['jquery', 'SOS'], function($, SOS) {
 			var properties = $('#properties option:selected').map(function() {
 				return this.id;
 			}).get();
-			setData(offering, features, properties);
-		});
-
-		$('#features').change(function() {
-			var offering = $('#offerings option:selected').attr("id");
-			var features = $('#features option:selected').map(function() {
-				return this.id;
-			}).get();
-			var properties = $('#properties option:selected').map(function() {
-				return this.id;
-			}).get();
-			setData(offering, features, properties);
-		});
+			var dateFrom = $('#date_from').val();
+			var dateTo = $('#date_to').val();
+					
+			setData(offering, features, properties, dateFrom, dateTo);
+		}
 
 		function setServices(urls) {
 			clearOptions('#services', '#offerings', '#features', '#properties');
@@ -163,9 +186,18 @@ define(['jquery', 'SOS'], function($, SOS) {
 
 			});
 		};
+		
+		function setDateRange() {
+			$('#date_from').prop('disabled', false);
+			$('#date_from').prop('readonly', true);
+			$('#date_to').prop('disabled', false);
+			$('#date_to').prop('readonly', true);
+		};
 
-		function setData(offering, features, properties) {
-			SOS.getObservation(offering, features, properties, function(observations) {
+		function setData(offering, features, properties, dateFrom, dateTo) {
+			var dateRange = (dateFrom && dateTo) ? [dateFrom, dateTo] : null;
+			
+			SOS.getObservation(offering, features, properties, dateRange, function(observations) {
 				raw(observations);
 
 				function d(n) {
@@ -214,6 +246,8 @@ define(['jquery', 'SOS'], function($, SOS) {
 			for (var i = 0; i < arguments.length; i++) {
 				$(arguments[i]).find('option').remove();
 			}
+			$('#date_from').prop('disabled', true);
+			$('#date_to').prop('disabled', true);
 			$("#table").html("");
 		}
 	
