@@ -1,6 +1,44 @@
-#editor {
-	float: left;
+body {
+	margin: 0;
+    background: url("/svg/gridtile.svg") repeat scroll -1px -1px / 50px auto #EEEEEE;
+    text-align: left;
 }
+
+#editor {
+	width: 520px;
+	height: 100%;
+	float: left;
+	background: #4A4A4A;
+	color: #FFFFFF;
+	border-right: 1px solid #333333;
+}
+
+#editor h1 {
+	text-align: center;
+	font-weight: 300;
+	padding: 10px;
+	margin: 0 20px 20px 20px;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+#widget {
+	float: left;
+	margin: 12px;
+	background: white;
+	border: 1px solid #333333;
+	height: 580px;
+	width: 320px;
+	-webkit-box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.5);
+    box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.5);
+    cursor: move;
+}
+
+#widget iframe {
+	background: white;
+}
+
+.ui-resizable-helper { border: 2px dotted #00F; }
 
 div.select {
 	padding: 3px;
@@ -8,14 +46,23 @@ div.select {
 
 div.select label {
 	display: inline-block;
-	width: 190px;
+	width: 120px;
 	text-align: right;
 	vertical-align: top;
+	padding-right: 10px;
 }
 
-div.select select {
+div.select select,
+div.select input {
 	display: inline-block;
 	width: 360px;
+}
+
+button {
+	display: inline-block;
+	margin-left: 372px;
+	margin-top: 24px;
+	width: 120px;
 }
 
 div.select select[multiple] {

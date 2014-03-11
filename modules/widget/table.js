@@ -3,21 +3,20 @@
  */
 define(['SOS', 'css!widget/table.css'], function(SOS) {
 	
-	var inputs = {
-		title: [false, false],
-		service: [true, false],
-		offering: [true, false],
-		features: [true, true],
-		properties: [true, true],
-		time_start: [false, false],
-		time_end: [false, false]
-	};
+	var inputs = [
+		"service",
+		"offering",
+		"features",
+		"properties",
+		"time_start",
+		"time_end"
+	];
 
 	return {
 		inputs: inputs,
 		init: function(config, renderTo) {
 			var contents = config.title ? "<h3>" + config.title + "</h3>" : "";
-			config.render_to.innerHTML = contents;
+			renderTo.innerHTML = contents;
 			
 	        SOS.setUrl(config.service);
 	        read();
@@ -63,7 +62,7 @@ define(['SOS', 'css!widget/table.css'], function(SOS) {
 				table += "</table>";
 				
 				var title = config.title ? "<h3>" + config.title + "</h3>" : "";
-				config.render_to.innerHTML = title + table;
+				renderTo.innerHTML = title + table;
 			};
 		}
 	};

@@ -1,8 +1,7 @@
 table.results {
-	clear: both;
 	border: 1px solid black;
-	margin-left: 200px;
-	margin-top: 24px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 table.results td {

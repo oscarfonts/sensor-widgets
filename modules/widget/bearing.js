@@ -3,21 +3,21 @@
  */
 define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 	
-	var inputs = {
-		title: [false, false],
-		service: [true, false],
-		offering: [true, false],
-		features: [true, false],
-		properties: [true, false],
-		refresh_interval: [true, false]
-	};
+	var inputs = [
+		"service",
+		"offering",
+		"feature",
+		"property",
+		"refresh_interval"
+	];
 
 	return {
 		inputs: inputs,
 		init: function(config, renderTo) {
-			var contents = config.title ? "<h1>" + config.title + "</h1>" : "";
-			contents += '<h2 id="feature"></h2><h1><span id="value"></span> º</h1><h3 id="date"></h3>';
+			var contents = '<div class="widget">';
+			contents += '<h1 id="feature_name"></h1><h2 id="property_name"></h2>';
 			contents += drawing;
+			contents += '<h1><span id="value"></span>º</h1><h3 id="date"></h3></div>';
 			renderTo.innerHTML = contents;
 			
 			var arrow = document.getElementById("arrow"),
@@ -28,7 +28,7 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 	        read();
 	
 	        function read() {
-	            SOS.getObservation(config.offering, config.features, config.properties, "latest", draw);
+	            SOS.getObservation(config.offering, [config.feature], [config.property], "latest", draw);
 	        };
 	
 	        function draw(observations) {
@@ -39,14 +39,22 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 	        		var obs = observations[0],
 	        			foi_name = obs.featureOfInterest.name.value,
 	        			date = obs.resultTime, // TODO cast to date object, &c.
-	        			value = obs.result.value;
+	        			value = obs.result.value,
+	        			procedure = obs.procedure;
 					
-					document.getElementById("feature").innerHTML = foi_name;
+					document.getElementById("feature_name").innerHTML = foi_name;
 					document.getElementById("date").innerHTML = date;
 					document.getElementById("value").innerHTML = value;
 					arrow.setAttribute("transform", "rotate("+value+", 256, 256)");
 					shadow.setAttribute("transform", "translate(5, 5) rotate("+value+", 256, 256)");
-	        		
+					
+		            SOS.describeSensor(obs.procedure, function(description) {
+						var property = description.hasOwnProperty("ProcessModel")
+						 	? description.ProcessModel.outputs.OutputList.output
+							: description.System.outputs.OutputList.output;
+						property = property instanceof Array ? property[0] : property;
+						document.getElementById("property_name").innerHTML = property.name;
+					});
 	    		} else {
 					console.error("Bearing Widget Error - Got an invalid observation from the SOS service");    			
 	    		}

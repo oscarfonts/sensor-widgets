@@ -36,18 +36,16 @@ define(function() {
 		// TODO: Really choose. Lists, links and onClicks.
 		var widgets = ["bearing", "table"];
 		
-		var contents = '<h1>Choose a Widget Type</h1>',
-			list = "";
+		var contents = '<h1>Widgets</h1>';
 
 		for (var i in widgets) {
 			var widget = widgets[i];
-			list += "<li><a class='widget' id='" + widget + "'>" + widget + "</a></li>";
+			contents += "<a class='big-button' id='" + widget + "' href='?name=" + widget + "' target='builder'> <div class='flaticon-"+widget+"'></div><b>NEW </b>" + widget + " widget</a>";
 		}
 		
-		contents += "<ul>" + list + "</ul>";
-		renderTo.innerHTML = contents;
+		var iframe = '<iframe id="factory-right" name="builder" width="80%" height="100%" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
 		
-		// TODO bind onclick callbck to each link. 
+		renderTo.innerHTML = '<div id="factory">' + contents + '</div>' + iframe;
 		
 		function clicked(e) {
 			var name = ""; // TODO get widget name from event parameters
@@ -83,10 +81,10 @@ define(function() {
 
 	function checkConfig(inputs, config) {
 		var missing = [];
-		for (key in inputs) {
-			var mandatory = inputs[key][0];
-			if (mandatory && !config.hasOwnProperty(key)){
-				missing.push(key);
+		for (i in inputs) {
+			var input = inputs[i];
+			if (!config.hasOwnProperty(input)){
+				missing.push(input);
 			}
 		}
 		if (missing.length) {
