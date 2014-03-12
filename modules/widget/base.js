@@ -12,11 +12,11 @@ define(["require"], function(require) {
 			return object;
 		},
 		loadCss: function(url) {
-		    var link = document.createElement("link");
-		    link.type = "text/css";
-		    link.rel = "stylesheet";
-		    link.href = require.toUrl(url);
-		    document.getElementsByTagName("head")[0].appendChild(link);
+			var link = document.createElement("link");
+			link.type = "text/css";
+			link.rel = "stylesheet";
+			link.href = require.toUrl(url);
+			document.getElementsByTagName("head")[0].appendChild(link);
 		}
 	};
 });

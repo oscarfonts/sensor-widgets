@@ -3,14 +3,9 @@
  */
 define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 	$(function() {
-		var featureNames = {},
-			propertyNames = {};
+		var featureNames = {}, propertyNames = {};
 
-		setServices([
-			"http://localhost:8080/52n-sos/sos/json",
-			"http://sensorweb.demo.52north.org/52n-sos-webapp/sos/json",
-			"http://172.17.4.37:8080/52n-sos/sos/json"
-		]);
+		setServices(["http://localhost:8080/52n-sos/sos/json", "http://sensorweb.demo.52north.org/52n-sos-webapp/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
 
 		$('#services').change(function() {
 			setOfferings($('#services option:selected').attr("id"));
@@ -25,7 +20,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 		$('#features').change(loadData);
 
 		$('#properties').change(loadData);
-		
+
 		$('#date_range').dateRangePicker({
 			separator: ' to ',
 			language: 'en',
@@ -34,8 +29,8 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 			//startDate: X, // TODO getDataAvailability
 			//endDate: X, // TODO getDataAvailability
 			shortcuts: {
-				'prev-days': [1,3,5],
-				'prev' : ['week']
+				'prev-days': [1, 3, 5],
+				'prev': ['week']
 			},
 			time: {
 				enabled: true
@@ -62,7 +57,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 			}).get();
 			var dateFrom = $('#date_from').val();
 			var dateTo = $('#date_to').val();
-					
+
 			setData(offering, features, properties, dateFrom, dateTo);
 		}
 
@@ -70,19 +65,16 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 			clearOptions('#services', '#offerings', '#features', '#properties');
 			featureNames = {};
 			propertyNames = {};
-			
-			if(urls) {
+
+			if (urls) {
 				$('#services').append($('<option>').append("Select a Service..."));
 			} else {
 				return;
 			}
-			
+
 			for (i in urls) {
 				url = urls[i];
-				$('#services').append($('<option>')
-					.attr('id', url)
-					.append(url)
-				);					
+				$('#services').append($('<option>').attr('id', url).append(url));
 			}
 		};
 
@@ -91,7 +83,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 			featureNames = {};
 			propertyNames = {};
 
-			if(url) {
+			if (url) {
 				$('#offerings').append($('<option>').append("Select an Offering..."));
 			} else {
 				return;
@@ -104,11 +96,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 				for (i in offerings) {
 					var offering = offerings[i];
 
-					$("#offerings").append($('<option>')
-		                .attr('id', offering.identifier)
-		                .data('procedure', offering.procedure[0])
-		                .append(offering.name)
-		            );
+					$("#offerings").append($('<option>').attr('id', offering.identifier).data('procedure', offering.procedure[0]).append(offering.name));
 				}
 			});
 		};
@@ -124,9 +112,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 			SOS.describeSensor(procedure, function(description) {
 				raw(description);
 
-				var properties = description.hasOwnProperty("ProcessModel")
-					 	? description.ProcessModel.outputs.OutputList.output
-						: description.System.outputs.OutputList.output;
+				var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
 
 				properties = properties instanceof Array ? properties : [properties];
 
@@ -140,7 +126,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 							property.type = type;
 							property.id = property[type].definition;
 							property.description = property.name + " (" + type;
-							if(type == "Quantity" && property[type].hasOwnProperty("uom")) {
+							if (type == "Quantity" && property[type].hasOwnProperty("uom")) {
 								property.description += " [" + property[type].uom.code + "]";
 							}
 							property.description += ")";
@@ -149,10 +135,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 
 					propertyNames[property.id] = property.description;
 
-					$("#properties").append($('<option>')
-		                .attr('id', property.id) 
-		                .append(property.description)
-		            );
+					$("#properties").append($('<option>').attr('id', property.id).append(property.description));
 
 				}
 
@@ -178,15 +161,12 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 
 					featureNames[id] = name;
 
-					$("#features").append($('<option>')
-		                .attr('id', id) 
-		                .append(name)
-		            );
+					$("#features").append($('<option>').attr('id', id).append(name));
 				}
 
 			});
 		};
-		
+
 		function setDateRange() {
 			$('#date_from').prop('disabled', false);
 			$('#date_from').prop('readonly', true);
@@ -196,7 +176,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 
 		function setData(offering, features, properties, dateFrom, dateTo) {
 			var dateRange = (dateFrom && dateTo) ? [dateFrom, dateTo] : null;
-			
+
 			SOS.getObservation(offering, features, properties, dateRange, function(observations) {
 				raw(observations);
 
@@ -209,10 +189,9 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 					var observation = observations[i];
 
 					var phen_time = observation.phenomenonTime;
-					var time = new Date(phen_time instanceof Array ? phen_time[0] : phen_time);
-					time = time.getUTCFullYear() + "/" + d(time.getUTCMonth() + 1) + "/" + d(time.getUTCDate()) +
-					 " " + d(time.getUTCHours()) + ":" + d(time.getUTCMinutes()) + ":" + d(time.getUTCSeconds());
-					
+					var time = new Date( phen_time instanceof Array ? phen_time[0] : phen_time);
+					time = time.getUTCFullYear() + "/" + d(time.getUTCMonth() + 1) + "/" + d(time.getUTCDate()) + " " + d(time.getUTCHours()) + ":" + d(time.getUTCMinutes()) + ":" + d(time.getUTCSeconds());
+
 					var result = observation.result;
 
 					rows.push({
@@ -220,7 +199,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 						property: propertyNames[observation.observableProperty],
 						time: time,
 						value: result.hasOwnProperty("value") ? result.value : result,
-						uom: result.hasOwnProperty("uom") ? result.uom : "(N/A)" 
+						uom: result.hasOwnProperty("uom") ? result.uom : "(N/A)"
 					});
 				}
 
@@ -228,17 +207,16 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 					return (r1.time > r2.time) ? 1 : -1;
 				});
 
-				var tbl = "<table class='results'>"
-						+ "<th>Feature</th><th>Property</th><th>Time</th><th>Value</th><th>UoM</th>";
-			    $.each(sorted, function() {
-			        var row = "";
-			        $.each(this, function(key, value) {
-			            row += "<td>"+value+"</td>";
-			        });
-			        tbl += "<tr>"+row+"</tr>";                 
-			    });
+				var tbl = "<table class='results'>" + "<th>Feature</th><th>Property</th><th>Time</th><th>Value</th><th>UoM</th>";
+				$.each(sorted, function() {
+					var row = "";
+					$.each(this, function(key, value) {
+						row += "<td>" + value + "</td>";
+					});
+					tbl += "<tr>" + row + "</tr>";
+				});
 				tbl += "</table>";
-			    $("#table").html(tbl);
+				$("#table").html(tbl);
 			});
 		};
 
@@ -250,10 +228,10 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 			$('#date_to').prop('disabled', true);
 			$("#table").html("");
 		}
-	
+
 		function raw(json) {
 			$("#raw").html(JSON.stringify(json, undefined, 2));
 		}
-		
+
 	});
 });

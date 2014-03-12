@@ -2,17 +2,16 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $) {
-	
+
 	var inputs = ["name"];
-	
+
 	function draw(widget, config, renderTo) {
-		var contents = '<h1>'+capitalize(config.name)+' Widget<br/><small>Builder</small></h1>';
-		
+		var contents = '<h1>' + capitalize(config.name) + ' Widget<br/><small>Builder</small></h1>';
+
 		for (var i in widget.inputs) {
 			var input = widget.inputs[i];
-				select = "",
-				multiple = false;
-			
+			select = "", multiple = false;
+
 			switch (input) {
 				case "service":
 				case "offering":
@@ -26,11 +25,10 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 					multiple = true;
 					break;
 				case "refresh_interval":
-					var options = "",
-						intervals = [5, 10, 30, 60, 120];
+					var options = "", intervals = [5, 10, 30, 60, 120];
 					for (i in intervals) {
 						var value = intervals[i];
-						options += '<option id="'+value+'">'+value+'</option>';
+						options += '<option id="' + value + '">' + value + '</option>';
 					}
 					select = '<select id="' + input + '">' + options + '</select>';
 					break;
@@ -38,37 +36,28 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 					select = '<input type="text" value="" id="' + input + '"/>';
 			}
 
-			var label = capitalize(input) + (multiple ? " (multiselect)" : "");
-			contents += '<div class="select">'
-					  + '<label for="'+input+'">'+label+':</label>'
-			    	  + select
-					  + '</div>';
+			var label = capitalize(input) + ( multiple ? " (multiselect)" : "");
+			contents += '<div class="select">' + '<label for="' + input + '">' + label + ':</label>' + select + '</div>';
 		}
-		
+
 		contents += '<button name="build">Create Widget</button>';
-		
-		renderTo.innerHTML = '<div id="editor">' + contents + '</div>'
-			+ '<div id="preview"><h1 id="header"><img src="/img/logo.svg"/>Widget<br/><small>Preview</small></h1>'
-			+ '<div id="widget"></div></div>';
+
+		renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="/img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
 		$("#widget").resizable({
 			helper: "ui-resizable-helper"
 		});
 		$("#widget").draggable({
 			opacity: 0.35
 		});
-		
+
 		$('[name="build"]').data({
 			name: config.name,
 			inputs: widget.inputs
 		}).click(loadWidget);
 
 		// Setup the SOS parameters: service, offering, feature(s) and property(ies)
-		setService([
-			"http://localhost:8080/52n-sos/sos/json",
-			"http://sensorweb.demo.52north.org/52n-sos-webapp/sos/json",
-			"http://172.17.4.37:8080/52n-sos/sos/json"
-		]);
-		
+		setService(["http://localhost:8080/52n-sos/sos/json", "http://sensorweb.demo.52north.org/52n-sos-webapp/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
+
 		$('#service').change(function() {
 			setOfferings($('#service option:selected').attr("id"));
 		});
@@ -78,22 +67,19 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 			setProperties($('#offering option:selected, #offerings option:selected').data("procedure"));
 		});
 	}
-	
+
 	function setService(urls) {
 		if (urls && $('#service')) {
 			$('#service').append($('<option>').append("Select a Service..."));
 			for (i in urls) {
 				url = urls[i];
-				$('#service').append($('<option>')
-					.attr('id', url)
-					.append(url)
-				);
+				$('#service').append($('<option>').attr('id', url).append(url));
 			}
 		} else {
 			return;
 		}
 	}
-	
+
 	function setOfferings(url) {
 		clearOptions('#offering', '#property', '#properties', '#feature', '#features');
 		featureNames = {};
@@ -110,11 +96,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 			for (i in offerings) {
 				var offering = offerings[i];
 
-				$("#offering").append($('<option>')
-	                .attr('id', offering.identifier)
-	                .data('procedure', offering.procedure[0])
-	                .append(offering.name)
-	            );
+				$("#offering").append($('<option>').attr('id', offering.identifier).data('procedure', offering.procedure[0]).append(offering.name));
 			}
 		});
 	};
@@ -128,9 +110,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 		}
 
 		SOS.describeSensor(procedure, function(description) {
-			var properties = description.hasOwnProperty("ProcessModel")
-				 	? description.ProcessModel.outputs.OutputList.output
-					: description.System.outputs.OutputList.output;
+			var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
 
 			properties = properties instanceof Array ? properties : [properties];
 
@@ -144,7 +124,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 						property.type = type;
 						property.id = property[type].definition;
 						property.description = property.name + " (" + type;
-						if(type == "Quantity" && property[type].hasOwnProperty("uom")) {
+						if (type == "Quantity" && property[type].hasOwnProperty("uom")) {
 							property.description += " [" + property[type].uom.code + "]";
 						}
 						property.description += ")";
@@ -153,10 +133,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 
 				propertyNames[property.id] = property.description;
 
-				$("#property, #properties").append($('<option>')
-	                .attr('id', property.id) 
-	                .append(property.description)
-	            );
+				$("#property, #properties").append($('<option>').attr('id', property.id).append(property.description));
 
 			}
 
@@ -180,10 +157,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 
 				featureNames[id] = name;
 
-				$("#feature, #features").append($('<option>')
-	                .attr('id', id) 
-	                .append(name)
-	            );
+				$("#feature, #features").append($('<option>').attr('id', id).append(name));
 			}
 
 		});
@@ -196,7 +170,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 			}
 		}
 	}
-	
+
 	function loadWidget() {
 		var widget = $('[name="build"]').data();
 		var params = [];
@@ -209,46 +183,49 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 				case "offering":
 				case "feature":
 				case "property":
-					value = $('#'+name+' option:selected').attr("id");
+					value = $('#' + name + ' option:selected').attr("id");
 					break;
 				case "features":
 				case "properties":
-					value = $('#'+name+' option:selected').map(function() {
+					value = $('#' + name + ' option:selected').map(function() {
 						return this.id;
 					}).get();
+					value = JSON.stringify(value);
+					// Serialize array as single value
 					break;
 				default:
-					value = $("#"+name).val();
+					value = $("#" + name).val();
 			}
 			if (value) {
 				params.push(name + "=" + encodeURIComponent(value));
 			}
 		}
 		var url = "?" + params.join("&");
-		var iframe = '<iframe id="iframe" src="'+url+'" width="100%" height="100%" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
-		
+		var iframe = '<iframe id="iframe" src="' + url + '" width="100%" height="100%" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
+
 		$("#widget").resizable("destroy");
 		$("#widget").html(iframe);
 		$("#widget").resizable({
 			helper: "ui-resizable-helper"
 		});
 	}
-	
+
 	function capitalize(string) {
-		return string.toLowerCase().replace("_", " ").replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+		return string.toLowerCase().replace("_", " ").replace(/(?:^|\s)\S/g, function(a) {
+			return a.toUpperCase();
+		});
 	}
-	
+
 	return {
 		inputs: inputs,
 		init: function(config, renderTo) {
 			// TODO: Refactor. This may live better in factory.
-			require(["widget/"+config.name], function(widget) {
+			require(["widget/" + config.name], function(widget) {
 				draw(widget, config, renderTo);
-			},
-			function(error) {
-				console.error("Widget '"+config.name+"' cannot be found.");
+			}, function(error) {
+				console.error("Widget '" + config.name + "' cannot be found.");
 			});
 		}
 	};
-	
+
 });

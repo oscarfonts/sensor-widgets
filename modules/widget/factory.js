@@ -7,22 +7,21 @@ define(function() {
 		if (!renderTo) {
 			renderTo = document.body;
 		}
-		
+
 		if (config && config.name) {
 			if (!config.service) {
 				config.service = '/52n-sos/sos/json';
 			}
-			require(["widget/"+config.name], function(widget) {
+			require(["widget/" + config.name], function(widget) {
 				if (checkConfig(widget.inputs, config)) {
-					console.info("Creating "+config.name+" widget from given parameters.");
+					console.info("Creating " + config.name + " widget from given parameters.");
 					widget.init(config, renderTo);
 				} else {
-					console.warn("Widget '"+config.name+"' exists, but some mandatory parameters missing. Starting builder.");
+					console.warn("Widget '" + config.name + "' exists, but some mandatory parameters missing. Starting builder.");
 					builder(config, renderTo);
 				}
-			},
-			function(error) {
-				console.error("Widget '"+config.name+"' cannot be found. Showing chooser.");
+			}, function(error) {
+				console.error("Widget '" + config.name + "' cannot be found. Showing chooser.");
 				chooser(renderTo);
 			});
 		} else {
@@ -31,7 +30,7 @@ define(function() {
 		}
 
 	}
-	
+
 	function chooser(renderTo) {
 		// TODO: Really choose. Lists, links and onClicks.
 		var widgets = ["bearing", "table"/*, "thermometer", "timechart", "map", "progressbar", "gauge", "flask"*/];
@@ -40,19 +39,23 @@ define(function() {
 
 		for (var i in widgets) {
 			var widget = widgets[i];
-			contents += "<a class='big-button' id='" + widget + "' href='?name=" + widget + "' target='builder'> <div class='flaticon-"+widget+"'></div><b>NEW </b>" + widget + "</a>";
+			contents += "<a class='big-button' id='" + widget + "' href='?name=" + widget + "' target='builder'> <div class='flaticon-" + widget + "'></div><b>NEW </b>" + widget + "</a>";
 		}
-		
+
 		var iframe = '<div id="factory-right"><iframe name="builder" frameBorder="0"><p>Your browser does not support iframes.</p></iframe></div>';
-		
+
 		renderTo.innerHTML = '<div id="factory">' + contents + '</div>' + iframe;
-		
+
 		function clicked(e) {
-			var name = ""; // TODO get widget name from event parameters
-			builder({name: name}, renderTo);
+			var name = "";
+			// TODO get widget name from event parameters
+			builder({
+				name: name
+			}, renderTo);
 		}
+
 	}
-	
+
 	function builder(config, renderTo) {
 		require(["widget/builder"], function(builder) {
 			if (checkConfig(builder.inputs, config)) {
@@ -66,33 +69,33 @@ define(function() {
 
 	function getParams() {
 		function str2obj(search) {
-		    var obj = {};
-		    var arr = search.split("&");
-		    for(var i=0; i<arr.length; i++) {
-		        var keyval = arr[i].split("=");
-		        obj[keyval[0]] = decodeURIComponent(keyval[1]);
-		    }
-		    return obj;
-		}		
-		
-    	var search = window.location.search.substr(1);
-    	return search != null && search != "" ? str2obj(search) : null;
+			var obj = {};
+			var arr = search.split("&");
+			for (var i = 0; i < arr.length; i++) {
+				var keyval = arr[i].split("=");
+				obj[keyval[0]] = decodeURIComponent(keyval[1]);
+			}
+			return obj;
+		}
+
+		var search = window.location.search.substr(1);
+		return search != null && search != "" ? str2obj(search) : null;
 	}
 
 	function checkConfig(inputs, config) {
 		var missing = [];
 		for (i in inputs) {
 			var input = inputs[i];
-			if (!config.hasOwnProperty(input)){
+			if (!config.hasOwnProperty(input)) {
 				missing.push(input);
 			}
 		}
 		if (missing.length) {
-			console.warn("The following parameters are mandatory: "+missing.join(", "));
+			console.warn("The following parameters are mandatory: " + missing.join(", "));
 		}
 		return !missing.length;
 	}
 
-    init(getParams());
+	init(getParams());
 
 });

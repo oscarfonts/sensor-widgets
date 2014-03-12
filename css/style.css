@@ -1,18 +1,18 @@
 body {
-    font-family: "Source Sans Pro", helvetica, sans-serif;
-    text-align: center;
+	font-family: "Source Sans Pro", helvetica, sans-serif;
+	text-align: center;
 	margin: 0;
 	min-width: 100%;
 }
 
 #factory {
-    background: #666666;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 210px;
-    overflow: auto;
+	background: #666666;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 210px;
+	overflow: auto;
 }
 
 #factory h1 {
@@ -25,17 +25,17 @@ body {
 }
 
 #factory-right {
-    position: absolute;
-    left: 210px;
-    top: 0;
-    height: 100%;
-    margin-right: 0;
-    right: 0;
+	position: absolute;
+	left: 210px;
+	top: 0;
+	height: 100%;
+	margin-right: 0;
+	right: 0;
 }
 
 #factory-right iframe {
-   height: 100%;
-   width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
 #header {
@@ -53,22 +53,20 @@ body {
 	height: 52px;
 }
 
-
-
 .big-button {
-    background-color: #8C8C8C;
-    border-radius: 3px;
-    box-shadow: 0 2px 0 #161616;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-size: 0.9em;
-    padding: 12px;
-    margin: 16px;
-    width: 140px;
-    text-align: center;
-    clear:both;
-    display: block;
-    text-decoration: none;
+	background-color: #8C8C8C;
+	border-radius: 3px;
+	box-shadow: 0 2px 0 #161616;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 0.9em;
+	padding: 12px;
+	margin: 16px;
+	width: 140px;
+	text-align: center;
+	clear: both;
+	display: block;
+	text-decoration: none;
 }
 
 .big-button div {

@@ -24,7 +24,7 @@ Map         Core in GeoJSON.       Geographic Entities  Features of Interest
             Possible plugins: OL2,
             Leaflet, OL3, GMaps
 Progressbar (TBD)                  Instant quantity     Pressure, wind speed,
-                                                     solar radiation
+                                                        solar radiation
 Gauge       gauge.svg              Percentage           Relative humidity
 Thermometer thermometer.svg        Temperature          Temperature
 Flask       erlenmeyer.svg         Accumulated quantity Precipitation

@@ -8,45 +8,45 @@ Bearing (wind direction, compass)
 Init parameters
 ---------------
 
-  * Title
-  * Service
-  * Offering
-  * Feature
-  * Property
-  * Interval
+* Title
+* Service
+* Offering
+* Feature
+* Property
+* Interval
 
 Requests
 --------
 
-  GetObservation(offering, [feature], [property], "latest"), every "Interval" seconds.
+GetObservation(offering, [feature], [property], "latest"), every "Interval" seconds.
 
 
 Response validation
 -------------------
 
-  * A single Observation
-  * Observation value should be numeric
-  * UoM should be "deg"
+* A single Observation
+* Observation value should be numeric
+* UoM should be "deg"
 
 
 Response data
 -------------
 
-  * FoI name
-  * Result time
-  * Result value: observations[0].result.value
+* FoI name
+* Result time
+* Result value: observations[0].result.value
 
 
 Visualization
 -------------
 
-  * Heading: Title
-  * Main graphical component: Wind Rose with an arrow pointing to an angular scale (0-360 deg)
-  * Numeric value: Degrees, rounded
-  * Footer: FoI name, result time
+* Heading: Title
+* Main graphical component: Wind Rose with an arrow pointing to an angular scale (0-360 deg)
+* Numeric value: Degrees, rounded
+* Footer: FoI name, result time
 
 
 Dependencies
 ------------
 
-  * None. Using an SVG drawing and raw javascript.
+* None. Using an SVG drawing and raw javascript.

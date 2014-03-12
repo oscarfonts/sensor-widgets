@@ -1,15 +1,15 @@
 body {
-    font-family: "Source Sans Pro", helvetica, sans-serif;
-    text-align: center;
+	font-family: "Source Sans Pro", helvetica, sans-serif;
+	text-align: center;
 	margin: 0;
 	min-width: 100%;
 }
 
 #factory {
-    background: #666666;
-    height: 100%;
-    width:15%;
-    float:left;
+	background: #666666;
+	height: 100%;
+	width: 15%;
+	float: left;
 }
 
 #factory h1 {
@@ -22,25 +22,25 @@ body {
 }
 
 #factory-right {
-	float:left;
-	right:0;
-	width:85%;
+	float: left;
+	right: 0;
+	width: 85%;
 }
 
 .big-button {
-    background-color: #8C8C8C;
-    border-radius: 3px;
-    box-shadow: 0 2px 0 #161616;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-size: 0.9em;
-    padding: 12px;
-    margin: 20px;
-    width: 160px;
-    text-align: center;
-    clear:both;
-    display: block;
-    text-decoration: none;
+	background-color: #8C8C8C;
+	border-radius: 3px;
+	box-shadow: 0 2px 0 #161616;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 0.9em;
+	padding: 12px;
+	margin: 20px;
+	width: 160px;
+	text-align: center;
+	clear: both;
+	display: block;
+	text-decoration: none;
 }
 
 .big-button div {
