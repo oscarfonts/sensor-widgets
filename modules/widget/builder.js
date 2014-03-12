@@ -6,7 +6,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 	var inputs = ["name"];
 	
 	function draw(widget, config, renderTo) {
-		var contents = '<h1>'+capitalize(config.name)+' Widget</h1>';
+		var contents = '<h1>'+capitalize(config.name)+' Widget<br/><small>Builder</small></h1>';
 		
 		for (var i in widget.inputs) {
 			var input = widget.inputs[i];
@@ -45,9 +45,11 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 					  + '</div>';
 		}
 		
-		contents += '<button name="build">Validate & build</button>';
+		contents += '<button name="build">Create Widget</button>';
 		
-		renderTo.innerHTML = '<div id="editor">' + contents + '</div><div id="widget"></div>';
+		renderTo.innerHTML = '<div id="editor">' + contents + '</div>'
+			+ '<h1 id="header"><img src="/img/logo.svg"/>Widget<br/><small>Preview</small></h1>'
+			+ '<div id="widget"></div>';
 		$("#widget").resizable({
 			helper: "ui-resizable-helper"
 		});

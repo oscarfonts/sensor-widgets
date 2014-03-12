@@ -36,7 +36,7 @@ define(function() {
 		// TODO: Really choose. Lists, links and onClicks.
 		var widgets = ["bearing", "table"];
 		
-		var contents = '<h1>Widgets</h1>';
+		var contents = '<h1>Widget<br/><small>Factory</small></h1>';
 
 		for (var i in widgets) {
 			var widget = widgets[i];

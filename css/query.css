@@ -1,0 +1,114 @@
+body {
+    font-family: "Source Sans Pro", helvetica, sans-serif;
+    text-align: center;
+	margin: 0;
+	min-width: 100%;
+}
+
+#factory {
+    background: #666666;
+    height: 100%;
+    width:15%;
+    float:left;
+}
+
+#factory h1 {
+	font-weight: 100;
+	font-size: 26px;
+	color: #FFFFFF;
+	padding: 10px;
+	margin: 0 20px 20px 20px;
+	text-align: left;
+}
+
+#factory-right {
+	float:left;
+	right:0;
+	width:85%;
+}
+
+.big-button {
+    background-color: #8C8C8C;
+    border-radius: 3px;
+    box-shadow: 0 2px 0 #161616;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 12px;
+    margin: 20px;
+    width: 160px;
+    text-align: center;
+    clear:both;
+    display: block;
+    text-decoration: none;
+}
+
+.big-button div {
+	padding-bottom: 8px;
+}
+
+/* Legacy styles. Delete once query is gone */
+
+.top {
+	overflow: hidden;
+}
+
+table.results {
+	clear: both;
+	border: 1px solid black;
+	margin-left: 200px;
+	margin-top: 24px;
+}
+
+table.results td {
+	background: #DDD;
+	color: #333;
+	padding: 3px;
+	text-align: left;
+}
+
+table.results th {
+	background: #333;
+	color: #DDD;
+	padding: 3px;
+}
+
+div.select {
+	padding: 3px;
+}
+
+div.select label {
+	display: inline-block;
+	width: 190px;
+	text-align: right;
+	vertical-align: top;
+}
+
+div.select select {
+	display: inline-block;
+	width: 360px;
+}
+
+div.select select[multiple] {
+	height: 180px !important;
+}
+
+div.select input {
+	width: 169px;
+}
+
+#navigator {
+	float: left;
+}
+
+#raw {
+	background: #DDD;
+	border: 1px solid gray;
+	padding: 14px;
+	margin: 0 25px;
+	font-size: 8px;
+	width: 600px;
+	height: 400px;
+	overflow: scroll;
+	float: left;
+}
