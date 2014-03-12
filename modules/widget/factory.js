@@ -34,16 +34,16 @@ define(function() {
 	
 	function chooser(renderTo) {
 		// TODO: Really choose. Lists, links and onClicks.
-		var widgets = ["bearing", "table"];
-		
+		var widgets = ["bearing", "table"/*, "thermometer", "timechart", "map", "progressbar", "gauge", "flask"*/];
+
 		var contents = '<h1>Widget<br/><small>Factory</small></h1>';
 
 		for (var i in widgets) {
 			var widget = widgets[i];
-			contents += "<a class='big-button' id='" + widget + "' href='?name=" + widget + "' target='builder'> <div class='flaticon-"+widget+"'></div><b>NEW </b>" + widget + " widget</a>";
+			contents += "<a class='big-button' id='" + widget + "' href='?name=" + widget + "' target='builder'> <div class='flaticon-"+widget+"'></div><b>NEW </b>" + widget + "</a>";
 		}
 		
-		var iframe = '<iframe id="factory-right" name="builder" width="80%" height="100%" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
+		var iframe = '<div id="factory-right"><iframe name="builder" frameBorder="0"><p>Your browser does not support iframes.</p></iframe></div>';
 		
 		renderTo.innerHTML = '<div id="factory">' + contents + '</div>' + iframe;
 		

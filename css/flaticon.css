@@ -32,7 +32,7 @@
 	content: "\e004";
 }
 
-.flaticon-progress:before {
+.flaticon-progressbar:before {
 	content: "\e005";
 }
 
@@ -43,3 +43,4 @@
 .flaticon-thermometer:before {
 	content: "\e007";
 }
+

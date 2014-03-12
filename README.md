@@ -1,4 +1,0 @@
-sensor-widgets
-==============
-
-Sensor Widgets

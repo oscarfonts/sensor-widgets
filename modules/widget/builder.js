@@ -27,7 +27,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 					break;
 				case "refresh_interval":
 					var options = "",
-						intervals = [15, 30, 60, 120];
+						intervals = [5, 10, 30, 60, 120];
 					for (i in intervals) {
 						var value = intervals[i];
 						options += '<option id="'+value+'">'+value+'</option>';
@@ -48,8 +48,8 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 		contents += '<button name="build">Create Widget</button>';
 		
 		renderTo.innerHTML = '<div id="editor">' + contents + '</div>'
-			+ '<h1 id="header"><img src="/img/logo.svg"/>Widget<br/><small>Preview</small></h1>'
-			+ '<div id="widget"></div>';
+			+ '<div id="preview"><h1 id="header"><img src="/img/logo.svg"/>Widget<br/><small>Preview</small></h1>'
+			+ '<div id="widget"></div></div>';
 		$("#widget").resizable({
 			helper: "ui-resizable-helper"
 		});

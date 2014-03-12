@@ -7,9 +7,12 @@ body {
 
 #factory {
     background: #666666;
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
-    width:15%;
-    float:left;
+    width: 210px;
+    overflow: auto;
 }
 
 #factory h1 {
@@ -22,9 +25,17 @@ body {
 }
 
 #factory-right {
-	float:left;
-	right:0;
-	width:85%;
+    position: absolute;
+    left: 210px;
+    top: 0;
+    height: 100%;
+    margin-right: 0;
+    right: 0;
+}
+
+#factory-right iframe {
+   height: 100%;
+   width: 100%;
 }
 
 #header {
@@ -53,7 +64,7 @@ body {
     font-size: 0.9em;
     padding: 12px;
     margin: 16px;
-    width: 160px;
+    width: 140px;
     text-align: center;
     clear:both;
     display: block;
