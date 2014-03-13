@@ -10,7 +10,8 @@ require.config({
 		"jquery-ui": LIB_PATH + "jquery-ui-1.10.4.custom.min",
 		"jqgrid": LIB_PATH + "jqGrid-4.6.0.min",
 		"moment": LIB_PATH + "moment-2.0.0.min",
-		"daterangepicker": LIB_PATH + "daterangepicker-1.2"
+		"daterangepicker": LIB_PATH + "daterangepicker-1.2",
+		"graph": LIB_PATH + "graph-1.3.2.min"
 	},
 	shim: {
 		"daterangepicker": {
@@ -21,6 +22,9 @@ require.config({
 		},
 		"jqgrid": {
 			deps: ["jquery-ui", "css!/css/ui.jqgrid.css"]
+		},
+		"graph": {
+			deps: ["css!/css/graph.css"]
 		}
 	}
 });

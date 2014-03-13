@@ -72,3 +72,8 @@ body {
 .big-button div {
 	padding-bottom: 8px;
 }
+
+.graph-legend {
+	text-align: left;
+	font-size: small;
+}

@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
+define(['SOS', 'graph'], function(SOS) {
 
 	var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
 	var propertyNames = null;
@@ -51,7 +51,7 @@ define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
 				}
 
 				if (propertyNames) {
-					createGrid(rows);
+					createChart(rows);
 				} else if (observations.length) {
 					getPropertyNames(observations[0].procedure, rows);
 				}
@@ -74,67 +74,44 @@ define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
 						}
 						propertyNames[property.id] = property.name;
 					}
-					createGrid(rows);
+					createChart(rows);
 				});
 			};
 
-			function createGrid(rows) {
+			function createChart(rows) {
+				var series = {};
 				for (var i in rows) {
 					var row = rows[i];
-					if (propertyNames[row.property]) {
-						row.property = propertyNames[row.property];
+					var label = propertyNames[row.property] + " (" + row.feature + ")";
+					if (!series[label]) {
+						series[label] = { data: [] };
 					}
+					series[label].data.push({
+						date: new Date(row.time),
+						value: row.value
+					});
 				}
 
-				// Render data as HTML table
-				/* Plain old table
-				var table = "<table class='results'>" + "<th>Time</th><th>Feature</th><th>Property</th><th>Value</th><th>Unit</th>";
-				for (var i in rows) {
-					var tr = "";
-					for (var key in rows[i]) {
-						tr += "<td>" + rows[i][key] + "</td>";
-					}
-					table += "<tr>" + tr + "</tr>";
-				}
-				table += "</table>";
-				*/
+				var data = [];
+				for (var key in series) {
+					series[key].label = key;
+					data.push(series[key]);
+				};
+
+				var options = {
+					"width": "99%",
+					"height": "90%"
+				};
 
 				// jqGrid table
 				var title = config.title ? "<h3>" + config.title + "</h3>" : "";
-				var table = "<table id='grid'></table>";
+				var table = "<div id='graph'></div>";
 				renderTo.innerHTML = title + table;
 
-				jQuery("#grid").jqGrid({
-					datatype: "local",
-					height: 'auto',
-					width: '100%',
-					caption: "Results",
-					shrinkToFit: true,
-					data: rows,
-					colNames: ['Time', 'Feature', 'Property', 'Value', 'Unit'],
-					colModel: [{
-						name: 'time',
-						index: 'time',
-						width: '160'
-					}, {
-						name: 'feature',
-						index: 'feature',
-						width: '150'
-					}, {
-						name: 'property',
-						index: 'property',
-						width: '150'
-					}, {
-						name: 'value',
-						index: 'value',
-						width: '80',
-						align: "right"
-					}, {
-						name: 'uom',
-						index: 'uom',
-						width: '60'
-					}]
-				});
+				var graph = new links.Graph(document.getElementById('graph'));
+
+				graph.draw(data, options);
+
 			}
 		}
 	};
