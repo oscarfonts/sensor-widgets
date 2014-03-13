@@ -78,7 +78,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 		$('#offering').change(function() {
 			setFeatures($('#offering option:selected, #offerings option:selected').data("procedure"));
 			setProperties($('#offering option:selected, #offerings option:selected').data("procedure"));
-			setTimeRange();
 		});
 
 		$('#time_range').dateRangePicker({
@@ -224,13 +223,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 			}
 
 		});
-	};
-
-	function setTimeRange() {
-		$('#time_start').prop('disabled', false);
-		$('#time_start').prop('readonly', true);
-		$('#time_end').prop('disabled', false);
-		$('#time_end').prop('readonly', true); 
 	};
 
 	function clearOptions() {
