@@ -17,8 +17,8 @@ define(['SOS', 'css!widget/table.css'], function(SOS) {
 			function read() {
 				var features = isArray(config.features) ? config.features : JSON.parse(config.features);
 				var properties = isArray(config.properties) ? config.properties : JSON.parse(config.properties);
-				SOS.getObservation(config.offering, features, properties, null, draw);
-				// TODO: Manage time range
+				var time_range = (config.time_start && config.time_end) ? [config.time_start, config.time_end] : null;
+				SOS.getObservation(config.offering, features, properties, time_range, draw);
 			};
 
 			function isArray(obj) {

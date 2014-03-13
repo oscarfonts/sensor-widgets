@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $) {
+define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css','css!/css/daterangepicker.css'], function(SOS, $) {
 
 	var inputs = ["name"];
 
@@ -10,7 +10,8 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 
 		for (var i in widget.inputs) {
 			var input = widget.inputs[i];
-			select = "", multiple = false;
+			var select = "";
+			var label = capitalize(input);
 
 			switch (input) {
 				case "service":
@@ -22,7 +23,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 				case "features":
 				case "properties":
 					select = '<select multiple id="' + input + '"></select>';
-					multiple = true;
+					label += " (multiselect)";
 					break;
 				case "refresh_interval":
 					var options = "", intervals = [5, 10, 30, 60, 120];
@@ -32,20 +33,32 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 					}
 					select = '<select id="' + input + '">' + options + '</select>';
 					break;
+				case "time_start":
+					if ($.inArray("time_end", widget.inputs)) {
+						label = "Time Range";
+						select = '<span id="time_range"><span class="sublabel">From: </span><input type="text" id="time_start" value=""/><br/>';
+						select += '<span class="sublabel">To: </span><input type="text" id="time_end" value=""/></span>';
+					}
+					break;
+				case "time_end":
+					break;
 				default:
 					select = '<input type="text" value="" id="' + input + '"/>';
 			}
 
-			var label = capitalize(input) + ( multiple ? " (multiselect)" : "");
-			contents += '<div class="select">' + '<label for="' + input + '">' + label + ':</label>' + select + '</div>';
+			if (select) {
+				contents += '<div class="select">' + '<label for="' + input + '">' + label + ':</label>' + select + '</div>';
+			}
 		}
 
 		contents += '<button name="build">Create Widget</button>';
 
 		renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="/img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
+
 		$("#widget").resizable({
 			helper: "ui-resizable-helper"
 		});
+
 		$("#widget").draggable({
 			opacity: 0.35
 		});
@@ -65,6 +78,56 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 		$('#offering').change(function() {
 			setFeatures($('#offering option:selected, #offerings option:selected').data("procedure"));
 			setProperties($('#offering option:selected, #offerings option:selected').data("procedure"));
+			setTimeRange();
+		});
+
+		$('#time_range').dateRangePicker({
+			separator: ' to ',
+			language: 'en',
+			startOfWeek: 'monday',
+			format: 'YYYY-MM-DD[T]HH:mm:ssZ',
+			//startDate: X, // TODO getDataAvailability
+			endDate: moment.utc(), // TODO getDataAvailability
+			autoClose: true,
+			showShortcuts: false,
+			shortcuts: null,
+			/* This is buggy
+			customShortcuts: [{
+				name: 'Last 10 minutes',
+				dates: function() {
+					var end = new Date();
+					var start = moment().subtract('minutes', 10).toDate();
+					return [start, end];
+				}
+			},{
+				name: 'Last hour',
+				dates: function() {
+					var end = new Date();
+					var start = moment().subtract('hours', 1).toDate();
+					return [start, end];
+				}
+			},{
+				name: 'Today',
+				dates: function() {
+					var end = new Date();
+					var start = moment().startOf('day').toDate();
+					return [start, end];
+				}
+			}],
+			*/
+			time: {
+				enabled: true
+			},
+			getValue: function() {
+				if ($('#time_start').val() && $('#time_end').val())
+					return $('#time_start').val() + ' to ' + $('#time_end').val();
+				else
+					return '';
+			},
+			setValue: function(s, date1, date2) {
+				$('#time_start').val(moment(date1).utc().format());
+				$('#time_end').val(moment(date2).utc().format());
+			}
 		});
 	}
 
@@ -163,12 +226,21 @@ define(['SOS', 'jquery', 'jquery-ui', 'css!widget/builder.css'], function(SOS, $
 		});
 	};
 
+	function setTimeRange() {
+		$('#time_start').prop('disabled', false);
+		$('#time_start').prop('readonly', true);
+		$('#time_end').prop('disabled', false);
+		$('#time_end').prop('readonly', true); 
+	};
+
 	function clearOptions() {
 		for (var i = 0; i < arguments.length; i++) {
 			if ($(arguments[i])) {
 				$(arguments[i]).find('option').remove();
 			}
 		}
+		$('#time_start').prop('disabled', true);
+		$('#time_end').prop('disabled', true);
 	}
 
 	function loadWidget() {

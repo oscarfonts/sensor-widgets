@@ -42,6 +42,20 @@ body {
 	cursor: move;
 }
 
+#time_start,
+#time_end {
+	width: 200px;
+	margin-top: 5px;
+}
+
+.sublabel {
+	padding-right: 10px;
+	width: 70;
+	font-size: small;
+	text-align: right;
+	display: inline-block;
+}
+
 #widget iframe {
 	background: white;
 }
