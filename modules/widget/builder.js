@@ -231,8 +231,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 				$(arguments[i]).find('option').remove();
 			}
 		}
-		$('#time_start').prop('disabled', true);
-		$('#time_end').prop('disabled', true);
 	}
 
 	function loadWidget() {
