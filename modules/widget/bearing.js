@@ -39,7 +39,7 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 					shadow.setAttribute("transform", "translate(5, 5) rotate(" + value + ", 256, 256)");
 
 					SOS.describeSensor(obs.procedure, function(description) {
-						var property = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
+						var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
 						for (var i in properties) {
 							var property = properties[i];
 							if (property.Quantity.definition == config.property) {
