@@ -1,9 +1,13 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
+define(['SOS', 'text!svg/thermometer.svg'], function(SOS, drawing) {
 
 	var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
+	var dy = 3.342574;
+	var y_max = 206.34359+267.40595;
+	var t_min = -24;
+	var t_max = 56;
 
 	return {
 		inputs: inputs,
@@ -14,7 +18,7 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 			contents += '<h1><span id="value"></span>º</h1><h3 id="date"></h3></div>';
 			renderTo.innerHTML = contents;
 
-			var arrow = document.getElementById("arrow"), shadow = document.getElementById("shadow");
+			var clip = document.getElementById("temp").firstChild;
 
 			SOS.setUrl(config.service);
 			setInterval(read, config.refresh_interval * 1000);
@@ -26,20 +30,23 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 
 			function draw(observations) {
 				if (observations.length == 1// Single observation
-				&& observations[0].result.uom == 'deg'// UoM is degrees
+				&& observations[0].result.uom == 'Cel'// UoM is celsius
 				&& typeof observations[0].result.value == 'number') {// Value is numeric
 
 					var obs = observations[0], foi_name = obs.featureOfInterest.name.value, date = obs.resultTime, // TODO cast to date object, &c.
 					value = obs.result.value, procedure = obs.procedure;
 
+					var h = dy * (value - t_min);
+					var y_min = y_max - h;
+
 					document.getElementById("feature_name").innerHTML = foi_name;
 					document.getElementById("date").innerHTML = date;
 					document.getElementById("value").innerHTML = value;
-					arrow.setAttribute("transform", "rotate(" + value + ", 256, 256)");
-					shadow.setAttribute("transform", "translate(5, 5) rotate(" + value + ", 256, 256)");
+					clip.setAttribute("height", h);
+					clip.setAttribute("y", y_min);
 
 					SOS.describeSensor(obs.procedure, function(description) {
-						var property = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
+						var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
 						for (var i in properties) {
 							var property = properties[i];
 							if (property.Quantity.definition == config.property) {
@@ -48,7 +55,7 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 						}
 					});
 				} else {
-					console.error("Bearing Widget Error - Got an invalid observation from the SOS service");
+					console.error("Thermometer Widget Error - Got an invalid observation from the SOS service");
 				}
 			};
 		}

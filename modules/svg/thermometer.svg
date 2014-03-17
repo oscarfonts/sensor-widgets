@@ -8,10 +8,34 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="75.789711"
    height="333.77173"
-   id="svg4142">
+   id="svg4142"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="thermometer.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1108"
+     inkscape:window-height="806"
+     id="namedview124"
+     showgrid="false"
+     inkscape:zoom="1.4141401"
+     inkscape:cx="93.925888"
+     inkscape:cy="187.87336"
+     inkscape:window-x="700"
+     inkscape:window-y="134"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g6250" />
   <defs
      id="defs4144">
     <linearGradient
@@ -479,6 +503,7 @@
        id="linearGradient6531"
        xlink:href="#THlinearGradient4266"
        gradientUnits="userSpaceOnUse" />
+    <clipPath id="temp"><rect x="439.7786" y="393.5278" width="20.24066" height="80.2218" /></clipPath>
   </defs>
   <metadata
      id="metadata4147">
@@ -488,7 +513,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -497,7 +522,8 @@
      id="layer1" />
   <g
      transform="translate(-423.14169,-184.57523)"
-     id="g6250">
+     id="g6250"
+     style="">
     <path
        d="m 102.94692,483.35783 a 16.394089,16.814449 0 1 1 -19.997154,-0.0766"
        transform="translate(356.88671,-5.3629009)"
@@ -513,8 +539,11 @@
        style="fill:#00338a;fill-opacity:1;stroke:none" />
     <path
        d="m 439.7786,473.74954 20.24066,0 -0.0387,-267.40595 -20.28271,0 z"
-       id="path6258"
-       style="fill:url(#linearGradient6447);fill-opacity:1;stroke:none" />
+       id="temperature"
+       style="fill:url(#linearGradient6447);fill-opacity:1;stroke:none;clip-path: url(#temp);">
+      <title
+         id="title3101">temperature</title>
+    </path>
     <rect
        width="6.4867501"
        height="1.07219"

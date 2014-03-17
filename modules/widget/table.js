@@ -86,19 +86,6 @@ define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
 					}
 				}
 
-				// Render data as HTML table
-				/* Plain old table
-				var table = "<table class='results'>" + "<th>Time</th><th>Feature</th><th>Property</th><th>Value</th><th>Unit</th>";
-				for (var i in rows) {
-					var tr = "";
-					for (var key in rows[i]) {
-						tr += "<td>" + rows[i][key] + "</td>";
-					}
-					table += "<tr>" + tr + "</tr>";
-				}
-				table += "</table>";
-				*/
-
 				// jqGrid table
 				var title = config.title ? "<h3>" + config.title + "</h3>" : "";
 				var table = "<table id='grid'></table>";
