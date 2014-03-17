@@ -33,7 +33,7 @@ define(function() {
 
 	function chooser(renderTo) {
 		// TODO: Really choose. Lists, links and onClicks.
-		var widgets = ["bearing", "table", "timechart", "thermometer", "gauge"/*, "map", "progressbar", "flask"*/];
+		var widgets = ["timechart", "table", "gauge", "progressbar", "bearing", "thermometer"/*, "map"*/];
 
 		var contents = '<h1>Widget<br/><small>Factory</small></h1>';
 
