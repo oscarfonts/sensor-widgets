@@ -11,7 +11,11 @@ require.config({
 		"jqgrid": LIB_PATH + "jqGrid-4.6.0.min",
 		"moment": LIB_PATH + "moment-2.0.0.min",
 		"daterangepicker": LIB_PATH + "daterangepicker-1.2",
-		"graph": LIB_PATH + "graph-1.3.2.min"
+		"graph": LIB_PATH + "graph-1.3.2.min",
+		"leaflet": LIB_PATH + "leaflet-0.7.2",
+		"proj4leaflet": LIB_PATH + "proj4leaflet",
+		"proj4": LIB_PATH + "proj4.min",
+		"leaflet-label": LIB_PATH + "leaflet-label-0.2.1.min"
 	},
 	shim: {
 		"daterangepicker": {
@@ -25,6 +29,15 @@ require.config({
 		},
 		"graph": {
 			deps: ["css!/css/graph.css"]
+		},
+		"proj4leaflet": {
+			deps: ["leaflet", "proj4"]
+		},
+		"leaflet": {
+			deps: ["css!/css/leaflet.css"]
+		},
+		"leaflet-label": {
+			deps: ["css!/css/leaflet.label.css"]
 		}
 	}
 });

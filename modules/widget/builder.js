@@ -90,30 +90,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 			autoClose: true,
 			showShortcuts: false,
 			shortcuts: null,
-			/* This is buggy
-			customShortcuts: [{
-				name: 'Last 10 minutes',
-				dates: function() {
-					var end = new Date();
-					var start = moment().subtract('minutes', 10).toDate();
-					return [start, end];
-				}
-			},{
-				name: 'Last hour',
-				dates: function() {
-					var end = new Date();
-					var start = moment().subtract('hours', 1).toDate();
-					return [start, end];
-				}
-			},{
-				name: 'Today',
-				dates: function() {
-					var end = new Date();
-					var start = moment().startOf('day').toDate();
-					return [start, end];
-				}
-			}],
-			*/
 			time: {
 				enabled: true
 			},
