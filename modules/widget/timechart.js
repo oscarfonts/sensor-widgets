@@ -98,6 +98,13 @@ define(['SOS', 'graph'], function(SOS) {
 					data.push(series[key]);
 				};
 
+				for (var s in data) {
+					var series = data[s];
+					series.data.sort(function(a, b) {
+						return b.date - a.date;
+					});
+				}
+
 				var options = {
 					"width": "99%",
 					"height": "90%"
