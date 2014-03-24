@@ -50,10 +50,10 @@ body {
 
 .sublabel {
 	padding-right: 10px;
-	width: 70;
 	font-size: small;
 	text-align: right;
 	display: inline-block;
+	width: 50px;
 }
 
 #widget iframe {
@@ -82,6 +82,7 @@ button {
 	margin-left: 160px;
 	margin-top: 24px;
 	width: 120px;
+	margin-bottom: 20px;
 }
 
 div.select select[multiple] {

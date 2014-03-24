@@ -89,15 +89,19 @@ define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
 				// jqGrid table
 				var title = config.title ? "<h3>" + config.title + "</h3>" : "";
 				var table = "<table id='grid'></table>";
-				renderTo.innerHTML = title + table;
+				var pager = '<div id="pager"></div>';
+				renderTo.innerHTML = title + table + pager;
 
 				jQuery("#grid").jqGrid({
 					datatype: "local",
 					height: 'auto',
 					width: '100%',
 					caption: "Results",
-					shrinkToFit: true,
 					data: rows,
+					pager: '#pager',
+					rowNum: 12,
+					sortname: 'time',
+					autowidth: true,
 					colNames: ['Time', 'Feature', 'Property', 'Value', 'Unit'],
 					colModel: [{
 						name: 'time',
@@ -121,6 +125,12 @@ define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
 						index: 'uom',
 						width: '60'
 					}]
+				});
+
+				$("#grid").setGridWidth($(window).width()-2);
+
+				$(window).bind('resize', function() {
+					$("#grid").setGridWidth($(window).width()-2);
 				});
 			}
 		}

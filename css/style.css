@@ -5,6 +5,11 @@ body {
 	min-width: 100%;
 }
 
+html, body, .widget {
+	overflow: auto;
+	height: 100%;
+}
+
 #factory {
 	background: #666666;
 	position: absolute;
@@ -31,6 +36,7 @@ body {
 	height: 100%;
 	margin-right: 0;
 	right: 0;
+	overflow: hidden;
 }
 
 #factory-right iframe {
