@@ -1,22 +1,581 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Sensor Widgets">
+		<meta name="author" content="Oscar Fonts">
+
 		<title>Sensor Widgets</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="css/flaticon.css" rel="stylesheet"/>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<style type="text/css">
+			body {
+				padding-top: 70px;
+				padding-bottom: 30px;
+			}
+
+			.theme-dropdown .dropdown-menu {
+				position: static;
+				display: block;
+				margin-bottom: 20px;
+			}
+
+			.theme-showcase > p > .btn {
+				margin: 5px 0;
+			}
+		</style>
 	</head>
-	<body style="font-family:'Source Sans Pro',helvetica,sans-serif;">
-		<h1 style="font-weight:1000;">Sensor Widgets</h1>
-		<ol>
-			<li>
-				<a href="query" target="_blank">Old Query Form</a>
-			</li>
-			<li>
-				<a href="widget" target="_blank">Widget Factory</a>
-			</li>
-			<li>
-				<a href="widget?name=bearing" target="_blank">Bearing Widget Builder</a>
-			</li>
-			<li>
-				<a href="widget?name=bearing&title=Direcci%C3%B3%20del%20Vent&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P7&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=15" target="_blank">Bearing Widget Example</a>
-			</li>
-		</ol>
+
+	<body role="document">
+
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Sensor Widgets</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="presentation">About</a>
+						</li>
+						<li>
+							<a href="https://github.com/oscarfonts/sensor-widgets">GitHub Repo</a>
+						</li>
+						<li>
+							<a href="widget">Widget Factory</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">
+									Instant Observations
+								</li>
+								<li>
+									<a href="#gauge">Gauge</a>
+								</li>
+								<li>
+									<a href="#progressbar">Progressbar</a>
+								</li>
+								<li>
+									<a href="#bearing">Bearing</a>
+								</li>
+								<li>
+									<a href="#thermometer">Thermometer</a>
+								</li>
+								<li class="divider"></li>
+								<li class="dropdown-header">
+									Multiple Obsrvations
+								</li>
+								<li>
+									<a href="#timechart">Timechart</a>
+								</li>
+								<li>
+									<a href="#table">Table</a>
+								</li>
+								<li class="divider"></li>
+								<li class="dropdown-header">
+									Service Description
+								</li>
+								<li>
+									<a href="#map">Map</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+
+		<div class="container theme-showcase" role="main">
+
+			<!-- Main jumbotron for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<img src="img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
+				<h1>Sensor Widgets</h1>
+				<p>Configurable graphical components for your <a href="http://live.osgeo.org/en/standards/sos_overview.html" target="_blank">SOS</a> sensor data.</p>
+				<h3>100% Javascript. Extensible. MIT licensed.</h3>
+				<p style="text-align:right;margin:40px 0 0 0;"><a class="btn btn-primary btn-lg" role="button" href="widget"><span class="glyphicon glyphicon-cog"></span>
+	&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a></p>
+			</div>
+
+			<div class="page-header" id="gauge">
+				<h1><i class="flaticon-gauge"></i>&nbsp;&nbsp;Gauge</h1>
+			</div>
+			<div class="thumbnail" style="width:250px;height:250px;">
+				<iframe width="100%" height="100%" frameborder="0" src="widget?name=gauge&service=http%3A%2F%2Fsensors.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P6&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2333&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="progressbar">
+				<h1><i class="flaticon-progressbar"></i>&nbsp;&nbsp;Progressbar</h1>
+			</div>
+			<div class="thumbnail" style="width:512px;height:256px;">
+				<iframe width="100%" height="100%" frameborder="0" src="widget?name=progressbar&service=http%3A%2F%2Fsensors.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P3&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2336M&min_value=0&max_value=1000&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="bearing">
+				<h1><i class="flaticon-bearing"></i>&nbsp;&nbsp;Bearing</h1>
+			</div>
+			<div class="thumbnail" style="width:300px;height:560px;">
+				<iframe width="100%" height="100%" frameborder="0" src="widget?name=bearing&service=http%3A%2F%2Fsensors.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P7&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="thermometer">
+				<h1><i class="flaticon-thermometer"></i>&nbsp;&nbsp;Thermometer</h1>
+			</div>
+			<div class="thumbnail" style="width:250px;height:600px;">
+				<iframe width="100%" height="100%" frameborder="0" src="widget?name=thermometer&service=http%3A%2F%2Fsensors.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2332&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="timechart">
+				<h1><i class="flaticon-timechart"></i>&nbsp;&nbsp;Timechart</h1>
+			</div>
+			<div class="thumbnail" style="height:380px;">
+				<iframe width="100%" height="100%" frameborder="0" src="widget?name=timechart&title=Timechart%20Example&service=http%3A%2F%2Fsensors.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&features=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P3%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P7%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P6%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301%22%5D&properties=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2333%22%5D&time_start=2012-06-11T00%3A10%3A00%2B00%3A00&time_end=2012-06-11T12%3A00%3A00%2B00%3A00"></iframe>
+			</div>
+
+			<div class="page-header" id="table">
+				<h1><i class="flaticon-table"></i>&nbsp;&nbsp;Table</h1>
+			</div>
+			<div class="thumbnail" style="height:425px;">
+				<iframe width="100%" height="100%" frameborder="0" src="widget?name=table&title=Table%20Example&service=http%3A%2F%2Fsensors.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2330m&features=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301%22%5D&properties=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2334%22%5D&time_start=2012-02-01T10%3A19%3A00%2B00%3A00&time_end=2014-03-25T10%3A19%3A00%2B00%3A00"></iframe>
+			</div>
+
+			<div class="page-header" id="map">
+				<h1><i class="flaticon-map"></i>&nbsp;&nbsp;Map</h1>
+			</div>
+			<div class="thumbnail" style="height:400px;">
+				<iframe width="100%" height="100%" frameborder="0" src="widget?name=map&service=http%3A%2F%2Fsensors.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m"></iframe>
+			</div>
+
+			<!--div class="page-header">
+				<h1>Buttons</h1>
+			</div>
+			<p>
+				<button type="button" class="btn btn-lg btn-default">
+					Default
+				</button>
+				<button type="button" class="btn btn-lg btn-primary">
+					Primary
+				</button>
+				<button type="button" class="btn btn-lg btn-success">
+					Success
+				</button>
+				<button type="button" class="btn btn-lg btn-info">
+					Info
+				</button>
+				<button type="button" class="btn btn-lg btn-warning">
+					Warning
+				</button>
+				<button type="button" class="btn btn-lg btn-danger">
+					Danger
+				</button>
+				<button type="button" class="btn btn-lg btn-link">
+					Link
+				</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-default">
+					Default
+				</button>
+				<button type="button" class="btn btn-primary">
+					Primary
+				</button>
+				<button type="button" class="btn btn-success">
+					Success
+				</button>
+				<button type="button" class="btn btn-info">
+					Info
+				</button>
+				<button type="button" class="btn btn-warning">
+					Warning
+				</button>
+				<button type="button" class="btn btn-danger">
+					Danger
+				</button>
+				<button type="button" class="btn btn-link">
+					Link
+				</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-sm btn-default">
+					Default
+				</button>
+				<button type="button" class="btn btn-sm btn-primary">
+					Primary
+				</button>
+				<button type="button" class="btn btn-sm btn-success">
+					Success
+				</button>
+				<button type="button" class="btn btn-sm btn-info">
+					Info
+				</button>
+				<button type="button" class="btn btn-sm btn-warning">
+					Warning
+				</button>
+				<button type="button" class="btn btn-sm btn-danger">
+					Danger
+				</button>
+				<button type="button" class="btn btn-sm btn-link">
+					Link
+				</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-xs btn-default">
+					Default
+				</button>
+				<button type="button" class="btn btn-xs btn-primary">
+					Primary
+				</button>
+				<button type="button" class="btn btn-xs btn-success">
+					Success
+				</button>
+				<button type="button" class="btn btn-xs btn-info">
+					Info
+				</button>
+				<button type="button" class="btn btn-xs btn-warning">
+					Warning
+				</button>
+				<button type="button" class="btn btn-xs btn-danger">
+					Danger
+				</button>
+				<button type="button" class="btn btn-xs btn-link">
+					Link
+				</button>
+			</p>
+
+			<div class="page-header">
+				<h1>Thumbnails</h1>
+			</div>
+			<img src="http://placehold.it/200" class="img-thumbnail" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
+
+			<div class="page-header">
+				<h1>Dropdown menus</h1>
+			</div>
+			<div class="dropdown theme-dropdown clearfix">
+				<a id="dropdownMenu1" href="#" role="button" class="sr-only dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+					<li class="active" role="presentation">
+						<a role="menuitem" tabindex="-1" href="#">Action</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#">Another action</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#">Something else here</a>
+					</li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#">Separated link</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="page-header">
+				<h1>Navbars</h1>
+			</div>
+
+			<div class="navbar navbar-default">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">Project name</a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li class="active">
+								<a href="#">Home</a>
+							</li>
+							<li>
+								<a href="#about">About</a>
+							</li>
+							<li>
+								<a href="#contact">Contact</a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">Action</a>
+									</li>
+									<li>
+										<a href="#">Another action</a>
+									</li>
+									<li>
+										<a href="#">Something else here</a>
+									</li>
+									<li class="divider"></li>
+									<li class="dropdown-header">
+										Nav header
+									</li>
+									<li>
+										<a href="#">Separated link</a>
+									</li>
+									<li>
+										<a href="#">One more separated link</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="navbar navbar-inverse">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">Project name</a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li class="active">
+								<a href="#">Home</a>
+							</li>
+							<li>
+								<a href="#about">About</a>
+							</li>
+							<li>
+								<a href="#contact">Contact</a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">Action</a>
+									</li>
+									<li>
+										<a href="#">Another action</a>
+									</li>
+									<li>
+										<a href="#">Something else here</a>
+									</li>
+									<li class="divider"></li>
+									<li class="dropdown-header">
+										Nav header
+									</li>
+									<li>
+										<a href="#">Separated link</a>
+									</li>
+									<li>
+										<a href="#">One more separated link</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="page-header">
+				<h1>Alerts</h1>
+			</div>
+			<div class="alert alert-success">
+				<strong>Well done!</strong> You successfully read this important alert message.
+			</div>
+			<div class="alert alert-info">
+				<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+			</div>
+			<div class="alert alert-warning">
+				<strong>Warning!</strong> Best check yo self, you're not looking too good.
+			</div>
+			<div class="alert alert-danger">
+				<strong>Oh snap!</strong> Change a few things up and try submitting again.
+			</div>
+
+			<div class="page-header">
+				<h1>Progress bars</h1>
+			</div>
+			<div class="progress">
+				<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+					<span class="sr-only">60% Complete</span>
+				</div>
+			</div>
+			<div class="progress">
+				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+					<span class="sr-only">40% Complete (success)</span>
+				</div>
+			</div>
+			<div class="progress">
+				<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+					<span class="sr-only">20% Complete</span>
+				</div>
+			</div>
+			<div class="progress">
+				<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+					<span class="sr-only">60% Complete (warning)</span>
+				</div>
+			</div>
+			<div class="progress">
+				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+					<span class="sr-only">80% Complete (danger)</span>
+				</div>
+			</div>
+			<div class="progress">
+				<div class="progress-bar progress-bar-success" style="width: 35%">
+					<span class="sr-only">35% Complete (success)</span>
+				</div>
+				<div class="progress-bar progress-bar-warning" style="width: 20%">
+					<span class="sr-only">20% Complete (warning)</span>
+				</div>
+				<div class="progress-bar progress-bar-danger" style="width: 10%">
+					<span class='sr-only'>10% Complete (danger)</span>
+				</div>
+			</div>
+
+			<div class="page-header">
+				<h1>List groups</h1>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<ul class="list-group">
+						<li class="list-group-item">
+							Cras justo odio
+						</li>
+						<li class="list-group-item">
+							Dapibus ac facilisis in
+						</li>
+						<li class="list-group-item">
+							Morbi leo risus
+						</li>
+						<li class="list-group-item">
+							Porta ac consectetur ac
+						</li>
+						<li class="list-group-item">
+							Vestibulum at eros
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-4">
+					<div class="list-group">
+						<a href="#" class="list-group-item active"> Cras justo odio </a>
+						<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+						<a href="#" class="list-group-item">Morbi leo risus</a>
+						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+						<a href="#" class="list-group-item">Vestibulum at eros</a>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="list-group">
+						<a href="#" class="list-group-item active"> <h4 class="list-group-item-heading">List group item heading</h4>
+						<p class="list-group-item-text">
+							Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+						</p> </a>
+						<a href="#" class="list-group-item"> <h4 class="list-group-item-heading">List group item heading</h4>
+						<p class="list-group-item-text">
+							Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+						</p> </a>
+						<a href="#" class="list-group-item"> <h4 class="list-group-item-heading">List group item heading</h4>
+						<p class="list-group-item-text">
+							Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+						</p> </a>
+					</div>
+				</div>
+			</div>
+
+			<div class="page-header">
+				<h1>Panels</h1>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Panel title</h3>
+						</div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Panel title</h3>
+						</div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3 class="panel-title">Panel title</h3>
+						</div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3 class="panel-title">Panel title</h3>
+						</div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h3 class="panel-title">Panel title</h3>
+						</div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title">Panel title</h3>
+						</div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="page-header">
+				<h1>Wells</h1>
+			</div>
+			<div class="well">
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur.
+				</p>
+			</div>
+
+		</div -->
+		<!-- /container -->
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="lib/jquery-2.1.0.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>
