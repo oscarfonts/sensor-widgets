@@ -5,7 +5,7 @@ define(['SOS', 'jquery', 'daterangepicker'], function(SOS, $) {
 	$(function() {
 		var featureNames = {}, propertyNames = {};
 
-		setServices(["http://localhost:8080/52n-sos/sos/json", "http://sensorweb.demo.52north.org/52n-sos-webapp/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
+		setServices(["http://sensors.fonts.cat/52n-sos/sos/json", "http://localhost:8080/52n-sos/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
 
 		$('#services').change(function() {
 			setOfferings($('#services option:selected').attr("id"));
