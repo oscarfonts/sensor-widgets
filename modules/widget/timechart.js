@@ -106,8 +106,9 @@ define(['SOS', 'graph'], function(SOS) {
 				}
 
 				var options = {
-					"width": "99%",
-					"height": "90%"
+					"width": "100%",
+					"bottom": "0",
+					"overflow": "hidden"
 				};
 
 				// jqGrid table
@@ -118,6 +119,8 @@ define(['SOS', 'graph'], function(SOS) {
 				var graph = new links.Graph(document.getElementById('graph'));
 
 				graph.draw(data, options);
+
+				// TODO on resize...
 
 			}
 		}

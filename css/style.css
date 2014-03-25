@@ -5,8 +5,15 @@ body {
 	min-width: 100%;
 }
 
-html, body, .widget {
+html, body {
 	overflow: auto;
+}
+
+.widget {
+	overflow: hidden;
+}
+
+html, body, .widget {
 	height: 100%;
 }
 
@@ -77,6 +84,10 @@ html, body, .widget {
 
 .big-button div {
 	padding-bottom: 8px;
+}
+
+#graph {
+	overflow: hidden;
 }
 
 .graph-legend {
