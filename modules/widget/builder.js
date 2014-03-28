@@ -69,7 +69,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 		}).click(loadWidget);
 
 		// Setup the SOS parameters: service, offering, feature(s) and property(ies)
-		setService(["http://sensors.fonts.cat/52n-sos/sos/json", "http://localhost:8080/52n-sos/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
+		setService(["http://sensors.fonts.cat/52n-sos/sos/json", "/52n-sos/sos/json", "http://localhost:8080/52n-sos/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
 
 		$('#service').change(function() {
 			setOfferings($('#service option:selected').attr("id"));
