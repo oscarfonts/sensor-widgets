@@ -1,32 +1,30 @@
-===============================
-Sensor Widgets for SOS services
-===============================
+==============
+Sensor Widgets
+==============
 
-A set of lightweight graphical components to display your standard sensor data:
+**Configurable graphical components for your SOS sensor data.**
 
-#. Choose a widget from the menu.
-#. Configure it instantly with the "Widget Builder" wizard.
-#. Embed the result in any web page.
+*100% Javascript. Extensible. MIT licensed.*
 
-100% Javascript, MIT licensed.
+* Demo & samples: http://sensors.fonts.cat/
+* #SIGLibre8 slides (spanish): http://sensors.fonts.cat/slides/
+* Configure your own widgets:
+  #. Go to http://sensors.fonts.cat/widget/
+  #. Choose a widget from the left menu.
+  #. Configure it instantly with the "Widget Builder" wizard form.
+  #. Embed the result in any web page, using an "object" (or an "iframe") tag.
 
-TODO: Demo page(s) and tutorials.
+Available widgets:
 
-Planned widgets:
-
-=========== ====================== ==================== =====================
-Widget name Drawing or library     Represented concept  Candidate properties
-=========== ====================== ==================== =====================
-Bearing     bearing.svg            Instant angle        Wind direction
-Table       (TBD)                  Any                  Any
-Timechart   (TBD)                  Time series          Any quantity
-Map         Core in GeoJSON.       Geographic Entities  Features of Interest
-            Possible plugins: OL2,
-            Leaflet, OL3, GMaps
-Progressbar (TBD)                  Instant quantity     Pressure, wind speed,
-                                                        solar radiation
-Gauge       gauge.svg              Percentage           Relative humidity
-Thermometer thermometer.svg        Temperature          Temperature
-Flask       erlenmeyer.svg         Accumulated quantity Precipitation
-            tube.svg
-=========== ====================== ==================== =====================
+=========== ====================== ====================== =====================
+Name        Library & dependencies Represented concept    Candidate properties
+=========== ====================== ====================== =====================
+Table       jqGrid                 Any measurement        Any value
+Timechart   CHAP Links Graph       Time series            Any numeric quantity
+Map         Leaflet                Geographic Features    Features of Interest
+Progressbar (HTML + CSS)           Instant quantity       Pressure, wind speed,
+                                                          solar radiation, etc.
+Gauge       (SVG + JS)             Percentage             Relative humidity
+Thermometer (SVG + JS)             Temperature            Temperature
+Bearing     (SVG + JS)             Instant angle          Wind direction
+=========== ====================== ====================== =====================
