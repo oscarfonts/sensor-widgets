@@ -47,6 +47,25 @@ define(['XML'], function(XML) {
 			});
 		},
 
+		getDataAvailability: function(procedures, features, properties, callback) {
+			var request = {
+				request: "GetDataAvailability"
+			};
+			if (procedures) {
+				request["procedures"] = procedures;
+			}
+			if (features) {
+				request["features"] = features;
+			}
+			if (properties) {
+				request["properties"] = properties;
+			}
+
+			this._send(request, function(response) {
+				callback(response.dataAvailability);
+			});
+		},
+
 		getObservation: function(offering, features, properties, time, callback) {
 			var request = {
 				"request": "GetObservation"
