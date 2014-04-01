@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css','css!/css/daterangepicker.css'], function(SOS, $) {
+define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css', 'css!/css/daterangepicker.css'], function(SOS, $) {
 
 	var inputs = ["name"];
 
@@ -72,12 +72,32 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 		setService(["http://metagato.fonts.cat/52n-sos/sos/json", "/52n-sos/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
 
 		$('#service').change(function() {
-			setOfferings($('#service option:selected').attr("id"));
+			var service = $('#service option:selected').attr("id");
+			setOfferings(service);
+			setDateRange();
 		});
 
 		$('#offering').change(function() {
-			setFeatures($('#offering option:selected, #offerings option:selected').data("procedure"));
-			setProperties($('#offering option:selected, #offerings option:selected').data("procedure"));
+			var procedure = $('#offering option:selected').data("procedure");
+			setFeatures(procedure);
+			setProperties(procedure);
+			setDateRange();
+		});
+
+		$('#feature').change(function() {
+			setDateRange();
+		});
+
+		$('#features').change(function() {
+			setDateRange();
+		});
+
+		$('#property').change(function() {
+			setDateRange();
+		});
+
+		$('#properties').change(function() {
+			setDateRange();
 		});
 
 		$('#time_range').dateRangePicker({
@@ -201,12 +221,43 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 		});
 	};
 
+	function setDateRange(procedure, features, properties) {
+		var procedure = $('#offering option:selected').data("procedure");
+		var feature = $('#feature option:selected').attr("id");
+		var property = $('#property option:selected').attr("id");
+		var features = feature ? feature : $('#features option:selected').map(function() {
+			return this.id;
+		}).get();
+		var properties = property ? property : $('#properties option:selected').map(function() {
+			return this.id;
+		}).get();
+
+		SOS.getDataAvailability(procedure, features, properties, function(availabilities) {
+			var abs_from = availabilities[0].phenomenonTime[0];
+			var abs_to = availabilities[0].phenomenonTime[1];
+			for (var i = 1; i < availabilities.length; i++) {
+				var from = availabilities[i].phenomenonTime[0];
+				var to = availabilities[i].phenomenonTime[1];
+				if (from < abs_from) {
+					abs_from = from;
+				}
+				if (to > abs_to) {
+					abs_to = to;
+				}
+			}
+			$("#time_start").val(moment(abs_from).utc().format());
+			$("#time_end").val(moment(abs_to).utc().format());
+		});
+	}
+
 	function clearOptions() {
 		for (var i = 0; i < arguments.length; i++) {
 			if ($(arguments[i])) {
 				$(arguments[i]).find('option').remove();
 			}
 		}
+		$("#time_start").val("");
+		$("#time_end").val("");
 	}
 
 	function loadWidget() {
