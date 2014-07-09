@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/cerulean/bootstrap.min.css" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<title>meteo.apb.es</title>
+		<style>
+			h1 {
+				padding-top: 70px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">meteo.apb.es</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							<a href="#Sirena">Sirena</a>
+						</li>
+						<li>
+							<a href="#XMVQA">XMVQA</a>
+						</li>
+						<li>
+							<a href="#TorreControl">Torre Control</a>
+						</li>
+						<li>
+							<a href="#DataBrowser">Data Browser</a>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+
+		<div class="container">
+			<h1 id="Sirena">Sirena</h1>
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">02-SIRENA</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-8">
+									<object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object>
+								</div>
+								<div class="col-xs-4">
+									<object type="text/html" width="100px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=thermometer&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2332&refresh_interval=60"></object>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<object type="text/html" width="100%" height="365px" data="http://sensors.portdebarcelona.cat/widget/?name=timechart&title=Velocitat%20Vent%20%28m%2Fs%29&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2330m&features=[%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22]&properties=[%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2330%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2330M%22]&time_start=2014-07-07T06%3A00%3A00%2B00%3A00&time_end=2014-07-08T06%3A00%3A00%2B00%3A00"></object>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									Rosa últimes 3 hores
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="panel panel-default">
+						<object type="text/html" width="100%" height="450px" data="http://sensors.portdebarcelona.cat/widget/?name=table&title=Data%20Table&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2330m&features=[%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22]&properties=[%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2334%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2330M%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2335%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2333%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2336%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2332%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2330%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331%22]&time_start=2014-07-07T08%3A32%3A00%2B00%3A00&time_end=2014-07-08T08%3A32%3A00%2B00%3A00"></object>
+					</div>
+				</div>
+			</div>
+
+			<h1 id="XMVQA">XMVQA</h1>
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">02-SIRENA</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									Panell instantani
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<object type="text/html" width="100%" height="365px" data="http://sensors.portdebarcelona.cat/widget/?name=timechart&title=Velocitat%20Vent%20%28m%2Fs%29&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&features=[%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22]&properties=[%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2330%22]&time_start=2014-07-07T04%3A00%3A00%2B00%3A00&time_end=2014-07-08T06%3A00%3A00%2B00%3A00"></object>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									Panell 30-minutal
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-8">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-3">
+									01-DISPENSARI
+								</div>
+								<div class="col-xs-3">
+									P4-DIC SUD PIF
+								</div>
+								<div class="col-xs-3">
+									03-ADOSSAT
+								</div>
+								<div class="col-xs-3">
+									P6-CONTRADIC
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-4">
+									P3-UNITAT MOBIL
+								</div>
+								<div class="col-xs-4">
+									P5-DARSENA SUD B
+								</div>
+								<div class="col-xs-4">
+									10-ZAL2
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h1 id="TorreControl">Torre Control</h1>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">P4-DIC SUD: Edifici PIF ZAL Prat</h3>
+						</div>
+						<div class="panel-body">
+							<p>Mini-mapa P4</p>
+							<object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P4&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object>
+							<p>Dades velocitat vent mitja hora</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">02-SIRENA: Balisa moll nou Contradic</h3>
+						</div>
+						<div class="panel-body">
+							<p>Mini-mapa 02</p>
+							<object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object>
+							<p>Dades velocitat vent mitja hora</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">03-ADOSSAT: BOCANA NORD</h3>
+						</div>
+						<div class="panel-body">
+							<p>Mini-mapa 03</p>
+							<object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2303&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object>
+							<p>Dades velocitat vent mitja hora</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h1 id="DataBrowser">Data Browser</h1>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-body" style="min-height:800px;">
+							<ul>
+								<li>Desplegable estació</li>
+								<li>Desplegable offering</li>
+								<li>Panell dades</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /container -->
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script>
+		$('.nav li').on('click', function() {
+			//
+			$(this).parent().find('.active').removeClass('active');
+			this.addClass("active");
+		});
+		</script>
+	</body>
+</html>
