@@ -1,7 +1,7 @@
 var LIB_PATH = "../lib/";
 
 require.config({
-	baseUrl: '/modules',
+	baseUrl: '../modules',
 	paths: {
 		"factory": "widget/factory",
 		"text": LIB_PATH + "text-2.0.10",
@@ -23,25 +23,25 @@ require.config({
 			deps: ["jquery", "moment"]
 		},
 		"jquery-ui": {
-			deps: ["jquery", "css!/css/jquery-ui-1.10.4.custom.min.css"]
+			deps: ["jquery", "css!../css/jquery-ui-1.10.4.custom.min.css"]
 		},
 		"jqgrid": {
-			deps: ["jqgrid-locale-en", "jquery-ui", "css!/css/ui.jqgrid.css"]
+			deps: ["jqgrid-locale-en", "jquery-ui", "css!../css/ui.jqgrid.css"]
 		},
 		"jqgrid-locale-en": {
 			deps: ["jquery"]
 		},
 		"graph": {
-			deps: ["css!/css/graph.css"]
+			deps: ["css!../css/graph.css"]
 		},
 		"proj4leaflet": {
 			deps: ["leaflet", "proj4"]
 		},
 		"leaflet": {
-			deps: ["css!/css/leaflet.css"]
+			deps: ["css!../css/leaflet.css"]
 		},
 		"leaflet-label": {
-			deps: ["leaflet", "css!/css/leaflet.label.css"]
+			deps: ["leaflet", "css!../css/leaflet.label.css"]
 		}
 	}
 });

@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	background: url("/img/gridtile.svg") repeat scroll -1px -1px /50px auto #EEEEEE;
+	background: url("../../img/gridtile.svg") repeat scroll -1px -1px /50px auto #EEEEEE;
 	text-align: left;
 }
 

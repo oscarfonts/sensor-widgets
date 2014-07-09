@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css', 'css!/css/daterangepicker.css'], function(SOS, $) {
+define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css', 'css!../../css/daterangepicker.css'], function(SOS, $) {
 
 	var inputs = ["name"];
 
@@ -53,7 +53,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 
 		contents += '<button name="build">Create Widget</button>';
 
-		renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="/img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
+		renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="../img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
 
 		$("#widget").resizable({
 			helper: "ui-resizable-helper"
@@ -69,7 +69,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 		}).click(loadWidget);
 
 		// Setup the SOS parameters: service, offering, feature(s) and property(ies)
-		setService(["http://metagato.fonts.cat/52n-sos/sos/json", "/52n-sos/sos/json", "http://172.17.4.37:8080/52n-sos/sos/json"]);
+		setService(["http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json", "http://metagato.fonts.cat/52n-sos/sos/json"]);
 
 		$('#service').change(function() {
 			var service = $('#service option:selected').attr("id");
