@@ -108,16 +108,20 @@ define(['SOS', 'graph'], function(SOS) {
 				var options = {
 					"width": "100%",
 					"bottom": "0",
-					"overflow": "hidden"
+					"overflow": "hidden",
+					"legend" : {
+						"visible": false
+					}
 				};
 
-				// jqGrid table
-				var title = config.title ? "<h3>" + config.title + "</h3>" : "";
-				var table = "<div id='graph'></div>";
-				renderTo.innerHTML = title + table;
+				// Widget contents
+				var contents = '<div class="timechart widget">';
+				contents += config.title ? '<h3 class="title">' + config.title + '</h3>' : "";
+				contents += "<div class='graph'></div>";
+				contents += '</div>';
+				renderTo.innerHTML = contents;
 
-				var graph = new links.Graph(document.getElementById('graph'));
-
+				var graph = new links.Graph(renderTo.querySelector('.graph'));
 				graph.draw(data, options);
 
 				// TODO on resize...
