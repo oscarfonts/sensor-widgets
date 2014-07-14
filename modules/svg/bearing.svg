@@ -1959,7 +1959,7 @@
            x="-400.24866">NO</tspan></text>
     </g>
   </g>
-  <g id="shadow">
+  <g class="shadow">
     <g
       transform="matrix(1.2033511,0,0,1.2033511,372.85862,-692.50773)"
        id="shadow"
@@ -4186,7 +4186,7 @@
       </g>
     </g>
   </g>
-  <g id="arrow">
+  <g class="arrow">
     <g
        transform="matrix(1.2033511,0,0,1.2033511,372.85862,-692.50773)">
       <path

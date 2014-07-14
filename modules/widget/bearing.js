@@ -8,13 +8,17 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 	return {
 		inputs: inputs,
 		init: function(config, renderTo) {
-			var contents = '<div class="widget">';
-			contents += '<h1 id="feature_name"></h1><h2 id="property_name"></h2>';
+			var contents = '<div class="bearing widget">';
+			contents += '<h1 class="feature_name"></h1>';
 			contents += drawing;
-			contents += '<h1><span id="value"></span>º</h1><h3 id="date"></h3></div>';
+			contents += '<h2><span class="property_name"></span>:<br/><span class="result_value"></span> deg</h2>';
+			contents += '<h3>Request time:<br/><span class="request_time"></span></h3>';
+			contents += '<h3>Result time:<br/><span class="result_time"></span></h3>';
+			contents += '</div>';
 			renderTo.innerHTML = contents;
 
-			var arrow = document.getElementById("arrow"), shadow = document.getElementById("shadow");
+			var arrow = renderTo.querySelector(".arrow");
+			var shadow = renderTo.querySelector(".shadow");
 
 			SOS.setUrl(config.service);
 			setInterval(read, config.refresh_interval * 1000);
@@ -25,16 +29,20 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 			};
 
 			function draw(observations) {
-				if (observations.length == 1// Single observation
-				&& observations[0].result.uom == 'deg'// UoM is degrees
-				&& typeof observations[0].result.value == 'number') {// Value is numeric
+				if (observations.length == 1 // Single observation
+				&& observations[0].result.uom == 'deg' // UoM is degrees
+				&& typeof observations[0].result.value == 'number') { // Value is numeric
 
-					var obs = observations[0], foi_name = obs.featureOfInterest.name.value, date = obs.resultTime, // TODO cast to date object, &c.
-					value = obs.result.value, procedure = obs.procedure;
+					var obs = observations[0];
+					var foi_name = obs.featureOfInterest.name.value;
+					var date = new Date(obs.resultTime);
+					var value = obs.result.value;
+					var procedure = obs.procedure;
 
-					document.getElementById("feature_name").innerHTML = foi_name;
-					document.getElementById("date").innerHTML = date;
-					document.getElementById("value").innerHTML = value;
+					renderTo.querySelector(".feature_name").innerHTML = foi_name;
+					renderTo.querySelector(".request_time").innerHTML = (new Date()).toLocaleString();
+					renderTo.querySelector(".result_time").innerHTML = date.toLocaleString();
+					renderTo.querySelector(".result_value").innerHTML = value;
 					arrow.setAttribute("transform", "rotate(" + value + ", 256, 256)");
 					shadow.setAttribute("transform", "translate(5, 5) rotate(" + value + ", 256, 256)");
 
@@ -43,7 +51,7 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 						for (var i in properties) {
 							var property = properties[i];
 							if (property.Quantity.definition == config.property) {
-								document.getElementById("property_name").innerHTML = property.name;
+								renderTo.querySelector(".property_name").innerHTML = property.name;
 							}
 						}
 					});
