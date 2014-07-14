@@ -1,13 +1,19 @@
-var LIB_PATH = "../lib/";
+var scripts = document.getElementsByTagName('script');
+var BASE = scripts[scripts.length-1].src.replace(/[^\/]*$/, '');
+var LIB_PATH = BASE + "lib/";
+var MODULES_PATH = BASE + "modules/";
 
 require.config({
-	baseUrl: '../modules',
+	baseUrl: MODULES_PATH,
 	paths: {
-		"factory": "widget/factory",
+		"factory": MODULES_PATH + "widget/factory",
 		"text": LIB_PATH + "text-2.0.10",
 		"css": LIB_PATH + "css",
 		"jquery": LIB_PATH + "jquery-2.1.0.min",
 		"jquery-ui": LIB_PATH + "jquery-ui-1.10.4.custom.min",
+		"flot": LIB_PATH + "flot-0.8.3",
+		"flot-time": LIB_PATH + "flot-time",
+		"flot-tooltip": LIB_PATH + "flot-tooltip-0.7.1",
 		"jqgrid": LIB_PATH + "jqGrid-4.6.0.min",
 		"jqgrid-locale-en": LIB_PATH + "jqGrid.locale-en",
 		"moment": LIB_PATH + "moment-2.0.0.min",
@@ -29,6 +35,15 @@ require.config({
 			deps: ["jqgrid-locale-en", "jquery-ui", "css!../css/ui.jqgrid.css"]
 		},
 		"jqgrid-locale-en": {
+			deps: ["jquery"]
+		},
+		"flot-time": {
+			deps: ["flot"]
+		},
+		"flot-tooltip": {
+			deps: ["flot"]
+		},
+		"flot": {
 			deps: ["jquery"]
 		},
 		"graph": {
