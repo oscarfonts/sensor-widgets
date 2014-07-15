@@ -12,10 +12,6 @@ define(['SOS', 'graph'], function(SOS) {
 			SOS.setUrl(config.service);
 			read();
 
-			function getPropertyNames(next) {
-				next();
-			}
-
 			function read() {
 				var features = isArray(config.features) ? config.features : JSON.parse(config.features);
 				var properties = isArray(config.properties) ? config.properties : JSON.parse(config.properties);
