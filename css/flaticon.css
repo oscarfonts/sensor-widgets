@@ -32,6 +32,10 @@
 	content: "\e003";
 }
 
+.flaticon-table-plain:before {
+	content: "\e003";
+}
+
 .flaticon-map:before {
 	content: "\e004";
 }
