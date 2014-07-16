@@ -14,6 +14,8 @@ require.config({
 		"flot": LIB_PATH + "flot-0.8.3",
 		"flot-time": LIB_PATH + "flot-time",
 		"flot-tooltip": LIB_PATH + "flot-tooltip-0.7.1",
+		"highcharts":  LIB_PATH + "highcharts-4.0.3",
+		"highcharts-more":  LIB_PATH + "highcharts-more-4.0.3",
 		"jqgrid": LIB_PATH + "jqGrid-4.6.0.min",
 		"jqgrid-locale-en": LIB_PATH + "jqGrid.locale-en",
 		"moment": LIB_PATH + "moment-2.0.0.min",
@@ -48,6 +50,13 @@ require.config({
 		},
 		"graph": {
 			deps: ["css!../css/graph.css"]
+		},
+		"highcharts": {
+			exports: "Highcharts",
+			deps: ["jquery"]
+		},
+		"highcharts-more": {
+			deps: ["highcharts"]
 		},
 		"proj4leaflet": {
 			deps: ["leaflet", "proj4"]
