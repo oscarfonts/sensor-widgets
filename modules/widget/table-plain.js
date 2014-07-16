@@ -75,10 +75,8 @@ define(['SOS'], function(SOS) {
 			};
 
 			function createGrid(data, propertyNames) {
-				console.log(data);
-				console.log(propertyNames);
-
-				table = '<table class="table table-striped table-condensed table-hover">';
+				table = '<div class="table-responsive">';
+				table += '<table class="table table-striped table-condensed table-hover table-bordered">';
 				table += '<tr>';
 				table += '<thead>';
 				table += '<th>Result Time</th>';
@@ -101,6 +99,7 @@ define(['SOS'], function(SOS) {
 					table += '</tr>';
 				}
 				table += '</table>';
+				table += '</div>';
 
 				// Add table contents to document
 				var title = config.title ? "<h3>" + config.title + "</h3>" : "";
