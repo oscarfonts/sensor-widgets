@@ -112,7 +112,7 @@ define(['SOS', 'flot-time', 'flot-tooltip'], function(SOS) {
 					},
 					tooltip: true,
 					tooltipOpts: {
-						content: "[%x] %s: %y " + row.uom
+						content: "[%x] %s: %y.2 " + row.uom
 					}
 				};
 
