@@ -40,6 +40,10 @@
 	content: "\e003";
 }
 
+.flaticon-panel:before {
+	content: "\e003";
+}
+
 .flaticon-map:before {
 	content: "\e004";
 }

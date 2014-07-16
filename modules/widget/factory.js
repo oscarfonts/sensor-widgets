@@ -33,7 +33,7 @@ define(function() {
 
 	function chooser(renderTo) {
 		// TODO: Really choose. Lists, links and onClicks.
-		var widgets = ["timechart", "timechart-flot", "table", "table-plain", "gauge", "progressbar", "bearing", "windrose", "thermometer", "map"];
+		var widgets = ["timechart", "timechart-flot", "table", "table-plain", "panel", "gauge", "progressbar", "bearing", "windrose", "thermometer", "map"];
 		var contents = '<h1>Widget<br/><small>Factory</small></h1>';
 
 		for (var i in widgets) {
@@ -52,7 +52,6 @@ define(function() {
 				name: name
 			}, renderTo);
 		}
-
 	}
 
 	function builder(config, renderTo) {
