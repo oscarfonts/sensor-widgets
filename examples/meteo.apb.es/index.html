@@ -13,45 +13,66 @@
 			}
 			div[class|='col'] {
 				/*border: 1px solid black;*/
-					}
-					.widget h1, .widget h2, .widget h3 {
-						margin: 0;
-						padding: 3px;
-						text-align: center;
-					}
-					.widget h1 {
-						font-size: 18px;
-					}
-					.widget h2 {
-						font-size: 22px;
-					}
-					.widget h3 {
-						display: none;
-						font-size: 12px;
-					}
-					.sirena .feature_name, .sirena .widget .title {
-						display: none;
-					}
-					.sirena .thermometer {
-						height: 340px;
-						overflow: hidden;
-					}
-					.sirena .timechart {
-						height: 170px;
-					}
-					.sirena .bearing {
-						height: 270px;
-						width: 270px;
-					}
-					.sirena .tablex {
-						font-size: 11px;
-					}
-					.sirena .tablex h3 {
-						display: none;
-					}
-					.sirena .tablex .time {
-						white-space: nowrap;
-					}
+			}
+			.widget h1, .widget h2, .widget h3 {
+				margin: 0;
+				padding: 3px;
+				text-align: center;
+			}
+			.widget h1 {
+				font-size: 18px;
+			}
+			.widget h2 {
+				font-size: 22px;
+			}
+			.widget h3 {
+				display: none;
+				font-size: 12px;
+			}
+			.sirena .feature_name, .sirena .widget .title {
+				display: none;
+			}
+			.sirena .thermometer {
+				height: 340px;
+				overflow: hidden;
+			}
+			.sirena .timechart {
+				height: 170px;
+			}
+			.sirena .bearing {
+				height: 270px;
+				width: 270px;
+			}
+			.sirena .tablex {
+				font-size: 11px;
+			}
+			.sirena .tablex h3 {
+				display: none;
+			}
+			.sirena .tablex .time {
+				white-space: nowrap;
+			}
+			.torrecontrol .map {
+				width: 100%;
+				height: 180px;
+			}
+			.torrecontrol .bearing {
+				height: 320px;
+				width: 100%;
+			}
+			.torrecontrol .bearing h1, .torrecontrol .bearing h2 {
+				display: none;
+			}
+			.torrecontrol [class|='panel'] h2 {
+				text-align: center;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.torrecontrol [class|='panel'] h3 {
+				text-align: center;
+				font-size: 14px;
+				margin-top: 0;
+			}
 		</style>
 	</head>
 	<body>
@@ -183,40 +204,43 @@
 			</div>
 
 			<h1 id="TorreControl">Torre Control</h1>
-			<div class="row">
-				<div class="col-md-4">
+			<div class="row torrecontrol">
+				<div class="col-md-4 p4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">P4-DIC SUD: Edifici PIF ZAL Prat</h3>
 						</div>
 						<div class="panel-body">
-							<p>Mini-mapa P4</p>
-							<!--object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P4&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object-->
-							<p>Dades velocitat vent mitja hora</p>
+							<div class="map"> </div>
+							<div class="bearing"> </div>
+							<div class="panel-10m"> </div>
+							<div class="panel-30m"> </div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 x02">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">02-SIRENA: Balisa moll nou Contradic</h3>
 						</div>
 						<div class="panel-body">
-							<p>Mini-mapa 02</p>
-							<!--object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object-->
-							<p>Dades velocitat vent mitja hora</p>
+							<div class="map"> </div>
+							<div class="bearing"> </div>
+							<div class="panel-10m"> </div>
+							<div class="panel-30m"> </div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 x03">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">03-ADOSSAT: BOCANA NORD</h3>
 						</div>
 						<div class="panel-body">
-							<p>Mini-mapa 03</p>
-							<!--object type="text/html" width="225px" height="600px" data="http://sensors.portdebarcelona.cat/widget/?name=bearing&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2303&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=60"></object-->
-							<p>Dades velocitat vent mitja hora</p>
+							<div class="map"> </div>
+							<div class="bearing"> </div>
+							<div class="panel-10m"> </div>
+							<div class="panel-30m"> </div>
 						</div>
 					</div>
 				</div>

@@ -1,8 +1,8 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget/windrose', 'widget/table-plain'],
-	function(bearing, thermometer, timechart, windrose, table) {
+define(['widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget/windrose', 'widget/table-plain', 'widget/map', 'widget/panel'],
+	function(bearing, thermometer, timechart, windrose, table, map, panel) {
 
 	var defs = {
 		service: function() {
@@ -20,10 +20,11 @@ define(['widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget
 	};
 
 	var now = new Date();
-	var a_day_ago = new Date(now.getTime() - 1000*60*60*24);
-	var back_33_samples = new Date(now.getTime() - 1000*60*60*17);
-	var three_hours_ago = new Date(now.getTime() - 1000*60*60*3);
+	var a_day_ago = new Date(now.getTime() - 1000 * 60 * 60 * 24);
+	var back_33_samples = new Date(now.getTime() - 1000 * 60 * 60 * 17);
+	var three_hours_ago = new Date(now.getTime() - 1000 * 60 * 60 * 3);
 
+	// SIRENA
 	bearing.init({
 		service: defs.service(),
 		offering: defs.offering("10m"),
@@ -74,4 +75,104 @@ define(['widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget
 		time_start: back_33_samples.toISOString().substring(0,19)+"Z",
 		time_end: now.toISOString().substring(0,19)+"Z"
 	}, document.querySelector(".sirena .tablex"));
+
+	// TORRE CONTROL
+	map.init({
+		service: defs.service(),
+		offering: defs.offering("30m"),
+		features: [defs.feature("P4")],
+		maxInitialZoom: 12
+	}, document.querySelector(".torrecontrol .p4 .map"));
+
+	bearing.init({
+		service: defs.service(),
+		offering: defs.offering("10m"),
+		feature: defs.feature("P4"),
+		property: defs.property("31"),
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .p4 .bearing"));
+
+	panel.init({
+		title: "Dades 10-minutals",
+		service: defs.service(),
+		offering: defs.offering("10m"),
+		feature: defs.feature("P4"),
+		properties: [defs.property("31"), defs.property("30")],
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .p4 .panel-10m"));
+
+	panel.init({
+		title: "Dades 30-minutals",
+		service: defs.service(),
+		offering: defs.offering("30m"),
+		feature: defs.feature("P4"),
+		properties: [defs.property("31"), defs.property("30")],
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .p4 .panel-30m"));
+
+	map.init({
+		service: defs.service(),
+		offering: defs.offering("30m"),
+		features: [defs.feature("02")],
+		maxInitialZoom: 12
+	}, document.querySelector(".torrecontrol .x02 .map"));
+
+	bearing.init({
+		service: defs.service(),
+		offering: defs.offering("10m"),
+		feature: defs.feature("02"),
+		property: defs.property("31"),
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .x02 .bearing"));
+
+	panel.init({
+		title: "Dades 10-minutals",
+		service: defs.service(),
+		offering: defs.offering("10m"),
+		feature: defs.feature("02"),
+		properties: [defs.property("31"), defs.property("30")],
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .x02 .panel-10m"));
+
+	panel.init({
+		title: "Dades 30-minutals",
+		service: defs.service(),
+		offering: defs.offering("30m"),
+		feature: defs.feature("02"),
+		properties: [defs.property("31"), defs.property("30")],
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .x02 .panel-30m"));
+
+	map.init({
+		service: defs.service(),
+		offering: defs.offering("30m"),
+		features: [defs.feature("03")],
+		maxInitialZoom: 12
+	}, document.querySelector(".torrecontrol .x03 .map"));
+
+	bearing.init({
+		service: defs.service(),
+		offering: defs.offering("10m"),
+		feature: defs.feature("03"),
+		property: defs.property("31"),
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .x03 .bearing"));
+
+	panel.init({
+		title: "Dades 10-minutals",
+		service: defs.service(),
+		offering: defs.offering("10m"),
+		feature: defs.feature("03"),
+		properties: [defs.property("31"), defs.property("30")],
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .x03 .panel-10m"));
+
+	panel.init({
+		title: "Dades 30-minutals",
+		service: defs.service(),
+		offering: defs.offering("30m"),
+		feature: defs.feature("03"),
+		properties: [defs.property("31"), defs.property("30")],
+		refresh_interval: 15
+	}, document.querySelector(".torrecontrol .x03 .panel-30m"));
 });
