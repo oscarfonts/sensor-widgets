@@ -123,7 +123,9 @@ define(['SOS', 'flot-time', 'flot-tooltip'], function(SOS) {
 				contents += '</div>';
 				renderTo.innerHTML = contents;
 
-				$.plot(".graph", data, options);
+				var elem = renderTo.querySelector(".graph");
+
+				$.plot(elem, data, options);
 
 			}
 		}
