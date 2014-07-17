@@ -40,7 +40,10 @@ define(['SOS'], function(SOS) {
 
 				}
 
-				getPropertyNames(observations[0].procedure, rows);
+				if (observations.length) {
+					getPropertyNames(observations[0].procedure, rows);
+				}
+
 			}
 
 			function getPropertyNames(procedure, rows) {
@@ -71,8 +74,10 @@ define(['SOS'], function(SOS) {
 				var panel = '<dl class="dl-horizontal">';
 				for (var i in config.properties) {
 					var row = rows[config.properties[i]];
-					panel += "<dt>" + propertyNames[row.property] + "</dt>";
-					panel += "<dd>" + row.value + " " + row.uom + "</dd>";
+					if (row) {
+						panel += "<dt>" + propertyNames[row.property] + "</dt>";
+						panel += "<dd>" + row.value + " " + row.uom + "</dd>";
+					}
 				}
 				panel += "</dl>";
 				renderTo.innerHTML = title + panel;
