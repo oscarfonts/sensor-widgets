@@ -1,10 +1,20 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget/windrose', 'widget/table-plain', 'widget/map', 'widget/panel'],
-	function(bearing, thermometer, timechart, windrose, table, map, panel) {
+define(['jquery', 'widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget/windrose', 'widget/table-plain', 'widget/map', 'widget/panel'],
+		function($, bearing, thermometer, timechart, windrose, table, map, panel) {
 
-	var refresh_interval = 60;
+	$('.nav li').on('click', function() {
+		$(this).parent().find('.active').removeClass('active');
+		$(this).addClass("active");
+		var id = $(this).find("a").attr("href");
+		//$(".section").hide();
+		//$(id).show();
+	});
+
+	$("a[href=" + window.location.hash + "]").click();
+
+	var refresh_interval = 600;
 
 	var defs = {
 		service: function() {
@@ -248,4 +258,29 @@ define(['widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget
 		properties: [defs.property("31"), defs.property("30")],
 		refresh_interval: refresh_interval
 	}, document.querySelector(".torrecontrol .x03 .panel-30m"));
+
+	var features = ["01", "02", "03", "10", "P1", "P3", "P4", "P5", "P6", "P7"];
+	var featureNames = ["01 Dispensari", "02 Sirena", "03 Adossat", "10 ZAL2", "P1 ESCU", "P3 Unitat Mobil", "P4 Dic Sud", "P5 Dàrsena sud B", "P6 Contradic", "P7 Torre Control"];
+	var offerings = ["1m", "10m", "30m"];
+	var offeringNames = ["Minutals", "10 minutals", "30 minutals"];
+
+	for (var f in features) {
+		var feature = features[f];
+		var featureName = featureNames[f];
+		var html = '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">' + featureName + '</h3></div><div class="panel-content"><div class="row"></div></div></div>';
+		var pnl = $(html).appendTo(".databrowser");
+		for (var o in offerings) {
+			var offering = offerings[o];
+			var col = $('<div/>').addClass("col-md-4").addClass("x"+offering).appendTo(pnl.find(".row"));
+			panel.init({
+				title: offeringNames[o],
+				service: defs.service(),
+				offering: defs.offering(offerings[o]),
+				feature: defs.feature(features[f]),
+				properties: [],
+				refresh_interval: refresh_interval
+			}, col.get(0));
+		}
+	}
+
 });

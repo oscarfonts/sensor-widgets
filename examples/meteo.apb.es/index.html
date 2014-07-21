@@ -3,111 +3,11 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=2">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="meteo.css" rel="stylesheet">
 		<title>meteo.apb.es</title>
-		<style>
-			h1 {
-				padding-top: 70px;
-			}
-			div[class|='col'] {
-				/*border: 1px solid black;*/
-			}
-			.widget h1, .widget h2, .widget h3 {
-				margin: 0;
-				padding: 3px;
-				text-align: center;
-			}
-			.widget h1 {
-				font-size: 18px;
-			}
-			.widget h2 {
-				font-size: 22px;
-			}
-			.widget h3 {
-				display: none;
-				font-size: 12px;
-			}
-			.sirena .feature_name, .sirena .widget .title {
-				display: none;
-			}
-			.sirena .thermometer {
-				height: 340px;
-				overflow: hidden;
-			}
-			.sirena .timechart {
-				height: 170px;
-			}
-			.sirena .bearing {
-				height: 270px;
-				width: 270px;
-			}
-			.sirena .tablex {
-				font-size: 11px;
-			}
-			.sirena .tablex h3 {
-				display: none;
-			}
-			.sirena .tablex .time {
-				white-space: nowrap;
-			}
-			.xmvqa .left .bearing {
-				height: 300px;
-			}
-			.xmvqa .left .timechart {
-				height: 160px;
-			}
-			.xmvqa .right .bearing {
-				height: 200px;
-			}
-			.xmvqa .bearing h2 {
-				display: none;
-			}
-			.xmvqa [class|='panel'] h2 {
-				text-align: center;
-				font-size: 16px;
-				font-weight: bold;
-			}
-			.xmvqa [class|='panel'] h3 {
-				text-align: center;
-				font-size: 14px;
-				margin-top: 0;
-			}
-			.xmvqa .right [class|='panel'] dt {
-				width: 80px;
-				font-size: 12px;
-			}
-			.xmvqa .right [class|='panel'] dd {
-				margin-left: 90px;
-				font-size: 12px;
-			}
-			.torrecontrol .map {
-				width: 100%;
-				height: 180px;
-			}
-			.torrecontrol .bearing {
-				height: 320px;
-				width: 100%;
-			}
-			.torrecontrol .bearing h1, .torrecontrol .bearing h2 {
-				display: none;
-			}
-			.torrecontrol [class|='panel'] h2 {
-				text-align: center;
-				font-size: 16px;
-				font-weight: bold;
-			}
-			.torrecontrol [class|='panel'] h3 {
-				text-align: center;
-				font-size: 14px;
-				margin-top: 0;
-			}
-			.panel {
-				-webkit-box-shadow: none;
-				box-shadow: none;
-			}
-		</style>
 	</head>
 	<body>
 		<!-- Fixed navbar -->
@@ -116,9 +16,9 @@
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
+						<span class="icon-bar"> </span>
+						<span class="icon-bar"> </span>
+						<span class="icon-bar"> </span>
 					</button>
 					<a class="navbar-brand" href="#">meteo.apb.es</a>
 				</div>
@@ -141,9 +41,8 @@
 			</div>
 		</div>
 
-		<div class="container">
-			<h1 id="Sirena">Sirena</h1>
-
+		<div class="container section" id="Sirena">
+			<h1>Sirena</h1>
 			<div class="row sirena">
 				<div class="col-md-5">
 					<div class="panel panel-default">
@@ -168,8 +67,10 @@
 				<div class="col-md-7 tablex">
 				</div>
 			</div>
+		</div>
 
-			<h1 id="XMVQA">XMVQA</h1>
+		<div class="container section" id="XMVQA">
+			<h1>XMVQA</h1>
 			<div class="row xmvqa">
 				<div class="col-xs-4 left">
 					<div class="panel panel-default">
@@ -236,8 +137,10 @@
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<h1 id="TorreControl">Torre Control</h1>
+		<div class="container section" id="TorreControl">
+			<h1>Torre Control</h1>
 			<div class="row torrecontrol">
 				<div class="col-md-4 p4">
 					<div class="panel panel-default">
@@ -279,33 +182,16 @@
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<h1 id="DataBrowser">Data Browser</h1>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-body" style="min-height:800px;">
-							<ul>
-								<li>Desplegable estació</li>
-								<li>Desplegable offering</li>
-								<li>Panell dades</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="container section" id="DataBrowser">
+			<h1>Data Browser</h1>
+			<div class="databrowser"> </div>
 		</div>
 		<!-- /container -->
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<script src="../../lib/require-2.1.11.min.js" data-main="meteo.apb.es"> </script>
 		<script src="../../config.js"></script>
-		<script>
-		$('.nav li').on('click', function() {
-			//
-			$(this).parent().find('.active').removeClass('active');
-			this.addClass("active");
-		});
-		</script>
 	</body>
 </html>

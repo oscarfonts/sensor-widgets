@@ -14,7 +14,11 @@ define(['SOS'], function(SOS) {
 			read();
 
 			function read() {
-				config.properties = isArray(config.properties) ? config.properties : JSON.parse(config.properties);
+				if (!config.properties | !config.properties.length) {
+					config.properties = null;
+				} else {
+					config.properties = isArray(config.properties) ? config.properties : JSON.parse(config.properties);
+				}
 				SOS.getObservation(config.offering, [config.feature], config.properties, "latest", draw);
 			}
 
@@ -62,6 +66,9 @@ define(['SOS'], function(SOS) {
 							}
 						}
 						propertyNames[property.id] = property.name;
+					}
+					if (!config.properties) {
+						config.properties = Object.keys(propertyNames);
 					}
 					createPanel(rows, propertyNames);
 				});
