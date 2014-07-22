@@ -32,7 +32,6 @@ define(function() {
 	}
 
 	function chooser(renderTo) {
-		// TODO: Really choose. Lists, links and onClicks.
 		var widgets = ["timechart", "timechart-flot", "table", "table-plain", "panel", "gauge", "progressbar", "bearing", "windrose", "thermometer", "map"];
 		var contents = '<h1>Widget<br/><small>Factory</small></h1>';
 
@@ -47,7 +46,6 @@ define(function() {
 
 		function clicked(e) {
 			var name = "";
-			// TODO get widget name from event parameters
 			builder({
 				name: name
 			}, renderTo);

@@ -120,7 +120,7 @@ define(['SOS', 'graph'], function(SOS) {
 				var graph = new links.Graph(renderTo.querySelector('.graph'));
 				graph.draw(data, options);
 
-				// TODO on resize...
+				// TODO on resize
 
 			}
 		}
