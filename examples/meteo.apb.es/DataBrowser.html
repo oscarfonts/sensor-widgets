@@ -4,14 +4,32 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/yeti/bootstrap.min.css" rel="stylesheet">
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href="meteo.css" rel="stylesheet">
 		<title>meteo.apb.es</title>
+		<script type="text/template" id="item-template">
+			<div class="panel panel-default">
+
+				<div style="cursor: pointer;" class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#{{id}}">
+					<h4 class="panel-title">{{title}}</h4>
+				</div>
+
+				<div id="{{id}}" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-4 x1m"></div>
+							<div class="col-sm-4 x10m"></div>
+							<div class="col-sm-4 x30m"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</script>
 	</head>
 	<body>
 		<!-- Fixed navbar -->
-		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,7 +40,7 @@
 					</button>
 					<a class="navbar-brand" href="#">meteo.apb.es</a>
 				</div>
-				<div class="navbar-collapse collapse">
+				<div class="navbar-collapse navbar-inverse-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li>
 							<a href="./">Sirena</a>
@@ -43,12 +61,12 @@
 
 		<div class="container section" id="DataBrowser">
 			<h1>Data Browser</h1>
-			<div class="databrowser"> </div>
+			<div class="panel-group databrowser" id="accordion"> </div>
 		</div>
 		<!-- /container -->
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-		<script src="../../lib/require-2.1.11.min.js" data-main="meteo.apb.es"> </script>
+		<script src="../../lib/require-2.1.11.min.js" data-main="meteo.apb.es"></script>
 		<script src="../../config.js"></script>
 	</body>
 </html>
