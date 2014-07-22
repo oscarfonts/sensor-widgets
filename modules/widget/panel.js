@@ -14,6 +14,10 @@ define(['SOS'], function(SOS) {
 			read();
 
 			function read() {
+					var title = "<h2>" + config.title + "</h2>";
+					var content = "<h3>Loading...</h3>";
+					renderTo.innerHTML = title + content;
+
 				if (!config.properties | !config.properties.length) {
 					config.properties = null;
 				} else {
@@ -46,6 +50,10 @@ define(['SOS'], function(SOS) {
 
 				if (observations.length) {
 					getPropertyNames(observations[0].procedure, rows);
+				} else {
+					var title = "<h2>" + config.title + "</h2>";
+					var content = "<h3>(no data)</h3>";
+					renderTo.innerHTML = title + content;
 				}
 
 			}
