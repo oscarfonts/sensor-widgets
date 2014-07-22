@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'flot-time', 'flot-tooltip'], function(SOS) {
+define(['SOS', 'flot-resize', 'flot-time', 'flot-tooltip'], function(SOS) {
 
 	var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
 	var propertyNames = null;
