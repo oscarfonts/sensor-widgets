@@ -117,8 +117,7 @@ define(['XML'], function(XML) {
 						var response = JSON.parse(xhr.responseText);
 						callback.call(this, response);
 					} else {
-						// TODO better error handling
-						alert("Error accessing " + this._url);
+						console.error("Error accessing " + this._url);
 					}
 				}
 			}.bind(this);

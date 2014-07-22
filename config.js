@@ -13,6 +13,7 @@ require.config({
 		"jquery-ui": LIB_PATH + "jquery-ui-1.10.4.custom.min",
 		"flot": LIB_PATH + "flot-0.8.3",
 		"flot-time": LIB_PATH + "flot-time",
+		"flot-resize": LIB_PATH + "flot-resize",
 		"flot-tooltip": LIB_PATH + "flot-tooltip-0.7.1",
 		"highcharts":  LIB_PATH + "highcharts-4.0.3",
 		"highcharts-more":  LIB_PATH + "highcharts-more-4.0.3",
@@ -40,6 +41,9 @@ require.config({
 			deps: ["jquery"]
 		},
 		"flot-time": {
+			deps: ["flot"]
+		},
+		"flot-resize": {
 			deps: ["flot"]
 		},
 		"flot-tooltip": {

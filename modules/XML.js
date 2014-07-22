@@ -91,8 +91,7 @@ define(function() {
 						return xml.data;
 						// A comment
 					} else {
-						// TODO better error handling
-						alert("unhandled node type: " + xml.nodeType);
+						console.error("unhandled node type: " + xml.nodeType);
 					}
 
 					return o;

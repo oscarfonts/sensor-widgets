@@ -69,7 +69,7 @@ define(function() {
 					properties: [defs.property("30"), defs.property("31")],
 					time_start: three_hours_ago.toISOString().substring(0, 19) + "Z",
 					time_end: now.toISOString().substring(0, 19) + "Z",
-					refresh_interval: 9999 // TODO Doesn't make sense with fixed time_start and time_end
+					refresh_interval: refresh_interval
 				}, document.querySelector(".sirena .windrose"));
 
 				table.init({
