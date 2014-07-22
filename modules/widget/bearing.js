@@ -11,6 +11,7 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 			var contents = '<div class="bearing widget">';
 			contents += '<h1 class="feature_name"></h1>';
 			contents += drawing;
+			contents += '<div class="error" style="display:none;text-align:center;">(no data)</div>';
 			contents += '<h2><span class="property_name"></span>:<br/><span class="result_value"></span> deg</h2>';
 			contents += '<h3>Request time:<br/><span class="request_time"></span></h3>';
 			contents += '<h3>Result time:<br/><span class="result_time"></span></h3>';
@@ -19,6 +20,7 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 
 			var arrow = renderTo.querySelector(".arrow");
 			var shadow = renderTo.querySelector(".shadow");
+			arrow.style.visibility = shadow.style.visibility = 'hidden';
 
 			SOS.setUrl(config.service);
 			setInterval(read, config.refresh_interval * 1000);
@@ -39,6 +41,8 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 					var value = obs.result.value;
 					var procedure = obs.procedure;
 
+					renderTo.querySelector(".error").style.display = 'none';
+					arrow.style.visibility = shadow.style.visibility = 'visible';
 					renderTo.querySelector(".feature_name").innerHTML = foi_name;
 					renderTo.querySelector(".request_time").innerHTML = (new Date()).toLocaleString();
 					renderTo.querySelector(".result_time").innerHTML = date.toLocaleString();
@@ -56,7 +60,8 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 						}
 					});
 				} else {
-					console.error("Bearing Widget Error - Got an invalid observation from the SOS service");
+					arrow.style.visibility = shadow.style.visibility = 'hidden';
+					renderTo.querySelector(".error").style.display = 'block';
 				}
 			};
 		}

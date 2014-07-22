@@ -8,6 +8,8 @@ define(function() {
 	var defs = {
 		service: function() {
 			return "http://sensors.portdebarcelona.cat/sos/json";
+			//return "http://172.17.4.37:8080/52n-sos/sos/json";
+			//return "http://metagato.fonts.cat/52n-sos/sos/json";
 		},
 		offering: function(p) {
 			return "http://sensors.portdebarcelona.cat/def/weather/offerings#" + p;
