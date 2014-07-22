@@ -17,8 +17,8 @@ define(function() {
 					if (xml.nodeType == 1) {// element node
 						if (xml.attributes.length) {// element with attributes
 							for (var i = 0; i < xml.attributes.length; i++) {
-								var name = xml.attributes[i].nodeName;
-								var value = xml.attributes[i].nodeValue;
+								var name = xml.attributes[i].name;
+								var value = xml.attributes[i].value;
 								var is_ns = name.lastIndexOf("xmlns:", 0) === 0;
 								if (!(clean && is_ns)) {// Hide xmlns attributes
 									o[X.at + name] = (value || "").toString();
@@ -108,8 +108,8 @@ define(function() {
 							if (n.nodeType == 1) {
 								s += "<" + n.nodeName;
 								for (var i = 0; i < n.attributes.length; i++) {
-									var name = n.attributes[i].nodeName;
-									var value = n.attributes[i].nodeValue || "";
+									var name = n.attributes[i].name;
+									var value = n.attributes[i].value || "";
 									s += " " + name + "=\"" + value.toString() + "\"";
 								}
 								if (n.firstChild) {
