@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
+define(['SOS', 'widget/common', 'jqgrid', 'css!widget/table.css'], function(SOS, common) {
 
 	var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
 	var propertyNames = null;
@@ -33,7 +33,6 @@ define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
 				for (i in observations) {
 					var obs = observations[i];
 					var time = new Date(obs.resultTime);
-					time = time.getUTCFullYear() + "/" + d(time.getUTCMonth() + 1) + "/" + d(time.getUTCDate()) + " " + d(time.getUTCHours()) + ":" + d(time.getUTCMinutes()) + ":" + d(time.getUTCSeconds());
 
 					var result = obs.result;
 
@@ -102,7 +101,11 @@ define(['SOS', 'jqgrid', 'css!widget/table.css'], function(SOS) {
 					colModel: [{
 						name: 'time',
 						index: 'time',
-						width: '160'
+						width: '160',
+						formatter: function(cellvalue, options, rowObject) {
+							var new_formatted_cellvalue = common.date.display(cellvalue);
+							return new_formatted_cellvalue;
+						}
 					}, {
 						name: 'feature',
 						index: 'feature',

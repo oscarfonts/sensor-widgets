@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS'], function(SOS) {
+define(['SOS', 'widget/common'], function(SOS, common) {
 
 	var inputs = ["title", "service", "offering", "feature", "properties", "time_start", "time_end"];
 	var propertyNames = null;
@@ -32,7 +32,7 @@ define(['SOS'], function(SOS) {
 				for (i in observations) {
 					var obs = observations[i];
 
-					var time = new Date(obs.resultTime).toISOString().substring(0,19).replace('T', ' ');
+					var time = new Date(obs.resultTime).getTime();
 					var property = obs.observableProperty;
 					var value = obs.result.hasOwnProperty("value") ? obs.result.value : obs.result;
 
@@ -92,7 +92,7 @@ define(['SOS'], function(SOS) {
 					var time = times[i];
 					var values = data[time];
 					table += '<tr>';
-					table += '<th class="time">' + time + '</th>';
+					table += '<th class="time">' + common.date.display(new Date(parseInt(time))) + '</th>';
 					for (var i in config.properties) {
 						table += '<td>' + values[config.properties[i]] + '</td>';
 					}

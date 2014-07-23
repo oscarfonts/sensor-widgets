@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'text!svg/thermometer.svg'], function(SOS, drawing) {
+define(['SOS', 'text!svg/thermometer.svg', 'widget/common'], function(SOS, drawing, common) {
 
 	var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
 	var dy = 3.342574;
@@ -46,8 +46,8 @@ define(['SOS', 'text!svg/thermometer.svg'], function(SOS, drawing) {
 					var y_min = y_max - h;
 
 					renderTo.querySelector(".feature_name").innerHTML = foi_name;
-					renderTo.querySelector(".request_time").innerHTML = (new Date()).toLocaleString();
-					renderTo.querySelector(".result_time").innerHTML = date.toLocaleString();
+					renderTo.querySelector(".request_time").innerHTML = common.date.display(new Date());
+					renderTo.querySelector(".result_time").innerHTML = common.date.display(date);
 					renderTo.querySelector(".result_value").innerHTML = value;
 					clip.setAttribute("height", h);
 					clip.setAttribute("y", y_min);

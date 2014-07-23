@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'css!widget/progressbar.css'], function(SOS, drawing) {
+define(['SOS', 'css!widget/progressbar.css', 'widget/common'], function(SOS, drawing, common) {
 
 	var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval"];
 
@@ -29,13 +29,15 @@ define(['SOS', 'css!widget/progressbar.css'], function(SOS, drawing) {
 				if (observations.length == 1// Single observation
 				&& typeof observations[0].result.value == 'number') {// Value is numeric
 
-					var obs = observations[0], foi_name = obs.featureOfInterest.name.value, date = obs.resultTime, // TODO cast to date object, &c.
+					var obs = observations[0];
+					var foi_name = obs.featureOfInterest.name.value;
+					var date = new Date(obs.resultTime);
 					value = obs.result.value, procedure = obs.procedure;
 
 					var width = 100 * (value - config.min_value) / (config.max_value - config.min_value);
 
 					document.getElementById("feature_name").innerHTML = foi_name;
-					document.getElementById("date").innerHTML = date;
+					document.getElementById("date").innerHTML = common.date.display(date);
 					document.getElementById("value").innerHTML = value;
 					document.getElementById("bar").style = "width: " + width + "%";
 

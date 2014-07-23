@@ -1,7 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(function() {
+define(['widget/common'], function(common) {
+
+	common.date.utc(false);
+	common.date.locale("es");
 
 	var refresh_interval = 600;
 

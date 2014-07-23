@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
+define(['SOS', 'text!svg/bearing.svg', 'widget/common'], function(SOS, drawing, common) {
 
 	var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
 
@@ -44,8 +44,8 @@ define(['SOS', 'text!svg/bearing.svg'], function(SOS, drawing) {
 					renderTo.querySelector(".error").style.display = 'none';
 					arrow.style.visibility = shadow.style.visibility = 'visible';
 					renderTo.querySelector(".feature_name").innerHTML = foi_name;
-					renderTo.querySelector(".request_time").innerHTML = (new Date()).toLocaleString();
-					renderTo.querySelector(".result_time").innerHTML = date.toLocaleString();
+					renderTo.querySelector(".request_time").innerHTML = common.date.display(new Date());
+					renderTo.querySelector(".result_time").innerHTML = common.date.display(date);
 					renderTo.querySelector(".result_value").innerHTML = value;
 					arrow.setAttribute("transform", "rotate(" + value + ", 256, 256)");
 					shadow.setAttribute("transform", "translate(5, 5) rotate(" + value + ", 256, 256)");

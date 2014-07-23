@@ -32,8 +32,7 @@ define(['SOS', 'graph'], function(SOS) {
 				var rows = [];
 				for (i in observations) {
 					var obs = observations[i];
-					var time = new Date(obs.resultTime);
-					time = time.getUTCFullYear() + "/" + d(time.getUTCMonth() + 1) + "/" + d(time.getUTCDate()) + " " + d(time.getUTCHours()) + ":" + d(time.getUTCMinutes()) + ":" + d(time.getUTCSeconds());
+					var time = new Date(obs.resultTime).getTime();
 
 					var result = obs.result;
 
@@ -83,7 +82,7 @@ define(['SOS', 'graph'], function(SOS) {
 						series[label] = { data: [] };
 					}
 					series[label].data.push({
-						date: new Date(row.time),
+						date: new Date(parseInt(row.time)),
 						value: row.value
 					});
 				}
