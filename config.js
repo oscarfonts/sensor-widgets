@@ -21,7 +21,6 @@ var require = (function() {
 			"jqgrid-locale-en": LIB_PATH + "jqGrid.locale-en",
 			"moment": LIB_PATH + "moment-2.0.0.min",
 			"daterangepicker": LIB_PATH + "daterangepicker-1.2",
-			"graph": LIB_PATH + "graph-1.3.2.min",
 			"leaflet": LIB_PATH + "leaflet-0.7.3",
 			"proj4leaflet": LIB_PATH + "proj4leaflet",
 			"proj4": LIB_PATH + "proj4.min",
@@ -54,9 +53,6 @@ var require = (function() {
 			},
 			"flot": {
 				deps: ["jquery"]
-			},
-			"graph": {
-				deps: ["css!../css/graph.css"]
 			},
 			"highcharts": {
 				exports: "Highcharts",

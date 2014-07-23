@@ -21,7 +21,7 @@ Available widgets:
 Name        Library & dependencies Represented concept    Candidate properties
 =========== ====================== ====================== =====================
 Table       jqGrid                 Any measurement        Any value
-Timechart   CHAP Links Graph       Time series            Any numeric quantity
+Timechart   Flot Charts            Time series            Any numeric quantity
 Map         Leaflet                Geographic Features    Features of Interest
 Progressbar (HTML + CSS)           Instant quantity       Pressure, wind speed,
                                                           solar radiation, etc.

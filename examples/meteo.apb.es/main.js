@@ -37,7 +37,7 @@ define(['widget/common'], function(common) {
 
 		case "Sirena":
 
-			require(['widget/bearing', 'widget/thermometer', 'widget/timechart-flot', 'widget/windrose', 'widget/table-plain'], function(bearing, thermometer, timechart, windrose, table) {
+			require(['widget/bearing', 'widget/thermometer', 'widget/timechart', 'widget/windrose', 'widget/table-plain'], function(bearing, thermometer, timechart, windrose, table) {
 
 				bearing.init({
 					service: defs.service(),
@@ -93,7 +93,7 @@ define(['widget/common'], function(common) {
 
 		case "XMVQA":
 
-			require(['widget/bearing', 'widget/panel', 'widget/timechart-flot'], function(bearing, panel, timechart) {
+			require(['widget/bearing', 'widget/panel', 'widget/timechart'], function(bearing, panel, timechart) {
 
 				bearing.init({
 					service: defs.service(),

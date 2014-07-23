@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'graph'], function(SOS) {
+define(['SOS', 'widget/common', 'flot-resize', 'flot-time', 'flot-tooltip', 'flot-navigate'], function(SOS, common) {
 
 	var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
 	var propertyNames = null;
@@ -32,14 +32,12 @@ define(['SOS', 'graph'], function(SOS) {
 				var rows = [];
 				for (i in observations) {
 					var obs = observations[i];
-					var time = new Date(obs.resultTime).getTime();
-
 					var result = obs.result;
 
 					rows.push({
-						time: time,
 						feature: obs.featureOfInterest.name.value,
 						property: obs.observableProperty,
+						time: new Date(obs.resultTime).getTime(),
 						value: result.hasOwnProperty("value") ? result.value : result,
 						uom: result.hasOwnProperty("uom") ? result.uom : "(N/A)"
 					});
@@ -81,10 +79,7 @@ define(['SOS', 'graph'], function(SOS) {
 					if (!series[label]) {
 						series[label] = { data: [] };
 					}
-					series[label].data.push({
-						date: new Date(parseInt(row.time)),
-						value: row.value
-					});
+					series[label].data.push([row.time, row.value]);
 				}
 
 				var data = [];
@@ -96,30 +91,52 @@ define(['SOS', 'graph'], function(SOS) {
 				for (var s in data) {
 					var series = data[s];
 					series.data.sort(function(a, b) {
-						return b.date - a.date;
+						return b[0] - a[0];
 					});
 				}
 
 				var options = {
-					"width": "100%",
-					"bottom": "0",
-					"overflow": "hidden",
-					"legend" : {
-						"visible": false
+					xaxis: {
+						mode: "time",
+						timezone: common.date.utc() ? "UTC": "browser"
+					},
+					yaxis: {
+						zoomRange: false,
+						panRange: false
+					},
+					grid: {
+						hoverable: true
+					},
+					series: {
+						lines: {
+							show: true
+						},
+						points: {
+							show: true
+						}
+					},
+					tooltip: true,
+					tooltipOpts: {
+						content: "[%x] %s: %y.2 " + row.uom
+					},
+					zoom: {
+						interactive: true
+					},
+					pan: {
+						interactive: true
 					}
 				};
 
 				// Widget contents
 				var contents = '<div class="timechart widget">';
 				contents += config.title ? '<h3 class="title">' + config.title + '</h3>' : "";
-				contents += "<div class='graph'></div>";
+				contents += "<div class='graph' style='height:100%;'></div>";
 				contents += '</div>';
 				renderTo.innerHTML = contents;
 
-				var graph = new links.Graph(renderTo.querySelector('.graph'));
-				graph.draw(data, options);
+				var elem = renderTo.querySelector(".graph");
 
-				// TODO on resize
+				$.plot(elem, data, options);
 
 			}
 		}

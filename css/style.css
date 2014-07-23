@@ -85,12 +85,3 @@ html, body, .widget {
 .big-button div {
 	padding-bottom: 8px;
 }
-
-#graph {
-	overflow: hidden;
-}
-
-.graph-legend {
-	text-align: left;
-	font-size: small;
-}
