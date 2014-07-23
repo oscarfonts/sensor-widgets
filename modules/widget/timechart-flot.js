@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'flot-resize', 'flot-time', 'flot-tooltip'], function(SOS) {
+define(['SOS', 'widget/common', 'flot-resize', 'flot-time', 'flot-tooltip', 'flot-navigate'], function(SOS, common) {
 
 	var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
 	var propertyNames = null;
@@ -97,7 +97,12 @@ define(['SOS', 'flot-resize', 'flot-time', 'flot-tooltip'], function(SOS) {
 
 				var options = {
 					xaxis: {
-						mode: "time"
+						mode: "time",
+						timezone: common.date.utc() ? "UTC": "browser"
+					},
+					yaxis: {
+						zoomRange: false,
+						panRange: false
 					},
 					grid: {
 						hoverable: true
@@ -113,6 +118,12 @@ define(['SOS', 'flot-resize', 'flot-time', 'flot-tooltip'], function(SOS) {
 					tooltip: true,
 					tooltipOpts: {
 						content: "[%x] %s: %y.2 " + row.uom
+					},
+					zoom: {
+						interactive: true
+					},
+					pan: {
+						interactive: true
 					}
 				};
 
