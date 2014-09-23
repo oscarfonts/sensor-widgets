@@ -94,7 +94,7 @@ define(['XML'], function(XML) {
 				}
 				filter = {};
 				filter[operation] = {
-					"ref": "om:phenomenonTime",
+					"ref": "om:resultTime",
 					"value": time
 				};
 				request["temporalFilter"] = [filter];
