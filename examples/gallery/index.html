@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Sensor Widgets">
+		<meta name="author" content="Oscar Fonts">
+
+		<title>Sensor Widgets</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/flatly/bootstrap.min.css" rel="stylesheet">
+		<link href="../../css/flaticon.css" rel="stylesheet"/>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<style type="text/css">
+			body {
+				padding-top: 70px;
+				padding-bottom: 30px;
+			}
+
+			.theme-dropdown .dropdown-menu {
+				position: static;
+				display: block;
+				margin-bottom: 20px;
+			}
+
+			.theme-showcase > p > .btn {
+				margin: 5px 0;
+			}
+		</style>
+	</head>
+
+	<body role="document">
+
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Sensor Widgets</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="../../doc/slides" target="_blank">#SIGLibre8 slides</a>
+						</li>
+						<li>
+							<a href="https://github.com/oscarfonts/sensor-widgets" target="_blank">GitHub Repo</a>
+						</li>
+						<li>
+							<a href="../factory" target="_blank">Widget Factory</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">
+									Instant Observations
+								</li>
+								<li>
+									<a href="#gauge">Gauge</a>
+								</li>
+								<li>
+									<a href="#progressbar">Progressbar</a>
+								</li>
+								<li>
+									<a href="#bearing">Bearing</a>
+								</li>
+								<li>
+									<a href="#thermometer">Thermometer</a>
+								</li>
+								<li class="divider"></li>
+								<li class="dropdown-header">
+									Multiple Obsrvations
+								</li>
+								<li>
+									<a href="#timechart">Timechart</a>
+								</li>
+								<li>
+									<a href="#table">Table</a>
+								</li>
+								<li class="divider"></li>
+								<li class="dropdown-header">
+									Service Description
+								</li>
+								<li>
+									<a href="#map">Map</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+
+		<div class="container theme-showcase" role="main">
+
+			<!-- Main jumbotron for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<img src="../../img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
+				<h1>Sensor Widgets</h1>
+				<p>Configurable graphical components for your <a href="http://live.osgeo.org/en/standards/sos_overview.html" target="_blank">SOS</a> sensor data.</p>
+				<h3>100% Javascript. Extensible. MIT licensed.</h3>
+				<p style="text-align:right;margin:40px 0 0 0;"><a class="btn btn-primary btn-lg" role="button" href="../factory"><span class="glyphicon glyphicon-cog"></span>
+	&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a></p>
+			</div>
+
+			<div class="page-header" id="gauge">
+				<h1><i class="flaticon-gauge"></i>&nbsp;&nbsp;Gauge</h1>
+			</div>
+			<div class="thumbnail" style="width:250px;height:250px;">
+				<iframe width="100%" height="100%" frameborder="0" src="../factory?name=gauge&service=http%3A%2F%2Fmetagato.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P6&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2333&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="progressbar">
+				<h1><i class="flaticon-progressbar"></i>&nbsp;&nbsp;Progressbar</h1>
+			</div>
+			<div class="thumbnail" style="width:512px;height:256px;">
+				<iframe width="100%" height="100%" frameborder="0" src="../factory?name=progressbar&service=http%3A%2F%2Fmetagato.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P7&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2330&min_value=0&max_value=70&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="bearing">
+				<h1><i class="flaticon-bearing"></i>&nbsp;&nbsp;Bearing</h1>
+			</div>
+			<div class="thumbnail" style="width:300px;height:560px;">
+				<iframe width="100%" height="100%" frameborder="0" src="../factory?name=bearing&service=http%3A%2F%2Fmetagato.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P7&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="thermometer">
+				<h1><i class="flaticon-thermometer"></i>&nbsp;&nbsp;Thermometer</h1>
+			</div>
+			<div class="thumbnail" style="width:250px;height:600px;">
+				<iframe width="100%" height="100%" frameborder="0" src="../factory?name=thermometer&service=http%3A%2F%2Fmetagato.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2332&refresh_interval=120"></iframe>
+			</div>
+
+			<div class="page-header" id="timechart">
+				<h1><i class="flaticon-timechart"></i>&nbsp;&nbsp;Timechart</h1>
+			</div>
+			<div class="thumbnail" style="height:380px;">
+				<iframe width="100%" height="100%" frameborder="0" src="../factory?name=timechart&title=Timechart%20Example&service=http%3A%2F%2Fmetagato.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2310m&features=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P3%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P7%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P6%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301%22%5D&properties=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2333%22%5D&time_start=2012-06-11T00%3A10%3A00%2B00%3A00&time_end=2012-06-11T12%3A00%3A00%2B00%3A00"></iframe>
+			</div>
+
+			<div class="page-header" id="table">
+				<h1><i class="flaticon-table"></i>&nbsp;&nbsp;Table</h1>
+			</div>
+			<div class="thumbnail" style="height:425px;">
+				<iframe width="100%" height="100%" frameborder="0" src="../factory?name=table&title=Table%20Example&service=http%3A%2F%2Fmetagato.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2330m&features=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301%22%5D&properties=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2334%22%5D&time_start=2012-02-01T10%3A19%3A00%2B00%3A00&time_end=2014-03-25T10%3A19%3A00%2B00%3A00"></iframe>
+			</div>
+
+			<div class="page-header" id="map">
+				<h1><i class="flaticon-map"></i>&nbsp;&nbsp;Map</h1>
+			</div>
+			<div class="thumbnail" style="height:400px;">
+				<iframe width="100%" height="100%" frameborder="0" src="../factory?name=map&service=http%3A%2F%2Fmetagato.fonts.cat%2F52n-sos%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&maxInitialZoom=17&features=[]"></iframe>
+			</div>
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	</body>
+</html>

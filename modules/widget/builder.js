@@ -53,7 +53,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 
 		contents += '<button name="build">Create Widget</button>';
 
-		renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="../img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
+		renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="../../img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
 
 		$("#widget").resizable({
 			helper: "ui-resizable-helper"
