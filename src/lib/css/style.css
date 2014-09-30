@@ -1,0 +1,76 @@
+body {
+    font-family: "Source Sans Pro", helvetica, sans-serif;
+    text-align: center;
+    margin: 0;
+    min-width: 100%;
+}
+html, body {
+    overflow: auto;
+}
+.widget {
+    overflow: hidden;
+}
+html, body, .widget {
+    height: 100%;
+}
+#factory {
+    background: #666666;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 210px;
+    overflow: auto;
+}
+#factory h1 {
+    font-weight: 100;
+    font-size: 26px;
+    color: #FFFFFF;
+    padding: 10px;
+    margin: 0 20px 20px 20px;
+    text-align: left;
+}
+#factory-right {
+    position: absolute;
+    left: 210px;
+    top: 0;
+    height: 100%;
+    margin-right: 0;
+    right: 0;
+    overflow: hidden;
+}
+#factory-right iframe {
+    height: 100%;
+    width: 100%;
+}
+#header {
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-weight: 200;
+    font-size: 26px;
+    color: #4A4A4A;
+}
+#header img {
+    margin: 3px 15px;
+    float: left;
+    height: 52px;
+}
+.big-button {
+    background-color: #8C8C8C;
+    border-radius: 3px;
+    box-shadow: 0 2px 0 #161616;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 12px;
+    margin: 16px;
+    width: 140px;
+    text-align: center;
+    clear: both;
+    display: block;
+    text-decoration: none;
+}
+.big-button div {
+    padding-bottom: 8px;
+}

@@ -1,0 +1,1 @@
+define([],function(){var e={utc:!1,locale:navigator.language||navigator.browserLanguage};return{date:{display:function(n){return n?e.utc?n.toLocaleString(e.locale,{timeZone:"UTC"})+" UTC":n.toLocaleString(e.locale):"(no date)"},locale:function(n){return n&&(e.locale=n),e.locale},utc:function(n){return"undefined"!=typeof n&&(e.utc=n),e.utc}}}});
