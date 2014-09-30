@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'text!svg/thermometer.svg', 'widget/common'], function(SOS, drawing, common) {
+define(['SOS', 'text!widget/thermometer.svg', 'common'], function(SOS, drawing, common) {
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
     var dy = 3.342574;
@@ -21,7 +21,8 @@ define(['SOS', 'text!svg/thermometer.svg', 'widget/common'], function(SOS, drawi
             contents += '</div>';
             renderTo.innerHTML = contents;
 
-            var clip = renderTo.querySelector(".svg-temp").firstChild;
+            var elem = renderTo.querySelector(".svg-temp");
+            var clip = (elem.firstElementChild||elem.firstChild);
 
             SOS.setUrl(config.service);
             setInterval(read, config.refresh_interval * 1000);

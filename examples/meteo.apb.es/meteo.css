@@ -45,21 +45,21 @@
 .xmvqa .bearing h2 {
     display: none;
 }
-.xmvqa[class|='panel'] h2 {
+.xmvqa [class|='panel'] h2 {
     text-align: center;
     font-size: 16px;
     font-weight: bold;
 }
-.xmvqa[class|='panel'] h3 {
+.xmvqa [class|='panel'] h3 {
     text-align: center;
     font-size: 14px;
     margin-top: 0;
 }
-.xmvqa .right[class|='panel'] dt {
+.xmvqa .right [class|='panel'] dt {
     width: 80px;
     font-size: 12px;
 }
-.xmvqa .right[class|='panel'] dd {
+.xmvqa .right [class|='panel'] dd {
     margin-left: 90px;
     font-size: 12px;
 }
@@ -70,12 +70,12 @@
 .torrecontrol .bearing h1, .torrecontrol .bearing h2 {
     display: none;
 }
-.torrecontrol[class|='panel'] h2 {
+.torrecontrol [class|='panel'] h2 {
     text-align: center;
     font-size: 16px;
     font-weight: bold;
 }
-.torrecontrol[class|='panel'] h3 {
+.torrecontrol [class|='panel'] h3 {
     text-align: center;
     font-size: 14px;
     margin-top: 0;

@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'css!widget/progressbar.css', 'widget/common'], function(SOS, drawing, common) {
+define(['SOS', 'css!widget/progressbar.css', 'common'], function(SOS, drawing, common) {
 
     var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval"];
 

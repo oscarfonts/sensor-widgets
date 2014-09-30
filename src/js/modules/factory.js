@@ -32,7 +32,7 @@ define(function() {
     }
 
     function chooser(renderTo) {
-        var widgets = ["timechart", "table", "table-plain", "panel", "gauge", "progressbar", "bearing", "windrose", "thermometer", "map"];
+        var widgets = ["bearing", "gauge", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
         var contents = '<h1>Widget<br/><small>Factory</small></h1>';
 
         for (var i in widgets) {
@@ -53,7 +53,7 @@ define(function() {
     }
 
     function builder(config, renderTo) {
-        require(["widget/builder"], function(builder) {
+        require(["builder"], function(builder) {
             if (checkConfig(builder.inputs, config)) {
                 builder.init(config, renderTo);
             } else {

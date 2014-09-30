@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['widget/common'], function(common) {
+define(['common'], function(common) {
 
     common.date.utc(false);
     common.date.locale("es");
@@ -37,7 +37,7 @@ define(['widget/common'], function(common) {
 
         case "Sirena":
 
-            require(['widget/bearing', 'widget/thermometer', 'widget/timechart', 'widget/windrose', 'widget/table-plain'], function(bearing, thermometer, timechart, windrose, table) {
+            require(['widget/bearing', 'widget/thermometer', 'widget/timechart', 'widget/windrose', 'widget/table'], function(bearing, thermometer, timechart, windrose, table) {
 
                 bearing.init({
                     service: defs.service(),

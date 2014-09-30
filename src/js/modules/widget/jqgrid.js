@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'widget/common', 'jqgrid', 'css!widget/table.css'], function(SOS, common) {
+define(['SOS', 'common', 'jqgrid', 'css!widget/jqgrid.css'], function(SOS, common) {
 
     var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
     var propertyNames = null;

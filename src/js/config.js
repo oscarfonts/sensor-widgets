@@ -1,10 +1,12 @@
 var require = (function() {
     var scripts = document.getElementsByTagName('script');
     var BASE = scripts[scripts.length - 1].src.replace(/[^\/]*$/, '');
-    var LIB_PATH = BASE + "lib/";
+    var LIB_PATH = BASE + "../lib/js/";
+    var EXAMPLES = BASE + "../../examples/";
     return {
         baseUrl: BASE + "modules/",
         paths: {
+            "meteo.apb.es": EXAMPLES + "meteo.apb.es/main",
             "text": LIB_PATH + "text-2.0.10",
             "css": LIB_PATH + "css",
             "jquery": LIB_PATH + "jquery-2.1.0.min",
@@ -30,10 +32,10 @@ var require = (function() {
                 deps: ["jquery", "moment"]
             },
             "jquery-ui": {
-                deps: ["jquery", "css!../css/jquery-ui-1.10.4.custom.min.css"]
+                deps: ["jquery", "css!../../lib/css/jquery-ui/jquery-ui-1.10.4.custom.min.css"]
             },
             "jqgrid": {
-                deps: ["jqgrid-locale-en", "jquery-ui", "css!../css/ui.jqgrid.css"]
+                deps: ["jqgrid-locale-en", "jquery-ui", "css!../../lib/css/ui.jqgrid.css"]
             },
             "jqgrid-locale-en": {
                 deps: ["jquery"]
@@ -64,10 +66,10 @@ var require = (function() {
                 deps: ["leaflet", "proj4"]
             },
             "leaflet": {
-                deps: ["css!../css/leaflet.css"]
+                deps: ["css!../../lib/css/leaflet.css"]
             },
             "leaflet-label": {
-                deps: ["leaflet", "css!../css/leaflet.label.css"]
+                deps: ["leaflet", "css!../../lib/css/leaflet.label.css"]
             }
         }
     };

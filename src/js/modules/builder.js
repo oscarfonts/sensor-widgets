@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css', 'css!../../css/daterangepicker.css'], function(SOS, $) {
+define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css', 'css!../../lib/css/daterangepicker.css'], function(SOS, $) {
 
     var inputs = ["name"];
 
@@ -54,7 +54,7 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!widget/builder.css
 
         contents += '<button name="build">Create Widget</button>';
 
-        renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="../../img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
+        renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
 
         $("#widget").resizable({
             helper: "ui-resizable-helper"

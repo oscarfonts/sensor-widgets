@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'text!svg/gauge.svg'], function(SOS, drawing) {
+define(['SOS', 'text!widget/gauge.svg'], function(SOS, drawing) {
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
 

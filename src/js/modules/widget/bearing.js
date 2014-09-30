@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'text!svg/bearing.svg', 'widget/common'], function(SOS, drawing, common) {
+define(['SOS', 'text!widget/bearing.svg', 'common'], function(SOS, drawing, common) {
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
 
