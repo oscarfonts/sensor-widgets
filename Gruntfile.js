@@ -2,33 +2,42 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        bower: {
+            install: {
+                options: {
+                    targetDir: 'src/lib',
+                    layout: 'byComponent'
+                }
+            }
+        },
         jshint: {
-            files: ['src/js/config.js', 'src/js/modules/**/*.js'],
+            files: ['src/config.js', 'src/js/**/*.js'],
             options: {
                 reporter: require('jshint-stylish')
+            }
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    optimize: "uglify2",
+                    optimizeCss: "standard",
+                    generateSourceMaps: true,
+                    mainConfigFile: "src/config.js",
+                    baseUrl: "src/js",
+                    dir: "dist/js"
+                }
             }
         },
         watch: {
             files: ['<%= jshint.files %>'],
             tasks: ['jshint']
         },
-        requirejs: {
-            compile: {
-                options: {
-                	optimize: "uglify2",
-                	optimizeCss: "standard",
-                	generateSourceMaps: true,
-                    mainConfigFile: "src/js/config.js",
-                    baseUrl: "src/js/modules/",
-                    dir: "dist"
-                }
-            }
-        },
-        clean: ["dist"]
+        clean: ["src/lib", "dist"]
     });
 
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
 

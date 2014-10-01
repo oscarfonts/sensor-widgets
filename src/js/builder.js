@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css', 'css!../../lib/css/daterangepicker.css'], function(SOS, $) {
+define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], function(SOS, $) {
 
     var inputs = ["name"];
 

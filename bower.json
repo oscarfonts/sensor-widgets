@@ -1,0 +1,69 @@
+{
+  "name": "sensor-widgets",
+  "version": "0.1.0",
+  "homepage": "https://github.com/oscarfonts/sensor-widgets",
+  "authors": [
+    "Oscar Fonts <oscar.fonts@geomati.co> (http://fonts.cat)"
+  ],
+  "description": "Configurable graphical components for your SOS sensor data.",
+  "main": "dist/js/factory.js",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.15",
+    "requirejs-text": "~2.0.12",
+    "requirejs-css": "git@github.com:dimaxweb/CSSLoader.git",
+    "daterangepicker": "git@github.com:longbill/jquery-date-range-picker.git",
+    "flot": "~0.8.3",
+    "flot.tooltip": "~0.8.4",
+    "highcharts": "~4.0.4",
+    "jquery": "~2.1.1",
+    "jquery-ui": "~1.11.1",
+    "jqgrid": "~4.6.0",
+    "leaflet": "~0.7.3",
+    "Leaflet.label": "~0.2.1",
+    "moment": "~2.8.3",
+    "proj4leaflet": "~0.7.0",
+    "proj4": "~2.2.2"
+  },
+  "exportsOverride": {
+    "requirejs-text": {
+      "/": "text.js"
+    },
+    "requirejs-css": {
+      "/": "src/css.js"
+    },
+    "daterangepicker": {
+      "/": "{jquery.daterangepicker.js,daterangepicker.css}"
+    },
+    "flot": {
+      "/": "jquery.flot{,.time,.resize,.navigate}.js"
+    },
+    "highcharts": {
+      "/": "highcharts{,-more}.js"
+    },
+    "jquery-ui": {
+      "/": "{jquery-ui.js,themes/redmond/jquery-ui.css}",
+      "images": "themes/redmond/images/**"
+    },
+    "leaflet": {
+      "/": "dist/leaflet.{js,css}",
+      "images": "dist/images/*.png"
+    },
+    "Leaflet.label": {
+      "/": "dist/leaflet.label.{js,css}"
+    },
+    "proj4leaflet": {
+      "/": "src/proj4leaflet.js"
+    }
+  }
+}
