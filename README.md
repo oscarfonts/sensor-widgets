@@ -37,3 +37,4 @@ Windrose    Highcharts (not free!) Accumulated angular    Wind direction stats
 * Install node, npm and grunt-cli.
 * Download grunt with "npm install".
 * Build the library using "grunt build".
+* Run a server with livereload using "grunt" (default task).
