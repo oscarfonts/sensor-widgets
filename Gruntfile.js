@@ -21,7 +21,7 @@ module.exports = function(grunt) {
                 options: {
                     optimize: "uglify2",
                     optimizeCss: "standard",
-                    generateSourceMaps: true,
+                    preserveLicenseComments: false,
                     mainConfigFile: "src/config.js",
                     baseUrl: "src/js",
                     dir: "dist/js"
@@ -41,6 +41,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
-    grunt.registerTask('default', ['jshint', 'clean', 'requirejs']);
+    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs']);
 
 };
