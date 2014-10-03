@@ -64,6 +64,7 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
             function fois2geojson(fois) {
                 var config_features = isArray(config.features) ? config.features : JSON.parse(config.features);
                 var features = [];
+                var crs = null;
                 for (var i in fois) {
                     var foi = fois[i];
                     if (foi.geometry && (!config_features.length || isInArray(foi.identifier.value, config.features))) {
@@ -78,24 +79,29 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
                         // Transform CRS from link type to name type.
                         // See spec: http://geojson.org/geojson-spec.html#named-crs
                         // See impl: https://github.com/kartena/Proj4Leaflet#lprojgeojson
-                        if (feature.geometry.crs) {
-                            var crs = feature.geometry.crs;
+                        // Assumes the same CRS for all FoIs!!
+                        if (!crs && feature.geometry.crs) {
+                            crs = feature.geometry.crs;
                             if (crs.type == "link") {
                                 var code = crs.properties.href.split("/").pop();
-                                delete feature.geometry.crs;
                                 delete crs.properties.href;
                                 crs.type = "name";
                                 crs.properties.name = "EPSG:" + code;
-                                feature.crs = crs;
                             }
                         }
+                        delete feature.geometry.crs;
                         features.push(feature);
                     }
                 }
-                return {
+                var featureCollection = {
                     type: "FeatureCollection",
                     features: features
                 };
+                // Assign 'global' CRS to the whole FeatureCollection (top-level structure)
+                if (crs) {
+                    featureCollection.crs = crs;
+                }
+                return featureCollection;
             }
         }
     };
