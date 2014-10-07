@@ -16,7 +16,7 @@
     -webkit-box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;
     box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;
 }
-#bar {
+.bar {
     height: 18px;
     position: absolute;
     border-radius: 10px;
@@ -24,18 +24,18 @@
     -webkit-box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;
     box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;
 }
-#min {
+.min {
     position: relative;
     top: -25px;
     float: left;
     width: 0;
 }
-#max {
+.max {
     position: relative;
     top: -25px;
     float: right;
 }
-#value {
+.value {
     position: relative;
     top: 25px;
     text-align: right;

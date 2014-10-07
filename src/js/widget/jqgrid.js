@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'common', 'jqgrid', 'css!widget/jqgrid.css'], function(SOS, common) {
+define(['SOS', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], function(SOS, ld) {
 
     var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
     var propertyNames = null;
@@ -103,7 +103,7 @@ define(['SOS', 'common', 'jqgrid', 'css!widget/jqgrid.css'], function(SOS, commo
                         index: 'time',
                         width: '160',
                         formatter: function(cellvalue, options, rowObject) {
-                            var new_formatted_cellvalue = common.date.display(cellvalue);
+                            var new_formatted_cellvalue = ld.display(cellvalue);
                             return new_formatted_cellvalue;
                         }
                     }, {

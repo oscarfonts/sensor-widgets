@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'common'], function(SOS, common) {
+define(['SOS', 'locale-date'], function(SOS, ld) {
 
     var inputs = ["title", "service", "offering", "feature", "properties", "time_start", "time_end"];
     var propertyNames = null;
@@ -92,7 +92,7 @@ define(['SOS', 'common'], function(SOS, common) {
                     var time = times[i];
                     var values = data[time];
                     table += '<tr>';
-                    table += '<th class="time">' + common.date.display(new Date(parseInt(time))) + '</th>';
+                    table += '<th class="time">' + ld.display(new Date(parseInt(time))) + '</th>';
                     for (var j in config.properties) {
                         table += '<td>' + values[config.properties[j]] + '</td>';
                     }

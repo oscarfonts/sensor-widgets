@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'common'], function(SOS, common) {
+define(['SOS', 'locale-date'], function(SOS, ld) {
 
     var inputs = ["title", "service", "offering", "feature", "properties", "refresh_interval"];
 
@@ -84,7 +84,7 @@ define(['SOS', 'common'], function(SOS, common) {
 
             function createPanel(rows, propertyNames) {
                 var title = "<h2>" + config.title + "</h2>";
-                title += "<h3>" + common.date.display(rows[Object.keys(rows)[0]].time) + "</h3>";
+                title += "<h3>" + ld.display(rows[Object.keys(rows)[0]].time) + "</h3>";
 
                 var panel = '<dl class="dl-horizontal">';
                 for (var i in config.properties) {

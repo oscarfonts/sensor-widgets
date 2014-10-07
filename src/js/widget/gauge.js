@@ -1,52 +1,34 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'text!widget/gauge.svg'], function(SOS, drawing) {
+define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawing) {
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
 
+    var template = [
+        '<div class="gauge widget">',
+            drawing,
+        '</div>'].join('');
+
     return {
         inputs: inputs,
-        init: function(config, renderTo) {
-            renderTo.innerHTML = '<div class="widget">' + drawing;
 
-            var arrow = document.getElementById("arrow");
+        init: function(config, el) {
 
-            SOS.setUrl(config.service);
-            setInterval(read, config.refresh_interval * 1000);
-            read();
+            // Render template
+            el.innerHTML = template;
+            var arrow = document.getElementById("arrow"); // TODO use classes, not ID's
 
-            function read() {
-                SOS.getObservation(config.offering, [config.feature], [config.property], "latest", draw);
-            }
+            // Setup SOS data access
+            var data = data_access(config, update);
+            setInterval(data.read, config.refresh_interval * 1000);
+            data.read();
 
-            function draw(observations) {
-                if (observations.length == 1 && // Single observation
-                    observations[0].result.uom == '%' && // UoM is percent
-                    typeof observations[0].result.value == 'number') { // Value is numeric
-
-                    var obs = observations[0],
-                        foi_name = obs.featureOfInterest.name.value,
-                        date = obs.resultTime, // TODO cast to date object, &c.
-                        value = obs.result.value,
-                        procedure = obs.procedure;
-
-                    document.getElementById("value").innerHTML = value + " %";
-                    var angle = 2.7 * value;
-                    arrow.setAttribute("transform", "rotate(" + angle + ", 365.396, 495)");
-
-                    SOS.describeSensor(obs.procedure, function(description) {
-                        var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
-                        for (var i in properties) {
-                            var property = properties[i];
-                            if (property.Quantity.definition == config.property) {
-                                document.getElementById("title").innerHTML = property.name;
-                            }
-                        }
-                    });
-                } else {
-                    console.error("Gauge Widget Error - Got an invalid observation from the SOS service");
-                }
+            // Update view
+            function update(date, value, feature, property) {
+                document.getElementById("title").innerHTML = property; // TODO use classes, not ID's
+                document.getElementById("value").innerHTML = value + " %"; // TODO use classes, not ID's
+                arrow.setAttribute("transform", "rotate(" + 2.7 * value + ", 365.396, 495)");
             }
         }
     };
