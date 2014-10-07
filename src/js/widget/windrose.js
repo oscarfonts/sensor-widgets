@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['SOS', 'highcharts-more'], function(SOS) {
+    "use strict";
 
     var inputs = ["title", "subtitle", "service", "offering", "feature", "properties", "refresh_interval", "time_start", "time_end"];
     var labels = ["&gt; 10 m/s", "8-10 m/s", "6-8 m/s", "4-6 m/s", "2-4 m/s", "0-2 m/s"];

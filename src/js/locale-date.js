@@ -2,6 +2,8 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define([], function() {
+    "use strict";
+
     var date = {
         utc: false,
         locale: navigator.language || navigator.browserLanguage

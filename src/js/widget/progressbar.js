@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], function(data_access, drawing, ld) {
+    "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval"];
 
@@ -31,18 +32,19 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], functio
             el.querySelector(".max").innerHTML = config.max_value;
 
             // Setup SOS data access
-            var data = data_access(config, update);
+            var data = data_access(config, redraw);
             setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
-            function update(date, value, feature, property) {
-                el.querySelector(".date").innerHTML = ld.display(date);
-                el.querySelector(".value").innerHTML = value;
-                el.querySelector(".feature").innerHTML = feature;
-                el.querySelector(".property").innerHTML = property;
+            function redraw(data) {
+                var measure = data[0];
+                el.querySelector(".date").innerHTML = ld.display(measure.time);
+                el.querySelector(".value").innerHTML = measure.value;
+                el.querySelector(".feature").innerHTML = measure.feature;
+                el.querySelector(".property").innerHTML = measure.property;
 
-                var width = 100 * (value - config.min_value) / (config.max_value - config.min_value);
+                var width = 100 * (measure.value - config.min_value) / (config.max_value - config.min_value);
                 el.querySelector(".bar").style = "width: " + width + "%";
             }
         }

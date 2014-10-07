@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(function() {
+    "use strict";
 
     function init(config, renderTo) {
         if (!renderTo) {

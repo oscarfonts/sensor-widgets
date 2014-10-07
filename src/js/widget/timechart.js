@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['SOS', 'locale-date', 'flot-resize', 'flot-time', 'flot-tooltip', 'flot-navigate'], function(SOS, ld) {
+    "use strict";
 
     var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
     var propertyNames = null;

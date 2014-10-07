@@ -2,8 +2,9 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['XML'], function(XML) {
+    "use strict";
 
-    SOS = {
+    var SOS = {
         _url: null,
 
         setUrl: function(url) {
@@ -92,7 +93,7 @@ define(['XML'], function(XML) {
                     // Time Instant
                     operation = "equals";
                 }
-                filter = {};
+                var filter = {};
                 filter[operation] = {
                     "ref": "om:resultTime",
                     "value": time

@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], function(data_access, drawing, ld) {
+    "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
 
@@ -31,19 +32,20 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
             var clip = (elem.firstElementChild||elem.firstChild);
 
             // Setup SOS data access
-            var data = data_access(config, update);
+            var data = data_access(config, redraw);
             setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
-            function update(date, value, feature, property) {
-                el.querySelector(".feature").innerHTML = feature;
-                el.querySelector(".property").innerHTML = property;
-                el.querySelector(".value").innerHTML = value;
+            function redraw(data) {
+                var measure = data[0];
+                el.querySelector(".feature").innerHTML = measure.feature;
+                el.querySelector(".property").innerHTML = measure.property;
+                el.querySelector(".value").innerHTML = measure.value;
                 el.querySelector(".request_time").innerHTML = ld.display(new Date());
-                el.querySelector(".result_time").innerHTML = ld.display(date);
+                el.querySelector(".result_time").innerHTML = ld.display(measure.time);
 
-                var h = dy * (value - t_min);
+                var h = dy * (measure.value - t_min);
                 var y_min = y_max - h;
                 clip.setAttribute("height", h);
                 clip.setAttribute("y", y_min);

@@ -1,99 +1,40 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], function(SOS, ld) {
+define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], function(data_access, ld) {
+    "use strict";
 
     var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
-    var propertyNames = null;
+    var count = 0;
 
     return {
         inputs: inputs,
-        init: function(config, renderTo) {
-            SOS.setUrl(config.service);
-            read();
 
-            function read() {
-                var features = isArray(config.features) ? config.features : JSON.parse(config.features);
-                var properties = isArray(config.properties) ? config.properties : JSON.parse(config.properties);
-                var time_range = (config.time_start && config.time_end) ? [config.time_start, config.time_end] : null;
-                SOS.getObservation(config.offering, features, properties, time_range, draw);
-            }
+        init: function(config, el) {
 
-            function isArray(obj) {
-                return Object.prototype.toString.call(obj) === '[object Array]';
-            }
+            // Render template
+            el.innerHTML = [
+                '<div class="jqgrid widget">',
+                    '<h3 class="title"></h3>',
+                    '<table id="grid',++count,'"></table>',
+                    '<div id="pager',count,'"></div>',
+                '</div>'
+            ].join('');
+            el.querySelector(".title").innerHTML = config.title;
 
-            function draw(observations) {
-                function d(n) {
-                    return n < 10 ? "0" + n : "" + n;
-                }
+            // Setup SOS data access
+            var data = data_access(config, redraw);
+            data.read();
 
-                // Get tabular data from observations
-                var rows = [];
-                for (var i in observations) {
-                    var obs = observations[i];
-                    var time = new Date(obs.resultTime);
-
-                    var result = obs.result;
-
-                    rows.push({
-                        time: time,
-                        feature: obs.featureOfInterest.name.value,
-                        property: obs.observableProperty,
-                        value: result.hasOwnProperty("value") ? result.value : result,
-                        uom: result.hasOwnProperty("uom") ? result.uom : "(N/A)"
-                    });
-                }
-
-                if (propertyNames) {
-                    createGrid(rows);
-                } else if (observations.length) {
-                    getPropertyNames(observations[0].procedure, rows);
-                }
-            }
-
-            function getPropertyNames(procedure, rows) {
-                SOS.describeSensor(procedure, function(description) {
-                    var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
-                    properties = properties instanceof Array ? properties : [properties];
-                    var types = ["Quantity", "Count", "Boolean", "Category", "Text", "ObservableProperty"];
-                    propertyNames = [];
-
-                    for (var i in properties) {
-                        var property = properties[i];
-                        for (var j in types) {
-                            var type = types[j];
-                            if (property.hasOwnProperty(type)) {
-                                property.id = property[type].definition;
-                            }
-                        }
-                        propertyNames[property.id] = property.name;
-                    }
-                    createGrid(rows);
-                });
-            }
-
-            function createGrid(rows) {
-                for (var i in rows) {
-                    var row = rows[i];
-                    if (propertyNames[row.property]) {
-                        row.property = propertyNames[row.property];
-                    }
-                }
-
+            function redraw(data) {
                 // jqGrid table
-                var title = config.title ? "<h3>" + config.title + "</h3>" : "";
-                var table = "<table id='grid'></table>";
-                var pager = '<div id="pager"></div>';
-                renderTo.innerHTML = title + table + pager;
-
-                jQuery("#grid").jqGrid({
-                    datatype: "local",
+                $("#grid"+count).first().jqGrid({
+                    datatype: 'local',
                     height: 'auto',
                     width: '100%',
-                    caption: "Results",
-                    data: rows,
-                    pager: '#pager',
+                    caption: 'Results',
+                    data: data,
+                    pager: '#pager'+count,
                     rowNum: 12,
                     sortname: 'time',
                     autowidth: true,
@@ -126,11 +67,12 @@ define(['SOS', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], function(SOS, 
                     }]
                 });
 
-                $("#grid").setGridWidth($(window).width() - 2);
+                $(window).bind('resize', setFullWidth);
+                setFullWidth();
+            }
 
-                $(window).bind('resize', function() {
-                    $("#grid").setGridWidth($(window).width() - 2);
-                });
+            function setFullWidth() {
+                $(".grid").setGridWidth($(window).width() - 2);
             }
         }
     };

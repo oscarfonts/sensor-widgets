@@ -1,7 +1,8 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], function(SOS, $) {
+define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.css'], function(SOS, $, moment) {
+    "use strict";
 
     var inputs = ["name"];
 
@@ -101,37 +102,39 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], fun
             setDateRange();
         });
 
-        $('#time_range').dateRangePicker({
-            separator: ' to ',
-            language: 'en',
-            startOfWeek: 'monday',
-            format: 'YYYY-MM-DD[T]HH:mm:ssZ',
-            //startDate: X, // TODO getDataAvailability
-            endDate: moment.utc(), // TODO getDataAvailability
-            autoClose: true,
-            showShortcuts: false,
-            shortcuts: null,
-            time: {
-                enabled: true
-            },
-            getValue: function() {
-                if ($('#time_start').val() && $('#time_end').val())
-                    return $('#time_start').val() + ' to ' + $('#time_end').val();
-                else
-                    return '';
-            },
-            setValue: function(s, date1, date2) {
-                $('#time_start').val(moment(date1).utc().format());
-                $('#time_end').val(moment(date2).utc().format());
-            }
-        });
+        if ($('#time_range').length) {
+            $('#time_range').dateRangePicker({
+                separator: ' to ',
+                language: 'en',
+                startOfWeek: 'monday',
+                format: 'YYYY-MM-DD[T]HH:mm:ssZ',
+                //startDate: X, // TODO getDataAvailability
+                endDate: moment.utc(), // TODO getDataAvailability
+                autoClose: true,
+                showShortcuts: false,
+                shortcuts: null,
+                time: {
+                    enabled: true
+                },
+                getValue: function() {
+                    if ($('#time_start').val() && $('#time_end').val())
+                        return $('#time_start').val() + ' to ' + $('#time_end').val();
+                    else
+                        return '';
+                },
+                setValue: function(s, date1, date2) {
+                    $('#time_start').val(moment(date1).utc().format());
+                    $('#time_end').val(moment(date2).utc().format());
+                }
+            });
+        }
     }
 
     function setService(urls) {
         if (urls && $('#service')) {
             $('#service').append($('<option>').append("Select a Service..."));
             for (var i in urls) {
-                url = urls[i];
+                var url = urls[i];
                 $('#service').append($('<option>').attr('id', url).append(url));
             }
         } else {
@@ -141,8 +144,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], fun
 
     function setOfferings(url) {
         clearOptions('#offering', '#property', '#properties', '#feature', '#features');
-        featureNames = {};
-        propertyNames = {};
 
         if (url) {
             $('#offering').append($('<option>').append("Select an Offering..."));
@@ -162,7 +163,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], fun
 
     function setProperties(procedure) {
         clearOptions('#property', '#properties');
-        propertyNames = {};
 
         if (!procedure) {
             return;
@@ -189,9 +189,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], fun
                         property.description += ")";
                     }
                 }
-
-                propertyNames[property.id] = property.description;
-
                 $("#property, #properties").append($('<option>').attr('id', property.id).append(property.description));
 
             }
@@ -201,7 +198,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], fun
 
     function setFeatures(procedure) {
         clearOptions('#feature', '#features');
-        featureNames = {};
 
         if (!procedure) {
             return;
@@ -213,8 +209,6 @@ define(['SOS', 'jquery', 'jquery-ui', 'daterangepicker', 'css!builder.css'], fun
                 var feature = features[i];
                 var id = feature.identifier.value;
                 var name = feature.name.value;
-
-                featureNames[id] = name;
 
                 $("#feature, #features").append($('<option>').attr('id', id).append(name));
             }

@@ -6,6 +6,7 @@
  See:     http://goessner.net/download/prj/jsonxml/
  */
 define(function() {
+    "use strict";
 
     return {
         read: function(xml, clean) {

@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(data_access, drawing, ld) {
+    "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
 
@@ -27,20 +28,21 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
             arrow.style.visibility = shadow.style.visibility = 'hidden';
 
             // Setup SOS data access
-            var data = data_access(config, update);
+            var data = data_access(config, redraw);
             setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
-            function update(date, value, feature, property) {
+            function redraw(data) {
+                var measure = data[0];
                 el.querySelector(".error").style.display = 'none';
                 el.querySelector(".request_time").innerHTML = ld.display(new Date());
-                el.querySelector(".result_time").innerHTML = ld.display(date);
-                el.querySelector(".value").innerHTML = value;
-                el.querySelector(".feature").innerHTML = feature;
-                el.querySelector(".property").innerHTML = property;
-                arrow.setAttribute("transform", "rotate(" + value + ", 256, 256)");
-                shadow.setAttribute("transform", "translate(5, 5) rotate(" + value + ", 256, 256)");
+                el.querySelector(".result_time").innerHTML = ld.display(measure.time);
+                el.querySelector(".value").innerHTML = measure.value;
+                el.querySelector(".feature").innerHTML = measure.feature;
+                el.querySelector(".property").innerHTML = measure.property;
+                arrow.setAttribute("transform", "rotate(" + measure.value + ", 256, 256)");
+                shadow.setAttribute("transform", "translate(5, 5) rotate(" + measure.value + ", 256, 256)");
                 arrow.style.visibility = shadow.style.visibility = 'visible';
             }
         }

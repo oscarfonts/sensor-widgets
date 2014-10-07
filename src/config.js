@@ -1,4 +1,5 @@
 var require = (function() {
+    "use strict";
     
     var scripts = document.getElementsByTagName('script');
     var CONFIG_LOCATION = scripts[scripts.length-1].src.replace(/[^\/]*$/, '');

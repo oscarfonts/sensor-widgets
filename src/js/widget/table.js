@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['SOS', 'locale-date'], function(SOS, ld) {
+    "use strict";
 
     var inputs = ["title", "service", "offering", "feature", "properties", "time_start", "time_end"];
     var propertyNames = null;
@@ -75,7 +76,7 @@ define(['SOS', 'locale-date'], function(SOS, ld) {
             }
 
             function createGrid(data, propertyNames) {
-                table = '<div class="table-responsive">';
+                var table = '<div class="table-responsive">';
                 table += '<table class="table table-striped table-condensed table-hover table-bordered">';
                 table += '<tr>';
                 table += '<thead>';

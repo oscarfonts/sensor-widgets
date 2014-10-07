@@ -2,6 +2,7 @@
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
 define(['SOS', 'locale-date'], function(SOS, ld) {
+    "use strict";
 
     var inputs = ["title", "service", "offering", "feature", "properties", "refresh_interval"];
 
@@ -63,7 +64,7 @@ define(['SOS', 'locale-date'], function(SOS, ld) {
                     var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
                     properties = properties instanceof Array ? properties : [properties];
                     var types = ["Quantity", "Count", "Boolean", "Category", "Text", "ObservableProperty"];
-                    propertyNames = [];
+                    var propertyNames = [];
 
                     for (var i in properties) {
                         var property = properties[i];
