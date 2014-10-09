@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'highcharts-more'], function(SOS) {
+define(['sos-data-access', 'highcharts-more'], function(data_access) {
     "use strict";
 
     var inputs = ["title", "subtitle", "service", "offering", "feature", "properties", "refresh_interval", "time_start", "time_end"];
@@ -9,88 +9,74 @@ define(['SOS', 'highcharts-more'], function(SOS) {
 
     return {
         inputs: inputs,
-        init: function(config, renderTo) {
-            SOS.setUrl(config.service);
-            setInterval(read, config.refresh_interval * 1000);
-            read();
 
-            function read() {
-                var properties = isArray(config.properties) ? config.properties : JSON.parse(config.properties);
-                var time_range = (config.time_start && config.time_end) ? [config.time_start, config.time_end] : null;
-                SOS.getObservation(config.offering, [config.feature], properties, time_range, parse);
-            }
+        init: function(config, el) {
 
-            function isArray(obj) {
-                return Object.prototype.toString.call(obj) === '[object Array]';
-            }
+            // Setup SOS data access
+            var data = data_access(config, redraw);
+            data.read();
 
-            function parse(observations) {
+            function redraw(data) {
                 var arr = [];
-                for (var i in observations) {
+                for (var i in data) {
+                    var measure = data[i];
+
                     // Build a sparse array where index is timestamp, and member is a 2-element array
                     // First element is wind speed, second element is wind direction
-                    var obs = observations[i];
-                    var timestamp = new Date(obs.resultTime).getTime();
-                    var magnitude = obs.result.uom == "deg" ? 1 : 0;
-                    var value = obs.result.value;
+                    var timestamp = measure.time.getTime();
+                    var magnitude = measure.uom == "deg" ? 1 : 0;
 
                     if (!arr[timestamp]) {
                         arr[timestamp] = [];
                     }
-                    arr[timestamp][magnitude] = value;
+                    arr[timestamp][magnitude] = measure.value;
                 }
 
-                var data = [];
-                while (data.length < 6) {
+                // Build a matrix where first index is speed range, and second is direction
+                var slots = [];
+                while (slots.length < 6) {
                     var dirs = [];
                     while (dirs.push(null) < 16);
-                    data.push(dirs);
+                    slots.push(dirs);
                 }
 
-                // Build a frequency matrix where rows are speed ranges and columns are direction ranges
+                // Sum the number of observations for each speed+direction slot
                 var n = 0;
                 for (i in arr) {
                     var values = arr[i];
                     if (values.length == 2) {
-                        var speed = 5 - Math.min(Math.floor(values[0] / 2), 5); // Speed slot from 0 to 5
-                        var direction = Math.round(values[1] / 22.5) % 16; // Direction slot from 0 to 15
-                        if (!data[speed][direction]) {
-                            data[speed][direction] = 1;
+                        var speed = 5 - Math.min(Math.floor(values[0] / 2), 5); // Speed slot - from 0 to 5
+                        var direction = Math.round(values[1] / 22.5) % 16; // Direction slot - from 0 to 15
+                        if (!slots[speed][direction]) {
+                            slots[speed][direction] = 1;
                         } else {
-                            data[speed][direction]++;
+                            slots[speed][direction]++;
                         }
                         n++;
                     }
                 }
 
-                // Convert from number of samples to %
-                for (i in data) {
-                    for (var j in data[i]) {
-                        data[i][j] = data[i][j] * 100 / n;
-                    }
-                }
-
-                draw(data);
-            }
-
-            function draw(data) {
+                // Convert from sample count to percentage
+                // Generate legend
                 var series = [];
-                for (var i in labels) {
+                for (i in slots) {
                     var total = 0;
-                    for (var j in data[i]) {
-                        total += data[i][j];
+                    for (var j in slots[i]) {
+                        slots[i][j] = slots[i][j] * 100 / n;
+                        total += slots[i][j];
                     }
                     series.push({
                         name: labels[i] + " (" + Math.round(total) + "%)",
-                        data: data[i]
+                        data: slots[i]
                     });
                 }
 
+                // Finally, generate the chart
                 new Highcharts.Chart({
                     chart: {
                         type: 'column',
                         polar: true,
-                        renderTo: renderTo
+                        renderTo: el
                     },
                     title: {
                         text: config.title
