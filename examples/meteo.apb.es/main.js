@@ -53,7 +53,7 @@ define(['locale-date'], function(ld) {
                     feature: defs.feature("02"),
                     property: defs.property("32"),
                     refresh_interval: refresh_interval
-                }, document.querySelector(".sirena .thermometer"));
+                }, document.querySelector(".sirena .meteo-thermometer"));
 
                 timechart.init({
                     title: "Velocitat Vent",
