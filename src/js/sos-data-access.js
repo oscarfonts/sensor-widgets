@@ -24,6 +24,10 @@
         }
 
         function parse(observations) {
+            if (!observations.length) {
+                redraw([]);
+            }
+
             // Get tabular data from observations
             var data = [];
             for (var i in observations) {
