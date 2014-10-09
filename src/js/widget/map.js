@@ -10,8 +10,8 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
 
     return {
         inputs: inputs,
-        init: function(config, renderTo) {
-            var map = L.map(renderTo, {
+        init: function(config, el) {
+            var map = L.map(el, {
                 dragging: false,
                 touchZoom: false,
                 scrollWheelZoom: false,
@@ -32,7 +32,13 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
 
             function read() {
                 SOS.getCapabilities(function(offerings) {
-                    var addFoIs = function(features) {
+                    for (var i in offerings) {
+                        var offering = offerings[i];
+                        if (offering.identifier == config.offering) {
+                            SOS.getFeatureOfInterest(offering.procedure[0], addFoIs);
+                        }
+                    }
+                    function addFoIs(features) {
                         var geojson = L.Proj.geoJson(fois2geojson(features), {
                             onEachFeature: function(feature, layer) {
                                 if (feature.properties && feature.properties.name) {
@@ -44,12 +50,6 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
                         map.fitBounds(geojson.getBounds(), {
                             maxZoom: config.maxInitialZoom ? parseInt(config.maxInitialZoom) : 14
                         });
-                    };
-                    for (var i in offerings) {
-                        var offering = offerings[i];
-                        if (offering.identifier == config.offering) {
-                            SOS.getFeatureOfInterest(offering.procedure[0], addFoIs);
-                        }
                     }
                 });
             }
