@@ -16,7 +16,8 @@
 .widget h2 {
     font-size: 22px;
 }
-.widget h3 {
+.widget.bearing h3,
+.widget.timechart h3 {
     display: none;
     font-size: 12px;
 }
