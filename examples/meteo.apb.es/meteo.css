@@ -21,7 +21,8 @@
     display: none;
     font-size: 12px;
 }
-.sirena .feature_name, .sirena .widget .title {
+.sirena .feature,
+.sirena .widget .title {
     display: none;
 }
 .sirena .thermometer {
