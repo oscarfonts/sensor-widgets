@@ -44,7 +44,10 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
 
                     // Add property to a "properties" object, including uom
                     if (!properties[measure.property]) {
-                        properties[measure.property] = measure.uom;
+                        properties[measure.property] = {
+                            "name": measure.property,
+                            "uom": measure.uom
+                        }
                     }
                 }
 
@@ -56,7 +59,10 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
                 html += '<thead>';
                 html += '<tr>';
                 html += '<th>Result Time</th>';
-                for (var name in properties) {
+
+                var sortedNames = Object.keys(properties).sort();
+                for (var i in sortedNames) {
+                    var name = sortedNames[i];
                     var uom = properties[name];
                     html += '<th>' + name + " (" + uom + ')</th>';
                 }
@@ -70,8 +76,8 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
                     var values = measures[time];
                     html += '<tr>';
                     html += '<th class="time">' + ld.display(new Date(parseInt(time))) + '</th>';
-                    for (var property in properties) {
-                        html += '<td>' + values[property] + '</td>';
+                    for (var i in sortedNames) {
+                        html += '<td>' + values[sortedNames[i]] + '</td>';
                     }
                     html += '</tr>';
                 }
