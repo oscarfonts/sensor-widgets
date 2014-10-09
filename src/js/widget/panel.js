@@ -1,102 +1,54 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'locale-date'], function(SOS, ld) {
+define(['sos-data-access', 'locale-date'], function(data_access, ld) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "feature", "properties", "refresh_interval"];
+    var inputs = ["title", "service", "offering", "feature", "properties"];
+
+    var template = [
+        '<div class="panel widget">',
+            '<h2></h2>',
+            '<h3>Loading...</h3>',
+            '<dl class="dl-horizontal"></dl>',
+        '</div>'
+    ].join('');
 
     return {
         inputs: inputs,
-        init: function(config, renderTo) {
 
-            SOS.setUrl(config.service);
-            setInterval(read, config.refresh_interval * 1000);
-            read();
+        init: function(config, el) {
 
-            function read() {
-                var title = "<h2>" + config.title + "</h2>";
-                var content = "<h3>Loading...</h3>";
-                renderTo.innerHTML = title + content;
+            // Render template
+            el.innerHTML = template;
+            el.querySelector("h2").innerHTML = config.title;
+            var subtitle = el.querySelector("h3");
+            var panel = el.querySelector("dl");
 
-                if (!config.properties | !config.properties.length) {
-                    config.properties = null;
-                } else {
-                    config.properties = isArray(config.properties) ? config.properties : JSON.parse(config.properties);
-                }
-                SOS.getObservation(config.offering, [config.feature], config.properties, "latest", draw);
-            }
+            // Setup SOS data access
+            var data = data_access(config, redraw);
+            data.read();
 
-            function isArray(obj) {
-                return Object.prototype.toString.call(obj) === '[object Array]';
-            }
-
-            function draw(observations) {
-                var rows = [];
-                for (var i in observations) {
-                    var obs = observations[i];
-                    var time = new Date(obs.resultTime);
-
-                    var result = obs.result;
-
-                    rows[obs.observableProperty] = {
-                        time: time,
-                        feature: obs.featureOfInterest.name.value,
-                        property: obs.observableProperty,
-                        value: result.hasOwnProperty("value") ? result.value : result,
-                        uom: result.hasOwnProperty("uom") ? result.uom : "(N/A)"
-                    };
-
+            // Update view
+            function redraw(data) {
+                if (!data.length) {
+                    subtitle.innerHTML = "(no data)";
+                    return;
                 }
 
-                if (observations.length) {
-                    getPropertyNames(observations[0].procedure, rows);
-                } else {
-                    var title = "<h2>" + config.title + "</h2>";
-                    var content = "<h3>(no data)</h3>";
-                    renderTo.innerHTML = title + content;
-                }
-
-            }
-
-            function getPropertyNames(procedure, rows) {
-                SOS.describeSensor(procedure, function(description) {
-                    var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
-                    properties = properties instanceof Array ? properties : [properties];
-                    var types = ["Quantity", "Count", "Boolean", "Category", "Text", "ObservableProperty"];
-                    var propertyNames = [];
-
-                    for (var i in properties) {
-                        var property = properties[i];
-                        for (var j in types) {
-                            var type = types[j];
-                            if (property.hasOwnProperty(type)) {
-                                property.id = property[type].definition;
-                            }
-                        }
-                        propertyNames[property.id] = property.name;
-                    }
-                    if (!config.properties) {
-                        config.properties = Object.keys(propertyNames);
-                    }
-                    createPanel(rows, propertyNames);
+                // Sort by property
+                data.sort(function(a, b) {
+                    return a.property.localeCompare(b.property);
                 });
-            }
 
-            function createPanel(rows, propertyNames) {
-                var title = "<h2>" + config.title + "</h2>";
-                title += "<h3>" + ld.display(rows[Object.keys(rows)[0]].time) + "</h3>";
-
-                var panel = '<dl class="dl-horizontal">';
-                for (var i in config.properties) {
-                    var row = rows[config.properties[i]];
-                    if (row) {
-                        panel += "<dt>" + propertyNames[row.property] + "</dt>";
-                        panel += "<dd>" + row.value + " " + row.uom + "</dd>";
-                    }
+                subtitle.innerHTML = ld.display(data[0].time);
+                var html = "";
+                for (var i in data) {
+                    var measure = data[i];
+                    html += "<dt>" + measure.property + "</dt>";
+                    html += "<dd>" + measure.value + " " + measure.uom + "</dd>";
                 }
-                panel += "</dl>";
-                renderTo.innerHTML = title + panel;
+                panel.innerHTML = html;
             }
         }
     };
