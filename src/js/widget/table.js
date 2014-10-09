@@ -47,7 +47,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
                         properties[measure.property] = {
                             "name": measure.property,
                             "uom": measure.uom
-                        }
+                        };
                     }
                 }
 
@@ -63,7 +63,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
                 var sortedNames = Object.keys(properties).sort();
                 for (var i in sortedNames) {
                     var name = sortedNames[i];
-                    var uom = properties[name];
+                    var uom = properties[name].uom;
                     html += '<th>' + name + " (" + uom + ')</th>';
                 }
                 html += '</tr>';
@@ -71,13 +71,13 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
 
                 var times = Object.keys(measures);
                 times.sort().reverse();
-                for (var i in times) {
+                for (i in times) {
                     var time = times[i];
                     var values = measures[time];
                     html += '<tr>';
                     html += '<th class="time">' + ld.display(new Date(parseInt(time))) + '</th>';
-                    for (var i in sortedNames) {
-                        html += '<td>' + values[sortedNames[i]] + '</td>';
+                    for (var j in sortedNames) {
+                        html += '<td>' + values[sortedNames[j]] + '</td>';
                     }
                     html += '</tr>';
                 }
