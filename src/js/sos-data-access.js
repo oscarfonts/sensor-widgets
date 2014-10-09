@@ -87,7 +87,7 @@
                     });
                 }
             } else {
-                callback(propertyNames[procedure][id]);
+                callback(propertyNames[procedure][id], context);
             }
         }
 
