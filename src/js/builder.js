@@ -71,7 +71,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         }).click(loadWidget);
 
         // Setup the SOS parameters: service, offering, feature(s) and property(ies)
-        setService(["http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json", "http://metagato.fonts.cat/52n-sos/sos/json"]);
+        setService(["http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
 
         $('#service').change(function() {
             var service = $('#service option:selected').attr("id");
