@@ -8,11 +8,10 @@ Sensor Widgets
 * Demo & samples: http://sensors.fonts.cat/
 * #SIGLibre8 slides (spanish): http://sensors.fonts.cat/doc/slides/
 * Configure your own widgets:
-
-   1. Go to http://sensors.fonts.cat/src/
-   2. Choose a widget from the left menu.
-   3. Configure it instantly with the "Widget Builder" wizard form.
-   4. Embed the result in any web page, using an "object" (or an "iframe") tag.
+  1. Go to http://sensors.fonts.cat/src/
+  2. Choose a widget from the left menu.
+  3. Configure it instantly with the "Widget Builder" wizard form.
+  4. Embed the result in any web page, using an "object" (or an "iframe") tag.
 
 
 Building
@@ -34,22 +33,26 @@ There's a demo kindly broght by gh-pages in: http://fonts.cat/sensor-widgets
 
 Bring the master changes to the gh-pages branch::
 
-	git checkout gh-pages
-	git merge master
+	  git checkout gh-pages
+	  git merge master
 
 Update the js dependencies::
 
     grunt bower
 
-Commit changes:
+Commit changes::
 
-	git add -A
-	git commit -m "Updated gh-pages & libs"
-	git push
+	  git add -A
+	  git commit -m "Updated gh-pages & libs"
+	  git push
 
 Check the demo page after 5 minutes.
 
 
+Don't forget to get back to master branch to continue development::
+
+    git checkout master
+  
 
 Available widgets
 =================
