@@ -8,6 +8,7 @@ Sensor Widgets
 * Demo & samples: http://sensors.fonts.cat/
 * #SIGLibre8 slides (spanish): http://sensors.fonts.cat/doc/slides/
 * Configure your own widgets:
+
   1. Go to http://sensors.fonts.cat/src/
   2. Choose a widget from the left menu.
   3. Configure it instantly with the "Widget Builder" wizard form.
