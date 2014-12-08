@@ -19,6 +19,7 @@ Building
 ========
 
 * Install node and npm. See instructions:
+
   * Mac & Windows: http://nodejs.org/download/
   * Debian & Ubuntu: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
 * Install grunt-cli. For example: `sudo npm install -g grunt-cli`.
