@@ -1,4 +1,5 @@
-# Sensor Widgets
+Sensor Widgets
+==============
 
 **Configurable graphical components for your SOS sensor data.**
 
@@ -14,7 +15,44 @@
    4. Embed the result in any web page, using an "object" (or an "iframe") tag.
 
 
-# Available widgets
+Building
+========
+
+* Install node and npm. See instructions:
+  * Mac & Windows: http://nodejs.org/download/
+  * Debian & Ubuntu: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
+* Install grunt-cli. For example: `sudo npm install -g grunt-cli`.
+* Get the project's npm deps (such as grunt) running `npm install`.
+* Build the project running `grunt build`.
+* Run a server with livereload using `grunt` (default task).
+
+
+Updating gh-pages (demo) branch
+===============================
+
+There's a demo kindly broght by gh-pages in: http://fonts.cat/sensor-widgets
+
+Bring the master changes to the gh-pages branch::
+
+	git checkout gh-pages
+	git merge master
+
+Update the js dependencies::
+
+    grunt bower
+
+Commit changes:
+
+	git add -A
+	git commit -m "Updated gh-pages & libs"
+	git push
+
+Check the demo page after 5 minutes.
+
+
+
+Available widgets
+=================
 
 =========== ====================== ====================== =====================
 Name        Library & dependencies Represented concept    Candidate properties
@@ -31,10 +69,3 @@ Thermometer (SVG + JS)             Temperature            Temperature
 Timechart   Flot Charts            Time series            Any numeric quantity
 Windrose    Highcharts (not free!) Accumulated angular    Wind direction stats
 =========== ====================== ====================== =====================
-
-# Building source code
-
-* Install node, npm and grunt-cli.
-* Download grunt with "npm install".
-* Build the library using "grunt build".
-* Run a server with livereload using "grunt" (default task).
