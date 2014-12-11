@@ -74,3 +74,10 @@ html, body, .widget {
 .big-button div {
     padding-bottom: 8px;
 }
+.widget svg {
+	max-width: 300px;	
+}
+	 
+div.widget-data {
+	display: inline-block;
+}
