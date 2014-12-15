@@ -10,10 +10,12 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
         '<div class="bearing widget">',
             '<h1 class="feature"></h1>',
             drawing,
+            '<div class="widget-data">',
             '<div class="error" style="display:none;text-align:center;">(no data)</div>',
             '<h2><span class="property"></span>:<br/><span class="value"></span> deg</h2>',
             '<h3>Request time:<br/><span class="request_time"></span></h3>',
             '<h3>Result time:<br/><span class="result_time"></span></h3>',
+            '</div>',
         '</div>'].join('');
 
     return {
