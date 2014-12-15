@@ -77,7 +77,23 @@ html, body, .widget {
 .widget svg {
 	max-width: 300px;	
 }
-	 
+
+.widget {
+	color: #222;
+	font-family: helvetica, sans-serif;
+}
 div.widget-data {
 	display: inline-block;
+	vertical-align: top;
+	margin: 10px;
+	max-width: 300px;
+}
+.widget h1 {
+    font-size: 28px;
+}
+.widget h2 {
+	font-size: 18px;
+}
+.widget h3 {
+	font-size: 14px;
 }

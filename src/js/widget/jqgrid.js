@@ -15,7 +15,7 @@ define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], fu
             // Render template
             el.innerHTML = [
                 '<div class="jqgrid widget">',
-                    '<h3 class="title"></h3>',
+                    '<h1 class="title"></h1>',
                     '<table id="grid',++count,'"></table>',
                     '<div id="pager',count,'"></div>',
                 '</div>'

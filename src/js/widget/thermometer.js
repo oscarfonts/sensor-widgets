@@ -10,9 +10,11 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
         '<div class="thermometer widget">',
             '<h1 class="feature"></h1>',
             drawing,
+            '<div class="widget-data">',
             '<h2><span class="property"></span>: <span class="value"></span> Cel</h2>',
             '<h3>Request time: <span class="request_time"></span></h3>',
             '<h3>Result time: <span class="result_time"></span></h3>',
+            '</div>',
         '</div>'
     ].join('');
 
