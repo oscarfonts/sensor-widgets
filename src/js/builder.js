@@ -55,10 +55,13 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
 
         contents += '<button name="build">Create Widget</button>';
 
-        renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
+        renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="img/logo.svg"/>Widget<br/><small>Preview</small>' + '<div id="codediv">Copy this code and paste it on your webpage<br><input id="codeinput" type="text" readonly="true"></div></h1>' + '<div id="widget"></div></div>';
 
         $("#widget").resizable({
-            helper: "ui-resizable-helper"
+            helper: "ui-resizable-helper",
+            resize: function( event, ui ) {
+            	//TODO
+            }
         });
 
         $("#widget").draggable({
@@ -293,6 +296,8 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         $("#widget").resizable({
             helper: "ui-resizable-helper"
         });
+        
+        $("#codeinput").val(iframe);
     }
 
     function capitalize(string) {

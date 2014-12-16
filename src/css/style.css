@@ -45,7 +45,7 @@ html, body, .widget {
 }
 #header {
     margin: 0;
-    padding: 10px;
+    padding: 15px 10px;
     background-color: rgba(255, 255, 255, 0.6);
     font-weight: 200;
     font-size: 26px;
@@ -55,6 +55,21 @@ html, body, .widget {
     margin: 3px 15px;
     float: left;
     height: 52px;
+}
+#codediv {
+	float: right;
+	font-size: 12px;
+	font-style: italic;
+	text-align: right;
+}
+#codeinput {
+    box-sizing: border-box;
+    color: #999999;
+    font-size: 13px;
+    min-height: 17px;
+    outline: medium none;
+    padding: 5px;
+    width: 260px;	
 }
 .big-button {
     background-color: #8C8C8C;
@@ -80,7 +95,7 @@ html, body, .widget {
 
 .widget {
 	color: #222;
-	font-family: helvetica, sans-serif;
+	font-family: Helvetica, sans-serif;
 }
 div.widget-data {
 	display: inline-block;
