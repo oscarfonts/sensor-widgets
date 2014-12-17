@@ -286,6 +286,9 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
                 params.push(name + "=" + encodeURIComponent(value));
             }
         }
+        
+        var url = "?" + params.join("&");
+        var absoluteUrl = "http://" + window.location.hostname + window.location.pathname + url;
 
         // we will use only first preferred size, though we could have an array and draw a combo
         var preferredSize = widget.preferredSizes[0];
@@ -294,21 +297,20 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         $("#widget").width(preferredSize.w).height(preferredSize.h);
         
         $("#widget").resizable("destroy");
-        $("#widget").html(writeIFrameTag(params, "100%", "100%"));
+        $("#widget").html(writeIFrameTag(url, "100%", "100%"));
         $("#widget").resizable({
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
             	//refresh code snippet (we write the iframe with dialog's current width and height)
-            	$("#codeinput").val(writeIFrameTag(params, ui.size.width, ui.size.height, true));
+            	$("#codeinput").val(writeIFrameTag(absoluteUrl, ui.size.width, ui.size.height, true));
             }
         });
         
         //refresh code snippet for the first time
-        $("#codeinput").val(writeIFrameTag(params, $("#widget").width(), $("#widget").height(), true));
+        $("#codeinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height(), true));
     }
     
-    function writeIFrameTag(params, width, height, absoluteUrl) {
-    	var url = (absoluteUrl ? "http://" + window.location.hostname + window.location.pathname : "") + "?" + params.join("&");
+    function writeIFrameTag(url, width, height) {
     	return '<iframe id="iframe" src="' + url + '" width="'+ width + '" height='+ height + '" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
     }
 
