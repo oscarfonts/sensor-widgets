@@ -5,6 +5,7 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
     "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
+    var preferredSizes = Array({ 'w': 300, 'h': 540});
 
     var template = [
         '<div class="thermometer widget">',
@@ -25,6 +26,7 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
 
         init: function(config, el) {
 

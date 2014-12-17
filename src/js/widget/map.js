@@ -7,9 +7,11 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
     proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
 
     var inputs = ["service", "offering", "features", "maxInitialZoom"];
+    var preferredSizes = Array({ 'w': 400, 'h': 400});
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
         init: function(config, el) {
             var map = L.map(el, {
                 dragging: false,

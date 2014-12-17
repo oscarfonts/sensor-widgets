@@ -5,10 +5,13 @@ define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], fu
     "use strict";
 
     var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
+    var preferredSizes = Array({ 'w': 530, 'h': 440});
+    
     var count = 0;
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
 
         init: function(config, el) {
 

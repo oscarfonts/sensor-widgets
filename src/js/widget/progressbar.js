@@ -5,6 +5,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], functio
     "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval"];
+    var preferredSizes = Array({ 'w': 500, 'h': 220});
 
     var template = [
         '<div class="progressbar widget">',
@@ -23,6 +24,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], functio
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
 
         init: function(config, el) {
 

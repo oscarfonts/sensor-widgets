@@ -5,6 +5,8 @@ define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawi
     "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
+    
+    var preferredSizes = Array({ 'w': 300, 'h': 300});
 
     var template = [
         '<div class="gauge widget">',
@@ -13,6 +15,7 @@ define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawi
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
 
         init: function(config, el) {
 

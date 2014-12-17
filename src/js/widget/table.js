@@ -5,6 +5,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
     "use strict";
 
     var inputs = ["title", "service", "offering", "feature", "properties", "time_start", "time_end"];
+    var preferredSizes = Array({ 'w': 400, 'h': 400});
 
     var template = [
         '<div class="table widget">',
@@ -15,6 +16,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
 
         init: function(config, el) {
 

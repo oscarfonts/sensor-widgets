@@ -5,6 +5,7 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
     "use strict";
 
     var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
+    var preferredSizes = Array({ 'w': 600, 'h': 400});
 
     var template = [
         '<div class="timechart widget">',
@@ -16,6 +17,7 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
 
         init: function(config, el) {
 
