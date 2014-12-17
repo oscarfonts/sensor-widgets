@@ -58,10 +58,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="img/logo.svg"/>Widget<br/><small>Preview</small>' + '<div id="codediv">Copy this code and paste it on your webpage<br><input id="codeinput" type="text" readonly="true"></div></h1>' + '<div id="widget"></div></div>';
 
         $("#widget").resizable({
-            helper: "ui-resizable-helper",
-            resize: function( event, ui ) {
-            	//TODO
-            }
+            helper: "ui-resizable-helper"
         });
 
         $("#widget").draggable({
@@ -289,22 +286,30 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
                 params.push(name + "=" + encodeURIComponent(value));
             }
         }
-        var url = "?" + params.join("&");
-        
-        var iframe = '<iframe id="iframe" src="' + url + '" width="100%" height="100%" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
 
         // we will use only first preferred size, though we could have an array and draw a combo
-        var preferredSize = widget.preferredSizes[0]; 
-        // set preferred size to start with
+        var preferredSize = widget.preferredSizes[0];
+        
+        // set preferred size to the dialog to start with
         $("#widget").width(preferredSize.w).height(preferredSize.h);
         
         $("#widget").resizable("destroy");
-        $("#widget").html(iframe);
+        $("#widget").html(writeIFrameTag(params, "100%", "100%"));
         $("#widget").resizable({
-            helper: "ui-resizable-helper"
+            helper: "ui-resizable-helper",
+            resize: function( event, ui ) {
+            	//refresh code snippet (we write the iframe with dialog's current width and height)
+            	$("#codeinput").val(writeIFrameTag(params, ui.size.width, ui.size.height, true));
+            }
         });
         
-        $("#codeinput").val(iframe);
+        //refresh code snippet for the first time
+        $("#codeinput").val(writeIFrameTag(params, $("#widget").width(), $("#widget").height(), true));
+    }
+    
+    function writeIFrameTag(params, width, height, absoluteUrl) {
+    	var url = (absoluteUrl ? "http://" + window.location.hostname + window.location.pathname : "") + "?" + params.join("&");
+    	return '<iframe id="iframe" src="' + url + '" width="'+ width + '" height='+ height + '" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
     }
 
     function capitalize(string) {
