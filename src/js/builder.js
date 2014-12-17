@@ -7,7 +7,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
     var inputs = ["name"];
 
     function draw(widget, config, renderTo) {
-        var contents = '<h1>' + capitalize(config.name) + ' Widget<br/><small>Builder</small></h1>';
+    	var contents = '<h1>' + capitalize(config.name) + ' Widget<br/><small>Builder</small></h1>';
 
         for (var i in widget.inputs) {
             var input = widget.inputs[i];
@@ -70,7 +70,8 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
 
         $('[name="build"]').data({
             name: config.name,
-            inputs: widget.inputs
+            inputs: widget.inputs,
+            preferredSizes: widget.preferredSizes
         }).click(loadWidget);
 
         // Setup the SOS parameters: service, offering, feature(s) and property(ies)
@@ -289,8 +290,14 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
             }
         }
         var url = "?" + params.join("&");
+        
         var iframe = '<iframe id="iframe" src="' + url + '" width="100%" height="100%" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
 
+        // we will use only first preferred size, though we could have an array and draw a combo
+        var preferredSize = widget.preferredSizes[0]; 
+        // set preferred size to start with
+        $("#widget").width(preferredSize.w).height(preferredSize.h);
+        
         $("#widget").resizable("destroy");
         $("#widget").html(iframe);
         $("#widget").resizable({
@@ -311,7 +318,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         init: function(config, renderTo) {
             // TODO: Refactor. This may live better in factory.
             require(["widget/" + config.name], function(widget) {
-                draw(widget, config, renderTo);
+            	draw(widget, config, renderTo);
             }, function(error) {
                 console.error("Widget '" + config.name + "' cannot be found.");
             });

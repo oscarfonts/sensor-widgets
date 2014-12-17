@@ -5,6 +5,8 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
     "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
+    
+    var preferredSizes = Array({ 'w': 570, 'h': 380}, {'w': 280, 'h': 540 });
 
     var template = [
         '<div class="bearing widget">',
@@ -20,6 +22,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
 
     return {
         inputs: inputs,
+        preferredSizes: preferredSizes, 
 
         init: function(config, el) {
 
