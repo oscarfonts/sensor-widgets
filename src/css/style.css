@@ -61,6 +61,7 @@ html, body, .widget {
 	font-size: 12px;
 	font-style: italic;
 	text-align: right;
+	display: none;	
 }
 .codeinput {
     box-sizing: border-box;
@@ -69,7 +70,7 @@ html, body, .widget {
     height: 22px;
     outline: medium none;
     width: 260px;
-    padding: 3px;	
+    padding: 3px;
 }
 .big-button {
     background-color: #8C8C8C;

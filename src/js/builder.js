@@ -57,7 +57,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
         	'</div>' + '<div id="preview"><h1 id="header"><div id="codediv">' + 
-        	'Build the widget, get the link and send it<br><input id="linkinput" class="codeinput" type="text" readonly="true"><br/>' +
+        	'Get the link and send it or post it<br><input id="linkinput" class="codeinput" type="text" readonly="true"><br/>' +
         	'Resize, copy HTML and paste it on webpage<br><input id="embedinput" class="codeinput" type="text" readonly="true"></div>' +
         	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
 
@@ -314,6 +314,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         //refresh code snippets for the first time
         $("#embedinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height()));
         $("#linkinput").val(absoluteUrl);
+        $("#codediv").show();
     }
     
     function writeIFrameTag(url, width, height) {
