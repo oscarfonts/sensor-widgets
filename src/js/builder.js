@@ -306,7 +306,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         $("#widget").resizable({
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
-            	//refresh code snippet (we write the iframe with dialog's current width and height)
+            	//refresh embed code snippet (we use the iframe tag with dialog's current width and height)
             	$("#embedinput").val(writeIFrameTag(absoluteUrl, ui.size.width, ui.size.height));
             }
         });
