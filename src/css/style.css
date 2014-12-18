@@ -62,14 +62,14 @@ html, body, .widget {
 	font-style: italic;
 	text-align: right;
 }
-#codeinput {
+.codeinput {
     box-sizing: border-box;
     color: #999999;
-    font-size: 13px;
-    min-height: 17px;
+    font-size: 12px;
+    height: 22px;
     outline: medium none;
-    padding: 5px;
-    width: 260px;	
+    width: 260px;
+    padding: 3px;	
 }
 .big-button {
     background-color: #8C8C8C;

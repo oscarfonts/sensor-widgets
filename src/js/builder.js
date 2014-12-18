@@ -55,7 +55,11 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
 
         contents += '<button name="build">Create Widget</button>';
 
-        renderTo.innerHTML = '<div id="editor">' + contents + '</div>' + '<div id="preview"><h1 id="header"><img src="img/logo.svg"/>Widget<br/><small>Preview</small>' + '<div id="codediv">Copy this code and paste it on your webpage<br><input id="codeinput" type="text" readonly="true"></div></h1>' + '<div id="widget"></div></div>';
+        renderTo.innerHTML = '<div id="editor">' + contents + 
+        	'</div>' + '<div id="preview"><h1 id="header"><div id="codediv">' + 
+        	'Build the widget, get the link and send it<br><input id="linkinput" class="codeinput" type="text" readonly="true"><br/>' +
+        	'Resize, copy HTML and paste it on webpage<br><input id="embedinput" class="codeinput" type="text" readonly="true"></div>' +
+        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
 
         $("#widget").resizable({
             helper: "ui-resizable-helper"
@@ -277,6 +281,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
                 case "properties":
                     value = $('#' + name + ' option:selected').map(getId).get();
                     value = JSON.stringify(value);
+
                     // Serialize array as single value
                     break;
                 default:
@@ -302,16 +307,17 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
             	//refresh code snippet (we write the iframe with dialog's current width and height)
-            	$("#codeinput").val(writeIFrameTag(absoluteUrl, ui.size.width, ui.size.height, true));
+            	$("#embedinput").val(writeIFrameTag(absoluteUrl, ui.size.width, ui.size.height));
             }
         });
         
-        //refresh code snippet for the first time
-        $("#codeinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height(), true));
+        //refresh code snippets for the first time
+        $("#embedinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height()));
+        $("#linkinput").val(absoluteUrl);
     }
     
     function writeIFrameTag(url, width, height) {
-    	return '<iframe id="iframe" src="' + url + '" width="'+ width + '" height='+ height + '" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
+    	return '<iframe id="iframe" src="' + url + '" width="'+ width + '" height="'+ height + '" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
     }
 
     function capitalize(string) {
