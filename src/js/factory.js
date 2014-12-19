@@ -59,7 +59,8 @@ define(function() {
                 builder.init(config, renderTo);
             } else {
                 console.error("Some mandatory parameters missing for builder. Back to chooser.");
-                chooser(renderTo);
+                //chooser(renderTo);
+                errorhandler.throwError("Some mandatory parameters missing for builder. Back to chooser.")
             }
         });
     }

@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['XML'], function(XML) {
+define(['XML', 'errorhandler'], function(XML, errorhandler) {
     "use strict";
 
     var SOS = {
@@ -119,6 +119,7 @@ define(['XML'], function(XML) {
                         callback.call(this, response);
                     } else {
                         console.error("Error accessing " + this._url);
+                        errorhandler.throwError("Server " + this._url + " does not seem to respond");
                     }
                 }
             }.bind(this);

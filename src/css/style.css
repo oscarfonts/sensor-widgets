@@ -113,3 +113,6 @@ div.widget-data {
 .widget h3 {
 	font-size: 14px;
 }
+.error {
+	color: red;
+}

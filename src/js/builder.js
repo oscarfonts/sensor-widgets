@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.css'], function(SOS, $, moment) {
+define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker', 'css!builder.css'], function(SOS, $, moment, errorhandler) {
     "use strict";
 
     var inputs = ["name"];
@@ -54,6 +54,8 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
         }
 
         contents += '<button name="build">Create Widget</button>';
+        
+        contents += "<div id='factoryError' class='error'></div>";
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
         	'</div>' + '<div id="preview"><h1 id="header"><div id="codediv">' + 
@@ -334,7 +336,7 @@ define(['SOS', 'jquery', 'moment', 'jquery-ui', 'daterangepicker', 'css!builder.
             require(["widget/" + config.name], function(widget) {
             	draw(widget, config, renderTo);
             }, function(error) {
-                console.error("Widget '" + config.name + "' cannot be found.");
+            	errorhandler.throwError("Widget '" + config.name + "' cannot be found.");
             });
         }
     };
