@@ -295,7 +295,9 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         }
         
         var url = "?" + params.join("&");
-        var absoluteUrl = "http://" + window.location.hostname + window.location.pathname + url;
+        var absoluteUrl = "http://" + window.location.hostname;
+        if(window.location.port) absoluteUrl += ":" + window.location.port;
+        absoluteUrl += window.location.pathname + url;
 
         // we will use only first preferred size, though we could have an array and draw a combo
         var preferredSize = widget.preferredSizes[0];
