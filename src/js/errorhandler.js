@@ -6,7 +6,8 @@ define(['jquery'], function($) {
 
 	    return { 
 	        throwError: function(msg) {
-	        	$("#factoryError").html(msg).show();
+	        	if($("#factoryError").length > 0) $("#factoryError").html(msg).show();
+	        	else alert(msg);
 	        }
 	    };
 
