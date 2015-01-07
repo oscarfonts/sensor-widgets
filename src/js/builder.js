@@ -56,17 +56,24 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         contents += '<button name="build">Create Widget</button>';
         
         contents += "<div id='factoryError' class='error'></div>";
+        
+        //provisional
+        var demo = 'require(["widget/" + config.name], function(widget) { draw(widget, config, renderTo); });';
+        
+        //modal div
+        contents += '<div id="codediv">' + 
+        	'Get the link and send it or post it<br><textarea id="linkinput" class="codeinput" readonly="true"></textarea><br/>' +
+        	'Resize, copy HTML and paste it on webpage<br><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
+        	'Add your widget to your app using Javascript<br><textarea id="jsinput" class="codeinput" readonly="true">' + demo + '</textarea></div>';
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
-        	'</div>' + '<div id="preview"><h1 id="header"><div id="codediv">' + 
-        	'Get the link and send it or post it<br><input id="linkinput" class="codeinput" type="text" readonly="true"><br/>' +
-        	'Resize, copy HTML and paste it on webpage<br><input id="embedinput" class="codeinput" type="text" readonly="true"></div>' +
-        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
+        	'</div>' + '<div id="preview"><h1 id="header">' +
+        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small><a id="share">Share!</a></h1>' + '<div id="widget"></div></div>';
 
         $("#widget").resizable({
             helper: "ui-resizable-helper"
         });
-
+        
         $("#widget").draggable({
             opacity: 0.35
         });
@@ -318,7 +325,16 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         //refresh code snippets for the first time
         $("#embedinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height()));
         $("#linkinput").val(absoluteUrl);
-        $("#codediv").show();
+        $(".codeinput").on("click", function() {this.focus();this.select();});
+        var opt = {
+            autoOpen: false,
+            height: 450,
+            width: 750,
+            modal: true,
+            title: "Share this widget!"
+        };
+        
+        $("#share").on("click", function() {$("#codediv").dialog(opt).dialog("open");});
     }
     
     function writeIFrameTag(url, width, height) {
