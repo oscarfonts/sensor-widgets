@@ -10,7 +10,7 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
     var template = [
         '<div class="timechart widget">',
             '<h3 style="position:absolute;width:100%"></h3>',
-            '<div class="graph" style="height:100%"></div>',
+            '<div class="graph" style="height:90%"></div>',
             '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
