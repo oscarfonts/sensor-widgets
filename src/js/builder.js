@@ -53,7 +53,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             }
         }
 
-        contents += '<button name="build">Create Widget</button>';
+        contents += '<button name="build">Build</button>';
         
         contents += "<div id='factoryError' class='error'></div>";
         
@@ -68,8 +68,10 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
         	'</div>' + '<div id="preview"><h1 id="header">' +
-        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it!</button>' + '<div id="widget"></div></div>';
+        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it</button>' + '<div id="widget"></div></div>';
 
+        $("[name=build]").button();
+        
         $("#widget").resizable({
             helper: "ui-resizable-helper"
         });
@@ -331,7 +333,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             height: 450,
             width: 750,
             modal: true,
-            title: "Share this widget!"
+            title: "Share this widget"
         };
         
         $("#share").button().show().click(function(event) {$("#codediv").dialog(opt).dialog("open");});;

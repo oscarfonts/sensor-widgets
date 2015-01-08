@@ -559,7 +559,7 @@ button.ui-button::-moz-focus-inner {
 ----------------------------------*/
 .ui-widget {
 	font-family: "Source Sans Pro",helvetica,sans-serif;
-	font-size: 1.0em;
+	/*font-size: 1.0em;*/
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
