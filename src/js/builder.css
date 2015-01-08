@@ -60,9 +60,10 @@ div.select {
 div.select label {
     display: block;
 }
-div.select select, div.select input {
+div.select select, div.select input, div.select textarea {
     display: inline-block;
     width: 280px;
+    box-sizing: border-box;
 }
 button {
     display: inline-block;

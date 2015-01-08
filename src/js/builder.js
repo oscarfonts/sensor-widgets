@@ -44,6 +44,9 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                     break;
                 case "time_end":
                     break;
+                case "footnote":
+                    select = '<textarea value="" id="' + input + '"></textarea>';
+                    break;
                 default:
                     select = '<input type="text" value="" id="' + input + '"/>';
             }
