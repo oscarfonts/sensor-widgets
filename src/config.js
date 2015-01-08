@@ -54,7 +54,7 @@ var require = (function() {
                 deps: ["highcharts"]
             },
             "jquery-ui": {
-                deps: ["jquery", "css!../lib/jquery-ui/jquery-ui.css"]
+                deps: ["jquery", "css!../css/jquery-ui.css"]
             },
             "jqgrid": {
                 deps: ["jquery-ui", "jqgrid-locale-en", "css!../lib/jqgrid/ui.jqgrid.css"]
