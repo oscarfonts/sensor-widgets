@@ -4,13 +4,14 @@
 define(['sos-data-access', 'locale-date'], function(data_access, ld) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "feature", "properties", "time_start", "time_end"];
+    var inputs = ["title", "service", "offering", "feature", "properties", "time_start", "time_end", "footnote"];
     var preferredSizes = Array({ 'w': 400, 'h': 400});
 
     var template = [
         '<div class="table widget">',
             '<h3></h3>',
             '<div class="table-responsive"></div>',
+            '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
 
@@ -23,6 +24,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
             // Render template
             el.innerHTML = template;
             el.querySelector("h3").innerHTML = config.title;
+            el.querySelector(".footnote").innerHTML = config.footnote;
             var table = el.querySelector(".table-responsive");
 
             // Setup SOS data access

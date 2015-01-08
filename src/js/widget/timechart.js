@@ -4,13 +4,14 @@
 define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tooltip', 'flot-navigate'], function(data_access, ld) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
+    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote"];
     var preferredSizes = Array({ 'w': 600, 'h': 400});
 
     var template = [
         '<div class="timechart widget">',
             '<h3 style="position:absolute;width:100%"></h3>',
             '<div class="graph" style="height:100%"></div>',
+            '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
 
@@ -24,6 +25,7 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
             // Render template
             el.innerHTML = template;
             el.querySelector("h3").innerHTML = config.title;
+            el.querySelector(".footnote").innerHTML = config.footnote;
             var graph = el.querySelector(".graph");
 
             // Setup SOS data access

@@ -4,7 +4,7 @@
 define(['sos-data-access', 'locale-date'], function(data_access, ld) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "feature", "properties"];
+    var inputs = ["title", "service", "offering", "feature", "properties", "footnote"];
     var preferredSizes = Array({ 'w': 400, 'h': 400});
 
     var template = [
@@ -12,6 +12,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
             '<h2></h2>',
             '<h3>Loading...</h3>',
             '<dl class="dl-horizontal"></dl>',
+            '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
 
@@ -24,6 +25,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
             // Render template
             el.innerHTML = template;
             el.querySelector("h2").innerHTML = config.title;
+            el.querySelector(".footnote").innerHTML = config.footnote;
             var subtitle = el.querySelector("h3");
             var panel = el.querySelector("dl");
 

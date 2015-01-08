@@ -4,7 +4,7 @@
 define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], function(data_access, drawing, ld) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
+    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote"];
     var preferredSizes = Array({ 'w': 300, 'h': 540});
 
     var template = [
@@ -16,6 +16,7 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
             '<h3>Request time: <span class="request_time"></span></h3>',
             '<h3>Result time: <span class="result_time"></span></h3>',
             '</div>',
+            '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
 
@@ -33,6 +34,7 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
             // Render template
             el.innerHTML = template;
             var elem = el.querySelector(".svg-temp");
+            el.querySelector(".footnote").innerHTML = config.footnote;
             var clip = (elem.firstElementChild||elem.firstChild);
 
             // Setup SOS data access

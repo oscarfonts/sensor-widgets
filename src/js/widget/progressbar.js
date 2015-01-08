@@ -4,7 +4,7 @@
 define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], function(data_access, drawing, ld) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval"];
+    var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval", "footnote"];
     var preferredSizes = Array({ 'w': 500, 'h': 220});
 
     var template = [
@@ -19,6 +19,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], functio
                 '<div class="max">100</div>',
             '</div>',
             '<h3 class="date"></h3>',
+            '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
 
@@ -32,6 +33,8 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], functio
             el.innerHTML = template;
             el.querySelector(".min").innerHTML = config.min_value;
             el.querySelector(".max").innerHTML = config.max_value;
+            
+            el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);

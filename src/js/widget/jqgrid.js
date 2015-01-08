@@ -4,7 +4,7 @@
 define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], function(data_access, ld) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end"];
+    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote"];
     var preferredSizes = Array({ 'w': 530, 'h': 440});
     
     var count = 0;
@@ -21,9 +21,11 @@ define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], fu
                     '<h1 class="title"></h1>',
                     '<table id="grid',++count,'"></table>',
                     '<div id="pager',count,'"></div>',
+                    '<div><span class="footnote"></span></div>',
                 '</div>'
             ].join('');
             el.querySelector(".title").innerHTML = config.title;
+            el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);

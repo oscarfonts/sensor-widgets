@@ -4,13 +4,14 @@
 define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawing) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
+    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote"];
     
     var preferredSizes = Array({ 'w': 300, 'h': 300});
 
     var template = [
         '<div class="gauge widget">',
             drawing,
+            '<div><span class="footnote"></span></div>',
         '</div>'].join('');
 
     return {
@@ -24,6 +25,7 @@ define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawi
             var arrow = el.querySelector(".arrow");
             var title = el.querySelector(".title");
             var value = el.querySelector(".value");
+            el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);

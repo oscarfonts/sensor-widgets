@@ -116,3 +116,11 @@ div.widget-data {
 .error {
 	color: red;
 }
+.footnote {
+	bottom: 20px;
+	right: 20px;
+	position: absolute;
+	font-size: 11px;
+	font-wieght: bold;
+	text-align: right;
+}

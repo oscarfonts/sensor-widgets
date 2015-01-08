@@ -60,7 +60,7 @@ define(function() {
             } else {
                 console.error("Some mandatory parameters missing for builder. Back to chooser.");
                 //chooser(renderTo);
-                errorhandler.throwError("Some mandatory parameters missing for builder. Back to chooser.")
+                errorhandler.throwError("Some mandatory parameters missing for builder. Back to chooser.");
             }
         });
     }

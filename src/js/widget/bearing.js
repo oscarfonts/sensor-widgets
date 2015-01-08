@@ -4,7 +4,7 @@
 define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(data_access, drawing, ld) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval"];
+    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote"];
     
     var preferredSizes = Array({ 'w': 570, 'h': 380}, {'w': 280, 'h': 540 });
 
@@ -18,6 +18,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
             '<h3>Request time:<br/><span class="request_time"></span></h3>',
             '<h3>Result time:<br/><span class="result_time"></span></h3>',
             '</div>',
+            '<div><span class="footnote"></span></div>',
         '</div>'].join('');
 
     return {
@@ -31,6 +32,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
             var arrow = el.querySelector(".arrow");
             var shadow = el.querySelector(".shadow");
             arrow.style.visibility = shadow.style.visibility = 'hidden';
+            el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);
