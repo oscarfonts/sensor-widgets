@@ -117,10 +117,9 @@ div.widget-data {
 	color: red;
 }
 .footnote {
-	bottom: 20px;
-	right: 20px;
-	position: absolute;
+	margin: 10px;
 	font-size: 11px;
-	font-wieght: bold;
-	text-align: right;
+	font-weight: bold;
+	display: block;
+	color: #222; 
 }
