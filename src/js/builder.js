@@ -63,12 +63,12 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         //modal div
         contents += '<div id="codediv">' + 
         	'Get the link and send it or post it<br><textarea id="linkinput" class="codeinput" readonly="true"></textarea><br/>' +
-        	'Resize, copy HTML and paste it on webpage<br><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
-        	'Add your widget to your app using Javascript<br><textarea id="jsinput" class="codeinput" readonly="true">' + demo + '</textarea></div>';
+        	'Resize the widget, copy this HTML code and paste it on your webpage<br><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
+        	'Add the widget to your app using Javascript<br><textarea id="jsinput" class="codeinput" readonly="true">' + demo + '</textarea></div>';
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
         	'</div>' + '<div id="preview"><h1 id="header">' +
-        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small><a id="share">Share!</a></h1>' + '<div id="widget"></div></div>';
+        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it!</button>' + '<div id="widget"></div></div>';
 
         $("#widget").resizable({
             helper: "ui-resizable-helper"
@@ -334,7 +334,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             title: "Share this widget!"
         };
         
-        $("#share").on("click", function() {$("#codediv").dialog(opt).dialog("open");});
+        $("#share").button().show().click(function(event) {$("#codediv").dialog(opt).dialog("open");});;
     }
     
     function writeIFrameTag(url, width, height) {
