@@ -131,7 +131,7 @@ define(['sos-data-access', 'highcharts-more'], function(data_access) {
             }
             var div = document.createElement("div");
             var span = document.createElement("span");
-    		span.innerHTML = config.footnote;
+    		if(config.footnote != undefined) span.innerHTML = config.footnote;
     		span.className = "footnote";
     		div.appendChild(span);
     		el.appendChild(div);

@@ -4,6 +4,10 @@
 define(function() {
     "use strict";
 
+    // by default, all params are MANDATORY (the widget doesn't load!)
+    // define here the non-mandatory params (same for all widgets)
+    var nonMandatory = ["footnote", "subtitle"];
+    
     function init(config, renderTo) {
         if (!renderTo) {
             renderTo = document.body;
@@ -82,9 +86,10 @@ define(function() {
 
     function checkConfig(inputs, config) {
         var missing = [];
+        
         for (var i in inputs) {
             var input = inputs[i];
-            if (!config.hasOwnProperty(input)) {
+            if ((nonMandatory.indexOf(input)) == -1 && (!config.hasOwnProperty(input))) {
                 missing.push(input);
             }
         }
