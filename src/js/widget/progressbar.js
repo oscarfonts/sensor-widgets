@@ -34,7 +34,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], functio
             el.querySelector(".min").innerHTML = config.min_value;
             el.querySelector(".max").innerHTML = config.max_value;
             
-            el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);

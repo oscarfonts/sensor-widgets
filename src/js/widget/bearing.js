@@ -32,7 +32,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
             var arrow = el.querySelector(".arrow");
             var shadow = el.querySelector(".shadow");
             arrow.style.visibility = shadow.style.visibility = 'hidden';
-            el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);

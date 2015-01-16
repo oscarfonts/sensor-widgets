@@ -25,7 +25,7 @@ define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawi
             var arrow = el.querySelector(".arrow");
             var title = el.querySelector(".title");
             var value = el.querySelector(".value");
-            el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);

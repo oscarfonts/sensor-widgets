@@ -25,7 +25,7 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
             // Render template
             el.innerHTML = template;
             el.querySelector("h3").innerHTML = config.title;
-            el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
             var graph = el.querySelector(".graph");
 
             // Setup SOS data access

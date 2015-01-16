@@ -24,7 +24,7 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
             // Render template
             el.innerHTML = template;
             el.querySelector("h3").innerHTML = config.title;
-            el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
             var table = el.querySelector(".table-responsive");
 
             // Setup SOS data access

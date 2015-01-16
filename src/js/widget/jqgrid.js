@@ -25,7 +25,7 @@ define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], fu
                 '</div>'
             ].join('');
             el.querySelector(".title").innerHTML = config.title;
-            el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
 
             // Setup SOS data access
             var data = data_access(config, redraw);

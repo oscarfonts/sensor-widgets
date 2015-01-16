@@ -34,7 +34,7 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
             // Render template
             el.innerHTML = template;
             var elem = el.querySelector(".svg-temp");
-            el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
             var clip = (elem.firstElementChild||elem.firstChild);
 
             // Setup SOS data access
