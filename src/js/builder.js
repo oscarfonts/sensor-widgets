@@ -56,20 +56,29 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             }
         }
 
-        contents += '<button name="build">Create Widget</button>';
+        contents += '<button name="build">Build</button>';
         
         contents += "<div id='factoryError' class='error'></div>";
+        
+        //provisional
+        var demo = 'TODO ... javascript code, but also will need to include a script tag';
+        
+        //modal div
+        contents += '<div id="codediv">' + 
+        	'<h3>Get the link</h3><h4>Get the link and send it or post it</h4><textarea id="linkinput" class="codeinput" readonly="true"></textarea><br/>' +
+        	'<h3>Embed it</h3><h4>Resize the widget, copy this HTML code and paste it on your webpage</h4><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
+        	'<h3>Use Javascript</h3><h4>Add the widget to your app using Javascript</h4><textarea id="jsinput" class="codeinput" readonly="true">' + demo + '</textarea></div>';
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
-        	'</div>' + '<div id="preview"><h1 id="header"><div id="codediv">' + 
-        	'Get the link and send it or post it<br><input id="linkinput" class="codeinput" type="text" readonly="true"><br/>' +
-        	'Resize, copy HTML and paste it on webpage<br><input id="embedinput" class="codeinput" type="text" readonly="true"></div>' +
-        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1>' + '<div id="widget"></div></div>';
+        	'</div>' + '<div id="preview"><h1 id="header">' +
+        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it</button>' + '<div id="widget"></div></div>';
 
+        $("[name=build]").button();
+        
         $("#widget").resizable({
             helper: "ui-resizable-helper"
         });
-
+        
         $("#widget").draggable({
             opacity: 0.35
         });
@@ -321,7 +330,16 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         //refresh code snippets for the first time
         $("#embedinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height()));
         $("#linkinput").val(absoluteUrl);
-        $("#codediv").show();
+        $(".codeinput").on("click", function() {this.focus();this.select();});
+        var opt = {
+            autoOpen: false,
+            height: 480,
+            width: 750,
+            modal: true,
+            title: "Share this widget"
+        };
+        
+        $("#share").button().show().click(function(event) {$("#codediv").dialog(opt).dialog("open");});;
     }
     
     function writeIFrameTag(url, width, height) {

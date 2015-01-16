@@ -56,20 +56,34 @@ html, body, .widget {
     float: left;
     height: 52px;
 }
+#share {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	display: none;
+}
 #codediv {
-	float: right;
 	font-size: 12px;
-	font-style: italic;
-	text-align: right;
 	display: none;	
 }
+#codediv h3 {
+	font-size: 15px;
+	margin-bottom: 0px;
+}
+#codediv h4 {
+	font-style: italic;
+	font-weight: normal;
+	margin-top: 2px;
+	margin-bottom: 3px;
+}
+
 .codeinput {
     box-sizing: border-box;
     color: #999999;
     font-size: 12px;
-    height: 22px;
+    height: 80px;
     outline: medium none;
-    width: 260px;
+    width: 720px;
     padding: 3px;
 }
 .big-button {
