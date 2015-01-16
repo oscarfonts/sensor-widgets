@@ -5,12 +5,13 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
     "use strict";
 
     var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote"];
-    var preferredSizes = Array({ 'w': 600, 'h': 400});
+    var preferredSizes = Array({ 'w': 650, 'h': 530});
 
     var template = [
         '<div class="timechart widget">',
             '<h3 style="position:absolute;width:100%"></h3>',
-            '<div class="graph" style="height:90%"></div>',
+            '<div class="graph" style="height:75%; width: 100%; max-height: 380px;"></div>',
+            '<div id="legend" style="display: inline-block; float: right; margin-right: 15px; margin-left: 50px; margin-top: 10px"></div>',
             '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
@@ -68,6 +69,9 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
                     },
                     grid: {
                         hoverable: true
+                    },
+                    legend: {
+                    	container: "#legend"
                     },
                     series: {
                         lines: {
