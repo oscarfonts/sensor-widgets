@@ -29,7 +29,7 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
                 attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
             }).addTo(map);
             
-            map.attributionControl.addAttribution("<br>"+config.footnote);
+            if(config.footnote != undefined) map.attributionControl.addAttribution("<br>"+config.footnote);
 
             SOS.setUrl(config.service);
             read();
