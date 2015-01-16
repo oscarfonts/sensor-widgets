@@ -64,9 +64,19 @@ html, body, .widget {
 }
 #codediv {
 	font-size: 12px;
-	font-style: italic;
 	display: none;	
 }
+#codediv h3 {
+	font-size: 15px;
+	margin-bottom: 0px;
+}
+#codediv h4 {
+	font-style: italic;
+	font-weight: normal;
+	margin-top: 2px;
+	margin-bottom: 3px;
+}
+
 .codeinput {
     box-sizing: border-box;
     color: #999999;

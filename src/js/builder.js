@@ -58,13 +58,13 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         contents += "<div id='factoryError' class='error'></div>";
         
         //provisional
-        var demo = 'require(["widget/" + config.name], function(widget) { draw(widget, config, renderTo); });';
+        var demo = 'TODO ... javascript code, but also will need to include a script tag';
         
         //modal div
         contents += '<div id="codediv">' + 
-        	'Get the link and send it or post it<br><textarea id="linkinput" class="codeinput" readonly="true"></textarea><br/>' +
-        	'Resize the widget, copy this HTML code and paste it on your webpage<br><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
-        	'Add the widget to your app using Javascript<br><textarea id="jsinput" class="codeinput" readonly="true">' + demo + '</textarea></div>';
+        	'<h3>Get the link</h3><h4>Get the link and send it or post it</h4><textarea id="linkinput" class="codeinput" readonly="true"></textarea><br/>' +
+        	'<h3>Embed it</h3><h4>Resize the widget, copy this HTML code and paste it on your webpage</h4><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
+        	'<h3>Use Javascript</h3><h4>Add the widget to your app using Javascript</h4><textarea id="jsinput" class="codeinput" readonly="true">' + demo + '</textarea></div>';
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
         	'</div>' + '<div id="preview"><h1 id="header">' +
@@ -330,7 +330,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         $(".codeinput").on("click", function() {this.focus();this.select();});
         var opt = {
             autoOpen: false,
-            height: 450,
+            height: 480,
             width: 750,
             modal: true,
             title: "Share this widget"
