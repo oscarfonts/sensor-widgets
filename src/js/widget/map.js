@@ -39,7 +39,14 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
             	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             });
             
-            var baseMaps = {"osm": osmBase, "hydda": hyddaBase, "esri-sat": esriBase};
+            var acetateBase = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
+            	attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
+            	subdomains: '0123',
+            	minZoom: 2,
+            	maxZoom: 18
+            });
+            
+            var baseMaps = {"osm": osmBase, "hydda": hyddaBase, "esri-sat": esriBase, "acetate": acetateBase};
             var selectedBase = baseMaps["osm"];
             if(config.baseMap != undefined) selectedBase = baseMaps[config.baseMap];
             selectedBase.addTo(map);

@@ -49,7 +49,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                     break;
                 case "baseMap":
                     var options = "",
-                    	baseMaps = ["osm", "hydda", "esri-sat"];
+                    	baseMaps = ["osm", "hydda", "esri-sat", "acetate"];
 	                for (i in baseMaps) {
 	                    var value = baseMaps[i];
 	                    options += '<option id="' + value + '">' + value + '</option>';
