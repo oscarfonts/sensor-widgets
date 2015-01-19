@@ -6,7 +6,7 @@ define(function() {
 
     // by default, all params are MANDATORY (the widget doesn't load!)
     // define here the non-mandatory params (same for all widgets)
-    var nonMandatory = ["footnote", "subtitle", "maxInitialZoom"];
+    var nonMandatory = ["footnote", "subtitle", "maxInitialZoom", "baseMap"];
     
     function init(config, renderTo) {
         if (!renderTo) {
