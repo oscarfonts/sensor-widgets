@@ -47,8 +47,8 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
             });
             
             var baseMaps = {"osm": osmBase, "hydda": hyddaBase, "esri-sat": esriBase, "acetate": acetateBase};
-            var selectedBase = baseMaps["osm"];
-            if(config.baseMap != undefined) selectedBase = baseMaps[config.baseMap];
+            var selectedBase = baseMaps[config.baseMap];
+            if(!selectedBase) selectedBase = baseMaps["osm"];
             selectedBase.addTo(map);
             
             if(config.footnote != undefined) map.attributionControl.addAttribution("<br>"+config.footnote);
