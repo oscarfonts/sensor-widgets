@@ -47,6 +47,15 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                 case "footnote":
                     select = '<textarea value="" id="' + input + '"></textarea>';
                     break;
+                case "baseMap":
+                    var options = "",
+                    	baseMaps = ["osm", "hydda", "esri-sat"];
+	                for (i in baseMaps) {
+	                    var value = baseMaps[i];
+	                    options += '<option id="' + value + '">' + value + '</option>';
+	                }
+		            select = '<select id="' + input + '">' + options + '</select>';
+                    break;    
                 default:
                     select = '<input type="text" value="" id="' + input + '"/>';
             }

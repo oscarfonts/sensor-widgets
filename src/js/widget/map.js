@@ -6,8 +6,8 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
 
     proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
 
-    var inputs = ["service", "offering", "features", "maxInitialZoom", "footnote"];
-    var preferredSizes = Array({ 'w': 400, 'h': 400});
+    var inputs = ["service", "offering", "features", "maxInitialZoom", "baseMap", "footnote"];
+    var preferredSizes = Array({ 'w': 550, 'h': 400});
 
     return {
         inputs: inputs,
@@ -22,12 +22,27 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
                 zoomControl: false
             }).setView([30, 0], 2);
 
-            L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+            var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
                 subdomains: '1234',
                 minZoom: 2,
                 maxZoom: 14,
                 attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
-            }).addTo(map);
+            });
+            
+            var hyddaBase = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+            	minZoom: 0,
+            	maxZoom: 18,
+            	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            });
+            
+            var esriBase = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+            
+            var baseMaps = {"osm": osmBase, "hydda": hyddaBase, "esri-sat": esriBase};
+            var selectedBase = baseMaps["osm"];
+            if(config.baseMap != undefined) selectedBase = baseMaps[config.baseMap];
+            selectedBase.addTo(map);
             
             if(config.footnote != undefined) map.attributionControl.addAttribution("<br>"+config.footnote);
 
