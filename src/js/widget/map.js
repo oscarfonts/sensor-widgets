@@ -17,10 +17,10 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
         attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
     });
     
-    var hyddaBase = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-    	minZoom: 0,
-    	maxZoom: 18,
-    	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    var portBase = L.tileLayer.wms('http://planolws.portdebarcelona.cat/mapproxy/service', {
+    	layers:"PDBFAV_20140621",
+    	format:"image/jpeg",
+    	attribution: 'Tiles courtesy of Port de Barcelona'
     });
     
     var esriBase = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -34,7 +34,7 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
     	maxZoom: 18
     });
     
-    var baseMaps = {"osm": osmBase, "hydda": hyddaBase, "esri-sat": esriBase, "acetate": acetateBase};
+    var baseMaps = {"osm": osmBase, "port-bcn": portBase, "esri-sat": esriBase, "acetate": acetateBase};
 
     return {
         inputs: inputs,
