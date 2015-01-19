@@ -10,6 +10,10 @@ html, body {
 .widget {
     overflow: hidden;
 }
+
+.widget.table {
+    overflow: auto;
+} 
 html, body, .widget {
     height: 100%;
 }
