@@ -50,8 +50,19 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
                 zoomControl: false
             }).setView([30, 0], 2);
 
+            //select predefined baseMap or use default 
             var selectedBase = baseMaps[config.baseMap];
             if(!selectedBase) selectedBase = baseMaps["osm"];
+            
+            //if a WMS is defined it overwrites everything (more specific)
+            if(config.baseMapWms && config.baseMapWmsParams) {
+            	// we get the params as a JSON string
+            	// Ex: {"layers":"PDBFAV_20140621","attribution":"Port de BCN","format":"image/jpeg"}
+            	var params = decodeURI(config.baseMapWmsParams);
+            	params = JSON.parse(params);
+            	selectedBase = L.tileLayer.wms(config.baseMapWms, params);
+            }
+            
             selectedBase.addTo(map);
             
             if(config.footnote != undefined) map.attributionControl.addAttribution("<br>"+config.footnote);
