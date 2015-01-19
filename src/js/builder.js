@@ -48,11 +48,9 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                     select = '<textarea value="" id="' + input + '"></textarea>';
                     break;
                 case "baseMap":
-                    var options = "",
-                    	baseMaps = ["osm", "hydda", "esri-sat", "acetate"];
-	                for (i in baseMaps) {
-	                    var value = baseMaps[i];
-	                    options += '<option id="' + value + '">' + value + '</option>';
+                    var options = "";
+                    for (var key in widget.baseMaps) {
+	                    options += '<option id="' + key + '">' + key + '</option>';
 	                }
 		            select = '<select id="' + input + '">' + options + '</select>';
                     break;    

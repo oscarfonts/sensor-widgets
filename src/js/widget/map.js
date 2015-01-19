@@ -8,9 +8,37 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
 
     var inputs = ["service", "offering", "features", "maxInitialZoom", "baseMap", "footnote"];
     var preferredSizes = Array({ 'w': 550, 'h': 400});
+    
+    var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+        subdomains: '1234',
+        title: 'djhgsdjhgdc',
+        minZoom: 2,
+        maxZoom: 14,
+        attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
+    });
+    
+    var hyddaBase = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+    	minZoom: 0,
+    	maxZoom: 18,
+    	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+    
+    var esriBase = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    });
+    
+    var acetateBase = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
+    	attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
+    	subdomains: '0123',
+    	minZoom: 2,
+    	maxZoom: 18
+    });
+    
+    var baseMaps = {"osm": osmBase, "hydda": hyddaBase, "esri-sat": esriBase, "acetate": acetateBase};
 
     return {
         inputs: inputs,
+        baseMaps: baseMaps,
         preferredSizes: preferredSizes, 
         init: function(config, el) {
             var map = L.map(el, {
@@ -22,31 +50,6 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
                 zoomControl: false
             }).setView([30, 0], 2);
 
-            var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-                subdomains: '1234',
-                minZoom: 2,
-                maxZoom: 14,
-                attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
-            });
-            
-            var hyddaBase = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-            	minZoom: 0,
-            	maxZoom: 18,
-            	attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            });
-            
-            var esriBase = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            });
-            
-            var acetateBase = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
-            	attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
-            	subdomains: '0123',
-            	minZoom: 2,
-            	maxZoom: 18
-            });
-            
-            var baseMaps = {"osm": osmBase, "hydda": hyddaBase, "esri-sat": esriBase, "acetate": acetateBase};
             var selectedBase = baseMaps[config.baseMap];
             if(!selectedBase) selectedBase = baseMaps["osm"];
             selectedBase.addTo(map);
