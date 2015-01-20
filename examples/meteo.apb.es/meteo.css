@@ -17,7 +17,8 @@
     font-size: 22px;
 }
 .widget.bearing h3,
-.widget.timechart h3 {
+.widget.timechart h3,
+.widget.thermometer h3 {
     display: none;
     font-size: 12px;
 }
@@ -98,4 +99,15 @@
 }
 .table-condensed>thead>tr>th, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>tbody>tr>td, .table-condensed>tfoot>tr>td {
     padding: 4px;
+}
+/* specific CSS for thermometer in sirena */
+.thermometer > .widget-data {
+	display: inline-flex;
+	vertical-align: top;
+	margin: 5px;
+	margin-top: 20px;
+	max-width: 60px;
+}
+.thermometer h2 {
+	font-size: 15px;
 }
