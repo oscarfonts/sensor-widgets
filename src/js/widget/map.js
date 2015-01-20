@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4) {
+define(['SOS', 'leaflet', 'proj4', 'widget/table', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, table) {
     "use strict";
 
     proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
@@ -58,8 +58,7 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
             if(config.baseMapWms && config.baseMapWmsParams) {
             	// we get the params as a JSON string
             	// Ex: {"layers":"PDBFAV_20140621","attribution":"Port de BCN","format":"image/jpeg"}
-            	var params = decodeURI(config.baseMapWmsParams);
-            	params = JSON.parse(params);
+            	var params = JSON.parse(decodeURI(config.baseMapWmsParams));
             	selectedBase = L.tileLayer.wms(config.baseMapWms, params);
             }
             
@@ -83,7 +82,23 @@ define(['SOS', 'leaflet', 'proj4', 'proj4leaflet', 'leaflet-label'], function(SO
                             onEachFeature: function(feature, layer) {
                                 if (feature.properties && feature.properties.name) {
                                     layer.bindLabel(feature.properties.name).addTo(map);
+                                    var popup = document.createElement("div");
+                                    layer.bindPopup(popup);
+                                    
+	                                table.init({
+					                    title: "Data Table " + feature.properties.name,
+					                    service: config.service,
+					                    offering: offering,
+					                    feature: feature,
+					                    //properties: feature.properties
+					                    properties: ["http://sensors.portdebarcelona.cat/def/weather/properties#31"]
+					                    //time_start: back_33_samples.toISOString().substring(0, 19) + "Z",
+					                    //time_end: now.toISOString().substring(0, 19) + "Z"
+					                    //time_start: '2012-06-11T00:00:00+00:00Z',
+					                    //time_end: '2012-06-11T00:00:00+00:00Z'
+					                }, popup);
                                 }
+                                
                             }
                         });
                         geojson.addTo(map);
