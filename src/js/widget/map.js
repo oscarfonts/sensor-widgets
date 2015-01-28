@@ -87,8 +87,8 @@ define(['SOS', 'leaflet', 'proj4', 'widget/table', 'proj4leaflet', 'leaflet-labe
 	                                table.init({
 					                    title: "Data Table " + feature.properties.name,
 					                    service: config.service,
-					                    offering: offering,
-					                    feature: feature,
+					                    offering: offering.identifier,
+					                    feature: feature.id,
 					                    //properties: feature.properties
 					                    properties: ["http://sensors.portdebarcelona.cat/def/weather/properties#31"]
 					                    //time_start: back_33_samples.toISOString().substring(0, 19) + "Z",
