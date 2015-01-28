@@ -11,7 +11,6 @@ define(['SOS', 'leaflet', 'proj4', 'widget/table', 'proj4leaflet', 'leaflet-labe
     
     var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
         subdomains: '1234',
-        title: 'djhgsdjhgdc',
         minZoom: 2,
         maxZoom: 14,
         attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
