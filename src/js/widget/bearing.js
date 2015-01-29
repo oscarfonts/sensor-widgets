@@ -22,11 +22,11 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
         '</div>'].join('');
     
     //TODO: shouldn't be here
-    function loadCSS(filename){
-    	var file = document.createElement("link")
-    	file.setAttribute("rel", "stylesheet")
-    	file.setAttribute("type", "text/css")
-    	file.setAttribute("href", filename)    	 
+    function loadCSS(fileName){
+    	var file = document.createElement("link");
+    	file.setAttribute("rel", "stylesheet");
+    	file.setAttribute("type", "text/css");
+    	file.setAttribute("href", fileName);   	 
     	if (typeof file!="undefined") document.getElementsByTagName("head")[0].appendChild(file)
     }
     
