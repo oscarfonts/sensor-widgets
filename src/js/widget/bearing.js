@@ -4,7 +4,7 @@
 define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(data_access, drawing, ld) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote"];
+    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote", "css"];
     
     var preferredSizes = Array({ 'w': 570, 'h': 380}, {'w': 280, 'h': 540 });
 
@@ -20,7 +20,16 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
             '</div>',
             '<div><span class="footnote"></span></div>',
         '</div>'].join('');
-
+    
+    //TODO: shouldn't be here
+    function loadCSS(filename){
+    	var file = document.createElement("link")
+    	file.setAttribute("rel", "stylesheet")
+    	file.setAttribute("type", "text/css")
+    	file.setAttribute("href", filename)    	 
+    	if (typeof file!="undefined") document.getElementsByTagName("head")[0].appendChild(file)
+    }
+    
     return {
         inputs: inputs,
         preferredSizes: preferredSizes, 
@@ -33,11 +42,13 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
             var shadow = el.querySelector(".shadow");
             arrow.style.visibility = shadow.style.visibility = 'hidden';
             if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
+            if(config.css != undefined) loadCSS(config.css);
 
             // Setup SOS data access
             var data = data_access(config, redraw);
             setInterval(data.read, config.refresh_interval * 1000);
             data.read();
+
 
             // Update view
             function redraw(data) {
