@@ -84,18 +84,36 @@ define(['SOS', 'leaflet', 'proj4', 'widget/table', 'proj4leaflet', 'leaflet-labe
                                     var popup = document.createElement("div");
                                     layer.bindPopup(popup);
                                     
-	                                table.init({
-					                    title: "Data Table " + feature.properties.name,
-					                    service: config.service,
-					                    offering: offering.identifier,
-					                    feature: feature.id,
-					                    //properties: feature.properties
-					                    properties: ["http://sensors.portdebarcelona.cat/def/weather/properties#31"]
-					                    //time_start: back_33_samples.toISOString().substring(0, 19) + "Z",
-					                    //time_end: now.toISOString().substring(0, 19) + "Z"
-					                    //time_start: '2012-06-11T00:00:00+00:00Z',
-					                    //time_end: '2012-06-11T00:00:00+00:00Z'
-					                }, popup);
+                                    SOS.describeSensor(offering.procedure[0], function(description) {
+                                    	
+                                    	var propertiesArray = [];
+                                    	
+                                        var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
+                                    	properties = properties instanceof Array ? properties : [properties];
+                                    	
+                                        for (var i in properties) {
+                                            var property = properties[i];
+                                            var types = ["Quantity", "Count", "Boolean", "Category", "Text", "ObservableProperty"];
+                                        	for (var j in types) {
+                                                var type = types[j];
+                                                if (property.hasOwnProperty(type)) {
+                                                    property.id = property[type].definition;
+                                                    propertiesArray[i] = property.id;
+                                                }
+                                            }
+                                            
+                                        }
+
+	                                    table.init({
+						                    title: feature.properties.name,
+						                    service: config.service,
+						                    offering: offering.identifier,
+						                    feature: feature.id,
+						                    properties: propertiesArray
+						                    //time_start: back_33_samples.toISOString().substring(0, 19) + "Z",
+						                    //time_end: now.toISOString().substring(0, 19) + "Z"
+						                }, popup);
+                                    });
                                 }
                                 
                             }
