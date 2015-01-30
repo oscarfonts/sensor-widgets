@@ -68,7 +68,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         contents += "<div id='factoryError' class='error'></div>";
         
         //provisional
-        var demo = 'TODO ... javascript code, but also will need to include a script tag';
+        var demo = 'require(["widget/bearing"], function(bearing) {\nbearing.init({\nservice: defs.service(),\noffering: defs.offering("1m"),\nfeature: defs.feature("02"),\nproperty: defs.property("31"),\nrefresh_interval: 15\n}, document.querySelector(".bearing"));';
         
         //modal div
         contents += '<div id="codediv">' + 
