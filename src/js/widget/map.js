@@ -56,7 +56,7 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'proj4leaflet', 'leaflet-labe
             
             selectedBase.addTo(map);
             
-            if(config.footnote != undefined) map.attributionControl.addAttribution("<br>"+config.footnote);
+            if(config.footnote !== undefined) map.attributionControl.addAttribution("<br>"+config.footnote);
 
             SOS.setUrl(config.service);
             read();
@@ -75,7 +75,12 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'proj4leaflet', 'leaflet-labe
                                 if (feature.properties && feature.properties.name) {
                                     layer.bindLabel(feature.properties.name).addTo(map);
                                     var popup = document.createElement("div");
-                                    layer.bindPopup(popup);
+                                    var popupOptions = {
+                                    		maxHeight: 230,
+                                    		minWidth: 230,
+                                    		autoPan: false
+                                    };
+                                    layer.bindPopup(popup, popupOptions);
                                     
                                     SOS.describeSensor(offering.procedure[0], function(description) {
                                     	
