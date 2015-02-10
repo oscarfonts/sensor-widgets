@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(data_access, drawing, ld) {
+define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
     "use strict";
 
     var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote", "css"];
@@ -21,28 +21,21 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date'], function(d
             '<div><span class="footnote"></span></div>',
         '</div>'].join('');
     
-    //TODO: shouldn't be here
-    function loadCSS(fileName){
-    	var file = document.createElement("link");
-    	file.setAttribute("rel", "stylesheet");
-    	file.setAttribute("type", "text/css");
-    	file.setAttribute("href", fileName);   	 
-    	if (typeof file!="undefined") document.getElementsByTagName("head")[0].appendChild(file);
-    }
-    
     return {
         inputs: inputs,
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
-
-            // Render template
+        	
+            //load widget common features
+        	common.init(config);
+        	
+        	// Render template
             el.innerHTML = template;
             var arrow = el.querySelector(".arrow");
             var shadow = el.querySelector(".shadow");
             arrow.style.visibility = shadow.style.visibility = 'hidden';
             if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
-            if(config.css != undefined) loadCSS(config.css);
 
             // Setup SOS data access
             var data = data_access(config, redraw);

@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'highcharts-more'], function(data_access) {
+define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_access, common) {
     "use strict";
 
-    var inputs = ["title", "subtitle", "service", "offering", "feature", "properties", "refresh_interval", "time_start", "time_end", "footnote"];
+    var inputs = ["title", "subtitle", "service", "offering", "feature", "properties", "refresh_interval", "time_start", "time_end", "footnote", "css"];
     var labels = ["&gt; 10 m/s", "8-10 m/s", "6-8 m/s", "4-6 m/s", "2-4 m/s", "0-2 m/s"];
     var preferredSizes = Array({ 'w': 620, 'h': 450});
 
@@ -13,6 +13,9 @@ define(['sos-data-access', 'highcharts-more'], function(data_access) {
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
+        	
+            //load widget common features
+        	common.init(config);
         	
             var chart = document.createElement("div"); 
     		el.appendChild(chart);

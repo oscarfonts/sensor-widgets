@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawing) {
+define(['sos-data-access', 'text!widget/gauge.svg', 'widget-common'], function(data_access, drawing, common) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote"];
+    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote", "css"];
     
     var preferredSizes = Array({ 'w': 300, 'h': 300});
 
@@ -19,6 +19,9 @@ define(['sos-data-access', 'text!widget/gauge.svg'], function(data_access, drawi
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
+        	
+            //load widget common features
+        	common.init(config);        	
 
             // Render template
             el.innerHTML = template;

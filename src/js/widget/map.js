@@ -1,12 +1,12 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, panel) {
+define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'widget-common', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, panel, common) {
     "use strict";
 
     proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
 
-    var inputs = ["service", "offering", "features", "maxInitialZoom", "baseMap", "footnote"];
+    var inputs = ["service", "offering", "features", "maxInitialZoom", "baseMap", "footnote", "css"];
     var preferredSizes = Array({ 'w': 550, 'h': 400});
     
     var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
@@ -40,6 +40,10 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'proj4leaflet', 'leaflet-labe
         baseMaps: baseMaps,
         preferredSizes: preferredSizes, 
         init: function(config, el) {
+        	
+            //load widget common features
+        	common.init(config);
+        	
             var map = L.map(el).setView([30, 0], 2);
 
             //select predefined baseMap or use default 

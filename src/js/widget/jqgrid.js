@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], function(data_access, ld) {
+define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget/jqgrid.css'], function(data_access, ld, common) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote"];
+    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote", "css"];
     var preferredSizes = Array({ 'w': 530, 'h': 440});
     
     var count = 0;
@@ -14,7 +14,10 @@ define(['sos-data-access', 'locale-date', 'jqgrid', 'css!widget/jqgrid.css'], fu
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
-
+        	
+            //load widget common features
+        	common.init(config);
+        	
             // Render template
             el.innerHTML = [
                 '<div class="jqgrid widget">',

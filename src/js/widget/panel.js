@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'locale-date'], function(data_access, ld) {
+define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access, ld, common) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "feature", "properties", "footnote"];
+    var inputs = ["title", "service", "offering", "feature", "properties", "footnote", "css"];
     var preferredSizes = Array({ 'w': 400, 'h': 400});
 
     var template = [
@@ -21,6 +21,9 @@ define(['sos-data-access', 'locale-date'], function(data_access, ld) {
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
+        	
+            //load widget common features
+        	common.init(config);        	
 
             // Render template
             el.innerHTML = template;

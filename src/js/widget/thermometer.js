@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], function(data_access, drawing, ld) {
+define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote"];
+    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote", "css"];
     var preferredSizes = Array({ 'w': 300, 'h': 540});
 
     var template = [
@@ -30,7 +30,10 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date'], functi
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
-
+        	
+            //load widget common features
+        	common.init(config);
+        	
             // Render template
             el.innerHTML = template;
             var elem = el.querySelector(".svg-temp");

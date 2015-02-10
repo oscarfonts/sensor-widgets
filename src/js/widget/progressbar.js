@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], function(data_access, drawing, ld) {
+define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval", "footnote"];
+    var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval", "footnote", "css"];
     var preferredSizes = Array({ 'w': 500, 'h': 220});
 
     var template = [
@@ -28,7 +28,10 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date'], functio
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
-
+        	
+            //load widget common features
+        	common.init(config);
+        	
             // Render template
             el.innerHTML = template;
             el.querySelector(".min").innerHTML = config.min_value;

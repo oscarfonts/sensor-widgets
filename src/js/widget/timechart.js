@@ -1,10 +1,10 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tooltip', 'flot-navigate'], function(data_access, ld) {
+define(['sos-data-access', 'locale-date', 'widget-common', 'flot-resize', 'flot-time', 'flot-tooltip', 'flot-navigate'], function(data_access, ld, common) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote"];
+    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote", "css"];
     var preferredSizes = Array({ 'w': 650, 'h': 530});
 
     var template = [
@@ -22,7 +22,10 @@ define(['sos-data-access', 'locale-date', 'flot-resize', 'flot-time', 'flot-tool
         preferredSizes: preferredSizes, 
 
         init: function(config, el) {
-
+        	
+            //load widget common features
+        	common.init(config);
+        	
             // Render template
             el.innerHTML = template;
             el.querySelector("h3").innerHTML = config.title;
