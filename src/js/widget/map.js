@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'leaflet', 'proj4', 'widget/table', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, table) {
+define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, panel) {
     "use strict";
 
     proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
@@ -104,7 +104,7 @@ define(['SOS', 'leaflet', 'proj4', 'widget/table', 'proj4leaflet', 'leaflet-labe
                                             
                                         }
 
-	                                    table.init({
+	                                    panel.init({
 						                    title: feature.properties.name,
 						                    service: config.service,
 						                    offering: offering.identifier,
