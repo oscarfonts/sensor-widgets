@@ -40,14 +40,7 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'proj4leaflet', 'leaflet-labe
         baseMaps: baseMaps,
         preferredSizes: preferredSizes, 
         init: function(config, el) {
-            var map = L.map(el, {
-                dragging: false,
-                touchZoom: false,
-                scrollWheelZoom: false,
-                doubleClickZoom: false,
-                boxZoom: false,
-                zoomControl: false
-            }).setView([30, 0], 2);
+            var map = L.map(el).setView([30, 0], 2);
 
             //select predefined baseMap or use default 
             var selectedBase = baseMaps[config.baseMap];
