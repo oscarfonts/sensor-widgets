@@ -63,7 +63,12 @@ define([], function() {
                 attribution: "Tiles courtesy of Port de Barcelona",
                 format: "image/jpeg"
             },
-            features: []
+            features: [
+                defs.feature("P6"),
+                defs.feature("03"),
+                defs.feature("02"),
+                defs.feature("01")            
+            ]
         },
         'panel': {
             title: "Last observations",
@@ -87,11 +92,11 @@ define([], function() {
             feature: defs.feature("01"),
             property: defs.property("34"),
             min_value: "900",
-            max_value: "1101",
+            max_value: "1100",
             refresh_interval: quick_refresh
         },
         'table': {
-            title: "Data Table - 3 last hours",
+            title: "Data Table - last 3 hours",
             service: defs.service(),
             offering: defs.offering("30m"),
             feature: defs.feature("02"),
@@ -140,10 +145,25 @@ define([], function() {
         }
     };
 
+    String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    }
+
+    var widget_menu = "";
+    var widget_list = "";
+    for (var name in widget_configurations) {
+        widget_menu += '<li><a href="#'+name+'">'+name.capitalize()+'</a></li>';
+        widget_list += ' \
+            <div class="anchor" id="'+name+'"></div> \
+            <h1><i class="flaticon-'+name+'"></i>&nbsp;&nbsp;'+name.capitalize()+'</h1> \
+            <div class="thumbnail widget-container" id="'+name+'-container"></div>';
+    };
+    document.getElementById("widget-menu").innerHTML = widget_menu;
+    document.getElementById("widget-list").innerHTML = widget_list;
+
     var instantiate = function(widget) {
         widget.init(this.config, document.querySelector('#'+this.name+'-container'));
     };
-
     for (var name in widget_configurations) {
         require(['widget/'+name], instantiate.bind({
             name: name,

@@ -12,7 +12,8 @@
 
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/flatly/bootstrap.min.css" rel="stylesheet">
     <link href="../src/fonts/flaticon.css" rel="stylesheet" />
-    <link href="../src/css/style.css" rel="stylesheet">
+    <link href="../src/css/widget.css" rel="stylesheet" />
+    <link href="examples.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -20,21 +21,7 @@
 		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
     <style type="text/css">
-        body {
-            padding-top: 70px;
-            padding-bottom: 30px;
-        }
-        .theme-dropdown .dropdown-menu {
-            position: static;
-            display: block;
-            margin-bottom: 20px;
-        }
-        .theme-showcase > p > .btn {
-            margin: 5px 0;
-        }
-        .widget-container {
-            height: 400px;
-        }
+
     </style>
 </head>
 
@@ -65,18 +52,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#bearing">Bearing</a></li>
-                            <li><a href="#gauge">Gauge</a></li>
-                            <li><a href="#jqgrid">jqGrid</a></li>
-                            <li><a href="#map">Map</a></li>
-                            <li><a href="#panel">Panel</a></li>
-                            <li><a href="#progressbar">Progressbar</a></li>
-                            <li><a href="#table">Table</a></li>
-                            <li><a href="#thermometer">Thermometer</a></li>
-                            <li><a href="#timechart">Timechart</a></li>
-                            <li><a href="#windrose">Windrose</a></li>
-                        </ul>
+                        <ul id="widget-menu" class="dropdown-menu"></ul>
                     </li>
                 </ul>
             </div>
@@ -96,42 +72,12 @@
             </p>
         </div>
 
-        <div id="widget-list">
-            <div class="page-header" id="bearing"><h1><i class="flaticon-bearing"></i>&nbsp;&nbsp;Bearing</h1></div>
-            <div class="thumbnail widget-container" id="bearing-container"></div>
-
-            <div class="page-header" id="gauge"><h1><i class="flaticon-gauge"></i>&nbsp;&nbsp;Gauge</h1></div>
-            <div class="thumbnail widget-container" id="gauge-container"></div>
-
-            <div class="page-header" id="jqgrid"><h1><i class="flaticon-jqgrid"></i>&nbsp;&nbsp;jqGrid</h1></div>
-            <div class="thumbnail widget-container" id="jqgrid-container"></div>
-
-            <div class="page-header" id="map"><h1><i class="flaticon-map"></i>&nbsp;&nbsp;Map</h1></div>
-            <div class="thumbnail widget-container" id="map-container"></div>
-
-            <div class="page-header" id="panel"><h1><i class="flaticon-panel"></i>&nbsp;&nbsp;Panel</h1></div>
-            <div class="thumbnail widget-container" id="panel-container"></div>
-
-            <div class="page-header" id="progressbar"><h1><i class="flaticon-progressbar"></i>&nbsp;&nbsp;Progressbar</h1></div>
-            <div class="thumbnail widget-container" id="progressbar-container"></div>
-
-            <div class="page-header" id="table"><h1><i class="flaticon-table"></i>&nbsp;&nbsp;Table</h1></div>
-            <div class="thumbnail widget-container" id="table-container"></div>
-
-            <div class="page-header" id="thermometer"><h1><i class="flaticon-thermometer"></i>&nbsp;&nbsp;Thermometer</h1></div>
-            <div class="thumbnail widget-container" id="thermometer-container"></div>
-
-            <div class="page-header" id="timechart"><h1><i class="flaticon-timechart"></i>&nbsp;&nbsp;Timechart</h1></div>
-            <div class="thumbnail widget-container" id="timechart-container"></div>
-
-            <div class="page-header" id="windrose"><h1><i class="flaticon-windrose"></i>&nbsp;&nbsp;Windrose</h1></div>
-            <div class="thumbnail widget-container" id="windrose-container"></div>
-        </div>
+        <div id="widget-list"></div>
 
         <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
         <script src="../src/config.js"></script>
-        <script src="../src/lib/requirejs/require.js" data-main="../../examples/index"></script>
+        <script src="../src/lib/requirejs/require.js" data-main="../../examples/examples"></script>
 </body>
 </html>

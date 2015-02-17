@@ -1,22 +1,10 @@
-body {
-    font-family: "Source Sans Pro", helvetica, sans-serif;
-    text-align: center;
-    margin: 0;
-    min-width: 100%;
-}
 html, body {
-    overflow: auto;
-}
-.widget {
+    font-family: "Source Sans Pro", helvetica, sans-serif;
+    height: 100%;
+    min-width: 100%;
     overflow: hidden;
 }
 
-.widget.table {
-    overflow: auto;
-} 
-html, body, .widget {
-    height: 100%;
-}
 #factory {
     background: #666666;
     position: absolute;
@@ -26,6 +14,7 @@ html, body, .widget {
     width: 210px;
     overflow: auto;
 }
+
 #factory h1 {
     font-weight: 100;
     font-size: 26px;
@@ -34,6 +23,7 @@ html, body, .widget {
     margin: 0 20px 20px 20px;
     text-align: left;
 }
+
 #factory-right {
     position: absolute;
     left: 210px;
@@ -43,10 +33,12 @@ html, body, .widget {
     right: 0;
     overflow: hidden;
 }
+
 #factory-right iframe {
     height: 100%;
     width: 100%;
 }
+
 #header {
     margin: 0;
     padding: 15px 10px;
@@ -55,30 +47,35 @@ html, body, .widget {
     font-size: 26px;
     color: #4A4A4A;
 }
+
 #header img {
     margin: 3px 15px;
     float: left;
     height: 52px;
 }
+
 #share {
-	position: absolute;
-	top: 10px;
-	right: 15px;
-	display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: none;
 }
+
 #codediv {
-	font-size: 12px;
-	display: none;	
+    font-size: 12px;
+    display: none;  
 }
+
 #codediv h3 {
-	font-size: 15px;
-	margin-bottom: 0px;
+    font-size: 15px;
+    margin-bottom: 0px;
 }
+
 #codediv h4 {
-	font-style: italic;
-	font-weight: normal;
-	margin-top: 2px;
-	margin-bottom: 3px;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 2px;
+    margin-bottom: 3px;
 }
 
 .codeinput {
@@ -90,6 +87,7 @@ html, body, .widget {
     width: 720px;
     padding: 3px;
 }
+
 .big-button {
     background-color: #8C8C8C;
     border-radius: 3px;
@@ -105,39 +103,11 @@ html, body, .widget {
     display: block;
     text-decoration: none;
 }
+
 .big-button div {
     padding-bottom: 8px;
 }
-.widget svg {
-	max-width: 300px;	
-}
 
-.widget {
-	color: #222;
-	font-family: Helvetica, sans-serif;
-}
-div.widget-data {
-	display: inline-block;
-	vertical-align: top;
-	margin: 10px;
-	max-width: 300px;
-}
-.widget h1 {
-    font-size: 28px;
-}
-.widget h2 {
-	font-size: 18px;
-}
-.widget h3 {
-	font-size: 14px;
-}
 .error {
-	color: red;
-}
-.footnote {
-	margin: 10px;
-	font-size: 11px;
-	font-weight: bold;
-	display: block;
-	color: #222; 
+    color: red;
 }
