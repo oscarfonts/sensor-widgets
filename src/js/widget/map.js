@@ -52,9 +52,9 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'widget-common', 'proj4leafle
             
             //if a WMS is defined it overwrites everything (more specific)
             if(config.baseMapWms && config.baseMapWmsParams) {
-            	// we get the params as a JSON string
-            	// Ex: {"layers":"PDBFAV_20140621","attribution":"Port de BCN","format":"image/jpeg"}
-            	var params = JSON.parse(decodeURI(config.baseMapWmsParams));
+                // we can get the params as a JSON string or object literal
+                // Ex: {"layers":"PDBFAV_20140621","attribution":"Port de BCN","format":"image/jpeg"}
+                var params = (typeof config.baseMapWmsParams == 'string' || config.baseMapWmsParams instanceof String) ? JSON.parse(config.baseMapWmsParams) : config.baseMapWmsParams;
             	selectedBase = L.tileLayer.wms(config.baseMapWms, params);
             }
             
