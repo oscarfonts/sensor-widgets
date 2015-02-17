@@ -10,28 +10,28 @@
 
     <title>Sensor Widgets</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/flatly/bootstrap.min.css" rel="stylesheet">
     <link href="../src/fonts/flaticon.css" rel="stylesheet" />
+    <link href="../src/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+	<![endif]-->
     <style type="text/css">
-    body {
-        padding-top: 70px;
-        padding-bottom: 30px;
-    }
-    .theme-dropdown .dropdown-menu {
-        position: static;
-        display: block;
-        margin-bottom: 20px;
-    }
-    .theme-showcase > p > .btn {
-        margin: 5px 0;
-    }
+        body {
+            padding-top: 70px;
+            padding-bottom: 30px;
+        }
+        .theme-dropdown .dropdown-menu {
+            position: static;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .theme-showcase > p > .btn {
+            margin: 5px 0;
+        }
     </style>
 </head>
 
@@ -63,49 +63,22 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-header">
-                                Instant Observations
-                            </li>
-                            <li>
-                                <a href="#gauge">Gauge</a>
-                            </li>
-                            <li>
-                                <a href="#progressbar">Progressbar</a>
-                            </li>
-                            <li>
-                                <a href="#bearing">Bearing</a>
-                            </li>
-                            <li>
-                                <a href="#thermometer">Thermometer</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">
-                                Multiple Obsrvations
-                            </li>
-                            <li>
-                                <a href="#timechart">Timechart</a>
-                            </li>
-                            <li>
-                                <a href="#jqgrid">jqGrid</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">
-                                Service Description
-                            </li>
-                            <li>
-                                <a href="#map">Map</a>
-                            </li>
+                            <li><a href="#bearing">Bearing</a></li>
+                            <li><a href="#gauge">Gauge</a></li>
+                            <li><a href="#jqgrid">jqGrid</a></li>
+                            <li><a href="#map">Map</a></li>
+                            <li><a href="#progressbar">Progressbar</a></li>
+                            <li><a href="#thermometer">Thermometer</a></li>
+                            <li><a href="#timechart">Timechart</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
-            <!--/.nav-collapse -->
         </div>
     </div>
 
     <div class="container theme-showcase" role="main">
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <img src="../src/img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
             <h1>Sensor Widgets</h1>
@@ -113,68 +86,35 @@
             <h3>100% Javascript. Extensible. MIT licensed.</h3>
             <p style="text-align:right;margin:40px 0 0 0;">
                 <a class="btn btn-primary btn-lg" role="button" href="../src">
-                    <span class="glyphicon glyphicon-cog"></span>
-                    &nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a>
+                    <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a>
             </p>
         </div>
 
-        <div class="page-header" id="gauge">
-            <h1><i class="flaticon-gauge"></i>&nbsp;&nbsp;Gauge</h1>
-        </div>
-        <div class="thumbnail" style="width:250px;height:250px;">
-            <iframe width="100%" height="100%" frameborder="0" id="iframe" src="../src?name=gauge&amp;service=http%3A%2F%2Fsos.fonts.cat%2Fsos%2Fjson&amp;offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&amp;feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P7&amp;property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&amp;refresh_interval=60"></iframe>
-        </div>
-        <div class="page-header" id="progressbar">
-            <h1><i class="flaticon-progressbar"></i>&nbsp;&nbsp;Progressbar</h1>
-        </div>
-        <div class="thumbnail" style="width:512px;height:256px;">
-            <iframe width="100%" height="100%" frameborder="0" src="../src?name=progressbar&service=http%3A%2F%2Fsos.fonts.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2334&min_value=900&max_value=1100&refresh_interval=15"></iframe>
-        </div>
+        <div class="page-header" id="bearing"><h1><i class="flaticon-bearing"></i>&nbsp;&nbsp;Bearing</h1></div>
+        <div class="thumbnail" id="bearing-container" style="width:570px;height:380px;"></div>
 
-        <div class="page-header" id="bearing">
-            <h1><i class="flaticon-bearing"></i>&nbsp;&nbsp;Bearing</h1>
-        </div>
-        <div class="thumbnail" style="width:300px;height:560px;">
-            <iframe width="100%" height="100%" frameborder="0" src="../src?name=bearing&service=http%3A%2F%2Fsos.fonts.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2331&refresh_interval=15"></iframe>
-        </div>
+        <div class="page-header" id="gauge"><h1><i class="flaticon-gauge"></i>&nbsp;&nbsp;Gauge</h1></div>
+        <div class="thumbnail" id="gauge-container" style="width:300px;height:300px;"></div>
 
-        <div class="page-header" id="thermometer">
-            <h1><i class="flaticon-thermometer"></i>&nbsp;&nbsp;Thermometer</h1>
-        </div>
-        <div class="thumbnail" style="width:250px;height:600px;">
-            <iframe width="100%" height="100%" frameborder="0" src="../src?name=thermometer&service=http%3A%2F%2Fsos.fonts.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&feature=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P6&property=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2332&refresh_interval=15"></iframe>
-        </div>
+        <div class="page-header" id="jqgrid"><h1><i class="flaticon-jqgrid"></i>&nbsp;&nbsp;jqGrid</h1></div>
+        <div class="thumbnail" id="jqgrid-container" style="height:425px;"></div>
 
-        <div class="page-header" id="timechart">
-            <h1><i class="flaticon-timechart"></i>&nbsp;&nbsp;Timechart</h1>
-        </div>
-        <div class="thumbnail" style="height:380px;">
-            <iframe width="100%" height="100%" frameborder="0" src="../src?name=timechart&title=Temperatures&service=http%3A%2F%2Fsos.fonts.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2330m&features=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%23P6%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2303%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301%22%5D&properties=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2332%22%5D&time_start=2012-06-11T00%3A00%3A00%2B00%3A00&time_end=2012-06-12T00%3A00%3A00%2B00%3A00"></iframe>
-        </div>
+        <div class="page-header" id="map"><h1><i class="flaticon-map"></i>&nbsp;&nbsp;Map</h1></div>
+        <div class="thumbnail" id="map-container" style="height:400px;"></div>
 
-        <div class="page-header" id="jqgrid">
-            <h1><i class="flaticon-jqgrid"></i>&nbsp;&nbsp;jqGrid</h1>
-        </div>
-        <div class="thumbnail" style="height:425px;">
-            <iframe width="100%" height="100%" frameborder="0" src="../src?name=jqgrid&title=jqGrid%20Example&service=http%3A%2F%2Fsos.fonts.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%2330m&features=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2302%22%2C%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Ffeatures%2301%22%5D&properties=%5B%22http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fproperties%2334%22%5D&time_start=2012-06-11T00%3A00%3A00%2B00%3A00&time_end=2012-06-12T00%3A00%3A00%2B00%3A00"></iframe>
-        </div>
+        <div class="page-header" id="progressbar"><h1><i class="flaticon-progressbar"></i>&nbsp;&nbsp;Progressbar</h1></div>
+        <div class="thumbnail" id="progressbar-container" style="width:500px;height:220px;"></div>
 
-        <div class="page-header" id="map">
-            <h1><i class="flaticon-map"></i>&nbsp;&nbsp;Map</h1>
-        </div>
-        
-        <div class="thumbnail" style="height:400px;">
-            <!--  attacking sensors.portdebarcelona.cat -->
-            <iframe width="100%" height="100%" frameborder="0" src="../src?name=map&service=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&maxInitialZoom=17&baseMapWms=http%3A%2F%2Fplanolws.portdebarcelona.cat%2Fmapproxy%2Fservice&baseMapWmsParams=%7B%22layers%22%3A%22PDBFAV_20140621%22%2C%22attribution%22%3A%22Tiles%20courtesy%20of%20Port%20de%20Barcelona%22%2C%22format%22%3A%22image%2Fjpeg%22%7D&features=[]"></iframe>
-            <!--  attacking sos.fonts.cat -->
-            <!-- iframe width="100%" height="100%" frameborder="0" src="../src?name=map&service=http%3A%2F%2Fsos.fonts.cat%2Fsos%2Fjson&offering=http%3A%2F%2Fsensors.portdebarcelona.cat%2Fdef%2Fweather%2Fofferings%231m&maxInitialZoom=17&baseMapWms=http%3A%2F%2Fplanolws.portdebarcelona.cat%2Fmapproxy%2Fservice&baseMapWmsParams=%7B%22layers%22%3A%22PDBFAV_20140621%22%2C%22attribution%22%3A%22Tiles%20courtesy%20of%20me%22%2C%22format%22%3A%22image%2Fjpeg%22%7D&features=[]"></iframe -->
-        </div>
+        <div class="page-header" id="thermometer"><h1><i class="flaticon-thermometer"></i>&nbsp;&nbsp;Thermometer</h1></div>
+        <div class="thumbnail" id="thermometer-container" style="width:250px;height:600px;"></div>
 
-        <!-- Bootstrap core JavaScript
-		================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
+        <div class="page-header" id="timechart"><h1><i class="flaticon-timechart"></i>&nbsp;&nbsp;Timechart</h1></div>
+        <div class="thumbnail" id="timechart-container" style="height:380px;"></div>
+
         <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-</body>
 
+        <script src="../src/config.js"></script>
+        <script src="../src/lib/requirejs/require.js" data-main="../../examples/index"></script>
+</body>
 </html>
