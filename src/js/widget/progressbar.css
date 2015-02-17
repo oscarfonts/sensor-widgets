@@ -1,8 +1,14 @@
 .progressbar.widget .progress {
+    height: 85px;
     width: 90%;
     margin: 0 auto;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.progressbar.widget .background-bar {
     text-align: left;
-    margin-bottom: 50px;
+    margin-top: 30px;
     background: #e9e5e2;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#e1ddd9), to(#e9e5e2));
     background-image: -webkit-linear-gradient(top, #e1ddd9, #e9e5e2);
@@ -17,8 +23,9 @@
     box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;
 }
 .progressbar.widget .bar {
+    width: 10px;
     height: 18px;
-    /*position: absolute;*/
+    position: absolute;
     border-radius: 10px;
     -moz-box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;
     -webkit-box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;
@@ -26,13 +33,13 @@
 }
 .progressbar.widget .min {
     position: relative;
-    top: -25px;
+    top: -20px;
     float: left;
     width: 0;
 }
 .progressbar.widget .max {
     position: relative;
-    top: -25px;
+    top: -20px;
     float: right;
 }
 .progressbar.widget .value {
@@ -41,7 +48,6 @@
     text-align: right;
 }
 .progressbar.widget .pink {
-    width: 100%;
     background-color: #f674a4;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#f674a4), to(#e06995));
     background-image: -webkit-linear-gradient(top, #f674a4, #e06995);
@@ -51,7 +57,6 @@
     background-image: linear-gradient(top, #f674a4, #e06995);
 }
 .progressbar.widget .yellow {
-    width: 90%;
     background-color: #f0bb4b;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#f0bb4b), to(#d9aa44));
     background-image: -webkit-linear-gradient(top, #f0bb4b, #d9aa44);
@@ -61,7 +66,6 @@
     background-image: linear-gradient(top, #f0bb4b, #d9aa44);
 }
 .progressbar.widget .green {
-    width: 65%;
     background-color: #a1ce5b;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#a1ce5b), to(#91ba52));
     background-image: -webkit-linear-gradient(top, #a1ce5b, #91ba52);
@@ -71,7 +75,6 @@
     background-image: linear-gradient(top, #a1ce5b, #91ba52);
 }
 .progressbar.widget .blue {
-    width: 20%;
     background-color: #66b3cc;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#66b3cc), to(#5da3ba));
     background-image: -webkit-linear-gradient(top, #66b3cc, #5da3ba);

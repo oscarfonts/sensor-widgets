@@ -12,11 +12,13 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
             '<h1 class="feature"></h1>',
             '<h3 class="property"></h3>',
             '<div class="progress">',
-                '<span class="blue bar">',
-                    '<div class="value"></div>',
-                '</span>',
                 '<div class="min">0</div>',
                 '<div class="max">100</div>',
+                '<div class="background-bar">',
+                    '<span class="green bar">',
+                        '<div class="value"></div>',
+                    '</span>',
+                '</div>',
             '</div>',
             '<h3 class="date"></h3>',
             '<div><span class="footnote"></span></div>',
@@ -52,8 +54,11 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
                 el.querySelector(".feature").innerHTML = measure.feature;
                 el.querySelector(".property").innerHTML = measure.property;
 
-                var width = 100 * (measure.value - config.min_value) / (config.max_value - config.min_value);
-                el.querySelector(".bar").style = "width: " + width + "%";
+                var fullspan = el.querySelector(".background-bar").offsetWidth;
+                var proportion = (measure.value - config.min_value) / (config.max_value - config.min_value);
+                var width = fullspan * proportion;
+
+                el.querySelector(".bar").style.width = width + "px";
             }
         }
     };
