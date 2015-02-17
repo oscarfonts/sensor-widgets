@@ -16,9 +16,11 @@ define([], function() {
     };
 
     var now = new Date();
+    var three_hours_ago = new Date(now.getTime() - 1000 * 60 * 60 * 3);
     var a_day_ago = new Date(now.getTime() - 1000 * 60 * 60 * 24);
     
     now = now.toISOString().substring(0, 19) + "Z";
+    three_hours_ago = three_hours_ago.toISOString().substring(0, 19) + "Z";
     a_day_ago = a_day_ago.toISOString().substring(0, 19) + "Z";
 
     require(['widget/bearing'], function(widget) {
@@ -71,6 +73,25 @@ define([], function() {
         }, document.querySelector('#map-container'));
     });
 
+    require(['widget/panel'], function(widget) {
+        widget.init({
+            title: "Last observations",
+            service: defs.service(),
+            offering: defs.offering("1m"),
+            feature: defs.feature("02"),
+            properties: [
+                defs.property("30"),
+                defs.property("31"),
+                defs.property("32"),
+                defs.property("33"),
+                defs.property("34"),
+                defs.property("35"),
+                defs.property("36")
+            ],
+            refresh_interval: 15
+        }, document.querySelector("#panel-container"));
+    });
+
     require(['widget/progressbar'], function(widget) {
         widget.init({
             service: defs.service(),
@@ -81,6 +102,25 @@ define([], function() {
             max_value: "1101",
             refresh_interval: 15
         }, document.querySelector("#progressbar-container"));
+    });
+
+    require(['widget/table'], function(widget) {
+        widget.init({
+            title: "Data Table - 3 last hours",
+            service: defs.service(),
+            offering: defs.offering("30m"),
+            feature: defs.feature("02"),
+            properties: [
+                defs.property("30"),
+                defs.property("31"),
+                defs.property("32"),
+                defs.property("33"),
+                defs.property("34"),
+                defs.property("36")
+            ],
+            time_start: three_hours_ago,
+            time_end: now
+        }, document.querySelector("#table-container"));
     });
 
     require(['widget/thermometer'], function(widget) {
@@ -108,6 +148,20 @@ define([], function() {
             time_start: a_day_ago,
             time_end: now
         }, document.querySelector('#timechart-container'));
+    });
+
+    require(['widget/windrose'], function(widget) {
+        widget.init({
+            title: "Sirena Windrose",
+            subtitle: "Last 3 hours of wind observations",
+            service: defs.service(),
+            offering: defs.offering("1m"),
+            feature: defs.feature("02"),
+            properties: [defs.property("30"), defs.property("31")],
+            time_start: three_hours_ago,
+            time_end: now,
+            refresh_interval: 120
+        }, document.querySelector("#windrose-container"));
     });
 
 });
