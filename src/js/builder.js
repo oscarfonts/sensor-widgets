@@ -67,14 +67,11 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         
         contents += "<div id='factoryError' class='error'></div>";
         
-        //provisional
-        var demo = 'require(["widget/bearing"], function(bearing) {\nbearing.init({\nservice: defs.service(),\noffering: defs.offering("1m"),\nfeature: defs.feature("02"),\nproperty: defs.property("31"),\nrefresh_interval: 15\n}, document.querySelector(".bearing"));';
-        
         //modal div
         contents += '<div id="codediv">' + 
         	'<h3>Get the link</h3><h4>Get the link and send it or post it</h4><textarea id="linkinput" class="codeinput" readonly="true"></textarea><br/>' +
         	'<h3>Embed it</h3><h4>Resize the widget, copy this HTML code and paste it on your webpage</h4><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
-        	'<h3>Use Javascript</h3><h4>Add the widget to your app using Javascript</h4><textarea id="jsinput" class="codeinput" readonly="true">' + demo + '</textarea></div>';
+        	'<h3>Use Javascript</h3><h4>Add the widget to your app using Javascript</h4><textarea id="jsinput" class="codeinput" readonly="true"></textarea></div>';
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
         	'</div>' + '<div id="preview"><h1 id="header">' +
@@ -283,8 +280,8 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
 
     function loadWidget() {
         var widget = $('[name="build"]').data();
-        var params = [];
-        params.push("name=" + widget.name);
+        var paramsArray = [];
+        paramsArray['name'] = widget.name;
         var getId = function() {
             return this.id;
         };
@@ -309,11 +306,15 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                     value = $("#" + name).val();
             }
             if (value) {
-                params.push(name + "=" + encodeURIComponent(value));
+            	paramsArray[name] = value;
             }
         }
         
-        var url = "?" + params.join("&");
+        var url = "";
+        for (var key in paramsArray) {
+        	url += url ? "&" : "?";
+        	url += key + "=" + encodeURIComponent(paramsArray[key]);
+        }
         var absoluteUrl = "http://" + window.location.hostname;
         if(window.location.port) absoluteUrl += ":" + window.location.port;
         absoluteUrl += window.location.pathname + url;
@@ -337,6 +338,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         //refresh code snippets for the first time
         $("#embedinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height()));
         $("#linkinput").val(absoluteUrl);
+        $("#jsinput").val(writeJSCode(paramsArray));
         $(".codeinput").on("click", function() {this.focus();this.select();});
         var opt = {
             autoOpen: false,
@@ -351,6 +353,19 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     
     function writeIFrameTag(url, width, height) {
     	return '<iframe id="iframe" src="' + url + '" width="'+ width + '" height="'+ height + '" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
+    }
+    
+    function writeJSCode(paramsArray) {
+    	var name = paramsArray['name'];
+    	var code = '';
+    	for (var key in paramsArray) {
+        	code += code ? ',\n' : '';
+        	var value = paramsArray[key];
+        	if(typeof(value) == "string") value = '"' + value + '"';
+        	code += '\t' + key + ': ' + value;
+        }
+    	code = 'require(["widget/' + name + '"], function(' + name + ') {\n' + code + '\n}, document.querySelector(".' + name + '"));';
+    	return code;
     }
 
     function capitalize(string) {
