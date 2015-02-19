@@ -9,6 +9,14 @@ body {
     margin-bottom: 20px;
 }
 
+pre {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+  font-size: 11px;
+  color: black;
+}
+
 .theme-showcase > p > .btn {
     margin: 5px 0;
 }
@@ -21,7 +29,7 @@ body {
 }
 
 .widget-container {
-    height: 435px;
+    height: 450px;
 }
 
 /* Override progressbar label positioning */

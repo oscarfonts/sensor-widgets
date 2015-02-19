@@ -36,15 +36,15 @@ define([], function() {
         },
         'gauge': {
             service: defs.service(),
-            offering: defs.offering("1m"),
+            offering: defs.offering("10m"),
             feature: defs.feature("02"),
             property: defs.property("33"),
-            refresh_interval: quick_refresh
+            refresh_interval: slow_refresh
         },
         'jqgrid': {
-            title: "jqGrid Example",
             service: defs.service(),
             offering: defs.offering("30m"),
+            title: "jqGrid Example",
             features: [
                 defs.feature("02"),
                 defs.feature("01")
@@ -55,14 +55,7 @@ define([], function() {
         },
         'map': {
             service: defs.service(),
-            offering: defs.offering("1m"),
-            maxInitialZoom: 17,
-            baseMapWms: "http://planolws.portdebarcelona.cat/mapproxy/service",
-            baseMapWmsParams: {
-                layers: "PDBFAV_20140621",
-                attribution: "Tiles courtesy of Port de Barcelona",
-                format: "image/jpeg"
-            },
+            offering: defs.offering("30m"),
             features: [
                 defs.feature("P6"),
                 defs.feature("03"),
@@ -88,12 +81,12 @@ define([], function() {
         },
         'progressbar': {
             service: defs.service(),
-            offering: defs.offering("1m"),
+            offering: defs.offering("10m"),
             feature: defs.feature("01"),
             property: defs.property("34"),
             min_value: "900",
             max_value: "1100",
-            refresh_interval: quick_refresh
+            refresh_interval: slow_refresh
         },
         'table': {
             title: "Data Table - last 3 hours",
@@ -113,18 +106,16 @@ define([], function() {
         },
         'thermometer': {
             service: defs.service(),
-            offering: defs.offering("1m"),
+            offering: defs.offering("10m"),
             feature: defs.feature("P6"),
             property: defs.property("32"),
-            refresh_interval: quick_refresh
+            refresh_interval: slow_refresh
         },
         'timechart': {
-            title: "Temperatures",
             service: defs.service(),
             offering: defs.offering("30m"),
+            title: "Temperatures",
             features: [
-                defs.feature("P6"),
-                defs.feature("03"),
                 defs.feature("02"),
                 defs.feature("01")
             ],
@@ -149,6 +140,10 @@ define([], function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }
 
+    String.prototype.indent = function(spaces) {
+        return this.replace(/^(?=.)/gm, new Array(spaces + 1).join(' '));
+    }
+
     var widget_menu = "";
     var widget_list = "";
     for (var name in widget_configurations) {
@@ -156,19 +151,35 @@ define([], function() {
         widget_list += ' \
             <div class="anchor" id="'+name+'"></div> \
             <h1><i class="flaticon-'+name+'"></i>&nbsp;&nbsp;'+name.capitalize()+'</h1> \
-            <div class="thumbnail widget-container" id="'+name+'-container"></div>';
+            <div class="row"> \
+                <div class="col-md-6"> \
+                    <div class="thumbnail widget-container" id="'+name+'-container"></div> \
+                </div> \
+                <div class="col-md-6"> \
+                    <div id="'+name+'-inputs"></div> \
+                    <pre id="'+name+'-code"></pre> \
+                </div> \
+            </div>';
     };
     document.getElementById("widget-menu").innerHTML = widget_menu;
     document.getElementById("widget-list").innerHTML = widget_list;
 
     var instantiate = function(widget) {
-        widget.init(this.config, document.querySelector('#'+this.name+'-container'));
+        widget.init(this.config, document.getElementById(this.name+'-container'));
+        document.getElementById(this.name+'-inputs').innerHTML = "Widget Inputs:<ul><li>Mandatory: " + widget.inputs.join(", ") + "<li>Optional: " + widget.optional_inputs.join(", ") + "</ul>";
     };
     for (var name in widget_configurations) {
+
+        widget_configurations[name].footnote="A sample footnote for "+name+" widget";
+
         require(['widget/'+name], instantiate.bind({
             name: name,
             config: widget_configurations[name],
         }));
+
+        var code_sample = name+".init(" + JSON.stringify(widget_configurations[name], null, 2) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
+        code_sample = "require(['widget/"+name+"'], function("+name+") {\r\n" + code_sample.indent(2) + "});"
+        document.getElementById(name+'-code').innerHTML = code_sample;
     };
 
 });
