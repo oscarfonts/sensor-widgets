@@ -4,20 +4,14 @@
 define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget/jqgrid.css'], function(data_access, ld, common) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote", "css"];
-    var preferredSizes = Array({ 'w': 530, 'h': 440});
-    
     var count = 0;
 
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["title", "features", "properties", "time_start", "time_end"]),
+        optional_inputs: common.optional_inputs,
+        preferredSizes: [{w: 530, h: 440}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);
-        	
             // Render template
             el.innerHTML = [
                 '<div class="jqgrid widget">',
@@ -28,7 +22,9 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget
                 '</div>'
             ].join('');
             el.querySelector(".title").innerHTML = config.title;
-            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
+
+            //load widget common features
+            common.init(config, el);
 
             // Setup SOS data access
             var data = data_access(config, redraw);

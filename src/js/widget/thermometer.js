@@ -4,9 +4,6 @@
 define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote", "css"];
-    var preferredSizes = Array({ 'w': 300, 'h': 540});
-
     var template = [
         '<div class="thermometer widget">',
             '<h1 class="feature"></h1>',
@@ -26,19 +23,18 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget
     var t_max = 56;
 
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["feature", "property", "refresh_interval"]),
+        optional_inputs: common.optional_inputs,
+        preferredSizes: [{w: 300, h: 540}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);
-        	
             // Render template
             el.innerHTML = template;
             var elem = el.querySelector(".svg-temp");
-            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
             var clip = (elem.firstElementChild||elem.firstChild);
+
+            //load widget common features
+            common.init(config, el);
 
             // Setup SOS data access
             var data = data_access(config, redraw);

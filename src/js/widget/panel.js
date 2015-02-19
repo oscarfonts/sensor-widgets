@@ -4,9 +4,6 @@
 define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access, ld, common) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "feature", "properties", "footnote", "css"];
-    var preferredSizes = Array({ 'w': 400, 'h': 400});
-
     var template = [
         '<div class="panel widget">',
             '<h2></h2>',
@@ -17,20 +14,19 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
     ].join('');
 
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["title", "feature", "properties"]),
+        optional_inputs: common.optional_inputs,
+        preferredSizes: [{w: 400, h: 400}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);        	
-
             // Render template
             el.innerHTML = template;
             el.querySelector("h2").innerHTML = config.title;
-            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
             var subtitle = el.querySelector("h3");
             var panel = el.querySelector("dl");
+
+            //load widget common features
+            common.init(config, el);
 
             // Setup SOS data access
             var data = data_access(config, redraw);

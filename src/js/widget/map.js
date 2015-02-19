@@ -5,46 +5,50 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'widget-common', 'proj4leafle
     "use strict";
 
     proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
-
-    var inputs = ["service", "offering", "features", "maxInitialZoom", "baseMap", "footnote", "css"];
-    var preferredSizes = Array({ 'w': 550, 'h': 400});
     
-    var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-        subdomains: '1234',
-        minZoom: 2,
-        maxZoom: 14,
-        attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
-    });
-    
-    var portBase = L.tileLayer.wms('http://planolws.portdebarcelona.cat/mapproxy/service', {
-    	layers:"PDBFAV_20140621",
-    	format:"image/jpeg",
-    	attribution: 'Tiles courtesy of Port de Barcelona'
-    });
-    
-    var esriBase = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    });
-    
-    var acetateBase = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
-    	attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
-    	subdomains: '0123',
-    	minZoom: 2,
-    	maxZoom: 18
-    });
-    
-    var baseMaps = {"osm": osmBase, "port-bcn": portBase, "esri-sat": esriBase, "acetate": acetateBase};
-
     return {
-        inputs: inputs,
-        baseMaps: baseMaps,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["features"]),
+        optional_inputs: common.optional_inputs.concat(["baseMap", "baseMapWms", "baseMapWmsParams", "maxInitialZoom"]),
+        preferredSizes: [{w: 550, h: 400}],
+
         init: function(config, el) {
+
+            // TODO: Don't instantiate these layers unless they are used, and never instantiate them outside "init", or will be shared across map instances (dealing to errors)
+            var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+                subdomains: '1234',
+                minZoom: 2,
+                maxZoom: 14,
+                attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
+            });
+
+            var portBase = L.tileLayer.wms('http://planolws.portdebarcelona.cat/mapproxy/service', {
+                layers:"PDBFAV_20140621",
+                format:"image/jpeg",
+                attribution: 'Tiles courtesy of Port de Barcelona'
+            });
+
+            var esriBase = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+
+            var acetateBase = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
+                attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
+                subdomains: '0123',
+                minZoom: 2,
+                maxZoom: 18
+            });
+
+            var baseMaps = {"osm": osmBase, "port-bcn": portBase, "esri-sat": esriBase, "acetate": acetateBase};
+
+            // Main div
+            var main_div = document.createElement("div");
+            main_div.className = "map widget";
+            el.appendChild(main_div);
         	
             //load widget common features
-        	common.init(config);
+            common.init(config, el);
         	
-            var map = L.map(el).setView([30, 0], 2);
+            var map = L.map(main_div).setView([30, 0], 2);
 
             //select predefined baseMap or use default 
             var selectedBase = baseMaps[config.baseMap];
@@ -57,11 +61,14 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'widget-common', 'proj4leafle
                 var params = (typeof config.baseMapWmsParams == 'string' || config.baseMapWmsParams instanceof String) ? JSON.parse(config.baseMapWmsParams) : config.baseMapWmsParams;
             	selectedBase = L.tileLayer.wms(config.baseMapWms, params);
             }
+
+            // Add footnote to attribution string
+            if (config.footnote) {
+                selectedBase.options.attribution += " | <b>" + config.footnote + "</b>";
+            }
             
             selectedBase.addTo(map);
             
-            if(config.footnote !== undefined) map.attributionControl.addAttribution("<br>"+config.footnote);
-
             SOS.setUrl(config.service);
             read();
 

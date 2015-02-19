@@ -3,10 +3,6 @@
  */
 define(function() {
     "use strict";
-
-    // by default, all params are MANDATORY (the widget doesn't load!)
-    // define here the non-mandatory params (same for all widgets)
-    var nonMandatory = ["footnote", "subtitle", "maxInitialZoom", "baseMap", "css"];
     
     function init(config, renderTo) {
         if (!renderTo) {
@@ -89,7 +85,7 @@ define(function() {
         
         for (var i in inputs) {
             var input = inputs[i];
-            if ((nonMandatory.indexOf(input)) == -1 && (!config.hasOwnProperty(input))) {
+            if (!config.hasOwnProperty(input)) {
                 missing.push(input);
             }
         }

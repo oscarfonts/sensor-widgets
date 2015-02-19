@@ -4,9 +4,6 @@
 define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "min_value", "max_value", "refresh_interval", "footnote", "css"];
-    var preferredSizes = Array({ 'w': 500, 'h': 220});
-
     var template = [
         '<div class="progressbar widget">',
             '<h1 class="feature"></h1>',
@@ -26,20 +23,18 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
     ].join('');
 
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["feature", "property", "min_value", "max_value", "refresh_interval"]),
+        optional_inputs: common.optional_inputs,
+        preferredSizes: [{w: 500, h: 220}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);
-        	
             // Render template
             el.innerHTML = template;
             el.querySelector(".min").innerHTML = config.min_value;
             el.querySelector(".max").innerHTML = config.max_value;
-            
-            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
+
+            //load widget common features
+            common.init(config, el);
 
             // Setup SOS data access
             var data = data_access(config, redraw);
@@ -50,7 +45,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
             function redraw(data) {
                 var measure = data[0];
                 el.querySelector(".date").innerHTML = ld.display(measure.time);
-                el.querySelector(".value").innerHTML = measure.value;
+                el.querySelector(".value").innerHTML = measure.value + " " + measure.uom;
                 el.querySelector(".feature").innerHTML = measure.feature;
                 el.querySelector(".property").innerHTML = measure.property;
 

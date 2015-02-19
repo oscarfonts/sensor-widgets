@@ -4,21 +4,33 @@
 define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_access, common) {
     "use strict";
 
-    var inputs = ["title", "subtitle", "service", "offering", "feature", "properties", "refresh_interval", "time_start", "time_end", "footnote", "css"];
     var labels = ["&gt; 10 m/s", "8-10 m/s", "6-8 m/s", "4-6 m/s", "2-4 m/s", "0-2 m/s"];
-    var preferredSizes = Array({ 'w': 620, 'h': 450});
 
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["title", "feature", "properties", "refresh_interval", "time_start", "time_end"]),
+        optional_inputs: common.optional_inputs.concat(["subtitle"]),
+        preferredSizes: [{w: 620, h: 450}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);
-        	
+            // Main div
+            var main_div = document.createElement("div");
+            main_div.className = "windrose widget";
+
+            // Chart div
             var chart = document.createElement("div"); 
-    		el.appendChild(chart);
+            main_div.appendChild(chart);
+
+            // Add footnote element
+            var footnote_div = document.createElement("div");
+            var footnote_span = document.createElement("span");
+            footnote_span.className = "footnote";
+            footnote_div.appendChild(footnote_span);
+            main_div.appendChild(footnote_div);
+
+            el.appendChild(main_div);
+
+            //load widget common features
+            common.init(config, el);
         	
             // Setup SOS data access
             var data = data_access(config, redraw);
@@ -132,12 +144,6 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
                     series: series
                 });
             }
-            var div = document.createElement("div");
-            var span = document.createElement("span");
-    		if(config.footnote != undefined) span.innerHTML = config.footnote;
-    		span.className = "footnote";
-    		div.appendChild(span);
-    		el.appendChild(div);
         }
     };
 });

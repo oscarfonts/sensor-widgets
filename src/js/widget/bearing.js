@@ -4,10 +4,6 @@
 define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote", "css"];
-    
-    var preferredSizes = Array({ 'w': 570, 'h': 380}, {'w': 280, 'h': 540 });
-
     var template = [
         '<div class="bearing widget">',
             '<h1 class="feature"></h1>',
@@ -20,28 +16,26 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
             '</div>',
             '<div><span class="footnote"></span></div>',
         '</div>'].join('');
-    
+
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["feature", "property", "refresh_interval"]),
+        optional_inputs: common.optional_inputs,
+        preferredSizes: [{w: 570, h: 380}, {w: 280, h: 540}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);
-        	
-        	// Render template
+            // Render template
             el.innerHTML = template;
             var arrow = el.querySelector(".arrow");
             var shadow = el.querySelector(".shadow");
             arrow.style.visibility = shadow.style.visibility = 'hidden';
-            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
+
+            //load widget common features
+            common.init(config, el);
 
             // Setup SOS data access
             var data = data_access(config, redraw);
             setInterval(data.read, config.refresh_interval * 1000);
             data.read();
-
 
             // Update view
             function redraw(data) {
@@ -56,6 +50,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
                 shadow.setAttribute("transform", "translate(5, 5) rotate(" + measure.value + ", 256, 256)");
                 arrow.style.visibility = shadow.style.visibility = 'visible';
             }
+
         }
     };
 });

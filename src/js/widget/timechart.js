@@ -4,9 +4,6 @@
 define(['sos-data-access', 'locale-date', 'widget-common', 'flot-resize', 'flot-time', 'flot-tooltip', 'flot-navigate'], function(data_access, ld, common) {
     "use strict";
 
-    var inputs = ["title", "service", "offering", "features", "properties", "time_start", "time_end", "footnote", "css"];
-    var preferredSizes = Array({ 'w': 650, 'h': 530});
-
     var template = [
         '<div class="timechart widget">',
             '<h3 style="width:100%"></h3>',
@@ -16,21 +13,19 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'flot-resize', 'flot-
         '</div>'
     ].join('');
 
-
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["title", "features", "properties", "time_start", "time_end"]),
+        optional_inputs: common.optional_inputs,
+        preferredSizes: [{w: 650, h: 530}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);
-        	
             // Render template
             el.innerHTML = template;
             el.querySelector("h3").innerHTML = config.title;
-            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
             var graph = el.querySelector(".graph");
+
+            //load widget common features
+            common.init(config, el);
 
             // Setup SOS data access
             var data = data_access(config, redraw);

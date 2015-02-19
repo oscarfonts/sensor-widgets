@@ -4,10 +4,6 @@
 define(['sos-data-access', 'text!widget/gauge.svg', 'widget-common'], function(data_access, drawing, common) {
     "use strict";
 
-    var inputs = ["service", "offering", "feature", "property", "refresh_interval", "footnote", "css"];
-    
-    var preferredSizes = Array({ 'w': 300, 'h': 300});
-
     var template = [
         '<div class="gauge widget">',
             drawing,
@@ -15,20 +11,19 @@ define(['sos-data-access', 'text!widget/gauge.svg', 'widget-common'], function(d
         '</div>'].join('');
 
     return {
-        inputs: inputs,
-        preferredSizes: preferredSizes, 
+        inputs: common.inputs.concat(["feature", "property", "refresh_interval"]),
+        optional_inputs: common.optional_inputs,
+        preferredSizes: [{w: 300, h: 300}],
 
         init: function(config, el) {
-        	
-            //load widget common features
-        	common.init(config);        	
-
             // Render template
             el.innerHTML = template;
             var arrow = el.querySelector(".arrow");
             var title = el.querySelector(".title");
             var value = el.querySelector(".value");
-            if(config.footnote != undefined) el.querySelector(".footnote").innerHTML = config.footnote;
+
+            //load widget common features
+            common.init(config, el);
 
             // Setup SOS data access
             var data = data_access(config, redraw);
@@ -42,6 +37,7 @@ define(['sos-data-access', 'text!widget/gauge.svg', 'widget-common'], function(d
                 value.innerHTML = measure.value + " %";
                 arrow.setAttribute("transform", "rotate(" + 2.7 * measure.value + ", 365.396, 495)");
             }
+
         }
     };
 });
