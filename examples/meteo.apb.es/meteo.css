@@ -1,3 +1,5 @@
+@import url("../../src/css/widget.css");
+
 .section {
     padding-top: 35px;
 }
@@ -101,7 +103,7 @@
     padding: 4px;
 }
 /* specific CSS for thermometer in sirena */
-.thermometer > .widget-data {
+.thermometer .data {
 	display: inline-flex;
 	vertical-align: top;
 	margin: 5px;
@@ -109,5 +111,5 @@
 	max-width: 60px;
 }
 .thermometer h2 {
-	font-size: 15px;
+	font-size: 12px;
 }
