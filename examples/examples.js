@@ -50,17 +50,20 @@ define([], function() {
                 defs.feature("01")
             ],
             properties: [defs.property("32")],
-            time_start: a_day_ago,
+            time_start: three_hours_ago,
             time_end: now
         },
         'map': {
             service: defs.service(),
             offering: defs.offering("30m"),
             features: [
-                defs.feature("P6"),
-                defs.feature("03"),
+                defs.feature("01"),
                 defs.feature("02"),
-                defs.feature("01")            
+                defs.feature("03"),
+                defs.feature("P4"),
+                defs.feature("10"),
+                defs.feature("P5"),
+                defs.feature("P6")
             ]
         },
         'panel': {
