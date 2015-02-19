@@ -23,10 +23,6 @@ body .widget {
     font-size: 14px;
 }
 
-.widget svg {
-    max-width: 300px;
-}
-
 .widget .footnote {
     margin: 10px;
     font-size: 11px;
@@ -42,10 +38,20 @@ body .widget {
     max-width: 300px;
 }
 
-.widget.table {
-    overflow: auto;
+.widget.bearing svg,
+.widget.gauge svg {
+    max-width: 300px;
 }
 
 .widget.panel dl {
     text-align: left;
+}
+
+.widget.table {
+    overflow: auto;
+    font-size: 12px;
+}
+
+.widget.windrose {
+    width: 100%;
 }
