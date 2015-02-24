@@ -4,8 +4,6 @@
 define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker', 'css!builder.css'], function(SOS, $, moment, errorhandler) {
     "use strict";
 
-    var inputs = ["name"];
-
     function draw(widget, config, renderTo) {
     	var contents = '<h1>' + capitalize(config.name) + ' Widget<br/><small>Builder</small></h1>';
 
@@ -312,7 +310,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         
         var url = "";
         for (var key in paramsArray) {
-        	url += url ? "&" : "?";
+        	url += url ? "&" : "widget.html?";
         	url += key + "=" + encodeURIComponent(paramsArray[key]);
         }
         var absoluteUrl = "http://" + window.location.hostname;
@@ -375,14 +373,8 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     }
 
     return {
-        inputs: inputs,
-        init: function(config, renderTo) {
-            // TODO: Refactor. This may live better in factory.
-            require(["widget/" + config.name], function(widget) {
-            	draw(widget, config, renderTo);
-            }, function(error) {
-            	errorhandler.throwError("Widget '" + config.name + "' cannot be found.");
-            });
+        init: function(widget, config, renderTo) {
+        	draw(widget, config, renderTo);
         }
     };
 
