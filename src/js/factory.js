@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(function() {
+define(["builder"], function(builder) {
     "use strict";
     
     function init(renderTo) {
@@ -15,7 +15,7 @@ define(function() {
 
         if (config.name) {
         	//Open builder of the selected widget
-            builder(config, renderTo);
+            builder.init(config, renderTo);
         } else {
             //No widget name specified. Showing chooser
             chooser(renderTo);
@@ -45,19 +45,10 @@ define(function() {
 
         function clicked(e) {
             var name = "";
-            builder({
+            builder.init({
                 name: name
             }, renderTo);
         }
-    }
-
-    function builder(config, renderTo) {
-        require(["builder", "widget/" + config.name], function(builder, widget) {
-            	builder.init(widget, config, renderTo);
-            }, function(error) {
-            	//TODO: error handling
-            	errorhandler.throwError("Widget '" + config.name + "' cannot be found.");
-        });
     }
 
     init();

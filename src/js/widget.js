@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(function() {
+define(['errorhandler'], function(errorhandler) {
     "use strict";
     
     function init(config, renderTo) {
@@ -18,16 +18,13 @@ define(function() {
                     console.info("Creating " + config.name + " widget from given parameters.");
                     widget.init(config, renderTo);
                 } else {
-                	//TODO: error handling
-                    console.warn("Widget '" + config.name + "' exists, but some mandatory parameters missing.");
+                	errorhandler.throwWidgetError("Widget '" + config.name + "' exists, but some mandatory parameters missing.");
                 }
             }, function(error) {
-            	//TODO: error handling
-            	console.error("Widget '" + config.name + "' cannot be found.");
+            	errorhandler.throwWidgetError("Widget '" + config.name + "' cannot be found.");
             });
         } else {
-        	//TODO: error handling
-        	console.info("No widget name specified.");
+        	errorhandler.throwWidgetError("No widget name specified.");
         }
 
     }
@@ -57,7 +54,7 @@ define(function() {
             }
         }
         if (missing.length) {
-            console.warn("The following parameters are mandatory: " + missing.join(", "));
+        	errorhandler.throwWidgetError("The following parameters are mandatory: " + missing.join(", "));
         }
         return !missing.length;
     }

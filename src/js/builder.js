@@ -4,7 +4,8 @@
 define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker', 'css!builder.css'], function(SOS, $, moment, errorhandler) {
     "use strict";
 
-    function draw(widget, config, renderTo) {
+    function init(widget, config, renderTo) {
+    	
     	var contents = '<h1>' + capitalize(config.name) + ' Widget<br/><small>Builder</small></h1>';
 
         for (var i in widget.inputs) {
@@ -63,7 +64,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
 
         contents += '<button name="build">Build</button>';
         
-        contents += "<div id='factoryError' class='error'></div>";
+        contents += "<div id='builderError' class='error'></div>";
         
         //modal div
         contents += '<div id="codediv">' + 
@@ -95,9 +96,11 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         setService(["http://sos.fonts.cat/sos/json", "http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
 
         $('#service').change(function() {
+        	errorhandler.hideError();
             var service = $('#service option:selected').attr("id");
             setOfferings(service);
             setDateRange();
+
         });
 
         $('#offering').change(function() {
@@ -373,8 +376,12 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     }
 
     return {
-        init: function(widget, config, renderTo) {
-        	draw(widget, config, renderTo);
+        init: function(config, renderTo) {
+        	require(["widget/" + config.name], function(widget) {        	
+        		init(widget, config, renderTo);
+        	}, function(error) {
+            	errorhandler.throwWidgetError("Widget '" + config.name + "' cannot be found.");
+        	});
         }
     };
 

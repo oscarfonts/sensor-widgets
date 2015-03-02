@@ -6,8 +6,15 @@ define(['jquery'], function($) {
 
 	    return { 
 	        throwError: function(msg) {
-	        	if($("#factoryError").length > 0) $("#factoryError").html(msg).show();
+	        	if($("#builderError").length > 0) $("#builderError").html(msg).show();
 	        	else console.error(msg);
+	        },
+	        hideError: function() {
+	        	$("#builderError").hide();
+	        },
+	        throwWidgetError: function(msg) {
+	        	var div = $("<div class='error'></div>").appendTo('body');
+	        	div.html("Error: " + msg);
 	        }
 	    };
 
