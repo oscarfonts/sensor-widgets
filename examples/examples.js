@@ -19,7 +19,7 @@ define([], function() {
         },
         property: function(p) {
             return "http://sensors.portdebarcelona.cat/def/weather/properties#" + p;
-        },
+        }
     };
     
     now = now.toISOString().substring(0, 19) + "Z";
