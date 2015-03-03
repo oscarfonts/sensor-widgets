@@ -343,7 +343,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         $(".codeinput").on("click", function() {this.focus();this.select();});
         var opt = {
             autoOpen: false,
-            height: 480,
+            height: 500,
             width: 750,
             modal: true,
             title: "Share this widget"
@@ -362,10 +362,11 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     	for (var key in paramsArray) {
         	code += code ? ',\n' : '';
         	var value = paramsArray[key];
-        	if(typeof(value) == "string") value = '"' + value + '"';
+        	//hack: need to avoid arrays
+        	if(value.substr(0,1) != "[") value = '"' + value + '"';
         	code += '\t' + key + ': ' + value;
         }
-    	code = 'require(["widget/' + name + '"], function(' + name + ') {\n' + code + '\n}, document.querySelector(".' + name + '"));';
+    	code = 'require(["widget/' + name + '"], function(' + name + ') {\n' + name + '.init({\n' + code + '\n},\n document.getElementById("' + name + '-container"));\n});';
     	return code;
     }
 

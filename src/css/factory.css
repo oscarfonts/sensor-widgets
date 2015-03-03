@@ -78,14 +78,18 @@ html, body {
     margin-bottom: 3px;
 }
 
-.codeinput {
+#codediv .codeinput {
     box-sizing: border-box;
-    color: #999999;
     font-size: 12px;
-    height: 80px;
+    height: 85px;
     outline: medium none;
     width: 720px;
-    padding: 3px;
+    padding: 6px;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    font-size: 11px;
+    background-color: #ecf0f1;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
 }
 
 .big-button {
