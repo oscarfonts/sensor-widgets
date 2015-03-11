@@ -1,4 +1,9 @@
+/**
+ * @author Oscar Fonts <oscar.fonts@geomati.co>
+ */
 define([], function() {
+    "use strict";
+
     var quick_refresh = 15; // seconds
     var slow_refresh = 120; // seconds
 
