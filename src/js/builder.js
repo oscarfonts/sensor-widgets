@@ -362,9 +362,15 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     	for (var key in paramsArray) {
         	code += code ? ',\n' : '';
         	var value = paramsArray[key];
-        	//hack: need to avoid arrays
-        	if(value.substr(0,1) != "[") value = '"' + value + '"';
-        	code += '\t' + key + ': ' + value;
+            try {
+                // If it is JSON parsejable, then it's an array or an object literal: leave as is
+                value = JSON.stringify(JSON.parse(value), null, 2);
+            } catch (e) {
+                // If it is not JSON parsejable, then it's a string: surround with quotes
+                value = '"' + value + '"';
+            } finally {
+                code += '\t' + key + ': ' + value;
+            }
         }
     	code = 'require(["widget/' + name + '"], function(' + name + ') {\n' + name + '.init({\n' + code + '\n},\n document.getElementById("' + name + '-container"));\n});';
     	return code;
