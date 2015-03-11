@@ -2,14 +2,15 @@ define([], function() {
     var quick_refresh = 15; // seconds
     var slow_refresh = 120; // seconds
 
-    var now = new Date();
+    //var now = new Date();
+    var now = new Date(2012, 5, 11, 3, 0, 0);
     var three_hours_ago = new Date(now.getTime() - 1000 * 60 * 60 * 3);
     var a_day_ago = new Date(now.getTime() - 1000 * 60 * 60 * 24);
 
     var defs = {
         service: function() {
-            //return "http://sos.fonts.cat/sos/json";
-            return "http://sensors.portdebarcelona.cat/sos/json";
+            return "http://sos.fonts.cat/sos/json";
+            //return "http://sensors.portdebarcelona.cat/sos/json";
         },
         offering: function(p) {
             return "http://sensors.portdebarcelona.cat/def/weather/offerings#" + p;
@@ -21,7 +22,7 @@ define([], function() {
             return "http://sensors.portdebarcelona.cat/def/weather/properties#" + p;
         }
     };
-    
+
     now = now.toISOString().substring(0, 19) + "Z";
     three_hours_ago = three_hours_ago.toISOString().substring(0, 19) + "Z";
     a_day_ago = a_day_ago.toISOString().substring(0, 19) + "Z";
@@ -141,16 +142,17 @@ define([], function() {
 
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
-    }
+    };
 
     String.prototype.indent = function(spaces) {
         return this.replace(/^(?=.)/gm, new Array(spaces + 1).join(' '));
-    }
+    };
 
     var widget_menu = "";
     var widget_list = "";
     for (var name in widget_configurations) {
-        widget_menu += '<li><a href="#'+name+'">'+name.capitalize()+'</a></li>';
+        widget_menu += '<li><a href="#'+name+'">' + name.capitalize() + '</a></li>';
+        /*jshint multistr: true */
         widget_list += ' \
             <div class="anchor" id="'+name+'"></div> \
             <h1><i class="flaticon-'+name+'"></i>&nbsp;&nbsp;'+name.capitalize()+'</h1> \
@@ -163,7 +165,8 @@ define([], function() {
                     <pre id="'+name+'-code"></pre> \
                 </div> \
             </div>';
-    };
+    }
+
     document.getElementById("widget-menu").innerHTML = widget_menu;
     document.getElementById("widget-list").innerHTML = widget_list;
 
@@ -171,18 +174,19 @@ define([], function() {
         widget.init(this.config, document.getElementById(this.name+'-container'));
         document.getElementById(this.name+'-inputs').innerHTML = "Widget Inputs:<ul><li>Mandatory: " + widget.inputs.join(", ") + "<li>Optional: " + widget.optional_inputs.join(", ") + "</ul>";
     };
-    for (var name in widget_configurations) {
+
+    for (name in widget_configurations) {
 
         widget_configurations[name].footnote="A sample footnote for "+name+" widget";
 
         require(['widget/'+name], instantiate.bind({
             name: name,
-            config: widget_configurations[name],
+            config: widget_configurations[name]
         }));
 
         var code_sample = name+".init(" + JSON.stringify(widget_configurations[name], null, 2) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
-        code_sample = "require(['widget/"+name+"'], function("+name+") {\r\n" + code_sample.indent(2) + "});"
+        code_sample = "require(['widget/"+name+"'], function("+name+") {\r\n" + code_sample.indent(2) + "});";
         document.getElementById(name+'-code').innerHTML = code_sample;
-    };
+    }
 
 });
