@@ -52,7 +52,7 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'widget-common', 'proj4leafle
 
             //select predefined baseMap or use default 
             var selectedBase = baseMaps[config.baseMap];
-            if(!selectedBase) selectedBase = baseMaps["osm"];
+            if(!selectedBase) selectedBase = baseMaps.osm;
             
             //if a WMS is defined it overwrites everything (more specific)
             if(config.baseMapWms && config.baseMapWmsParams) {

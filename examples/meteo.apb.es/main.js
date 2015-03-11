@@ -20,7 +20,7 @@ define(['locale-date'], function(ld) {
         },
         property: function(p) {
             return "http://sensors.portdebarcelona.cat/def/weather/properties#" + p;
-        },
+        }
     };
 
     var now = new Date();
@@ -275,8 +275,8 @@ define(['locale-date'], function(ld) {
                 var tpl = $('#item-template').html();
                 var html = "";
                 for (var f in features) {
-                    var res = tpl.replace(/{{id}}/g, features[f]);
-                    res = res.replace(/{{title}}/g, featureNames[f]);
+                    var res = tpl.replace(/\{\{id}}/g, features[f]);
+                    res = res.replace(/\{\{title}}/g, featureNames[f]);
                     html += res;
                 }
                 $(".databrowser").html(html);

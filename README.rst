@@ -35,8 +35,8 @@ There's a demo kindly broght by gh-pages in: http://fonts.cat/sensor-widgets
 
 Bring the master changes to the gh-pages branch::
 
-	  git checkout gh-pages
-	  git merge master
+    git checkout gh-pages
+    git merge master
 
 Update the js dependencies::
 
@@ -44,9 +44,9 @@ Update the js dependencies::
 
 Commit changes::
 
-	  git add -A
-	  git commit -m "Updated gh-pages & libs"
-	  git push
+    git add -A
+    git commit -m "Updated gh-pages & libs"
+    git push
 
 Check the demo page after 5 minutes.
 
@@ -54,7 +54,6 @@ Check the demo page after 5 minutes.
 Don't forget to get back to master branch to continue development::
 
     git checkout master
-  
 
 Available widgets
 =================

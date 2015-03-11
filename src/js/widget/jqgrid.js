@@ -47,9 +47,8 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget
                         name: 'time',
                         index: 'time',
                         width: '160',
-                        formatter: function(cellvalue, options, rowObject) {
-                            var new_formatted_cellvalue = ld.display(cellvalue);
-                            return new_formatted_cellvalue;
+                        formatter: function(cellvalue) {
+                            return ld.display(cellvalue);
                         }
                     }, {
                         name: 'feature',

@@ -20,7 +20,6 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget
     var dy = 3.342574;
     var y_max = 206.34359 + 267.40595;
     var t_min = -24;
-    var t_max = 56;
 
     return {
         inputs: common.inputs.concat(["feature", "property", "refresh_interval"]),
@@ -52,8 +51,8 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget
 
                 var h = dy * (measure.value - t_min);
                 var y_min = y_max - h;
-                clip.setAttribute("height", h);
-                clip.setAttribute("y", y_min);
+                clip.setAttribute("height", h.toString());
+                clip.setAttribute("y", y_min.toString());
             }
         }
     };

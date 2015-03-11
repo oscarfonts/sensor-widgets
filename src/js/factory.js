@@ -43,12 +43,6 @@ define(["builder"], function(builder) {
 
         renderTo.innerHTML = '<div id="factory">' + contents + '</div>' + iframe;
 
-        function clicked(e) {
-            var name = "";
-            builder.init({
-                name: name
-            }, renderTo);
-        }
     }
 
     init();

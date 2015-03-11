@@ -12,6 +12,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             var input = widget.inputs[i];
             var select = "";
             var label = capitalize(input);
+            var options = "";
 
             switch (input) {
                 case "service":
@@ -26,10 +27,9 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                     label += " (multiselect)";
                     break;
                 case "refresh_interval":
-                    var options = "",
-                        intervals = [5, 10, 30, 60, 120];
-                    for (i in intervals) {
-                        var value = intervals[i];
+                    var intervals = [5, 10, 30, 60, 120];
+                    for (var j in intervals) {
+                        var value = intervals[j];
                         options += '<option id="' + value + '">' + value + '</option>';
                     }
                     select = '<select id="' + input + '">' + options + '</select>';
@@ -47,12 +47,11 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                     select = '<textarea value="" id="' + input + '"></textarea>';
                     break;
                 case "baseMap":
-                    var options = "";
                     for (var key in widget.baseMaps) {
 	                    options += '<option id="' + key + '">' + key + '</option>';
 	                }
 		            select = '<select id="' + input + '">' + options + '</select>';
-                    break;    
+                    break;
                 default:
                     select = '<input type="text" value="" id="' + input + '"/>';
             }
@@ -80,9 +79,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         
         $("#widget").resizable({
             helper: "ui-resizable-helper"
-        });
-        
-        $("#widget").draggable({
+        }).draggable({
             opacity: 0.35
         });
 
@@ -97,14 +94,14 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
 
         $('#service').change(function() {
         	errorhandler.hideError();
-            var service = $('#service option:selected').attr("id");
+            var service = $('#service').find('option:selected').attr("id");
             setOfferings(service);
             setDateRange();
 
         });
 
         $('#offering').change(function() {
-            var procedure = $('#offering option:selected').data("procedure");
+            var procedure = $('#offering').find('option:selected').data("procedure");
             setFeatures(procedure);
             setProperties(procedure);
             setDateRange();
@@ -126,8 +123,9 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             setDateRange();
         });
 
-        if ($('#time_range').length) {
-            $('#time_range').dateRangePicker({
+        var timeRange = $('#time_range');
+        if (timeRange.length) {
+            timeRange.dateRangePicker({
                 separator: ' to ',
                 language: 'en',
                 startOfWeek: 'monday',
@@ -141,10 +139,13 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
                     enabled: true
                 },
                 getValue: function() {
-                    if ($('#time_start').val() && $('#time_end').val())
-                        return $('#time_start').val() + ' to ' + $('#time_end').val();
-                    else
+                    var timeStart = $('#time_start').val();
+                    var timeEnd = $('#time_end').val();
+                    if (timeStart && timeEnd) {
+                        return timeStart + ' to ' + timeEnd;
+                    } else {
                         return '';
+                    }
                 },
                 setValue: function(s, date1, date2) {
                     $('#time_start').val(moment(date1).utc().format());
@@ -155,14 +156,13 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     }
 
     function setService(urls) {
-        if (urls && $('#service')) {
-            $('#service').append($('<option>').append("Select a Service..."));
+        var service = $('#service');
+        if (urls && service) {
+            service.append($('<option>').append("Select a Service..."));
             for (var i in urls) {
                 var url = urls[i];
-                $('#service').append($('<option>').attr('id', url).append(url));
+                service.append($('<option>').attr('id', url).append(url));
             }
-        } else {
-            return;
         }
     }
 
@@ -228,7 +228,6 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         }
 
         SOS.getFeatureOfInterest(procedure, function(features) {
-            var properties;
             for (var i in features) {
                 var feature = features[i];
                 var id = feature.identifier.value;
@@ -241,13 +240,13 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     }
 
     function setDateRange() {
-        var procedure = $('#offering option:selected').data("procedure");
-        var feature = $('#feature option:selected').attr("id");
-        var property = $('#property option:selected').attr("id");
-        var features = feature ? feature : $('#features option:selected').map(function() {
+        var procedure = $('#offering').find('option:selected').data("procedure");
+        var feature = $('#feature').find('option:selected').attr("id");
+        var property = $('#property').find('option:selected').attr("id");
+        var features = feature ? feature : $('#features').find('option:selected').map(function() {
             return this.id;
         }).get();
-        var properties = property ? property : $('#properties option:selected').map(function() {
+        var properties = property ? property : $('#properties').find('option:selected').map(function() {
             return this.id;
         }).get();
 
@@ -282,29 +281,28 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     function loadWidget() {
         var widget = $('[name="build"]').data();
         var paramsArray = [];
-        paramsArray['name'] = widget.name;
+        paramsArray.name = widget.name;
         var getId = function() {
             return this.id;
         };
         for (var i in widget.inputs) {
             var name = widget.inputs[i];
+            var el = $('#'+name);
             var value;
             switch (name) {
                 case "service":
                 case "offering":
                 case "feature":
                 case "property":
-                    value = $('#' + name + ' option:selected').attr("id");
+                    value = el.find('option:selected').attr("id");
                     break;
                 case "features":
                 case "properties":
-                    value = $('#' + name + ' option:selected').map(getId).get();
-                    value = JSON.stringify(value);
-
-                    // Serialize array as single value
+                    value = el.find('option:selected').map(getId).get();
+                    value = JSON.stringify(value); // Serialize array as single value
                     break;
                 default:
-                    value = $("#" + name).val();
+                    value = el.val();
             }
             if (value) {
             	paramsArray[name] = value;
@@ -324,11 +322,12 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         var preferredSize = widget.preferredSizes[0];
         
         // set preferred size to the dialog to start with
-        $("#widget").width(preferredSize.w).height(preferredSize.h);
+        var widgetEl = $("#widget");
+        widgetEl.width(preferredSize.w).height(preferredSize.h);
         
-        $("#widget").resizable("destroy");
-        $("#widget").html(writeIFrameTag(url, "100%", "100%"));
-        $("#widget").resizable({
+        widgetEl.resizable("destroy");
+        widgetEl.html(writeIFrameTag(url, "100%", "100%"));
+        widgetEl.resizable({
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
             	//refresh embed code snippet (we use the iframe tag with dialog's current width and height)
@@ -337,7 +336,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         });
         
         //refresh code snippets for the first time
-        $("#embedinput").val(writeIFrameTag(absoluteUrl, $("#widget").width(), $("#widget").height()));
+        $("#embedinput").val(writeIFrameTag(absoluteUrl, widgetEl.width(), widgetEl.height()));
         $("#linkinput").val(absoluteUrl);
         $("#jsinput").val(writeJSCode(paramsArray));
         $(".codeinput").on("click", function() {this.focus();this.select();});
@@ -349,7 +348,9 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             title: "Share this widget"
         };
         
-        $("#share").button().show().click(function(event) {$("#codediv").dialog(opt).dialog("open");});;
+        $("#share").button().show().click(function() {
+            $("#codediv").dialog(opt).dialog("open");
+        });
     }
     
     function writeIFrameTag(url, width, height) {
@@ -357,8 +358,8 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
     }
     
     function writeJSCode(paramsArray) {
-    	var name = paramsArray['name'];
-    	var code = '';
+        var name = paramsArray.name;
+        var code = '';
     	for (var key in paramsArray) {
         	code += code ? ',\n' : '';
         	var value = paramsArray[key];
@@ -386,7 +387,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         init: function(config, renderTo) {
         	require(["widget/" + config.name], function(widget) {        	
         		init(widget, config, renderTo);
-        	}, function(error) {
+            }, function() {
             	errorhandler.throwWidgetError("Widget '" + config.name + "' cannot be found.");
         	});
         }

@@ -20,7 +20,7 @@ define(['errorhandler'], function(errorhandler) {
                 } else {
                 	errorhandler.throwWidgetError("Widget '" + config.name + "' exists, but some mandatory parameters missing.");
                 }
-            }, function(error) {
+            }, function() {
             	errorhandler.throwWidgetError("Widget '" + config.name + "' cannot be found.");
             });
         } else {

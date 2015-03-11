@@ -68,7 +68,7 @@ html, body {
 
 #codediv h3 {
     font-size: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 #codediv h4 {
@@ -80,7 +80,6 @@ html, body {
 
 #codediv .codeinput {
     box-sizing: border-box;
-    font-size: 12px;
     height: 85px;
     outline: medium none;
     width: 720px;
