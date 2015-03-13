@@ -90,7 +90,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
         }).click(loadWidget);
 
         // Setup the SOS parameters: service, offering, feature(s) and property(ies)
-        setService(["http://sos.fonts.cat/sos/json", "http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
+        setService(["http://demo.geomati.co/sos/json", "http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
 
         $('#service').change(function() {
         	errorhandler.hideError();

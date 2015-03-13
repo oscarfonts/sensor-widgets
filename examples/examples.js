@@ -14,7 +14,7 @@ define([], function() {
 
     var defs = {
         service: function() {
-            return "http://sos.fonts.cat/sos/json";
+            return "http://demo.geomati.co/sos/json";
             //return "http://sensors.portdebarcelona.cat/sos/json";
         },
         offering: function(p) {
