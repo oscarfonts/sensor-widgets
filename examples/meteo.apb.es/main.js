@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['locale-date'], function(ld) {
+define(['locale-date', 'bootstrap'], function(ld) {
     "use strict";
 
     ld.utc(false);

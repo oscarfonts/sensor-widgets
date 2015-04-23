@@ -9,6 +9,7 @@ var require = (function() {
         paths: {
             "text": "../lib/requirejs-text/text",
             "css": "../lib/requirejs-css/css",
+            "bootstrap": "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min",
             "daterangepicker": "../lib/daterangepicker/jquery.daterangepicker",
             "flot": "../lib/flot/jquery.flot",
             "flot-navigate": "../lib/flot/jquery.flot.navigate",
@@ -28,6 +29,9 @@ var require = (function() {
             "proj4": "../lib/proj4/proj4"
         },
         shim: {
+            "bootstrap": {
+                deps: ["jquery"]
+            },
             "daterangepicker": {
                 deps: ["jquery", "moment", "css!../lib/daterangepicker/daterangepicker.css"]
             },
