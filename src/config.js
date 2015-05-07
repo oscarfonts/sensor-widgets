@@ -5,6 +5,7 @@ var require = (function() {
     var CONFIG_LOCATION = scripts[scripts.length-1].src.replace(/[^\/]*$/, '');
     
     return {
+        waitSeconds: 30,
         baseUrl: CONFIG_LOCATION + "js/",
         paths: {
             "text": "../lib/requirejs-text/text",
