@@ -33,7 +33,8 @@
     "Leaflet.label": "~0.2.1",
     "moment": "~2.8.3",
     "proj4leaflet": "~0.7.0",
-    "proj4": "~2.1.2"
+    "proj4": "~2.1.2",
+    "bootstrap": "~3.3.4"
   },
   "exportsOverride": {
     "requirejs-text": {

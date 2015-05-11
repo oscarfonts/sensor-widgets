@@ -1,3 +1,5 @@
+var compression = require('compression');
+
 module.exports = function(grunt) {
 
     grunt.initConfig({
@@ -16,26 +18,63 @@ module.exports = function(grunt) {
                 reporter: require('jshint-stylish')
             }
         },
-        /*
         requirejs: {
-            compile: {
+            options: {
+                'appDir': 'src/',
+                'baseUrl': 'js/',
+                'dir': 'dist/',
+                'mainConfigFile': 'src/js/main.js',
+                'optimize': 'uglify2', //'none',
+                'normalizeDirDefines': 'skip',
+                'skipDirOptimize': true
+            },
+            main: {
                 options: {
-                    optimize: "uglify2",
-                    optimizeCss: "standard",
-                    preserveLicenseComments: false,
-                    mainConfigFile: "src/config.js",
-                    baseUrl: "src/js",
-                    dir: "dist/js"
+                    'modules': [
+                        {
+                            'name': '../lib/requirejs/require'
+                        },
+                        {
+                            'name': 'main',
+                            'include': [
+                                'main',
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'SensorWidget'
+                            ]
+                        },{
+                            'name': 'widget/bearing',
+                            'include': [
+                                'widget/bearing'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler'
+                            ]
+                        }
+
+                    ]
                 }
             }
         },
-        */
         connect: {
             server: {
                 options: {
                     hostname: "localhost",
                     port: 8080,
-                    livereload: true
+                    livereload: true,
+                    middleware: function(connect, options, middlewares) {
+                        middlewares.unshift(compression());
+                        return middlewares;
+                    }
                 }
             }
         },
@@ -63,9 +102,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    //grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-requirejs');
 
     grunt.registerTask('default', ['connect', 'watch']);
-    grunt.registerTask('build', ['clean', 'bower', 'jshint' /*, 'requirejs'*/ ]);
+    grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs']);
 
 };
