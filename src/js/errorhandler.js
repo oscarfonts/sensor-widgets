@@ -1,24 +1,30 @@
 /**
  * @author Martí Pericay <marti@pericay.com>
+ * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['jquery'], function($) {
+define([], function() {
     "use strict";
 
     function showBuilderError(msg) {
-        var el = $("#builderError");
-        if (el.length > 0) {
-            el.html(msg).show();
+        var el = document.getElementById("builderError");
+        if (el) {
+            el.innerHTML = msg;
         }
         else console.error(msg);
     }
 
     function hideBuilderError() {
-        $("#builderError").hide();
+        var el = document.getElementById("builderError");
+        if (el) {
+            el.innerHTML = "";
+        }
     }
 
     function showGeneralError(msg) {
-        var div = $("<div class='error'></div>").appendTo('body');
-        div.html("Error: " + msg);
+        var div = document.createElement("div");
+        div.className = 'error';
+        document.body.appendChild(div);
+        div.innerHTML = "Error: " + msg;
     }
 
     return {
