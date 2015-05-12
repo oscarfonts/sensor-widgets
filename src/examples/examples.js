@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('examples', ["SensorWidget", "bootstrap"], function(SensorWidget) {
+define('examples', ["SensorWidget", "main", "bootstrap"], function(SensorWidget) {
     "use strict";
 
     var quick_refresh = 15; // seconds

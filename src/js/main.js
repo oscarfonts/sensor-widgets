@@ -1,6 +1,5 @@
 require.config({
     waitSeconds: 30,
-    baseUrl: 'js/',
     paths: {
         'text': '../lib/requirejs-text/text',
         'bootstrap': '../lib/bootstrap/bootstrap',

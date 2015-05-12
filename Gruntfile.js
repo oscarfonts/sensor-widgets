@@ -220,7 +220,6 @@ module.exports = function(grunt) {
                             ]
                         }
                         // TODO: Builder (factory? widget?); daterangepicker, moment
-                        // TODO: meteo.apb.es
                     ]
                 }
             }
