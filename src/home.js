@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('examples', ["SensorWidget", "main", "bootstrap"], function(SensorWidget) {
+define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     "use strict";
 
     var quick_refresh = 15; // seconds
@@ -176,7 +176,7 @@ define('examples', ["SensorWidget", "main", "bootstrap"], function(SensorWidget)
     document.getElementById("widget-list").innerHTML = widget_list;
 
     var inspect = function(widget) {
-        document.getElementById(this.name+'-inputs').innerHTML = "Widget Inputs:<ul><li>Mandatory: " + widget.inputs.join(", ") + "<li>Optional: " + widget.optional_inputs.join(", ") + "</ul>";
+        document.getElementById(this.name+'-inputs').innerHTML = "<strong>" + this.name.capitalize() + " Widget Inputs:</strong><ul><li><strong>Mandatory:</strong> " + widget.inputs.join(", ") + "<li><strong>Optional:</strong> " + widget.optional_inputs.join(", ") + "</ul>";
     };
 
     for (name in widget_configurations) {
@@ -193,15 +193,15 @@ define('examples', ["SensorWidget", "main", "bootstrap"], function(SensorWidget)
             name: name
         }));
 
-        var code_sample = name+".init(" + JSON.stringify(widget_configurations[name], null, 2) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
-        code_sample = "require(['widget/"+name+"'], function("+name+") {\r\n" + code_sample.indent(2) + "});";
+        var code_sample = "SensorWidget('"+name+"', " + JSON.stringify(widget_configurations[name], null, 3) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
+        code_sample = "require(['SensorWidget'], function(SensorWidget) {\r\n" + code_sample.indent(3) + "});";
         document.getElementById(name+'-code').innerHTML = code_sample;
     }
 
 });
 
 requirejs.config({
-    baseUrl: '../js/'
+    baseUrl: 'js/'
 });
 
-requirejs(['examples']);
+requirejs(['home']);

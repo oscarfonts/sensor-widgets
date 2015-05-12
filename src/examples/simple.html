@@ -1,7 +1,9 @@
 <html>
 	<head>
 		<title>Sensor Widgets Simple Example</title>
-        <script src="../lib/requirejs/require.js" data-main="../js/main.js"></script>
+        <link href="../css/widget.css" rel="stylesheet" />
+        <script src="../lib/requirejs/require.js"></script>
+        <script src="../js/main.js"></script>
         <script>
             require(['SensorWidget'], function(SensorWidget) {
                 SensorWidget('bearing',
@@ -10,8 +12,7 @@
                         offering: 'http://sensors.portdebarcelona.cat/def/weather/offerings#1m',
                         feature: 'http://sensors.portdebarcelona.cat/def/weather/features#02',
                         property: 'http://sensors.portdebarcelona.cat/def/weather/properties#31',
-                        refresh_interval: 15,
-                        footnote: 'A sample footnote for bearing widget'
+                        refresh_interval: 15
                     },
                     document.getElementById('widget-container')
                 );
@@ -19,7 +20,6 @@
         </script>
 	</head>
 	<body>
-        <h1>Sensor Widgets Simple Example</h1>
         <div id="widget-container"></div>
     </body>
 </html>
