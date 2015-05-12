@@ -10,19 +10,10 @@
 
     <title>Sensor Widgets</title>
 
-    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/flatly/bootstrap.min.css" rel="stylesheet">
-    <link href="../src/fonts/flaticon.css" rel="stylesheet" />
-    <link href="../src/css/widget.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="../fonts/flaticon.css" rel="stylesheet" />
+    <link href="../css/widget.css" rel="stylesheet" />
     <link href="examples.css" rel="stylesheet" />
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
-    <style type="text/css">
-
-    </style>
 </head>
 
 <body role="document">
@@ -48,7 +39,7 @@
                         <a href="https://github.com/oscarfonts/sensor-widgets" target="_blank">GitHub Repo</a>
                     </li>
                     <li>
-                        <a href="../src" target="_blank">Widget Factory</a>
+                        <a href="../" target="_blank">Widget Factory</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
@@ -62,12 +53,12 @@
     <div class="container theme-showcase" role="main">
 
         <div class="jumbotron">
-            <img src="../src/img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
+            <img src="../img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
             <h1>Sensor Widgets</h1>
             <p>Configurable graphical components for your <a href="http://live.osgeo.org/en/standards/sos_overview.html" target="_blank">SOS</a> sensor data.</p>
             <h3>100% Javascript. Extensible. MIT licensed.</h3>
             <p style="text-align:right;margin:40px 0 0 0;">
-                <a class="btn btn-primary btn-lg" role="button" href="../src">
+                <a class="btn btn-primary btn-lg" role="button" href="../">
                     <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a>
             </p>
         </div>
@@ -75,10 +66,8 @@
         <div id="widget-list"></div>
     </div>
 
-    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <script src="../src/config.js"></script>
-    <script src="../src/lib/requirejs/require.js" data-main="../../examples/examples"></script>
+    <script src="../lib/requirejs/require.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="examples.js"></script>
 </body>
 </html>

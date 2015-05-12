@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define([], function() {
+define('examples', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     "use strict";
 
     var quick_refresh = 15; // seconds
@@ -175,8 +175,7 @@ define([], function() {
     document.getElementById("widget-menu").innerHTML = widget_menu;
     document.getElementById("widget-list").innerHTML = widget_list;
 
-    var instantiate = function(widget) {
-        widget.init(this.config, document.getElementById(this.name+'-container'));
+    var inspect = function(widget) {
         document.getElementById(this.name+'-inputs').innerHTML = "Widget Inputs:<ul><li>Mandatory: " + widget.inputs.join(", ") + "<li>Optional: " + widget.optional_inputs.join(", ") + "</ul>";
     };
 
@@ -184,9 +183,14 @@ define([], function() {
 
         widget_configurations[name].footnote="A sample footnote for "+name+" widget";
 
-        require(['widget/'+name], instantiate.bind({
-            name: name,
-            config: widget_configurations[name]
+        new SensorWidget(
+            name,
+            widget_configurations[name],
+            document.getElementById(name+'-container')
+        );
+
+        require(['widget/'+name], inspect.bind({
+            name: name
         }));
 
         var code_sample = name+".init(" + JSON.stringify(widget_configurations[name], null, 2) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
@@ -195,3 +199,9 @@ define([], function() {
     }
 
 });
+
+requirejs.config({
+    baseUrl: '../js/'
+});
+
+requirejs(['examples']);
