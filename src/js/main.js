@@ -3,7 +3,6 @@ require.config({
     baseUrl: 'js/',
     paths: {
         'text': '../lib/requirejs-text/text',
-        'css': '../lib/requirejs-css/css',
         'bootstrap': '../lib/bootstrap/bootstrap',
         'daterangepicker': '../lib/daterangepicker/jquery.daterangepicker',
         'flot': '../lib/flot/jquery.flot',

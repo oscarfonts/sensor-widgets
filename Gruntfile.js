@@ -24,15 +24,28 @@ module.exports = function(grunt) {
                 'baseUrl': 'js/',
                 'dir': 'dist/',
                 'mainConfigFile': 'src/js/main.js',
-                'optimize': 'uglify2', //'none',
-                'normalizeDirDefines': 'skip',
-                'skipDirOptimize': true
+                'removeCombined': true,
+                'logLevel': 0,
+                'optimize': 'uglify2' // 'uglify2' 'none'
             },
             main: {
                 options: {
                     'modules': [
                         {
-                            'name': '../lib/requirejs/require'
+                            'name': 'leaflet-label',
+                            'exclude': [
+                                'css',
+                                'leaflet'
+                            ]
+                        },
+                        {
+                            'name': 'leaflet',
+                            'include': [
+                                'leaflet'
+                            ],
+                            'exclude': [
+                                'css'
+                            ]
                         },
                         {
                             'name': 'main',
@@ -44,7 +57,9 @@ module.exports = function(grunt) {
                                 'widget-common',
                                 'locale-date',
                                 'errorhandler',
-                                'SensorWidget'
+                                'SensorWidget',
+                                'css',
+                                'text'
                             ]
                         },{
                             'name': 'widget/bearing',
@@ -57,10 +72,155 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler'
+                                'errorhandler',
+                                'css',
+                                'text'
+                            ]
+                        },{
+                            'name': 'widget/gauge',
+                            'include': [
+                                'widget/gauge'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text'
+                            ]
+                        },{
+                            'name': 'widget/jqgrid',
+                            'include': [
+                                'widget/jqgrid'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text',
+                                'jqgrid',
+                                'jquery'
+                            ]
+                        },{
+                            'name': 'widget/map',
+                            'include': [
+                                'widget/map'
+                            ],
+                            'exclude': [
+                                'leaflet',
+                                'leaflet-label',
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text',
+                                'widget/panel'
+                            ]
+                        },{
+                            'name': 'widget/panel',
+                            'include': [
+                                'widget/panel'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text'
+                            ]
+                        },{
+                            'name': 'widget/progressbar',
+                            'include': [
+                                'widget/progressbar'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text'
+                            ]
+                        },{
+                            'name': 'widget/table',
+                            'include': [
+                                'widget/table'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text'
+                            ]
+                        },{
+                            'name': 'widget/thermometer',
+                            'include': [
+                                'widget/thermometer'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text'
+                            ]
+                        },{
+                            'name': 'widget/timechart',
+                            'include': [
+                                'widget/timechart'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text',
+                                'jquery'
+                            ]
+                        },{
+                            'name': 'widget/windrose',
+                            'include': [
+                                'widget/windrose'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'errorhandler',
+                                'css',
+                                'text',
+                                'jquery'
                             ]
                         }
-
+                        // TODO: Builder (factory? widget?); daterangepicker, moment
+                        // TODO: meteo.apb.es
                     ]
                 }
             }

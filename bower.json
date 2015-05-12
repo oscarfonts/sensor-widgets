@@ -21,7 +21,6 @@
   "dependencies": {
     "requirejs": "~2.1.15",
     "requirejs-text": "~2.0.12",
-    "requirejs-css": "git@github.com:dimaxweb/CSSLoader.git",
     "daterangepicker": "git@github.com:longbill/jquery-date-range-picker.git",
     "flot": "~0.8.3",
     "flot.tooltip": "~0.8.4",
@@ -39,9 +38,6 @@
   "exportsOverride": {
     "requirejs-text": {
       "/": "text.js"
-    },
-    "requirejs-css": {
-      "/": "src/css.js"
     },
     "daterangepicker": {
       "/": "{jquery.daterangepicker.js,daterangepicker.css}"
