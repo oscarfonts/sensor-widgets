@@ -153,6 +153,10 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
         return this.replace(/^(?=.)/gm, new Array(spaces + 1).join(' '));
     };
 
+    String.prototype.htmlDecode = function() {
+        return this.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    };
+
     var widget_menu = "";
     var widget_list = "";
     for (var name in widget_configurations) {
@@ -167,6 +171,8 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
                 </div> \
                 <div class="col-md-6"> \
                     <div id="'+name+'-inputs"></div> \
+                    <pre id="'+name+'-url"></pre> \
+                    <pre id="'+name+'-iframe"></pre> \
                     <pre id="'+name+'-code"></pre> \
                 </div> \
             </div>';
@@ -175,27 +181,35 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     document.getElementById("widget-menu").innerHTML = widget_menu;
     document.getElementById("widget-list").innerHTML = widget_list;
 
-    var inspect = function(widget) {
-        document.getElementById(this.name+'-inputs').innerHTML = "<strong>" + this.name.capitalize() + " Widget Inputs:</strong><ul><li><strong>Mandatory:</strong> " + widget.inputs.join(", ") + "<li><strong>Optional:</strong> " + widget.optional_inputs.join(", ") + "</ul>";
+    var renderInputs = function(inputs, optional, sizes) {
+        var iface = "<strong>" + this.name.capitalize() + " Widget Interface:</strong><ul>";
+        iface += "<li><strong>Mandatory Inputs:</strong> " + inputs.join(", ");
+        iface += "<li><strong>Optional Inputs:</strong> " + optional.join(", ");
+        iface += "<li><strong>Preferred Sizes:</strong> " + sizes.map(function(size) {
+            return size.w + " x " + size.h + " px";
+        }).join(", ") + "</ul>";
+        document.getElementById(this.name+'-inputs').innerHTML = iface;
     };
 
     for (name in widget_configurations) {
 
         widget_configurations[name].footnote="A sample footnote for "+name+" widget";
 
-        new SensorWidget(
+        var widget = new SensorWidget(
             name,
             widget_configurations[name],
             document.getElementById(name+'-container')
         );
 
-        require(['widget/'+name], inspect.bind({
-            name: name
-        }));
+        widget.inspect(
+            renderInputs.bind({
+                name: name
+            })
+        );
 
-        var code_sample = "SensorWidget('"+name+"', " + JSON.stringify(widget_configurations[name], null, 3) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
-        code_sample = "require(['SensorWidget'], function(SensorWidget) {\r\n" + code_sample.indent(3) + "});";
-        document.getElementById(name+'-code').innerHTML = code_sample;
+        document.getElementById(name+'-url').innerHTML = '<a href="'+widget.url()+'" target="_blank">'+widget.url()+'</a>';
+        document.getElementById(name+'-iframe').innerHTML = widget.iframe().htmlDecode();
+        document.getElementById(name+'-code').innerHTML = widget.javascript();
     }
 
 });

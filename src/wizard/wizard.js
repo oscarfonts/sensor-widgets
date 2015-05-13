@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(["builder"], function(builder) {
+define('wizard', ["builder"], function(builder) {
     "use strict";
     
     function init(renderTo) {
@@ -32,7 +32,7 @@ define(["builder"], function(builder) {
 
     function chooser(renderTo) {
         var widgets = ["bearing", "gauge", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
-        var contents = '<h1>Widget<br/><small>Factory</small></h1>';
+        var contents = '<h1>Widget<br/><small>Wizard</small></h1>';
 
         for (var i in widgets) {
             var widget = widgets[i];
@@ -48,3 +48,5 @@ define(["builder"], function(builder) {
     init();
 
 });
+
+require(["wizard"]);

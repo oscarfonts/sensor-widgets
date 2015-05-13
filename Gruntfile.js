@@ -26,6 +26,7 @@ module.exports = function(grunt) {
                 'mainConfigFile': 'src/js/main.js',
                 'removeCombined': true,
                 'logLevel': 0,
+                'wrapShim': true,
                 'optimize': 'uglify2' // 'uglify2' 'none'
             },
             main: {

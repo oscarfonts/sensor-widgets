@@ -73,7 +73,7 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
 
         renderTo.innerHTML = '<div id="editor">' + contents + 
         	'</div>' + '<div id="preview"><h1 id="header">' +
-        	'<img src="img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it</button>' + '<div id="widget"></div></div>';
+        	'<img src="../img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it</button>' + '<div id="widget"></div></div>';
 
         $("[name=build]").button();
         
@@ -309,14 +309,10 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             }
         }
         
-        var url = "";
-        for (var key in paramsArray) {
-        	url += url ? "&" : "widget.html?";
-        	url += key + "=" + encodeURIComponent(paramsArray[key]);
-        }
-        var absoluteUrl = "http://" + window.location.hostname;
-        if(window.location.port) absoluteUrl += ":" + window.location.port;
-        absoluteUrl += window.location.pathname + url;
+        var url = window.location.origin + window.location.pathname.replace('wizard', 'widget') + "?";
+        url += Object.keys(paramsArray).map(function(name) {
+            return name + "=" + encodeURIComponent(paramsArray[name]);
+        }).join("&");
 
         // we will use only first preferred size, though we could have an array and draw a combo
         var preferredSize = widget.preferredSizes[0];
@@ -331,13 +327,13 @@ define(['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
             	//refresh embed code snippet (we use the iframe tag with dialog's current width and height)
-            	$("#embedinput").val(writeIFrameTag(absoluteUrl, ui.size.width, ui.size.height));
+            	$("#embedinput").val(writeIFrameTag(url, ui.size.width, ui.size.height));
             }
         });
         
         //refresh code snippets for the first time
-        $("#embedinput").val(writeIFrameTag(absoluteUrl, widgetEl.width(), widgetEl.height()));
-        $("#linkinput").val(absoluteUrl);
+        $("#embedinput").val(writeIFrameTag(url, widgetEl.width(), widgetEl.height()));
+        $("#linkinput").val(url);
         $("#jsinput").val(writeJSCode(paramsArray));
         $(".codeinput").on("click", function() {this.focus();this.select();});
         var opt = {
