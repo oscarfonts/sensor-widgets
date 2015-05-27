@@ -142,7 +142,7 @@ body {
     height: 100%;
     overflow: auto;
 }
-#widget {
+#widget-container {
     float: left;
     margin: 12px;
     background: white;
@@ -153,6 +153,7 @@ body {
     -moz-box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.5);
     box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.5);
     cursor: move;
+    overflow: hidden;
 }
 #time_start, #time_end {
     width: 200px;
@@ -165,7 +166,7 @@ body {
     display: inline-block;
     width: 50px;
 }
-#widget iframe {
+#widget-container iframe {
     background: white;
 }
 .ui-resizable-helper {

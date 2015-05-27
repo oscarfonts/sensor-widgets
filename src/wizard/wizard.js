@@ -1,17 +1,16 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('wizard', ['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker'], function(SOS, $, moment, errorhandler) {
+define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker'], function(SensorWidget, SOS, $, moment, errorhandler) {
     "use strict";
 
     var name = getParameterByName("name");
 
-    if (name) {
-        //Open wizard for the selected widget
-        init({name: name}, document.body);
+    if (name) { // Open builder for the selected widget
+        getBuilder({name: name}, document.body);
     } else {
-        //No widget name specified. Show chooser
-        chooser(document.body);
+        // No widget name specified. Show a list of widgets
+        showList(document.body);
     }
 
     function getParameterByName(name) {
@@ -21,7 +20,7 @@ define('wizard', ['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'dater
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-    function chooser(renderTo) {
+    function showList() {
         var widgets = ["bearing", "gauge", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
         var contents = '<h1>Widget<br/><small>Wizard</small></h1>';
 
@@ -32,19 +31,19 @@ define('wizard', ['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'dater
 
         var iframe = '<div id="factory-right"><iframe name="builder" frameBorder="0"><p>Your browser does not support iframes.</p></iframe></div>';
 
-        renderTo.innerHTML = '<div id="factory">' + contents + '</div>' + iframe;
+        document.body.innerHTML = '<div id="factory">' + contents + '</div>' + iframe;
     }
 
 
-    function init(config, renderTo) {
+    function getBuilder(config, renderTo) {
         require(["widget/" + config.name], function(widget) {
-            init2(widget, config, renderTo);
+            renderBuilder(widget, config, renderTo);
         }, function() {
             errorhandler.throwWidgetError("Widget '" + config.name + "' cannot be found.");
         });
     }
 
-    function init2(widget, config, renderTo) {
+    function renderBuilder(widget, config, renderTo) {
 
     	var contents = '<h1>' + capitalize(config.name) + ' Widget<br/><small>Builder</small></h1>';
 
@@ -113,15 +112,17 @@ define('wizard', ['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'dater
 
         renderTo.innerHTML = '<div id="editor">' + contents +
         	'</div>' + '<div id="preview"><h1 id="header">' +
-        	'<img src="../img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it</button>' + '<div id="widget"></div></div>';
+        	'<img src="../img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it</button>' + '<div id="widget-container"></div></div>';
 
         $("[name=build]").button();
 
-        $("#widget").resizable({
+        $("#widget-container").resizable({
             helper: "ui-resizable-helper"
         }).draggable({
             opacity: 0.35
         });
+
+        $("#widget-container").append('<div id="widget"></div>');
 
         $('[name="build"]').data({
             name: config.name,
@@ -320,11 +321,12 @@ define('wizard', ['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'dater
 
     function loadWidget() {
         var widget = $('[name="build"]').data();
-        var paramsArray = [];
-        paramsArray.name = widget.name;
+        var config = {};
+
         var getId = function() {
             return this.id;
         };
+
         for (var i in widget.inputs) {
             var name = widget.inputs[i];
             var el = $('#'+name);
@@ -339,42 +341,38 @@ define('wizard', ['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'dater
                 case "features":
                 case "properties":
                     value = el.find('option:selected').map(getId).get();
-                    value = JSON.stringify(value); // Serialize array as single value
                     break;
                 default:
                     value = el.val();
             }
             if (value) {
-            	paramsArray[name] = value;
+            	config[name] = value;
             }
         }
-
-        var url = window.location.origin + window.location.pathname.replace('wizard', 'widget') + "?";
-        url += Object.keys(paramsArray).map(function(name) {
-            return name + "=" + encodeURIComponent(paramsArray[name]);
-        }).join("&");
 
         // we will use only first preferred size, though we could have an array and draw a combo
         var preferredSize = widget.preferredSizes[0];
 
         // set preferred size to the dialog to start with
-        var widgetEl = $("#widget");
-        widgetEl.width(preferredSize.w).height(preferredSize.h);
+        var widgetContainer = $("#widget-container");
+        widgetContainer.resizable("destroy");
 
-        widgetEl.resizable("destroy");
-        widgetEl.html(writeIFrameTag(url, "100%", "100%"));
-        widgetEl.resizable({
+        widgetContainer.width(preferredSize.w).height(preferredSize.h);
+
+        var instance = new SensorWidget(widget.name, config, document.getElementById("widget"));
+
+        widgetContainer.resizable({
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
             	//refresh embed code snippet (we use the iframe tag with dialog's current width and height)
-            	$("#embedinput").val(writeIFrameTag(url, ui.size.width, ui.size.height));
+                $("#embedinput").val(instance.iframe(ui.size.width, ui.size.height));
             }
         });
 
         //refresh code snippets for the first time
-        $("#embedinput").val(writeIFrameTag(url, widgetEl.width(), widgetEl.height()));
-        $("#linkinput").val(url);
-        $("#jsinput").val(writeJSCode(paramsArray));
+        $("#embedinput").val(instance.iframe(preferredSize.w,preferredSize.h));
+        $("#linkinput").val(instance.url());
+        $("#jsinput").val(instance.javascript());
         $(".codeinput").on("click", function() {this.focus();this.select();});
         var opt = {
             autoOpen: false,
@@ -387,30 +385,6 @@ define('wizard', ['SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'dater
         $("#share").button().show().click(function() {
             $("#codediv").dialog(opt).dialog("open");
         });
-    }
-
-    function writeIFrameTag(url, width, height) {
-    	return '<iframe id="iframe" src="' + url + '" width="'+ width + '" height="'+ height + '" frameBorder="0"><p>Your browser does not support iframes.</p></iframe>';
-    }
-
-    function writeJSCode(paramsArray) {
-        var name = paramsArray.name;
-        var code = '';
-    	for (var key in paramsArray) {
-        	code += code ? ',\n' : '';
-        	var value = paramsArray[key];
-            try {
-                // If it is JSON parsejable, then it's an array or an object literal: leave as is
-                value = JSON.stringify(JSON.parse(value), null, 2);
-            } catch (e) {
-                // If it is not JSON parsejable, then it's a string: surround with quotes
-                value = '"' + value + '"';
-            } finally {
-                code += '\t' + key + ': ' + value;
-            }
-        }
-    	code = 'require(["widget/' + name + '"], function(' + name + ') {\n' + name + '.init({\n' + code + '\n},\n document.getElementById("' + name + '-container"));\n});';
-    	return code;
     }
 
     function capitalize(string) {
