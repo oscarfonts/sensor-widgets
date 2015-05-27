@@ -89,6 +89,7 @@ define('meteo', ['SensorWidget', 'locale-date', 'bootstrap'], function(SensorWid
         case "XMVQA":
 
             new SensorWidget('bearing', {
+                title: "Sirena",
                 service: defs.service(),
                 offering: defs.offering("1m"),
                 feature: defs.feature("02"),
@@ -124,12 +125,20 @@ define('meteo', ['SensorWidget', 'locale-date', 'bootstrap'], function(SensorWid
                 refresh_interval: 120
             }, document.querySelector(".xmvqa .left .panel-30m"));
 
-            var stations = ["01", "P4", "03", "P6", "P3", "P5", "10"];
+            var stations = {
+                "01": "Dispensari",
+                "P4": "Dic Sud",
+                "03": "Adossat",
+                "P6": "Contradic",
+                "P3": "Unitat Mobil",
+                "P5": "Dàrsena Sud B",
+                "10": "ZAL2"
+            };
 
-            for (var i in stations) {
-                var station = stations[i];
+            for (var station in stations) {
 
                 new SensorWidget('bearing', {
+                    title: stations[station],
                     service: defs.service(),
                     offering: defs.offering("1m"),
                     feature: defs.feature(station),

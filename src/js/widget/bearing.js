@@ -6,10 +6,10 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
 
     var template = [
         '<div class="bearing widget">',
-            '<h1 class="feature"></h1>',
+            '<h1 class="title"></h1>',
             drawing,
             '<div class="data">',
-            '<div class="error" style="display:none;text-align:center;">(no data)</div>',
+            '<div class="error" style="display:none;text-align:center;">Loading...</div>',
             '<h2><span class="property"></span>:<br/><span class="value"></span> deg</h2>',
             '<h3>Request time:<br/><span class="request_time"></span></h3>',
             '<h3>Result time:<br/><span class="result_time"></span></h3>',
@@ -19,7 +19,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
 
     return {
         inputs: common.inputs.concat(["feature", "property", "refresh_interval"]),
-        optional_inputs: common.optional_inputs,
+        optional_inputs: common.optional_inputs.concat(["title"]),
         preferredSizes: [{w: 570, h: 380}, {w: 280, h: 540}],
 
         init: function(config, el) {
@@ -32,6 +32,10 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
             //load widget common features
             common.init(config, el);
 
+            if (config.title) {
+                el.querySelector(".title").innerHTML = config.title;
+            }
+
             // Setup SOS data access
             var data = data_access(config, redraw);
             setInterval(data.read, config.refresh_interval * 1000);
@@ -40,15 +44,19 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
             // Update view
             function redraw(data) {
                 var measure = data[0];
-                el.querySelector(".error").style.display = 'none';
-                el.querySelector(".request_time").innerHTML = ld.display(new Date());
-                el.querySelector(".result_time").innerHTML = ld.display(measure.time);
-                el.querySelector(".value").innerHTML = measure.value;
-                el.querySelector(".feature").innerHTML = measure.feature;
-                el.querySelector(".property").innerHTML = measure.property;
-                arrow.setAttribute("transform", "rotate(" + measure.value + ", 256, 256)");
-                shadow.setAttribute("transform", "translate(5, 5) rotate(" + measure.value + ", 256, 256)");
-                arrow.style.visibility = shadow.style.visibility = 'visible';
+                if (measure) {
+                    el.querySelector(".error").style.display = 'none';
+                    el.querySelector(".request_time").innerHTML = ld.display(new Date());
+                    el.querySelector(".result_time").innerHTML = ld.display(measure.time);
+                    el.querySelector(".value").innerHTML = measure.value;
+                    if (!config.title) {
+                        el.querySelector(".title").innerHTML = measure.feature;
+                    }
+                    el.querySelector(".property").innerHTML = measure.property;
+                    arrow.setAttribute("transform", "rotate(" + measure.value + ", 256, 256)");
+                    shadow.setAttribute("transform", "translate(5, 5) rotate(" + measure.value + ", 256, 256)");
+                    arrow.style.visibility = shadow.style.visibility = 'visible';
+                }
             }
 
         }
