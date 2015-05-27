@@ -7,15 +7,15 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     var quick_refresh = 15; // seconds
     var slow_refresh = 120; // seconds
 
-    //var now = new Date();
-    var now = new Date(2012, 5, 11, 3, 0, 0);
+    var now = new Date();
+    //var now = new Date(2012, 5, 11, 3, 0, 0);
     var three_hours_ago = new Date(now.getTime() - 1000 * 60 * 60 * 3);
     var a_day_ago = new Date(now.getTime() - 1000 * 60 * 60 * 24);
 
     var defs = {
         service: function() {
-            return "http://demo.geomati.co/sos/json";
-            //return "http://sensors.portdebarcelona.cat/sos/json";
+            //return "http://demo.geomati.co/sos/json";
+            return "http://sensors.portdebarcelona.cat/sos/json";
         },
         offering: function(p) {
             return "http://sensors.portdebarcelona.cat/def/weather/offerings#" + p;
@@ -116,7 +116,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
         'thermometer': {
             service: defs.service(),
             offering: defs.offering("10m"),
-            feature: defs.feature("P6"),
+            feature: defs.feature("01"),
             property: defs.property("32"),
             refresh_interval: slow_refresh
         },
@@ -147,11 +147,11 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
 
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
-    };
+    }
 
     function htmlDecode(str) {
         return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    };
+    }
 
     var widget_menu = "";
     var widget_list = "";
