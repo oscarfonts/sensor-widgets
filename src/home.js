@@ -145,26 +145,22 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
         }
     };
 
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1);
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     };
 
-    String.prototype.indent = function(spaces) {
-        return this.replace(/^(?=.)/gm, new Array(spaces + 1).join(' '));
-    };
-
-    String.prototype.htmlDecode = function() {
-        return this.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    function htmlDecode(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     };
 
     var widget_menu = "";
     var widget_list = "";
     for (var name in widget_configurations) {
-        widget_menu += '<li><a href="#'+name+'">' + name.capitalize() + '</a></li>';
+        widget_menu += '<li><a href="#'+name+'">' + capitalize(name) + '</a></li>';
         /*jshint multistr: true */
         widget_list += ' \
             <div class="anchor" id="'+name+'"></div> \
-            <h1><i class="flaticon-'+name+'"></i>&nbsp;&nbsp;'+name.capitalize()+'</h1> \
+            <h1><i class="flaticon-'+name+'"></i>&nbsp;&nbsp;'+capitalize(name)+'</h1> \
             <div class="row"> \
                 <div class="col-md-6"> \
                     <div class="thumbnail widget-container" id="'+name+'-container"></div> \
@@ -182,7 +178,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     document.getElementById("widget-list").innerHTML = widget_list;
 
     var renderInputs = function(inputs, optional, sizes) {
-        var iface = "<strong>" + this.name.capitalize() + " Widget Interface:</strong><ul>";
+        var iface = "<strong>" + capitalize(this.name) + " Widget Interface:</strong><ul>";
         iface += "<li><strong>Mandatory Inputs:</strong> " + inputs.join(", ");
         iface += "<li><strong>Optional Inputs:</strong> " + optional.join(", ");
         iface += "<li><strong>Preferred Sizes:</strong> " + sizes.map(function(size) {
@@ -208,7 +204,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
         );
 
         document.getElementById(name+'-url').innerHTML = '<a href="'+widget.url()+'" target="_blank">'+widget.url()+'</a>';
-        document.getElementById(name+'-iframe').innerHTML = widget.iframe().htmlDecode();
+        document.getElementById(name+'-iframe').innerHTML = htmlDecode(widget.iframe());
         document.getElementById(name+'-code').innerHTML = widget.javascript();
     }
 
