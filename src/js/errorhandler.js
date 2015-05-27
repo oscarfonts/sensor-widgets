@@ -20,10 +20,11 @@ define([], function() {
         }
     }
 
-    function showGeneralError(msg) {
+    function showGeneralError(msg, el) {
+        if(!el) el = document.body;
         var div = document.createElement("div");
         div.className = 'error';
-        document.body.appendChild(div);
+        el.appendChild(div);
         div.innerHTML = "Error: " + msg;
     }
 
@@ -34,8 +35,8 @@ define([], function() {
         hideError: function() {
             hideBuilderError();
         },
-        throwWidgetError: function(msg) {
-            showGeneralError(msg);
+        throwWidgetError: function(msg, el) {
+            showGeneralError(msg, el);
         }
     };
 });

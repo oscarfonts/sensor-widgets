@@ -16,15 +16,15 @@ define(['errorhandler'], function(errorhandler) {
             }
 
             require(["widget/" + name], function(widget) {
-                if (checkConfig(widget.inputs, config)) {
+                if (checkConfig(widget.inputs, config, renderTo)) {
                     console.debug("Creating " + name + " widget from given parameters.");
                     widget.init(config, renderTo);
                     return widget;
                 } else {
-                	errorhandler.throwWidgetError("Widget '" + name + "' exists, but some mandatory parameters missing.");
+                	errorhandler.throwWidgetError("Widget '" + name + "' exists, but some mandatory parameters missing.", renderTo);
                 }
             }, function() {
-            	errorhandler.throwWidgetError("Widget '" + name + "' cannot be found.");
+            	errorhandler.throwWidgetError("Widget '" + name + "' cannot be found.", renderTo);
             });
 
             return {
@@ -67,11 +67,11 @@ define(['errorhandler'], function(errorhandler) {
                 }
             };
         } else {
-        	errorhandler.throwWidgetError("No widget name specified.");
+        	errorhandler.throwWidgetError("No widget name specified.", renderTo);
         }
     };
 
-    function checkConfig(inputs, config) {
+    function checkConfig(inputs, config, renderTo) {
         var missing = [];
 
         for (var i in inputs) {
@@ -81,7 +81,7 @@ define(['errorhandler'], function(errorhandler) {
             }
         }
         if (missing.length) {
-        	errorhandler.throwWidgetError("The following parameters are mandatory: " + missing.join(", "));
+        	errorhandler.throwWidgetError("The following parameters are mandatory: " + missing.join(", "), renderTo);
         }
         return !missing.length;
     }
