@@ -1,6 +1,10 @@
 define(['errorhandler'], function(errorhandler) {
     "use strict";
 
+    function indent(str, spaces) {
+        return str.replace(/^(?=.)/gm, new Array(spaces + 1).join(' '));
+    }
+
     return function(name, config, renderTo) {
         if (name && config) {
             if (!renderTo) {
@@ -44,10 +48,11 @@ define(['errorhandler'], function(errorhandler) {
                     var url = window.location.origin +relPathToAbs(require.toUrl("../widget/")) + "?";
                     url += "name="+ encodeURIComponent(name)+"&";
                     url += Object.keys(config).map(function(key) {
-                        if(typeof config[key] === 'object') {
-                            config[key] = JSON.stringify(config[key]);
+                        var val = config[key];
+                        if (typeof config[key] === 'object') {
+                            val = JSON.stringify(config[key]);
                         }
-                        return key + "=" + encodeURIComponent(config[key]);
+                        return key + "=" + encodeURIComponent(val);
                     }).join("&");
                     return url;
                 },
@@ -58,7 +63,7 @@ define(['errorhandler'], function(errorhandler) {
                 },
                 javascript: function() {
                     var code_sample = "SensorWidget('"+name+"', " + JSON.stringify(config, null, 3) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
-                    return "require(['SensorWidget'], function(SensorWidget) {\r\n" + code_sample.indent(3) + "});";
+                    return "require(['SensorWidget'], function(SensorWidget) {\r\n" + indent(code_sample, 3) + "});";
                 }
             };
         } else {
