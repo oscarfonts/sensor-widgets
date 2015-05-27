@@ -14,7 +14,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
     ].join('');
 
     return {
-        inputs: common.inputs.concat(["title", "feature", "properties"]),
+        inputs: common.inputs.concat(["title", "feature", "properties", "refresh_interval"]),
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 400, h: 400}],
 
@@ -30,6 +30,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
 
             // Setup SOS data access
             var data = data_access(config, redraw);
+            setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
