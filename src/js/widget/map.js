@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'widget-common', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, panel, common) {
+define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, SensorWidget, common) {
     "use strict";
 
     proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
@@ -113,14 +113,13 @@ define(['SOS', 'leaflet', 'proj4', 'widget/panel', 'widget-common', 'proj4leafle
                                             
                                         }
 
-	                                    panel.init({
+	                                    new SensorWidget('panel', {
 						                    title: feature.properties.name,
 						                    service: config.service,
 						                    offering: offering.identifier,
 						                    feature: feature.id,
-						                    properties: propertiesArray
-						                    //time_start: back_33_samples.toISOString().substring(0, 19) + "Z",
-						                    //time_end: now.toISOString().substring(0, 19) + "Z"
+						                    properties: propertiesArray,
+						                    refresh_interval: 60
 						                }, popup);
                                     });
                                 }
