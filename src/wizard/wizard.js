@@ -1,9 +1,26 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker'], function(SensorWidget, SOS, $, moment, errorhandler) {
+define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker', 'bootstrap'], function(SensorWidget, SOS, $, moment, errorhandler) {
     "use strict";
 
+    menu();
+
+    var sw = SensorWidget('bearing', {
+      "service": "http://sensors.portdebarcelona.cat/sos/json",
+      "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#1m",
+      "feature": "http://sensors.portdebarcelona.cat/def/weather/features#02",
+      "property": "http://sensors.portdebarcelona.cat/def/weather/properties#31",
+      "refresh_interval": 15,
+      "footnote": "A sample footnote for bearing widget"
+    },
+    document.getElementById('widget-preview'));
+
+    document.getElementById('code').innerHTML = sw.javascript();
+    document.getElementById('embed').innerHTML = htmlDecode(sw.iframe());
+    document.getElementById('link').innerHTML = '<a href="'+sw.url()+'" target="_blank">'+sw.url()+'</a>';
+
+    /*
     var name = getParameterByName("name");
 
     if (name) { // Open builder for the selected widget
@@ -19,21 +36,23 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
             results = regex.exec(location.search);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
+    */
 
-    function showList() {
+    function menu() {
         var widgets = ["bearing", "gauge", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
-        var contents = '<h1>Widget<br/><small>Wizard</small></h1>';
-
+        var styles = ["default", "primary", "success", "info", "warning", "danger"];
+        var html = "";
         for (var i in widgets) {
             var widget = widgets[i];
-            contents += "<a class='big-button' id='" + widget + "' href='?name=" + widget + "' target='builder'> <div class='flaticon-" + widget + "'></div><b>NEW </b>" + widget + "</a>";
+            var style = styles[i%styles.length];
+            html += '<a role="button" class="btn btn-'+style+' btn-lg" href="#'+widget+'"><div class="flaticon-'+widget+'"></div>'+capitalize(widget)+'&nbsp;&nbsp;»</a>';
         }
-
-        var iframe = '<div id="factory-right"><iframe name="builder" frameBorder="0"><p>Your browser does not support iframes.</p></iframe></div>';
-
-        document.body.innerHTML = '<div id="factory">' + contents + '</div>' + iframe;
+        document.getElementById("main-menu").innerHTML = html;
     }
 
+    function htmlDecode(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
 
     function getBuilder(config, renderTo) {
         require(["widget/" + config.name], function(widget) {

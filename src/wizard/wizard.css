@@ -1,3 +1,40 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+.col-fixed-200 {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 200px;
+    float: left;
+}
+
+.left-200 {
+    margin-left: 200px;
+}
+
+.tab-content {
+    border: 1px solid #ecf0f1;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 15px;
+    padding-bottom: 0;
+}
+
+pre {
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
+    font-size: 11px;
+    color: black;
+}
+
+.well {
+    margin-bottom: 0;
+}
+
+/*
 html, body {
     font-family: "Source Sans Pro", helvetica, sans-serif;
     height: 100%;
@@ -193,3 +230,4 @@ button {
 div.select select[multiple] {
     height: 180px !important;
 }
+*/

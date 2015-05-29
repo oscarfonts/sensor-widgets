@@ -1,16 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Sensor Widget Wizard</title>
-		<link rel="stylesheet" type="text/css" href="../fonts/flaticon.css"/>
-		<link rel="stylesheet" type="text/css" href="wizard.css"/>
-        <link rel="stylesheet" type="text/css" href="../css/widget.css"/>
-		<script src="../lib/requirejs/require.js"></script>
-        <script src="../js/main.js"></script>
-        <script src="wizard.js"></script>
-	</head>
-	<body> </body>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sensor Widgets">
+    <meta name="author" content="Oscar Fonts">
+
+    <title>Sensor Widgets Wizard</title>
+
+    <link rel="stylesheet" href="../css/bootswatch-flatly.min.css">
+    <link rel="stylesheet" href="../fonts/flaticon.css"/>
+    <link rel="stylesheet" href="../css/widget.css"/>
+    <link rel="stylesheet" href="wizard.css"/>
+</head>
+
+<body role="document">
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Sensor Widget Wizard</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-fixed-200">
+    <div id="main-menu" class="btn-group-vertical" role="group">
+        <a role="button" class="btn btn-primary btn-lg">
+            <div class="flaticon-bearing"></div>
+            Bearing&nbsp;&nbsp;»</a>
+    </div>
+</div>
+
+<div class="container-fluid left-200" role="main">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Configure</h3>
+                        </div>
+                        <div class="panel-body well">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+
+                                            <div class="col-lg-10">
+                                                <input type="password" class="form-control" id="inputPassword"
+                                                       placeholder="Password">
+
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> Checkbox
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+
+                                            <div class="col-lg-10">
+                                                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Radios</label>
+
+                                            <div class="col-lg-10">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios" id="optionsRadios1"
+                                                               value="option1" checked="">
+                                                        Option one is this
+                                                    </label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios" id="optionsRadios2"
+                                                               value="option2">
+                                                        Option two can be something else
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Selects</label>
+
+                                            <div class="col-lg-10">
+                                                <select class="form-control" id="select">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                                <br>
+                                                <select multiple="" class="form-control">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-10 col-lg-offset-2">
+                                                <button type="reset" class="btn btn-default">Cancel</button>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Preview</h3>
+                        </div>
+                        <div class="panel-body" id="widget-preview"></div>
+                    </div>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Take Away</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs nav-justified">
+                                <li class="active"><a href="#code-tab" data-toggle="tab" aria-expanded="true">Code</a></li>
+                                <li class=""><a href="#embed-tab" data-toggle="tab" aria-expanded="false">Embed</a></li>
+                                <li class=""><a href="#link-tab" data-toggle="tab" aria-expanded="false">Link</a></li>
+                            </ul>
+                        </div>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade active in" id="code-tab">
+                                <pre id="code"></pre>
+                            </div>
+                            <div class="tab-pane fade" id="embed-tab">
+                                <pre id="embed"></pre>
+                            </div>
+                            <div class="tab-pane fade" id="link-tab">
+                                <pre id="link"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../lib/requirejs/require.js"></script>
+<script src="../js/main.js"></script>
+<script src="wizard.js"></script>
+
+</body>
 </html>
