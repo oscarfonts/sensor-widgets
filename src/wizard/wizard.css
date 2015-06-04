@@ -34,6 +34,14 @@ pre {
     margin-bottom: 0;
 }
 
+#widget-view,
+#widget-container,
+.map.widget,
+.timechart.widget {
+    height: 100%;
+    padding: 0;
+}
+
 /*
 html, body {
     font-family: "Source Sans Pro", helvetica, sans-serif;

@@ -6,6 +6,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
 
     menu();
 
+    /* START Static Sample */
     var sw = SensorWidget('bearing', {
       "service": "http://sensors.portdebarcelona.cat/sos/json",
       "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#1m",
@@ -14,29 +15,12 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
       "refresh_interval": 15,
       "footnote": "A sample footnote for bearing widget"
     },
-    document.getElementById('widget-preview'));
+    document.getElementById('widget-view'));
 
     document.getElementById('code').innerHTML = sw.javascript();
     document.getElementById('embed').innerHTML = htmlDecode(sw.iframe());
     document.getElementById('link').innerHTML = '<a href="'+sw.url()+'" target="_blank">'+sw.url()+'</a>';
-
-    /*
-    var name = getParameterByName("name");
-
-    if (name) { // Open builder for the selected widget
-        getBuilder({name: name}, document.body);
-    } else {
-        // No widget name specified. Show a list of widgets
-        showList(document.body);
-    }
-
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-    */
+    /* END Static Sample */
 
     function menu() {
         var widgets = ["bearing", "gauge", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
@@ -45,174 +29,154 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
         for (var i in widgets) {
             var widget = widgets[i];
             var style = styles[i%styles.length];
-            html += '<a role="button" class="btn btn-'+style+' btn-lg" href="#'+widget+'"><div class="flaticon-'+widget+'"></div>'+capitalize(widget)+'&nbsp;&nbsp;»</a>';
+            html += '<a role="button" class="menu-btn btn btn-'+style+' btn-lg" id="'+widget+'"><div class="flaticon-'+widget+'"></div>'+capitalize(widget)+'&nbsp;&nbsp;»</a>';
         }
         document.getElementById("main-menu").innerHTML = html;
+        $(".menu-btn").click(function() {
+            form(this.id);
+        });
     }
 
     function htmlDecode(str) {
         return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    function getBuilder(config, renderTo) {
-        require(["widget/" + config.name], function(widget) {
-            renderBuilder(widget, config, renderTo);
-        }, function() {
-            errorhandler.throwWidgetError("Widget '" + config.name + "' cannot be found.");
-        });
-    }
+    function form(name) {
+        $("#widget-form-title").html(capitalize(name) + " Widget Configuration");
+        SensorWidget(name).inspect(function(inputs, optionalInputs, preferredSizes) {
+            var contents = "";
 
-    function renderBuilder(widget, config, renderTo) {
+            for (var i in inputs) {
+                var input = inputs[i];
+                var select = "";
+                var label = capitalize(input);
+                var options = "";
 
-    	var contents = '<h1>' + capitalize(config.name) + ' Widget<br/><small>Builder</small></h1>';
-
-        for (var i in widget.inputs) {
-            var input = widget.inputs[i];
-            var select = "";
-            var label = capitalize(input);
-            var options = "";
-
-            switch (input) {
-                case "service":
-                case "offering":
-                case "feature":
-                case "property":
-                    select = '<select id="' + input + '"></select>';
-                    break;
-                case "features":
-                case "properties":
-                    select = '<select multiple id="' + input + '"></select>';
-                    label += " (multiselect)";
-                    break;
-                case "refresh_interval":
-                    var intervals = [5, 10, 30, 60, 120];
-                    for (var j in intervals) {
-                        var value = intervals[j];
-                        options += '<option id="' + value + '">' + value + '</option>';
-                    }
-                    select = '<select id="' + input + '">' + options + '</select>';
-                    break;
-                case "time_start":
-                    if ($.inArray("time_end", widget.inputs)) {
-                        label = "Time Range";
-                        select = '<span id="time_range"><span class="sublabel">From: </span><input type="text" id="time_start" value=""/><br/>';
-                        select += '<span class="sublabel">To: </span><input type="text" id="time_end" value=""/></span>';
-                    }
-                    break;
-                case "time_end":
-                    break;
-                case "footnote":
-                    select = '<textarea value="" id="' + input + '"></textarea>';
-                    break;
-                case "baseMap":
-                    for (var key in widget.baseMaps) {
-	                    options += '<option id="' + key + '">' + key + '</option>';
-	                }
-		            select = '<select id="' + input + '">' + options + '</select>';
-                    break;
-                default:
-                    select = '<input type="text" value="" id="' + input + '"/>';
-            }
-
-            if (select) {
-                contents += '<div class="select">' + '<label for="' + input + '">' + label + ':</label>' + select + '</div>';
-            }
-        }
-
-        contents += '<button name="build">Build</button>';
-
-        contents += "<div id='builderError' class='error'></div>";
-
-        //modal div
-        contents += '<div id="codediv">' +
-        	'<h3>Get the link</h3><h4>Get the link and send it or post it</h4><textarea id="linkinput" class="codeinput" readonly="true"></textarea><br/>' +
-        	'<h3>Embed it</h3><h4>Resize the widget, copy this HTML code and paste it on your webpage</h4><textarea id="embedinput" class="codeinput" readonly="true"></textarea><br/>' +
-        	'<h3>Use Javascript</h3><h4>Add the widget to your app using Javascript</h4><textarea id="jsinput" class="codeinput" readonly="true"></textarea></div>';
-
-        renderTo.innerHTML = '<div id="editor">' + contents +
-        	'</div>' + '<div id="preview"><h1 id="header">' +
-        	'<img src="../img/logo.svg"/>Widget<br/><small>Preview</small></h1><button id="share" title="Take this widget to your webpage!">Share it</button>' + '<div id="widget-container"></div></div>';
-
-        $("[name=build]").button();
-
-        $("#widget-container").resizable({
-            helper: "ui-resizable-helper"
-        }).draggable({
-            opacity: 0.35
-        });
-
-        $("#widget-container").append('<div id="widget"></div>');
-
-        $('[name="build"]').data({
-            name: config.name,
-            inputs: widget.inputs,
-            preferredSizes: widget.preferredSizes
-        }).click(loadWidget);
-
-        // Setup the SOS parameters: service, offering, feature(s) and property(ies)
-        setService(["http://demo.geomati.co/sos/json", "http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
-
-        $('#service').change(function() {
-        	errorhandler.hideError();
-            var service = $('#service').find('option:selected').attr("id");
-            setOfferings(service);
-            setDateRange();
-
-        });
-
-        $('#offering').change(function() {
-            var procedure = $('#offering').find('option:selected').data("procedure");
-            setFeatures(procedure);
-            setProperties(procedure);
-            setDateRange();
-        });
-
-        $('#feature').change(function() {
-            setDateRange();
-        });
-
-        $('#features').change(function() {
-            setDateRange();
-        });
-
-        $('#property').change(function() {
-            setDateRange();
-        });
-
-        $('#properties').change(function() {
-            setDateRange();
-        });
-
-        var timeRange = $('#time_range');
-        if (timeRange.length) {
-            timeRange.dateRangePicker({
-                separator: ' to ',
-                language: 'en',
-                startOfWeek: 'monday',
-                format: 'YYYY-MM-DD[T]HH:mm:ssZ',
-                //startDate: X, // TODO getDataAvailability
-                endDate: moment.utc(), // TODO getDataAvailability
-                autoClose: true,
-                showShortcuts: false,
-                shortcuts: null,
-                time: {
-                    enabled: true
-                },
-                getValue: function() {
-                    var timeStart = $('#time_start').val();
-                    var timeEnd = $('#time_end').val();
-                    if (timeStart && timeEnd) {
-                        return timeStart + ' to ' + timeEnd;
-                    } else {
-                        return '';
-                    }
-                },
-                setValue: function(s, date1, date2) {
-                    $('#time_start').val(moment(date1).utc().format());
-                    $('#time_end').val(moment(date2).utc().format());
+                switch (input) {
+                    case "service":
+                    case "offering":
+                    case "feature":
+                    case "property":
+                        select = '<select class="form-control" id="' + input + '"></select>';
+                        break;
+                    case "features":
+                    case "properties":
+                        select = '<select class="form-control" multiple id="' + input + '"></select>';
+                        label += " (multiselect)";
+                        break;
+                    case "refresh_interval":
+                        var intervals = [5, 10, 30, 60, 120];
+                        for (var j in intervals) {
+                            var value = intervals[j];
+                            options += '<option id="' + value + '">' + value + '</option>';
+                        }
+                        select = '<select class="form-control" id="' + input + '">' + options + '</select>';
+                        break;
+                    case "time_start":
+                        if ($.inArray("time_end", inputs)) {
+                            label = "Time Range";
+                            select = 'TODO...<span id="time_range"><span class="sublabel">From: </span><input type="text" id="time_start" value=""/><br/>';
+                            select += 'TODO...<span class="sublabel">To: </span><input type="text" id="time_end" value=""/></span>';
+                        }
+                        break;
+                    case "time_end":
+                        break;
+                    case "footnote":
+                        select = '<textarea class="form-control" value="" id="' + input + '"></textarea>';
+                        break;
+                    case "baseMap":
+                        for (var key in inputs.baseMaps) {
+                            options += '<option id="' + key + '">' + key + '</option>';
+                        }
+                        select = '<select class="form-control" id="' + input + '">' + options + '</select>';
+                        break;
+                    default:
+                        select = '<input  class="form-control" type="text" value="" id="' + input + '"/>';
                 }
+
+                if (select) {
+                    contents += '<div class="form-group">' + '<label class="col-md-2 control-label" for="' + input + '">' + label + '</label><div class="col-md-10">' + select + '</div></div>';
+                }
+            }
+
+            contents += '<input type="button" name="build" class="btn btn-primary pull-right" value="Create Widget&nbsp;&nbsp;»"/>';
+            contents += "<div id='builderError' class='error'></div>";
+
+            $("#widget-form").html(contents);
+
+            $('[name="build"]').data({
+                name: name,
+                inputs: inputs,
+                preferredSizes: preferredSizes
+            }).click(loadWidget);
+
+            // Setup the SOS parameters: service, offering, feature(s) and property(ies)
+            setService(["http://demo.geomati.co/sos/json", "http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
+
+            $('#service').change(function() {
+                errorhandler.hideError();
+                var service = $('#service').find('option:selected').attr("id");
+                setOfferings(service);
+                setDateRange();
+
             });
-        }
+
+            $('#offering').change(function() {
+                var procedure = $('#offering').find('option:selected').data("procedure");
+                setFeatures(procedure);
+                setProperties(procedure);
+                setDateRange();
+            });
+
+            $('#feature').change(function() {
+                setDateRange();
+            });
+
+            $('#features').change(function() {
+                setDateRange();
+            });
+
+            $('#property').change(function() {
+                setDateRange();
+            });
+
+            $('#properties').change(function() {
+                setDateRange();
+            });
+
+            var timeRange = $('#time_range');
+            if (timeRange.length) {
+                timeRange.dateRangePicker({
+                    separator: ' to ',
+                    language: 'en',
+                    startOfWeek: 'monday',
+                    format: 'YYYY-MM-DD[T]HH:mm:ssZ',
+                    //startDate: X, // TODO getDataAvailability
+                    endDate: moment.utc(), // TODO getDataAvailability
+                    autoClose: true,
+                    showShortcuts: false,
+                    shortcuts: null,
+                    time: {
+                        enabled: true
+                    },
+                    getValue: function() {
+                        var timeStart = $('#time_start').val();
+                        var timeEnd = $('#time_end').val();
+                        if (timeStart && timeEnd) {
+                            return timeStart + ' to ' + timeEnd;
+                        } else {
+                            return '';
+                        }
+                    },
+                    setValue: function(s, date1, date2) {
+                        $('#time_start').val(moment(date1).utc().format());
+                        $('#time_end').val(moment(date2).utc().format());
+                    }
+                });
+            }
+        });
+
+
     }
 
     function setService(urls) {
@@ -339,15 +303,15 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
     }
 
     function loadWidget() {
-        var widget = $('[name="build"]').data();
+        var params = $('[name="build"]').data();
         var config = {};
 
         var getId = function() {
             return this.id;
         };
 
-        for (var i in widget.inputs) {
-            var name = widget.inputs[i];
+        for (var i in params.inputs) {
+            var name = params.inputs[i];
             var el = $('#'+name);
             var value;
             switch (name) {
@@ -370,29 +334,33 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
         }
 
         // we will use only first preferred size, though we could have an array and draw a combo
-        var preferredSize = widget.preferredSizes[0];
+        var preferredSize = params.preferredSizes[0];
 
         // set preferred size to the dialog to start with
         var widgetContainer = $("#widget-container");
-        widgetContainer.resizable("destroy");
+        //widgetContainer.resizable("destroy");
 
         widgetContainer.width(preferredSize.w).height(preferredSize.h);
 
-        var instance = new SensorWidget(widget.name, config, document.getElementById("widget"));
+        var instance = new SensorWidget(params.name, config, document.getElementById("widget-view"));
 
         widgetContainer.resizable({
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
             	//refresh embed code snippet (we use the iframe tag with dialog's current width and height)
-                $("#embedinput").val(instance.iframe(ui.size.width, ui.size.height));
+                document.getElementById('embed').innerHTML = htmlDecode(instance.iframe(ui.size.width, ui.size.height));
             }
         });
 
         //refresh code snippets for the first time
-        $("#embedinput").val(instance.iframe(preferredSize.w,preferredSize.h));
-        $("#linkinput").val(instance.url());
-        $("#jsinput").val(instance.javascript());
-        $(".codeinput").on("click", function() {this.focus();this.select();});
+        document.getElementById('code').innerHTML = instance.javascript();
+        document.getElementById('embed').innerHTML = htmlDecode(instance.iframe());
+        document.getElementById('link').innerHTML = '<a href="'+instance.url()+'" target="_blank">'+instance.url(preferredSize.w, preferredSize.h)+'</a>';
+        //$("#embedinput").val(instance.iframe(preferredSize.w,preferredSize.h));
+        //$("#linkinput").val(instance.url());
+        //$("#jsinput").val(instance.javascript());
+        //$(".codeinput").on("click", function() {this.focus();this.select();});
+        /*
         var opt = {
             autoOpen: false,
             height: 500,
@@ -404,6 +372,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
         $("#share").button().show().click(function() {
             $("#codediv").dialog(opt).dialog("open");
         });
+        */
     }
 
     function capitalize(string) {
