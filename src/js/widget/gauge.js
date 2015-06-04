@@ -27,7 +27,7 @@ define(['sos-data-access', 'text!widget/gauge.svg', 'widget-common'], function(d
 
             // Setup SOS data access
             var data = data_access(config, redraw);
-            setInterval(data.read, config.refresh_interval * 1000);
+            var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
@@ -36,6 +36,12 @@ define(['sos-data-access', 'text!widget/gauge.svg', 'widget-common'], function(d
                 title.innerHTML = measure.property;
                 value.innerHTML = measure.value + " %";
                 arrow.setAttribute("transform", "rotate(" + 2.7 * measure.value + ", 365.396, 495)");
+            }
+
+            return {
+                destroy: function() {
+                    clearInterval(refreshIntervalId);
+                }
             }
 
         }

@@ -38,7 +38,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
 
             // Setup SOS data access
             var data = data_access(config, redraw);
-            setInterval(data.read, config.refresh_interval * 1000);
+            var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
@@ -54,6 +54,12 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
                 var width = fullspan * proportion;
 
                 el.querySelector(".bar").style.width = width + "px";
+            }
+
+            return {
+                destroy: function() {
+                    clearInterval(refreshIntervalId);
+                }
             }
         }
     };

@@ -30,7 +30,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
 
             // Setup SOS data access
             var data = data_access(config, redraw);
-            setInterval(data.read, config.refresh_interval * 1000);
+            var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
@@ -53,6 +53,13 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
                     html += "<dd>" + measure.value + " " + measure.uom + "</dd>";
                 }
                 panel.innerHTML = html;
+
+            }
+
+            return {
+                destroy: function() {
+                    clearInterval(refreshIntervalId);
+                }
             }
         }
     };

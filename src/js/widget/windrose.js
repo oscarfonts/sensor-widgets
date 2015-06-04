@@ -34,6 +34,7 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
         	
             // Setup SOS data access
             var data = data_access(config, redraw);
+            var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             function redraw(data) {
@@ -143,6 +144,13 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
                     colors: ['#BD0BC9', '#C9170B', '#C9760B', '#BDC90B', '#0BC917', '#0BBDC9'],
                     series: series
                 });
+
+            }
+
+            return {
+                destroy: function() {
+                    clearInterval(refreshIntervalId);
+                }
             }
         }
     };

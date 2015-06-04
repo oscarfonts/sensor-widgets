@@ -38,7 +38,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
 
             // Setup SOS data access
             var data = data_access(config, redraw);
-            setInterval(data.read, config.refresh_interval * 1000);
+            var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
@@ -56,6 +56,12 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
                     arrow.setAttribute("transform", "rotate(" + measure.value + ", 256, 256)");
                     shadow.setAttribute("transform", "translate(5, 5) rotate(" + measure.value + ", 256, 256)");
                     arrow.style.visibility = shadow.style.visibility = 'visible';
+                }
+            }
+
+            return {
+                destroy: function() {
+                    clearInterval(refreshIntervalId);
                 }
             }
 

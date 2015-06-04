@@ -37,7 +37,7 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget
 
             // Setup SOS data access
             var data = data_access(config, redraw);
-            setInterval(data.read, config.refresh_interval * 1000);
+            var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 
             // Update view
@@ -53,6 +53,12 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget
                 var y_min = y_max - h;
                 clip.setAttribute("height", h.toString());
                 clip.setAttribute("y", y_min.toString());
+            }
+
+            return {
+                destroy: function() {
+                    clearInterval(refreshIntervalId);
+                }
             }
         }
     };
