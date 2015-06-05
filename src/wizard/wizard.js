@@ -6,21 +6,14 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
 
     menu();
 
-    /* START Static Sample */
-    var sw = SensorWidget('bearing', {
-      "service": "http://sensors.portdebarcelona.cat/sos/json",
-      "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#1m",
-      "feature": "http://sensors.portdebarcelona.cat/def/weather/features#02",
-      "property": "http://sensors.portdebarcelona.cat/def/weather/properties#31",
-      "refresh_interval": 15,
-      "footnote": "A sample footnote for bearing widget"
-    },
-    document.getElementById('widget-view'));
+    $(".panel").draggable({
+        handle: ".panel-heading"
+    })
 
-    document.getElementById('code').innerHTML = sw.javascript();
-    document.getElementById('embed').innerHTML = htmlDecode(sw.iframe());
-    document.getElementById('link').innerHTML = '<a href="'+sw.url()+'" target="_blank">'+sw.url()+'</a>';
-    /* END Static Sample */
+    $(".width-resizable-panel").resizable({
+        handles: 'e, w'
+    });
+    $("#widget-container").resizable();
 
     function menu() {
         var widgets = ["bearing", "gauge", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
@@ -100,7 +93,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
             }
 
             contents += '<input type="button" name="build" class="btn btn-primary pull-right" value="Create Widget&nbsp;&nbsp;»"/>';
-            contents += "<div id='builderError' class='error'></div>";
+            contents += '<div id="builderError"  class="text-danger"></div>';
 
             $("#widget-form").html(contents);
 
@@ -175,8 +168,6 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
                 });
             }
         });
-
-
     }
 
     function setService(urls) {
@@ -338,8 +329,9 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
 
         // set preferred size to the dialog to start with
         var widgetContainer = $("#widget-container");
-        //widgetContainer.resizable("destroy");
+        widgetContainer.draggable();
 
+        widgetContainer.resizable("destroy");
         widgetContainer.width(preferredSize.w).height(preferredSize.h);
 
         var instance = new SensorWidget(params.name, config, document.getElementById("widget-view"));
@@ -356,23 +348,6 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
         document.getElementById('code').innerHTML = instance.javascript();
         document.getElementById('embed').innerHTML = htmlDecode(instance.iframe());
         document.getElementById('link').innerHTML = '<a href="'+instance.url()+'" target="_blank">'+instance.url(preferredSize.w, preferredSize.h)+'</a>';
-        //$("#embedinput").val(instance.iframe(preferredSize.w,preferredSize.h));
-        //$("#linkinput").val(instance.url());
-        //$("#jsinput").val(instance.javascript());
-        //$(".codeinput").on("click", function() {this.focus();this.select();});
-        /*
-        var opt = {
-            autoOpen: false,
-            height: 500,
-            width: 750,
-            modal: true,
-            title: "Share this widget"
-        };
-
-        $("#share").button().show().click(function() {
-            $("#codediv").dialog(opt).dialog("open");
-        });
-        */
     }
 
     function capitalize(string) {

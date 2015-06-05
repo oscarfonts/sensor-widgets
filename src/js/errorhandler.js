@@ -23,7 +23,7 @@ define([], function() {
     function showGeneralError(msg, el) {
         if(!el) el = document.body;
         var div = document.createElement("div");
-        div.className = 'error';
+        div.className = 'text-danger error';
         el.appendChild(div);
         div.innerHTML = "Error: " + msg;
     }

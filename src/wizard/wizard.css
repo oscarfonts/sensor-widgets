@@ -42,6 +42,23 @@ pre {
     padding: 0;
 }
 
+select[multiple] {
+    height: 225px !important;
+}
+
+#widget-container {
+    z-index: 99998;
+}
+
+.ui-resizable-handle {
+    z-index: 99999 !important;
+}
+
+.ui-resizable-helper {
+    border-radius: 4px;
+    border: 2px dashed #e74c3c;
+}
+
 /*
 html, body {
     font-family: "Source Sans Pro", helvetica, sans-serif;

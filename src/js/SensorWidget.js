@@ -13,11 +13,13 @@ define(['errorhandler'], function(errorhandler) {
     }
 
     return function(name, config, renderTo) {
-        if (name && config) {
-            if (!renderTo) {
-                renderTo = document.body;
-            }
+        if (!renderTo) {
+            renderTo = document.body;
+        }
 
+        var errEl = renderTo;
+
+        if (name && config) {
             if(!renderTo.id) renderTo.id = uid();
 
             if (!config.service) {
@@ -25,23 +27,21 @@ define(['errorhandler'], function(errorhandler) {
             }
 
             require(["widget/" + name], function (widget) {
-                if (checkConfig(widget.inputs, config, renderTo)) {
-                    renderTo.innerHTML = "";
-                    if (instances.hasOwnProperty(renderTo.id) && instances[renderTo.id] && instances[renderTo.id].hasOwnProperty("destroy")) {
-                        console.debug("Destroying previous widget on ElementId=" + renderTo.id);
-                        instances[renderTo.id].destroy();
-                        delete instances[renderTo.id];
-                    }
+                renderTo.innerHTML = "";
+                if (instances.hasOwnProperty(renderTo.id) && instances[renderTo.id] && instances[renderTo.id].hasOwnProperty("destroy")) {
+                    console.debug("Destroying previous widget on ElementId=" + renderTo.id);
+                    instances[renderTo.id].destroy();
+                    delete instances[renderTo.id];
+                }
+                if (checkConfig(name, widget.inputs, config, errEl)) {
                     console.debug("Creating new " + name + " widget on ElementId=" + renderTo.id);
                     instances[renderTo.id] = widget.init(config, renderTo);
-                } else {
-                    errorhandler.throwWidgetError("Widget '" + name + "' exists, but some mandatory parameters missing.", renderTo);
                 }
             }, function () {
-                errorhandler.throwWidgetError("Widget '" + name + "' cannot be found.", renderTo);
+                errorhandler.throwWidgetError("Widget '" + name + "' cannot be found.", errEl);
             });
         } else if (!name) {
-        	errorhandler.throwWidgetError("No widget name specified.", renderTo);
+        	errorhandler.throwWidgetError("No widget name specified.", errEl);
         }
         return {
             name: name,
@@ -84,7 +84,7 @@ define(['errorhandler'], function(errorhandler) {
         };
     };
 
-    function checkConfig(inputs, config, renderTo) {
+    function checkConfig(name, inputs, config, errEl) {
         var missing = [];
 
         for (var i in inputs) {
@@ -94,7 +94,7 @@ define(['errorhandler'], function(errorhandler) {
             }
         }
         if (missing.length) {
-        	errorhandler.throwWidgetError("The following parameters are mandatory: " + missing.join(", "), renderTo);
+            errorhandler.throwWidgetError("The '" + name + "' widget is missing some mandatory parameters: " + missing.join(", "), errEl);
         }
         return !missing.length;
     }
