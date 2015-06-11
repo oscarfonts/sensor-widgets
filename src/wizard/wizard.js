@@ -68,7 +68,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
                         break;
                     case "time_start":
                         if ($.inArray("time_end", inputs)) {
-                            label = "Time Range (UTC time)";
+                            label = "Time Range (UTC)";
                             select = '<input class="form-control" type="text" id="time_range" disabled />';
                         }
                         break;
@@ -278,12 +278,23 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
                 var options = {
                     timePicker: true,
                     format: 'MMM D, YYYY H:mm',
-                    timePickerIncrement: 10,
+                    timePickerIncrement: 5,
                     timePicker12Hour: false,
                     timePickerSeconds: false,
                     timeZone: '+00:00',
                     minDate: moment.utc(abs_from),
-                    maxDate: moment.utc(abs_to)
+                    maxDate: moment.utc(abs_to),
+                    dateLimit: {
+                        days: 7
+                    },
+                    ranges: {
+                       'Today': [moment().startOf('day'), moment()],
+                       'Last hour': [moment().subtract(1, 'hour'), moment()],
+                       'Last 3 hours': [moment().subtract(3, 'hours'), moment()],
+                       'Last 6 hours': [moment().subtract(6, 'hours'), moment()],
+                       'Last 12 hours': [moment().subtract(3, 'hours'), moment()],
+                       'Last 24 hours': [moment().subtract(3, 'hours'), moment()]
+                    }
                 };
                 if (control.prop('disabled')) {
                     control.daterangepicker(options);
