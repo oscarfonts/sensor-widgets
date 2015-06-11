@@ -17,11 +17,11 @@ define(function() {
 
     return {
         inputs: ["service", "offering"],
-        optional_inputs: ["footnote", "css"],
+        optional_inputs: ["footnote", "custom_css_url"],
 
         init: function(config, el) {
-            if (config.css !== undefined) {
-                loadCSS(config.css);
+            if (config.custom_css_url !== undefined) {
+                loadCSS(config.custom_css_url);
             }
             if (config.footnote !== undefined && el.querySelector(".footnote")) {
                 el.querySelector(".footnote").innerHTML = config.footnote;
