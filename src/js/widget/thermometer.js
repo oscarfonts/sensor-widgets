@@ -59,7 +59,7 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget
                 destroy: function() {
                     clearInterval(refreshIntervalId);
                 }
-            }
+            };
         }
     };
 });

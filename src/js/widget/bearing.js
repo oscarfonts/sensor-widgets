@@ -63,7 +63,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
                 destroy: function() {
                     clearInterval(refreshIntervalId);
                 }
-            }
+            };
 
         }
     };

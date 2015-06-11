@@ -42,7 +42,7 @@ define(['sos-data-access', 'text!widget/gauge.svg', 'widget-common'], function(d
                 destroy: function() {
                     clearInterval(refreshIntervalId);
                 }
-            }
+            };
 
         }
     };

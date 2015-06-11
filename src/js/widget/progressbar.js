@@ -60,7 +60,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
                 destroy: function() {
                     clearInterval(refreshIntervalId);
                 }
-            }
+            };
         }
     };
 });

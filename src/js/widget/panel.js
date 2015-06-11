@@ -60,7 +60,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
                 destroy: function() {
                     clearInterval(refreshIntervalId);
                 }
-            }
+            };
         }
     };
 });

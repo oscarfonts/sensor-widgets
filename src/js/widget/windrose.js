@@ -151,7 +151,7 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
                 destroy: function() {
                     clearInterval(refreshIntervalId);
                 }
-            }
+            };
         }
     };
 });
