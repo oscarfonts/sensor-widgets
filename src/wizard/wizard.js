@@ -1,14 +1,14 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jquery-ui', 'daterangepicker', 'bootstrap'], function(SensorWidget, SOS, $, moment, errorhandler) {
+define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'jquery-ui',/* 'daterangepicker',*/ 'bootstrap'], function(SensorWidget, SOS, $, moment, errorhandler) {
     "use strict";
 
     menu();
 
     $(".panel").draggable({
         handle: ".panel-heading"
-    })
+    });
 
     $(".width-resizable-panel").resizable({
         handles: 'e, w'
@@ -36,14 +36,15 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
 
     function form(name) {
         $("#widget-form-title").html(capitalize(name) + " Widget Configuration");
-        SensorWidget(name).inspect(function(inputs, optionalInputs, preferredSizes) {
-            var contents = "";
+        new SensorWidget(name).inspect(function(inputs, optionalInputs, preferredSizes) {
+            var contents = '<fieldset><legend>Mandatory inputs</legend>';
+            var input, select, label, options;
 
             for (var i in inputs) {
-                var input = inputs[i];
-                var select = "";
-                var label = capitalize(input);
-                var options = "";
+                input = inputs[i];
+                select = "";
+                label = capitalize(input);
+                options = "";
 
                 switch (input) {
                     case "service":
@@ -74,23 +75,51 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
                         break;
                     case "time_end":
                         break;
-                    case "footnote":
-                        select = '<textarea class="form-control" value="" id="' + input + '"></textarea>';
-                        break;
-                    case "baseMap":
-                        for (var key in inputs.baseMaps) {
-                            options += '<option id="' + key + '">' + key + '</option>';
-                        }
-                        select = '<select class="form-control" id="' + input + '">' + options + '</select>';
-                        break;
                     default:
                         select = '<input  class="form-control" type="text" value="" id="' + input + '"/>';
                 }
 
                 if (select) {
-                    contents += '<div class="form-group">' + '<label class="col-md-2 control-label" for="' + input + '">' + label + '</label><div class="col-md-10">' + select + '</div></div>';
+                    contents += '<div class="form-group">' + '<label class="col-lg-4 control-label" for="' + input + '">' + label + '</label><div class="col-lg-8">' + select + '</div></div>';
                 }
             }
+
+            contents += '</fieldset>';
+
+            contents += '<fieldset><legend>Optional inputs</legend>';
+            for (i in optionalInputs) {
+                input = optionalInputs[i];
+                select = "";
+                label = capitalize(input);
+                options = "";
+                switch(input) {
+                    case "footnote":
+                        select = '<textarea class="form-control" value="" id="' + input + '"></textarea>';
+                        break;
+                    case "base_map":
+                        for (var key in inputs.base_maps) {
+                            options += '<option id="' + key + '">' + key + '</option>';
+                        }
+                        select = '<select class="form-control" id="' + input + '">' + options + '</select>';
+                        break;
+                    default:
+                        select = '<textarea class="form-control" value="" id="' + input + '"></textarea>';
+                }
+                contents += '<div class="form-group">' + '<label class="col-lg-4 control-label" for="' + input + '">' + label + '</label><div class="col-lg-8">' + select + '</div></div>';
+            }
+            contents += '</fieldset>';
+
+            contents += '<fieldset><legend>Widget dimensions</legend>';
+            input = "sizes";
+            label = "Initial Size";
+
+            for (i in preferredSizes) {
+                var size = preferredSizes[i];
+                options += '<option id="size" value="' + i + '">' + size.w + " x " + size.h + ' px</option>';
+            }
+            var control = '<select class="form-control" id="sizes">' + options + '</select>';
+            contents += '<div class="form-group">' + '<label class="col-lg-4 control-label" for="' + input + '">' + label + '</label><div class="col-lg-8">' + control + '</div></div>';
+            contents += '</fieldset>';
 
             contents += '<input type="button" name="build" class="btn btn-primary pull-right" value="Create Widget&nbsp;&nbsp;»"/>';
             contents += '<div id="builderError"  class="text-danger"></div>';
@@ -100,6 +129,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
             $('[name="build"]').data({
                 name: name,
                 inputs: inputs,
+                optionalInputs: optionalInputs,
                 preferredSizes: preferredSizes
             }).click(loadWidget);
 
@@ -137,6 +167,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
                 setDateRange();
             });
 
+            /*
             var timeRange = $('#time_range');
             if (timeRange.length) {
                 timeRange.dateRangePicker({
@@ -166,7 +197,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
                         $('#time_end').val(moment(date2).utc().format());
                     }
                 });
-            }
+            }*/
         });
     }
 
@@ -301,10 +332,11 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
             return this.id;
         };
 
+        var name, el, value;
+
         for (var i in params.inputs) {
-            var name = params.inputs[i];
-            var el = $('#'+name);
-            var value;
+            name = params.inputs[i];
+            el = $('#'+name);
             switch (name) {
                 case "service":
                 case "offering":
@@ -324,15 +356,23 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
             }
         }
 
-        // we will use only first preferred size, though we could have an array and draw a combo
-        var preferredSize = params.preferredSizes[0];
+        for (i in params.optionalInputs) {
+            name = params.optionalInputs[i];
+            el = $('#'+name);
+            value = el.val();
+            if (value) {
+            	config[name] = value;
+            }
+        }
+
+        var preferredSize = params.preferredSizes[$("#sizes").val()];
 
         // set preferred size to the dialog to start with
         var widgetContainer = $("#widget-container");
         widgetContainer.draggable();
 
         widgetContainer.resizable("destroy");
-        widgetContainer.width(preferredSize.w).height(preferredSize.h);
+        $("#widget-container").width(preferredSize.w).height(preferredSize.h+39);
 
         var instance = new SensorWidget(params.name, config, document.getElementById("widget-view"));
 
@@ -340,18 +380,18 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler' ,'jq
             helper: "ui-resizable-helper",
             resize: function( event, ui ) {
             	//refresh embed code snippet (we use the iframe tag with dialog's current width and height)
-                document.getElementById('embed').innerHTML = htmlDecode(instance.iframe(ui.size.width, ui.size.height));
+                document.getElementById('embed').innerHTML = htmlDecode(instance.iframe(ui.size.width, ui.size.height-39));
             }
         });
 
         //refresh code snippets for the first time
         document.getElementById('code').innerHTML = instance.javascript();
-        document.getElementById('embed').innerHTML = htmlDecode(instance.iframe());
-        document.getElementById('link').innerHTML = '<a href="'+instance.url()+'" target="_blank">'+instance.url(preferredSize.w, preferredSize.h)+'</a>';
+        document.getElementById('embed').innerHTML = htmlDecode(instance.iframe(preferredSize.w, preferredSize.h));
+        document.getElementById('link').innerHTML = '<a href="'+instance.url()+'" target="_blank">'+instance.url()+'</a>';
     }
 
     function capitalize(string) {
-        return string.toLowerCase().replace("_", " ").replace(/(?:^|\s)\S/g, function(a) {
+        return string.toLowerCase().replace(/_/g, " ").replace(/(?:^|\s)\S/g, function(a) {
             return a.toUpperCase();
         });
     }
