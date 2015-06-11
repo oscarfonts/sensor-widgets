@@ -8,7 +8,7 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
 
     return {
         inputs: common.inputs.concat(["title", "feature", "properties", "refresh_interval", "time_start", "time_end"]),
-        optional_inputs: common.optional_inputs.concat(["subtitle"]),
+        optional_inputs: ["subtitle"].concat(common.optional_inputs),
         preferredSizes: [{w: 620, h: 450}],
 
         init: function(config, el) {

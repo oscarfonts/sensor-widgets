@@ -19,7 +19,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
 
     return {
         inputs: common.inputs.concat(["feature", "property", "refresh_interval"]),
-        optional_inputs: common.optional_inputs.concat(["title"]),
+        optional_inputs: ["title"].concat(common.optional_inputs),
         preferredSizes: [{w: 570, h: 380}, {w: 280, h: 540}],
 
         init: function(config, el) {

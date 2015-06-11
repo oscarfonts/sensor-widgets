@@ -8,7 +8,7 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
     
     return {
         inputs: common.inputs.concat(["features"]),
-        optional_inputs: common.optional_inputs.concat(["baseMap", "baseMapWms", "baseMapWmsParams", "maxInitialZoom"]),
+        optional_inputs: ["max_initial_zoom", "base_map", "base_map_wms", "base_map_wms_params"].concat(common.optional_inputs),
         preferredSizes: [{w: 550, h: 400}],
 
         init: function(config, el) {
@@ -50,16 +50,16 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
         	
             var map = L.map(main_div).setView([30, 0], 2);
 
-            //select predefined baseMap or use default 
-            var selectedBase = baseMaps[config.baseMap];
+            //select predefined base_map or use default
+            var selectedBase = baseMaps[config.base_map];
             if(!selectedBase) selectedBase = baseMaps.osm;
             
             //if a WMS is defined it overwrites everything (more specific)
-            if(config.baseMapWms && config.baseMapWmsParams) {
+            if(config.base_map_wms && config.base_map_wms_params) {
                 // we can get the params as a JSON string or object literal
                 // Ex: {"layers":"PDBFAV_20140621","attribution":"Port de BCN","format":"image/jpeg"}
-                var params = (typeof config.baseMapWmsParams == 'string' || config.baseMapWmsParams instanceof String) ? JSON.parse(config.baseMapWmsParams) : config.baseMapWmsParams;
-            	selectedBase = L.tileLayer.wms(config.baseMapWms, params);
+                var params = (typeof config.base_map_wms_params == 'string' || config.base_map_wms_params instanceof String) ? JSON.parse(config.base_map_wms_params) : config.base_map_wms_params;
+            	selectedBase = L.tileLayer.wms(config.base_map_wms, params);
             }
 
             // Add footnote to attribution string
@@ -128,7 +128,7 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
                         });
                         geojson.addTo(map);
                         map.fitBounds(geojson.getBounds(), {
-                            maxZoom: config.maxInitialZoom ? parseInt(config.maxInitialZoom) : 14
+                            maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14
                         });
                     }
                 });
