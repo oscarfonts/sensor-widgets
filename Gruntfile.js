@@ -229,7 +229,7 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     hostname: "localhost",
-                    port: 8080,
+                    port: 8081,
                     livereload: true,
                     middleware: function(connect, options, middlewares) {
                         middlewares.unshift(compression());
