@@ -4,7 +4,7 @@ require.config({
     paths: {
         'text': '../lib/requirejs-text/text',
         'bootstrap': '../lib/bootstrap/bootstrap',
-        'daterangepicker': '../lib/daterangepicker/jquery.daterangepicker',
+        'daterangepicker': '../lib/bootstrap-daterangepicker/daterangepicker',
         'flot': '../lib/flot/jquery.flot',
         'flot-navigate': '../lib/flot/jquery.flot.navigate',
         'flot-resize': '../lib/flot/jquery.flot.resize',
@@ -27,7 +27,7 @@ require.config({
             deps: ['jquery']
         },
         'daterangepicker': {
-            deps: ['jquery', 'moment', 'css!../lib/daterangepicker/daterangepicker.css']
+            deps: ['bootstrap', 'moment', 'jquery', 'css!../lib/bootstrap-daterangepicker/daterangepicker-bs3.css']
         },
         'flot': {
             deps: ['jquery']

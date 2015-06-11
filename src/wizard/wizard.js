@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'jquery-ui',/* 'daterangepicker',*/ 'bootstrap'], function(SensorWidget, SOS, $, moment, errorhandler) {
+define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'daterangepicker', 'jquery-ui', 'bootstrap'], function(SensorWidget, SOS, $, moment, errorhandler) {
     "use strict";
 
     menu();
@@ -68,15 +68,14 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'jq
                         break;
                     case "time_start":
                         if ($.inArray("time_end", inputs)) {
-                            label = "Time Range";
-                            select = 'TODO...<span id="time_range"><span class="sublabel">From: </span><input type="text" id="time_start" value=""/><br/>';
-                            select += 'TODO...<span class="sublabel">To: </span><input type="text" id="time_end" value=""/></span>';
+                            label = "Time Range (UTC time)";
+                            select = '<input class="form-control" type="text" id="time_range" disabled />';
                         }
                         break;
                     case "time_end":
                         break;
                     default:
-                        select = '<input  class="form-control" type="text" value="" id="' + input + '"/>';
+                        select = '<input class="form-control" type="text" value="" id="' + input + '"/>';
                 }
 
                 if (select) {
@@ -140,15 +139,12 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'jq
                 errorhandler.hideError();
                 var service = $('#service').find('option:selected').attr("id");
                 setOfferings(service);
-                setDateRange();
-
             });
 
             $('#offering').change(function() {
                 var procedure = $('#offering').find('option:selected').data("procedure");
                 setFeatures(procedure);
                 setProperties(procedure);
-                setDateRange();
             });
 
             $('#feature').change(function() {
@@ -166,38 +162,6 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'jq
             $('#properties').change(function() {
                 setDateRange();
             });
-
-            /*
-            var timeRange = $('#time_range');
-            if (timeRange.length) {
-                timeRange.dateRangePicker({
-                    separator: ' to ',
-                    language: 'en',
-                    startOfWeek: 'monday',
-                    format: 'YYYY-MM-DD[T]HH:mm:ssZ',
-                    //startDate: X, // TODO getDataAvailability
-                    endDate: moment.utc(), // TODO getDataAvailability
-                    autoClose: true,
-                    showShortcuts: false,
-                    shortcuts: null,
-                    time: {
-                        enabled: true
-                    },
-                    getValue: function() {
-                        var timeStart = $('#time_start').val();
-                        var timeEnd = $('#time_end').val();
-                        if (timeStart && timeEnd) {
-                            return timeStart + ' to ' + timeEnd;
-                        } else {
-                            return '';
-                        }
-                    },
-                    setValue: function(s, date1, date2) {
-                        $('#time_start').val(moment(date1).utc().format());
-                        $('#time_end').val(moment(date2).utc().format());
-                    }
-                });
-            }*/
         });
     }
 
@@ -286,32 +250,59 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'jq
     }
 
     function setDateRange() {
-        var procedure = $('#offering').find('option:selected').data("procedure");
-        var feature = $('#feature').find('option:selected').attr("id");
-        var property = $('#property').find('option:selected').attr("id");
-        var features = feature ? feature : $('#features').find('option:selected').map(function() {
-            return this.id;
-        }).get();
-        var properties = property ? property : $('#properties').find('option:selected').map(function() {
-            return this.id;
-        }).get();
+        var control = $('#time_range');
+        if (control) {
+            var procedure = $('#offering').find('option:selected').data("procedure");
+            var feature = $('#feature').find('option:selected').attr("id");
+            var property = $('#property').find('option:selected').attr("id");
+            var features = feature ? feature : $('#features').find('option:selected').map(function() {
+                return this.id;
+            }).get();
+            var properties = property ? property : $('#properties').find('option:selected').map(function() {
+                return this.id;
+            }).get();
 
-        SOS.getDataAvailability(procedure, features, properties, function(availabilities) {
-            var abs_from = availabilities[0].phenomenonTime[0];
-            var abs_to = availabilities[0].phenomenonTime[1];
-            for (var i = 1; i < availabilities.length; i++) {
-                var from = availabilities[i].phenomenonTime[0];
-                var to = availabilities[i].phenomenonTime[1];
-                if (from < abs_from) {
-                    abs_from = from;
+            SOS.getDataAvailability(procedure, features, properties, function(availabilities) {
+                var abs_from = availabilities[0].phenomenonTime[0];
+                var abs_to = availabilities[0].phenomenonTime[1];
+                for (var i = 1; i < availabilities.length; i++) {
+                    var from = availabilities[i].phenomenonTime[0];
+                    var to = availabilities[i].phenomenonTime[1];
+                    if (from < abs_from) {
+                        abs_from = from;
+                    }
+                    if (to > abs_to) {
+                        abs_to = to;
+                    }
                 }
-                if (to > abs_to) {
-                    abs_to = to;
+                var options = {
+                    timePicker: true,
+                    format: 'MMM D, YYYY H:mm',
+                    timePickerIncrement: 10,
+                    timePicker12Hour: false,
+                    timePickerSeconds: false,
+                    timeZone: '+00:00',
+                    minDate: moment.utc(abs_from),
+                    maxDate: moment.utc(abs_to)
+                };
+                if (control.prop('disabled')) {
+                    control.daterangepicker(options);
+                    control.prop('disabled', false);
+                    var picker = control.data('daterangepicker');
+                    picker.setStartDate(moment.max(moment.utc(abs_from), moment.utc(abs_to).subtract(1, 'day')));
+                    picker.setEndDate(moment.utc(abs_to));
+                } else {
+                    var picker = control.data('daterangepicker');
+                    picker.setOptions(options);
+                    var timeZoneOffset = new Date().getTimezoneOffset();
+                    var from = picker.startDate.subtract(timeZoneOffset, 'minutes');
+                    var to = picker.endDate.subtract(timeZoneOffset, 'minutes');
+                    picker.setStartDate(moment.max(moment.utc(abs_from), from));
+                    picker.setEndDate(moment.min(moment.utc(abs_to), to));
                 }
-            }
-            $("#time_start").val(moment(abs_from).utc().format());
-            $("#time_end").val(moment(abs_to).utc().format());
-        });
+
+            });
+        }
     }
 
     function clearOptions() {
@@ -347,6 +338,12 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'jq
                 case "features":
                 case "properties":
                     value = el.find('option:selected').map(getId).get();
+                    break;
+                case "time_start":
+                    value = $('#time_range').data('daterangepicker').startDate.utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
+                    break;
+                case "time_end":
+                    value = $('#time_range').data('daterangepicker').endDate.utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
                     break;
                 default:
                     value = el.val();
