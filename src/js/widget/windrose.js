@@ -7,7 +7,7 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
     var labels = ["&gt; 10 m/s", "8-10 m/s", "6-8 m/s", "4-6 m/s", "2-4 m/s", "0-2 m/s"];
 
     return {
-        inputs: common.inputs.concat(["title", "feature", "properties", "refresh_interval", "time_start", "time_end"]),
+        inputs: common.inputs.concat(["feature", "properties", "time_start", "time_end", "refresh_interval", "title"]),
         optional_inputs: ["subtitle"].concat(common.optional_inputs),
         preferredSizes: [{w: 620, h: 450}],
 

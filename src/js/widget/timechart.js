@@ -14,7 +14,7 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'flot-resize', 'flot-
     ].join('');
 
     return {
-        inputs: common.inputs.concat(["title", "features", "properties", "time_start", "time_end"]),
+        inputs: common.inputs.concat(["features", "properties", "time_start", "time_end", "title"]),
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 650, h: 530}],
 

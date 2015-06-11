@@ -13,7 +13,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
     ].join('');
 
     return {
-        inputs: common.inputs.concat(["title", "feature", "properties", "time_start", "time_end"]),
+        inputs: common.inputs.concat(["feature", "properties", "time_start", "time_end", "title"]),
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 400, h: 400}],
 

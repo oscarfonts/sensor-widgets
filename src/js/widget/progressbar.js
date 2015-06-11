@@ -23,7 +23,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
     ].join('');
 
     return {
-        inputs: common.inputs.concat(["feature", "property", "min_value", "max_value", "refresh_interval"]),
+        inputs: common.inputs.concat(["feature", "property", "refresh_interval", "min_value", "max_value"]),
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 500, h: 220}],
 
