@@ -265,9 +265,10 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
             SOS.getDataAvailability(procedure, features, properties, function(availabilities) {
                 var abs_from = availabilities[0].phenomenonTime[0];
                 var abs_to = availabilities[0].phenomenonTime[1];
+                var from, to;
                 for (var i = 1; i < availabilities.length; i++) {
-                    var from = availabilities[i].phenomenonTime[0];
-                    var to = availabilities[i].phenomenonTime[1];
+                    from = availabilities[i].phenomenonTime[0];
+                    to = availabilities[i].phenomenonTime[1];
                     if (from < abs_from) {
                         abs_from = from;
                     }
@@ -296,18 +297,19 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
                        'Last 24 hours': [moment().subtract(3, 'hours'), moment()]
                     }
                 };
+                var picker;
                 if (control.prop('disabled')) {
                     control.daterangepicker(options);
+                    picker = control.data('daterangepicker');
                     control.prop('disabled', false);
-                    var picker = control.data('daterangepicker');
                     picker.setStartDate(moment.max(moment.utc(abs_from), moment.utc(abs_to).subtract(1, 'day')));
                     picker.setEndDate(moment.utc(abs_to));
                 } else {
-                    var picker = control.data('daterangepicker');
+                    picker = control.data('daterangepicker');
                     picker.setOptions(options);
                     var timeZoneOffset = new Date().getTimezoneOffset();
-                    var from = picker.startDate.subtract(timeZoneOffset, 'minutes');
-                    var to = picker.endDate.subtract(timeZoneOffset, 'minutes');
+                    from = picker.startDate.subtract(timeZoneOffset, 'minutes');
+                    to = picker.endDate.subtract(timeZoneOffset, 'minutes');
                     picker.setStartDate(moment.max(moment.utc(abs_from), from));
                     picker.setEndDate(moment.min(moment.utc(abs_to), to));
                 }
