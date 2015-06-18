@@ -6,6 +6,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-requirejs');
@@ -261,7 +262,14 @@ module.exports = function(grunt) {
                 push: true,
                 only: ['**/*', '!CNAME']
             },
-            src: '**/*'
+            src: ['**/*']
+        },
+        copy: {
+            docs: {
+                expand: true,
+                src: 'doc/**',
+                dest: 'dist/'
+            },
         },
         clean: ["src/lib", "dist"]
     });
@@ -275,7 +283,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['connect', 'watch']);
-    grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs']);
+    grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs', 'copy:docs']);
     grunt.registerTask('publish', ['build', 'gh-pages']);
 
 };

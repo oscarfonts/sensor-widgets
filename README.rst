@@ -9,10 +9,11 @@ Sensor Widgets
 * #SIGLibre8 slides (spanish): http://sensors.fonts.cat/doc/slides/
 * Configure your own widgets:
 
-  1. Go to http://sensors.fonts.cat/src/
+  1. Go to http://sensors.fonts.cat/wizard/
   2. Choose a widget from the left menu.
-  3. Configure it instantly with the "Widget Builder" wizard form.
-  4. Embed the result in any web page, using an "object" (or an "iframe") tag.
+  3. Configure it instantly with the "Widget Configuration" form.
+  4. See the result in the "Widget View" panel.
+  4. Embed the widget in any web page grabbing the code snippets from the "Take Away" panel.
 
 
 Building
@@ -28,30 +29,14 @@ Building
 * Run a server with livereload using `grunt` (default task).
 
 
-Updating gh-pages (demo) branch
-===============================
+Updating gh-pages (demo site)
+=============================
 
-Bring the master changes to the gh-pages branch::
+Simply use the "publish" grunt task::
 
-    git checkout gh-pages
-    git merge master
+    grunt publish
 
-Update the js dependencies::
-
-    grunt bower
-
-Commit changes::
-
-    git add -A
-    git commit -m "Updated gh-pages & libs"
-    git push
-
-Check the demo page.
-
-
-Don't forget to get back to master branch to continue development::
-
-    git checkout master
+This will push an optimized version of the library along with examples and documentation.
 
 Available widgets
 =================
