@@ -4,3 +4,4 @@ bower_components/
 src/lib/
 dist/
 .idea/
+.grunt/

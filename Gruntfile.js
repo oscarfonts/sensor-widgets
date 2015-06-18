@@ -2,6 +2,14 @@ var compression = require('compression');
 
 module.exports = function(grunt) {
 
+    grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.loadNpmTasks('grunt-requirejs');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         bower: {
@@ -246,6 +254,15 @@ module.exports = function(grunt) {
                 nospawn: true
             }
         },
+        'gh-pages': {
+            options: {
+                base: 'dist',
+                message: 'Auto-generated gh-pages commit',
+                push: true,
+                only: ['**/*', '!CNAME']
+            },
+            src: '**/*'
+        },
         clean: ["src/lib", "dist"]
     });
 
@@ -257,14 +274,8 @@ module.exports = function(grunt) {
         grunt.config('jshint.files', filepath);
     });
 
-    grunt.loadNpmTasks('grunt-bower-task');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-requirejs');
-
     grunt.registerTask('default', ['connect', 'watch']);
     grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs']);
+    grunt.registerTask('publish', ['build', 'gh-pages']);
 
 };
