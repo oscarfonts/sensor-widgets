@@ -167,9 +167,16 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
                 </div> \
                 <div class="col-md-6"> \
                     <div id="'+name+'-inputs"></div> \
-                    <pre id="'+name+'-url"></pre> \
-                    <pre id="'+name+'-iframe"></pre> \
-                    <pre id="'+name+'-code"></pre> \
+                    <ul class="nav nav-tabs nav-justified"> \
+                        <li class="active"><a href="#'+name+'-code" data-toggle="tab" aria-expanded="true">Code</a></li> \
+                        <li class=""><a href="#'+name+'-iframe" data-toggle="tab" aria-expanded="false">Embed</a></li> \
+                        <li class=""><a href="#'+name+'-url" data-toggle="tab" aria-expanded="false">Link</a></li> \
+                    </ul> \
+                    <div id="myTabContent" class="tab-content"> \
+                        <div class="tab-pane fade active in" id="'+name+'-code"></div> \
+                        <div class="tab-pane fade" id="'+name+'-iframe"></div> \
+                        <div class="tab-pane fade" id="'+name+'-url"></div> \
+                    </div> \
                 </div> \
             </div>';
     }
@@ -178,12 +185,13 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     document.getElementById("widget-list").innerHTML = widget_list;
 
     var renderInputs = function(inputs, optional, sizes) {
-        var iface = "<strong>" + capitalize(this.name) + " Widget Interface:</strong><ul>";
-        iface += "<li><strong>Mandatory Inputs:</strong> " + inputs.join(", ");
-        iface += "<li><strong>Optional Inputs:</strong> " + optional.join(", ");
-        iface += "<li><strong>Preferred Sizes:</strong> " + sizes.map(function(size) {
+        var iface = "<h4><strong>" + capitalize(this.name) + " Configuration Parameters</strong>:</h4><dl class='dl-horizontal'>";
+        iface += "<dt>Mandatory:</dt> <dd><span class='label label-primary'>" + inputs.join("</span> <span class='label label-primary'>") + "</span></dd>";
+        iface += "<dt>Optional:</dt> <dd><span class='label label-info'>" + optional.join("</span> <span class='label label-info'>") + "</span></dd>";
+        iface += "<dt>Suggested Sizes:</dt> <dd><span class='label label-default'>" + sizes.map(function(size) {
             return size.w + " x " + size.h + " px";
-        }).join(", ") + "</ul>";
+        }).join("</span> <span class='label label-default'>") + "</dd>"
+        iface += "</dl>";
         document.getElementById(this.name+'-inputs').innerHTML = iface;
     };
 
@@ -203,9 +211,9 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
             })
         );
 
-        document.getElementById(name+'-url').innerHTML = '<a href="'+widget.url()+'" target="_blank">'+widget.url()+'</a>';
-        document.getElementById(name+'-iframe').innerHTML = htmlDecode(widget.iframe());
-        document.getElementById(name+'-code').innerHTML = widget.javascript();
+        document.getElementById(name+'-url').innerHTML = '<pre>' + '<a href="'+widget.url()+'" target="_blank">'+widget.url()+'</a>' + '</pre>';
+        document.getElementById(name+'-iframe').innerHTML = '<pre>' + htmlDecode(widget.iframe()) + '</pre>';
+        document.getElementById(name+'-code').innerHTML = '<pre>' + widget.javascript() + '</pre>';
     }
 
 });
