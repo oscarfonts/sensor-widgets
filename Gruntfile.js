@@ -229,7 +229,6 @@ module.exports = function(grunt) {
                                 'jquery'
                             ]
                         }
-                        // TODO: Builder (factory? widget?); daterangepicker, moment
                     ]
                 }
             }
@@ -269,7 +268,7 @@ module.exports = function(grunt) {
                 expand: true,
                 src: 'doc/**',
                 dest: 'dist/'
-            },
+            }
         },
         clean: ["src/lib", "dist"]
     });
