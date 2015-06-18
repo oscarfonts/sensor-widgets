@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sensor Widgets">
+    <meta name="author" content="Oscar Fonts">
+
+    <title>Sensor Widgets</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="fonts/flaticon.css" rel="stylesheet" />
+    <link href="css/widget.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
+</head>
+
+<body role="document">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Sensor Widgets</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="../doc/slides" target="_blank">#SIGLibre8 slides</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/oscarfonts/sensor-widgets" target="_blank">GitHub Repo</a>
+                    </li>
+                    <li>
+                        <a href="wizard" target="_blank">Widget Wizard</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+                        <ul id="widget-menu" class="dropdown-menu"></ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container theme-showcase" role="main">
+
+        <div class="jumbotron">
+            <img src="img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
+            <h1>Sensor Widgets</h1>
+            <p>Configurable graphical components for your <a href="http://live.osgeo.org/en/standards/sos_overview.html" target="_blank">SOS</a> sensor data.</p>
+            <h3>100% Javascript. Extensible. MIT licensed.</h3>
+            <p style="text-align:right;margin:40px 0 0 0;">
+                <a class="btn btn-primary btn-lg" role="button" href="wizard">
+                    <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a>
+            </p>
+        </div>
+
+        <div id="widget-list"></div>
+    </div>
+
+    <script src="lib/requirejs/require.js"></script>
+    <script src="js/main.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

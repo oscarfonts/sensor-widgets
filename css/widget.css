@@ -1,0 +1,47 @@
+body .widget {
+    font-family: "Source Sans Pro", helvetica, sans-serif;
+    text-align: center;
+    margin: 0;
+}
+.widget {
+    height: 100%;
+    overflow: hidden;
+    color: #222;
+    font-family: Helvetica, sans-serif;
+}
+.widget h1 {
+    font-size: 28px;
+}
+.widget h2 {
+    font-size: 18px;
+}
+.widget h3 {
+    font-size: 14px;
+}
+.widget .footnote {
+    margin: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    display: block;
+    color: #222; 
+}
+.widget .data {
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+    max-width: 300px;
+}
+.widget.bearing svg,
+.widget.gauge svg {
+    max-width: 300px;
+}
+.widget.panel dl {
+    text-align: left;
+}
+.widget.table {
+    overflow: auto;
+    font-size: 12px;
+}
+.widget.windrose {
+    width: 100%;
+}

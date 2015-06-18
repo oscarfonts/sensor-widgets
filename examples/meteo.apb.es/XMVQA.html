@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/yeti/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="meteo.css" rel="stylesheet">
+    <title>meteo.apb.es</title>
+</head>
+
+<body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">meteo.apb.es</a>
+            </div>
+            <div class="navbar-collapse navbar-inverse-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="./">Sirena</a>
+                    </li>
+                    <li class="active">
+                        <a href="XMVQA.html">XMVQA</a>
+                    </li>
+                    <li>
+                        <a href="TorreControl.html">Torre Control</a>
+                    </li>
+                    <li>
+                        <a href="DataBrowser.html">Data Browser</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="container section" id="XMVQA">
+        <h1>XMVQA</h1>
+        <div class="row xmvqa">
+            <div class="col-sm-6 col-md-4 left">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12 bearing">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 panel-10m">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 timechart">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 panel-30m">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-8 right">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row top">
+                            <div class="col-lg-3 col-md-6 x01">
+                                <div class="bearing"></div>
+                                <div class="panel"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 xP4">
+                                <div class="bearing"></div>
+                                <div class="panel"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 x03">
+                                <div class="bearing"></div>
+                                <div class="panel"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 xP6">
+                                <div class="bearing"></div>
+                                <div class="panel"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row bottom">
+                            <div class="col-md-4 xP3">
+                                <div class="bearing"></div>
+                                <div class="panel"></div>
+                            </div>
+                            <div class="col-md-4 xP5">
+                                <div class="bearing"></div>
+                                <div class="panel"></div>
+                            </div>
+                            <div class="col-md-4 x10">
+                                <div class="bearing"></div>
+                                <div class="panel"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /container -->
+    <script src="../../lib/requirejs/require.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="meteo.js"></script>
+</body>
+
+</html>
