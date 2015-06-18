@@ -53,15 +53,21 @@ define(['errorhandler'], function(errorhandler) {
                 });
             },
             url: function() {
-                function relPathToAbs(sRelPath) {
-                    var nUpLn, sDir = "", sPath = location.pathname.replace(/[^\/]*$/, sRelPath.replace(/(\/|^)(?:\.?\/+)+/g, "$1"));
-                    for (var nEnd, nStart = 0; nEnd = sPath.indexOf("/../", nStart), nEnd > -1; nStart = nEnd + nUpLn) {
-                        nUpLn = /^\/(?:\.\.\/)*/.exec(sPath.slice(nEnd))[0].length;
-                        sDir = (sDir + sPath.substring(nStart, nEnd)).replace(new RegExp("(?:\\\/+[^\\\/]*){0," + ((nUpLn - 1) / 3) + "}$"), "/");
-                        }
-                    return sDir + sPath.substr(nStart);
+                function relPathToAbs(pathname) {
+                    var output = [];
+                    pathname.replace(/^(\.\.?(\/|$))+/, "")
+                            .replace(/\/(\.(\/|$))+/g, "/")
+                            .replace(/\/\.\.$/, "/../")
+                            .replace(/\/?[^\/]*/g, function (p) {
+                              if (p === "/..") {
+                                output.pop();
+                              } else {
+                                output.push(p);
+                              }
+                            });
+                    return output.join("").replace(/^\//, pathname.charAt(0) === "/" ? "/" : "");
                 }
-                var url = window.location.origin +relPathToAbs(require.toUrl("../widget/")) + "?";
+                var url = relPathToAbs(require.toUrl("../widget/")) + "?";
                 url += "name="+ encodeURIComponent(name)+"&";
                 url += Object.keys(config).map(function(key) {
                     var val = config[key];

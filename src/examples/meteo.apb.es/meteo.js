@@ -316,8 +316,4 @@ define('meteo', ['SensorWidget', 'locale-date', 'bootstrap'], function(SensorWid
 
 });
 
-requirejs.config({
-    baseUrl: '../../js/'
-});
-
 requirejs(['meteo']);

@@ -71,3 +71,20 @@ require.config({
         }
     }
 });
+
+(function(requirejs) {
+    var script;
+    if (document.currentScript) {
+        script = document.currentScript;
+    } else {
+        var scripts = document.getElementsByTagName('script');
+        script = scripts[scripts.length - 1];
+    }
+
+    var baseUrl = script.src.replace(/[^\/]*$/, '');
+    console.debug('Sensor Widgets Base URL is:' + baseUrl);
+
+    requirejs.config({
+        baseUrl: baseUrl
+    });
+})(requirejs);

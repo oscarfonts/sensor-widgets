@@ -218,8 +218,4 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
 
 });
 
-requirejs.config({
-    baseUrl: 'js/'
-});
-
 requirejs(['home']);
