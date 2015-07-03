@@ -251,7 +251,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
 
     function setDateRange() {
         var control = $('#time_range');
-        if (control) {
+        if (control.length) {
             var procedure = $('#offering').find('option:selected').data("procedure");
             var feature = $('#feature').find('option:selected').attr("id");
             var property = $('#property').find('option:selected').attr("id");
