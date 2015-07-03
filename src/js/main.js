@@ -18,9 +18,7 @@ require.config({
         'jqgrid-locale-en': '../lib/jqgrid/grid.locale-en',
         'leaflet': '../lib/leaflet/leaflet',
         'leaflet-label': '../lib/Leaflet.label/leaflet.label',
-        'moment': '../lib/moment/moment',
-        'proj4leaflet': '../lib/proj4leaflet/proj4leaflet',
-        'proj4': '../lib/proj4/proj4'
+        'moment': '../lib/moment/moment'
     },
     shim: {
         'bootstrap': {
@@ -65,9 +63,6 @@ require.config({
         },
         'leaflet-label': {
             deps: ['leaflet', 'css!../lib/Leaflet.label/leaflet.label.css']
-        },
-        'proj4leaflet': {
-            deps: ['leaflet', 'proj4']
         }
     }
 });

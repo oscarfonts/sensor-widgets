@@ -1,44 +1,15 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leaflet', 'leaflet-label'], function(SOS, L, proj4, SensorWidget, common) {
+define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], function(SOS, L, SensorWidget, common) {
     "use strict";
 
-    proj4.defs("EPSG:23031", "+title= ED50 / UTM zone 31N +proj=utm +zone=31 +ellps=intl +units=m +no_defs +towgs84=-181.5,-90.3,-187.2,0.144,0.492,-0.394,17.57");
-    
     return {
         inputs: common.inputs.concat(["features"]),
-        optional_inputs: ["max_initial_zoom", "base_map", "base_map_wms", "base_map_wms_params"].concat(common.optional_inputs),
+        optional_inputs: ["max_initial_zoom", "base_layer"].concat(common.optional_inputs),
         preferredSizes: [{w: 550, h: 400}],
 
         init: function(config, el) {
-
-            // TODO: Don't instantiate these layers unless they are used, and never instantiate them outside "init", or will be shared across map instances (dealing to errors)
-            var osmBase = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-                subdomains: '1234',
-                minZoom: 2,
-                maxZoom: 14,
-                attribution: '<a href="http://www.openstreetmap.org" target="_blank">OpenStreetMap</a> | <a href="http://www.mapquest.com" target="_blank">MapQuest</a>'
-            });
-
-            var portBase = L.tileLayer.wms('http://planolws.portdebarcelona.cat/mapproxy/service', {
-                layers:"PDBFAV_20140621",
-                format:"image/jpeg",
-                attribution: 'Tiles courtesy of Port de Barcelona'
-            });
-
-            var esriBase = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-            });
-
-            var acetateBase = L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
-                attribution: '&copy;2012 Esri & Stamen, Data from OSM and Natural Earth',
-                subdomains: '0123',
-                minZoom: 2,
-                maxZoom: 18
-            });
-
-            var baseMaps = {"osm": osmBase, "port-bcn": portBase, "esri-sat": esriBase, "acetate": acetateBase};
 
             // Main div
             var main_div = document.createElement("div");
@@ -50,24 +21,30 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
         	
             var map = L.map(main_div).setView([30, 0], 2);
 
-            //select predefined base_map or use default
-            var selectedBase = baseMaps[config.base_map];
-            if(!selectedBase) selectedBase = baseMaps.osm;
-            
-            //if a WMS is defined it overwrites everything (more specific)
-            if(config.base_map_wms && config.base_map_wms_params) {
-                // we can get the params as a JSON string or object literal
-                // Ex: {"layers":"PDBFAV_20140621","attribution":"Port de BCN","format":"image/jpeg"}
-                var params = (typeof config.base_map_wms_params == 'string' || config.base_map_wms_params instanceof String) ? JSON.parse(config.base_map_wms_params) : config.base_map_wms_params;
-            	selectedBase = L.tileLayer.wms(config.base_map_wms, params);
+            var baseLayer;
+
+            if (config.base_layer) {
+                var params = (typeof config.base_layer == 'string' || config.base_layer instanceof String) ? JSON.parse(config.base_layer) : config.base_layer;
+                if (params.type && params.type.toUpperCase() === 'WMS') {
+                    // WMS Layer
+                    baseLayer = L.tileLayer.wms(params.url, params.options);
+                } else {
+                    // XYZ TileLayer
+                    baseLayer = L.tileLayer(params.url, params.options);
+                }
+            } else {
+                // A default base layer
+                baseLayer = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+});
             }
 
             // Add footnote to attribution string
             if (config.footnote) {
-                selectedBase.options.attribution += " | <b>" + config.footnote + "</b>";
+                baseLayer.options.attribution += " | <b>" + config.footnote + "</b>";
             }
             
-            selectedBase.addTo(map);
+            baseLayer.addTo(map);
             
             SOS.setUrl(config.service);
             read();
@@ -81,51 +58,7 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
                         }
                     }
                     function addFoIs(features) {
-                        var geojson = L.Proj.geoJson(fois2geojson(features), {
-                            onEachFeature: function(feature, layer) {
-                                if (feature.properties && feature.properties.name) {
-                                    layer.bindLabel(feature.properties.name).addTo(map);
-                                    var popup = document.createElement("div");
-                                    var popupOptions = {
-                                    		maxHeight: 230,
-                                    		minWidth: 230,
-                                    		autoPan: false
-                                    };
-                                    layer.bindPopup(popup, popupOptions);
-                                    
-                                    SOS.describeSensor(offering.procedure[0], function(description) {
-                                    	
-                                    	var propertiesArray = [];
-                                    	
-                                        var properties = description.hasOwnProperty("ProcessModel") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;
-                                    	properties = properties instanceof Array ? properties : [properties];
-                                    	
-                                        for (var i in properties) {
-                                            var property = properties[i];
-                                            var types = ["Quantity", "Count", "Boolean", "Category", "Text", "ObservableProperty"];
-                                        	for (var j in types) {
-                                                var type = types[j];
-                                                if (property.hasOwnProperty(type)) {
-                                                    property.id = property[type].definition;
-                                                    propertiesArray[i] = property.id;
-                                                }
-                                            }
-                                            
-                                        }
-
-	                                    new SensorWidget('panel', {
-						                    title: feature.properties.name,
-						                    service: config.service,
-						                    offering: offering.identifier,
-						                    feature: feature.id,
-						                    properties: propertiesArray,
-						                    refresh_interval: 60
-						                }, popup);
-                                    });
-                                }
-                                
-                            }
-                        });
+                        var geojson = fois2geojson(features);
                         geojson.addTo(map);
                         map.fitBounds(geojson.getBounds(), {
                             maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14
@@ -145,7 +78,6 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
             function fois2geojson(fois) {
                 var config_features = isArray(config.features) ? config.features : JSON.parse(config.features);
                 var features = [];
-                var crs = null;
                 for (var i in fois) {
                     var foi = fois[i];
                     if (foi.geometry && (!config_features.length || isInArray(foi.identifier.value, config.features))) {
@@ -157,20 +89,6 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
                                 name: foi.name.value
                             }
                         };
-                        // Transform CRS from link type to name type.
-                        // See spec: http://geojson.org/geojson-spec.html#named-crs
-                        // See impl: https://github.com/kartena/Proj4Leaflet#lprojgeojson
-                        // Assumes the same CRS for all FoIs!!
-                        if (!crs && feature.geometry.crs) {
-                            crs = feature.geometry.crs;
-                            if (crs.type == "link") {
-                                var code = crs.properties.href.split("/").pop();
-                                delete crs.properties.href;
-                                crs.type = "name";
-                                crs.properties.name = "EPSG:" + code;
-                            }
-                        }
-                        delete feature.geometry.crs;
                         features.push(feature);
                     }
                 }
@@ -178,10 +96,6 @@ define(['SOS', 'leaflet', 'proj4', 'SensorWidget', 'widget-common', 'proj4leafle
                     type: "FeatureCollection",
                     features: features
                 };
-                // Assign 'global' CRS to the whole FeatureCollection (top-level structure)
-                if (crs) {
-                    featureCollection.crs = crs;
-                }
                 return featureCollection;
             }
         }
