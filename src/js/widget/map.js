@@ -19,10 +19,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
             //load widget common features
             common.init(config, el);
         	
-            var map = L.map(main_div).setView([30, 0], 2);
-
             var baseLayer;
-
             if (config.base_layer) {
                 var params = (typeof config.base_layer == 'string' || config.base_layer instanceof String) ? JSON.parse(config.base_layer) : config.base_layer;
                 if (params.type && params.type.toUpperCase() === 'WMS') {
@@ -33,10 +30,12 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                     baseLayer = L.tileLayer(params.url, params.options);
                 }
             } else {
-                // A default base layer
-                baseLayer = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-});
+                // A default base layer, taken from http://leaflet-extras.github.io/leaflet-providers/preview/
+                baseLayer =  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                    subdomains: 'abcd',
+                    maxZoom: 19
+                });
             }
 
             // Add footnote to attribution string
@@ -44,8 +43,10 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                 baseLayer.options.attribution += " | <b>" + config.footnote + "</b>";
             }
             
-            baseLayer.addTo(map);
-            
+            var map = L.map(main_div, {
+                layers: [baseLayer]
+            });
+
             SOS.setUrl(config.service);
             read();
 
@@ -58,7 +59,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                         }
                     }
                     function addFoIs(features) {
-                        var geojson = fois2geojson(features);
+                        var geojson = L.geoJson(fois2geojson(features));
                         geojson.addTo(map);
                         map.fitBounds(geojson.getBounds(), {
                             maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14
