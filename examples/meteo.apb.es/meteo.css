@@ -22,6 +22,17 @@
     display: none;
     font-size: 12px;
 }
+.widget.panel dl {
+    text-align: left;
+}
+.widget.panel dd.outdated {
+    color: #AA1111;
+    font-style: italic;
+}
+.widget.panel dd.outdated span {
+    font-size: 9px;
+    display: block;
+}
 .sirena .feature,
 .sirena .widget .title {
     display: none;
