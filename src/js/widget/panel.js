@@ -40,17 +40,24 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
                     return;
                 }
 
+                // Get the most recent measure time as the reference one
+                var mostRecentTime = new Date(Math.max.apply(Math,data.map(function(o){return o.time;})));
+
                 // Sort by property
                 data.sort(function(a, b) {
                     return a.property.localeCompare(b.property);
                 });
 
-                subtitle.innerHTML = ld.display(data[0].time);
+                subtitle.innerHTML = ld.display(mostRecentTime);
                 var html = "";
                 for (var i in data) {
                     var measure = data[i];
                     html += "<dt>" + measure.property + "</dt>";
-                    html += "<dd>" + measure.value + " " + measure.uom + "</dd>";
+                    if (measure.time.getTime() == mostRecentTime.getTime()) {
+                        html += "<dd>" + measure.value + " " + measure.uom + "</dd>";
+                    } else { // Outdated! Display distinctly and with corresponding date
+                        html += "<dd class='outdated'>" + measure.value + " " + measure.uom + "* <span>*(" + ld.display(measure.time) + ")</span></dd>";
+                    }
                 }
                 panel.innerHTML = html;
 
