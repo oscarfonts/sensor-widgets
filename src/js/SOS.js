@@ -52,13 +52,13 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
             var request = {
                 request: "GetDataAvailability"
             };
-            if (procedures) {
+            if (procedures != false) {
                 request.procedure = procedures;
             }
-            if (features) {
+            if (features != false) {
                 request.featureOfInterest = features;
             }
-            if (properties) {
+            if (properties != false) {
                 request.observedProperty = properties;
             }
 
