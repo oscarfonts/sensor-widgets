@@ -51,10 +51,6 @@ lib/leaflet/leaflet.css
 ----------------
 lib/leaflet/leaflet.css
 
-lib/leaflet-dist/leaflet.css
-----------------
-lib/leaflet-dist/leaflet.css
-
 wizard/wizard.css
 ----------------
 wizard/wizard.css
@@ -99,9 +95,7 @@ js/widget/jqgrid.js
 
 js/widget/map.js
 ----------------
-lib/proj4/proj4.js
 js/SensorWidget.js
-lib/proj4leaflet/proj4leaflet.js
 js/widget/map.js
 
 js/widget/panel.js
