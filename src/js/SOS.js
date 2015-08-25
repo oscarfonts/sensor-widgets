@@ -53,13 +53,13 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
                 request: "GetDataAvailability"
             };
             if (procedures) {
-                request.procedures = procedures;
+                request.procedure = procedures;
             }
             if (features) {
-                request.features = features;
+                request.featureOfInterest = features;
             }
             if (properties) {
-                request.properties = properties;
+                request.observedProperty = properties;
             }
 
             this._send(request, function(response) {
