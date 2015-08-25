@@ -48,17 +48,17 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
             });
         },
 
-        getDataAvailability: function(procedures, features, properties, callback) {
+        getDataAvailability: function(procedure, features, properties, callback) {
             var request = {
                 request: "GetDataAvailability"
             };
-            if (procedures != false) {
-                request.procedure = procedures;
+            if (procedure) {
+                request.procedure = procedure;
             }
-            if (features != false) {
+            if (features && features.length) {
                 request.featureOfInterest = features;
             }
-            if (properties != false) {
+            if (properties && properties.length) {
                 request.observedProperty = properties;
             }
 
