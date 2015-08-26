@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define([], function() {
+define(['i18n'], function(i18n) {
     "use strict";
 
     var date = {
@@ -12,7 +12,7 @@ define([], function() {
     return {
         display: function(d) {
             if (!d) {
-                return "(no date)";
+                return i18n.t("(no date)");
             }
             if (date.utc) {
                 return d.toLocaleString(date.locale, {

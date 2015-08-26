@@ -1,4 +1,4 @@
-define([], function() {
+define(['i18n'], function(i18n) {
     "use strict";
 
     var instances = {};
@@ -41,7 +41,7 @@ define([], function() {
                 }
             }
             if (missing.length) {
-                errorHandler("The '" + name + "' widget is missing some mandatory parameters: " + missing.join(", "));
+                errorHandler(i18n.t("The '{name}' widget is missing some mandatory parameters: ", {name: name}) + missing.join(", "));
             }
             return !missing.length;
         }
@@ -65,10 +65,10 @@ define([], function() {
                     instances[renderTo.id] = widget.init(config, renderTo, errorHandler);
                 }
             }, function () {
-                errorHandler("Widget '" + name + "' cannot be found");
+                errorHandler(i18n.t("Widget '{name}' cannot be found", {name: name}));
             });
         } else if (!name) {
-            errorHandler("No widget name specified");
+            errorHandler(i18n.t("No widget name specified"));
         }
         return {
             name: name,

@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
+define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidget) {
     "use strict";
 
     var quick_refresh = 15; // seconds
@@ -50,7 +50,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
         'jqgrid': {
             service: defs.service(),
             offering: defs.offering("30m"),
-            title: "jqGrid Example",
+            title: i18n.t("jqGrid Example"),
             features: [
                 defs.feature("02"),
                 defs.feature("01")
@@ -73,7 +73,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
             ]
         },
         'panel': {
-            title: "Last observations",
+            title: i18n.t("Last observations"),
             service: defs.service(),
             offering: defs.offering("1m"),
             feature: defs.feature("02"),
@@ -98,7 +98,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
             refresh_interval: slow_refresh
         },
         'table': {
-            title: "Data Table - last 3 hours",
+            title: i18n.t("Data Table - last 3 hours"),
             service: defs.service(),
             offering: defs.offering("30m"),
             feature: defs.feature("02"),
@@ -133,8 +133,8 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
             time_end: now
         },
         'windrose': {
-            title: "Sirena Windrose",
-            subtitle: "Last 3 hours of wind observations",
+            title: i18n.t("Sirena Windrose"),
+            subtitle: i18n.t("Last 3 hours of wind observations"),
             service: defs.service(),
             offering: defs.offering("1m"),
             feature: defs.feature("02"),
@@ -146,7 +146,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     };
 
     function capitalize(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
+        return i18n.t(str.charAt(0).toUpperCase() + str.slice(1));
     }
 
     function htmlDecode(str) {
@@ -158,37 +158,37 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
     for (var name in widget_configurations) {
         widget_menu += '<li><a href="#'+name+'">' + capitalize(name) + '</a></li>';
         /*jshint multistr: true */
-        widget_list += ' \
-            <div class="anchor" id="'+name+'"></div> \
-            <h1><i class="flaticon-'+name+'"></i>&nbsp;&nbsp;'+capitalize(name)+'</h1> \
-            <div class="row"> \
-                <div class="col-md-6"> \
-                    <div class="thumbnail widget-container" id="'+name+'-container"></div> \
-                </div> \
-                <div class="col-md-6"> \
-                    <div id="'+name+'-inputs"></div> \
-                    <ul class="nav nav-tabs nav-justified"> \
-                        <li class=""><a href="#'+name+'-code" data-toggle="tab" aria-expanded="true">Code</a></li> \
-                        <li class=""><a href="#'+name+'-iframe" data-toggle="tab" aria-expanded="false">Embed</a></li> \
-                        <li class="active"><a href="#'+name+'-url" data-toggle="tab" aria-expanded="false">Link</a></li> \
-                    </ul> \
-                    <div id="myTabContent" class="tab-content"> \
-                        <div class="tab-pane fade" id="'+name+'-code"></div> \
-                        <div class="tab-pane fade" id="'+name+'-iframe"></div> \
-                        <div class="tab-pane fade active in" id="'+name+'-url"></div> \
-                    </div> \
-                </div> \
-            </div>';
+        widget_list += [
+            '<div class="anchor" id="'+name+'"></div>',
+            '<h1><i class="flaticon-'+name+'"></i>&nbsp;&nbsp;'+capitalize(name)+'</h1>',
+            '<div class="row">',
+                '<div class="col-md-6">',
+                    '<div class="thumbnail widget-container" id="'+name+'-container"></div>',
+                '</div>',
+                '<div class="col-md-6">',
+                    '<div id="'+name+'-inputs"></div>',
+                    '<ul class="nav nav-tabs nav-justified">',
+                        '<li class=""><a href="#'+name+'-code" data-toggle="tab" aria-expanded="true">', i18n.t("Code"), '</a></li>',
+                        '<li class=""><a href="#'+name+'-iframe" data-toggle="tab" aria-expanded="false">', i18n.t("Embed"), '</a></li>',
+                        '<li class="active"><a href="#'+name+'-url" data-toggle="tab" aria-expanded="false">', i18n.t("Link"), '</a></li>',
+                    '</ul>',
+                    '<div id="myTabContent" class="tab-content">',
+                        '<div class="tab-pane fade" id="'+name+'-code"></div>',
+                        '<div class="tab-pane fade" id="'+name+'-iframe"></div>',
+                        '<div class="tab-pane fade active in" id="'+name+'-url"></div>',
+                    '</div>',
+                '</div>',
+            '</div>'].join('');
     }
 
     document.getElementById("widget-menu").innerHTML = widget_menu;
     document.getElementById("widget-list").innerHTML = widget_list;
 
     var renderInputs = function(inputs, optional, sizes) {
-        var iface = "<h4><strong>" + capitalize(this.name) + " Configuration Parameters</strong>:</h4><dl class='dl-horizontal'>";
-        iface += "<dt>Mandatory:</dt> <dd><span class='label label-primary'>" + inputs.join("</span> <span class='label label-primary'>") + "</span></dd>";
-        iface += "<dt>Optional:</dt> <dd><span class='label label-info'>" + optional.join("</span> <span class='label label-info'>") + "</span></dd>";
-        iface += "<dt>Suggested Sizes:</dt> <dd><span class='label label-default'>" + sizes.map(function(size) {
+        var iface = "<h4><strong> " + i18n.t("{name} Configuration Parameters", {name: capitalize(this.name)}) + "</strong>:</h4><dl class='dl-horizontal'>";
+        iface += "<dt>" + i18n.t("Mandatory") + ":</dt> <dd><span class='label label-primary'>" + inputs.join("</span> <span class='label label-primary'>") + "</span></dd>";
+        iface += "<dt>" + i18n.t("Optional") + ":</dt> <dd><span class='label label-info'>" + optional.join("</span> <span class='label label-info'>") + "</span></dd>";
+        iface += "<dt>" + i18n.t("Suggested Sizes") + ":</dt> <dd><span class='label label-default'>" + sizes.map(function(size) {
             return size.w + " x " + size.h + " px";
         }).join("</span> <span class='label label-default'>") + "</dd>";
         iface += "</dl>";
@@ -197,7 +197,7 @@ define('home', ["SensorWidget", "bootstrap"], function(SensorWidget) {
 
     for (name in widget_configurations) {
 
-        widget_configurations[name].footnote="A sample footnote for "+name+" widget";
+        widget_configurations[name].footnote= i18n.t("A sample footnote for {name} widget", {name: capitalize(name)});
 
         var widget = new SensorWidget(
             name,

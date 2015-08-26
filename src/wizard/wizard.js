@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 'jquery-ui', 'bootstrap'], function(SensorWidget, SOS, $, moment) {
+define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 'jquery-ui', 'bootstrap'], function(i18n, SensorWidget, SOS, $, moment) {
     "use strict";
 
     menu();
@@ -37,9 +37,9 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
     }
 
     function form(name) {
-        $("#widget-form-title").html(capitalize(name) + " Widget Configuration");
+        $("#widget-form-title").html(i18n.t("{name} Widget Configuration", {name: capitalize(name)}));
         new SensorWidget(name).inspect(function(inputs, optionalInputs, preferredSizes) {
-            var contents = '<fieldset><legend>Mandatory inputs</legend>';
+            var contents = '<fieldset><legend>' + i18n.t("Mandatory inputs") + '</legend>';
             var input, select, label, options;
 
             for (var i in inputs) {
@@ -58,7 +58,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
                     case "features":
                     case "properties":
                         select = '<select class="form-control" multiple id="' + input + '"></select>';
-                        label += " (multiselect)";
+                        label += " " + i18n.t("(multiselect)");
                         break;
                     case "refresh_interval":
                         var intervals = [5, 10, 30, 60, 120];
@@ -70,7 +70,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
                         break;
                     case "time_start":
                         if ($.inArray("time_end", inputs)) {
-                            label = "Time Range (UTC)";
+                            label = i18n.t("Time Range") + " (UTC)";
                             select = '<input class="form-control" type="text" id="time_range" disabled />';
                         }
                         break;
@@ -87,7 +87,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
 
             contents += '</fieldset>';
 
-            contents += '<fieldset><legend>Optional inputs</legend>';
+            contents += '<fieldset><legend>' + i18n.t("Optional inputs") + '</legend>';
             for (i in optionalInputs) {
                 input = optionalInputs[i];
                 select = "";
@@ -110,9 +110,9 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
             }
             contents += '</fieldset>';
 
-            contents += '<fieldset><legend>Widget dimensions</legend>';
+            contents += '<fieldset><legend>' + i18n.t("Widget dimensions") + '</legend>';
             input = "sizes";
-            label = "Initial Size";
+            label = i18n.t("Initial Size");
 
             for (i in preferredSizes) {
                 var size = preferredSizes[i];
@@ -122,7 +122,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
             contents += '<div class="form-group">' + '<label class="col-lg-4 control-label" for="' + input + '">' + label + '</label><div class="col-lg-8">' + control + '</div></div>';
             contents += '</fieldset>';
 
-            contents += '<input type="button" name="build" class="btn btn-primary pull-right" value="Create Widget&nbsp;&nbsp;»"/>';
+            contents += '<input type="button" name="build" class="btn btn-primary pull-right" value="' + i18n.t("Create Widget") + '&nbsp;&nbsp;»"/>';
 
             $("#widget-form").html(contents);
 
@@ -169,7 +169,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
     function setService(urls) {
         var service = $('#service');
         if (urls && service) {
-            service.append($('<option>').append("Select a Service..."));
+            service.append($('<option>').append(i18n.t("Select a Service...")));
             for (var i in urls) {
                 var url = urls[i];
                 service.append($('<option>').attr('id', url).append(url));
@@ -181,7 +181,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
         clearOptions('#offering', '#property', '#properties', '#feature', '#features');
 
         if (url) {
-            $('#offering').append($('<option>').append("Select an Offering..."));
+            $('#offering').append($('<option>').append(i18n.t("Select an Offering...")));
         } else {
             return;
         }
@@ -416,9 +416,9 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 
     }
 
     function capitalize(string) {
-        return string.toLowerCase().replace(/_/g, " ").replace(/(?:^|\s)\S/g, function(a) {
+        return i18n.t(string.toLowerCase().replace(/_/g, " ").replace(/(?:^|\s)\S/g, function(a) {
             return a.toUpperCase();
-        });
+        }));
     }
 
 });

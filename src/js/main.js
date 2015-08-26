@@ -77,7 +77,7 @@ require.config({
     }
 
     var baseUrl = script.src.replace(/[^\/]*$/, '');
-    console.debug('Sensor Widgets Base URL is:' + baseUrl);
+    console.debug("Sensor Widgets' Base URL is: " + baseUrl);
 
     requirejs.config({
         baseUrl: baseUrl

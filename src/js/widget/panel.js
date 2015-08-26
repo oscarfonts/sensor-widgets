@@ -1,13 +1,13 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access, ld, common) {
+define(['i18n', 'sos-data-access', 'locale-date', 'widget-common'], function(i18n, data_access, ld, common) {
     "use strict";
 
     var template = [
         '<div class="panel widget">',
             '<h2></h2>',
-            '<h3>Loading...</h3>',
+            '<h3>', i18n.t("Loading..."), '</h3>',
             '<dl class="dl-horizontal"></dl>',
             '<div><span class="footnote"></span></div>',
         '</div>'
@@ -36,7 +36,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
             // Update view
             function redraw(data) {
                 if (!data.length) {
-                    subtitle.innerHTML = "(no data)";
+                    subtitle.innerHTML = i18n.t("(no data)");
                     return;
                 }
 

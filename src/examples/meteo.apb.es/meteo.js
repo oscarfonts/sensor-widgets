@@ -1,11 +1,12 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('meteo', ['SensorWidget', 'locale-date', 'bootstrap'], function(SensorWidget, ld) {
+define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i18n, SensorWidget, ld) {
     "use strict";
 
     ld.utc(false);
     ld.locale("es");
+    i18n.setLang('ca');
 
     var defs = {
         service: function() {
@@ -75,7 +76,7 @@ define('meteo', ['SensorWidget', 'locale-date', 'bootstrap'], function(SensorWid
             }, document.querySelector(".sirena .windrose"));
 
             new SensorWidget('table', {
-                title: "Data Table",
+                title: "Taula de dades",
                 service: defs.service(),
                 offering: defs.offering("30m"),
                 feature: defs.feature("02"),

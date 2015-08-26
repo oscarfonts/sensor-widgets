@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
+define(['i18n', 'sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-common'], function(i18n, data_access, drawing, ld, common) {
     "use strict";
 
     var template = [
@@ -9,10 +9,10 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
             '<h1 class="title"></h1>',
             drawing,
             '<div class="data">',
-            '<div class="error" style="display:none;text-align:center;">Loading...</div>',
-            '<h2><span class="property"></span>:<br/><span class="value"></span> deg</h2>',
-            '<h3>Request time:<br/><span class="request_time"></span></h3>',
-            '<h3>Result time:<br/><span class="result_time"></span></h3>',
+            '<div class="error" style="display:none;text-align:center;">', i18n.t("Loading..."), '</div>',
+            '<h2><span class="property"></span>:<br/><span class="value"></span> ', i18n.t("deg"), '</h2>',
+            '<h3>', i18n.t("Request time"), ':<br/><span class="request_time"></span></h3>',
+            '<h3>', i18n.t("Result time"), ':<br/><span class="result_time"></span></h3>',
             '</div>',
             '<div><span class="footnote"></span></div>',
         '</div>'].join('');

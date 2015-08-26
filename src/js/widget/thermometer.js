@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
+define(['i18n', 'sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget-common'], function(i18n, data_access, drawing, ld, common) {
     "use strict";
 
     var template = [
@@ -9,9 +9,9 @@ define(['sos-data-access', 'text!widget/thermometer.svg', 'locale-date', 'widget
             '<h1 class="feature"></h1>',
             drawing,
             '<div class="data">',
-            '<h2><span class="property"></span>: <span class="value"></span> Cel</h2>',
-            '<h3>Request time: <span class="request_time"></span></h3>',
-            '<h3>Result time: <span class="result_time"></span></h3>',
+            '<h2><span class="property"></span>: <span class="value"></span> ', i18n.t("Cel"), '</h2>',
+            '<h3>', i18n.t("Request time"), ': <span class="request_time"></span></h3>',
+            '<h3>', i18n.t("Result time"), ': <span class="result_time"></span></h3>',
             '</div>',
             '<div><span class="footnote"></span></div>',
         '</div>'
