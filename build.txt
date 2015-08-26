@@ -69,7 +69,6 @@ js/main.js
 ----------------
 js/main.js
 js/XML.js
-js/errorhandler.js
 js/SOS.js
 js/sos-data-access.js
 js/widget-common.js
