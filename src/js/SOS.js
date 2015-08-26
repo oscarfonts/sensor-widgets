@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['XML', 'errorhandler'], function(XML, errorhandler) {
+define(['XML'], function(XML) {
     "use strict";
 
     var SOS = {
@@ -11,7 +11,7 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
             this._url = url;
         },
 
-        getCapabilities: function(callback) {
+        getCapabilities: function(callback, errorHandler) {
             var request = {
                 request: "GetCapabilities",
                 sections: ["Contents"]
@@ -19,10 +19,10 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
 
             this._send(request, function(response) {
                 callback(response.contents);
-            });
+            }, errorHandler);
         },
 
-        describeSensor: function(procedure, callback) {
+        describeSensor: function(procedure, callback, errorHandler) {
             var request = {
                 request: "DescribeSensor",
                 procedure: procedure,
@@ -34,10 +34,10 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
                 var description = response.procedureDescription.description;
                 var json = XML.read(description, true);
                 callback(json.SensorML.member);
-            });
+            }, errorHandler);
         },
 
-        getFeatureOfInterest: function(procedure, callback) {
+        getFeatureOfInterest: function(procedure, callback, errorHandler) {
             var request = {
                 request: "GetFeatureOfInterest",
                 procedure: procedure
@@ -45,10 +45,10 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
 
             this._send(request, function(response) {
                 callback(response.featureOfInterest);
-            });
+            }, errorHandler);
         },
 
-        getDataAvailability: function(procedure, features, properties, callback) {
+        getDataAvailability: function(procedure, features, properties, callback, errorHandler) {
             var request = {
                 request: "GetDataAvailability"
             };
@@ -64,10 +64,10 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
 
             this._send(request, function(response) {
                 callback(response.dataAvailability);
-            });
+            }, errorHandler);
         },
 
-        getObservation: function(offering, features, properties, time, callback) {
+        getObservation: function(offering, features, properties, time, callback, errorHandler) {
             var request = {
                 "request": "GetObservation"
             };
@@ -103,10 +103,10 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
 
             this._send(request, function(response) {
                 callback(response.observations);
-            });
+            }, errorHandler);
         },
 
-        _send: function(request, callback) {
+        _send: function(request, onSuccess, onError) {
             request.service = "SOS";
             request.version = "2.0.0";
 
@@ -114,12 +114,25 @@ define(['XML', 'errorhandler'], function(XML, errorhandler) {
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
+                    var response = xhr.responseText;
+                    try {
+                        response = JSON.parse(response);
+                    } catch (e) {
+                        // OK, not JSON
+                    }
                     if (xhr.status == 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        callback.call(this, response);
+                        onSuccess.call(this, response);
                     } else {
-                        console.error("Error accessing " + this._url);
-                        errorhandler.throwError("Server " + this._url + " does not seem to respond");
+                        var e = {
+                            status: xhr.statusText,
+                            url: this._url,
+                            request: request,
+                            response: response
+                        };
+                        console.log(e);
+                        if (onError) {
+                            onError.call(this, e.status, e.url, e.request, e.response);
+                        }
                     }
                 }
             }.bind(this);

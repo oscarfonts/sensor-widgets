@@ -66,7 +66,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'SensorWidget',
                                 'css',
                                 'text'
@@ -82,7 +81,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text'
                             ]
@@ -97,7 +95,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text'
                             ]
@@ -112,7 +109,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text',
                                 'jqgrid',
@@ -131,7 +127,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text',
                                 'widget/panel'
@@ -147,7 +142,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text'
                             ]
@@ -162,7 +156,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text'
                             ]
@@ -177,7 +170,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text'
                             ]
@@ -192,7 +184,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text'
                             ]
@@ -207,7 +198,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text',
                                 'jquery'
@@ -223,7 +213,6 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
-                                'errorhandler',
                                 'css',
                                 'text',
                                 'jquery'

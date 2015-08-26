@@ -18,7 +18,7 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'flot-resize', 'flot-
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 650, h: 530}],
 
-        init: function(config, el) {
+        init: function(config, el, errorHandler) {
             // Render template
             el.innerHTML = template;
             el.querySelector("h3").innerHTML = config.title;
@@ -28,7 +28,7 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'flot-resize', 'flot-
             common.init(config, el);
 
             // Setup SOS data access
-            var data = data_access(config, redraw);
+            var data = data_access(config, redraw, errorHandler);
             data.read();
 
             function redraw(data) {

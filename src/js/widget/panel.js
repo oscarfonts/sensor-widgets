@@ -18,7 +18,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 400, h: 400}],
 
-        init: function(config, el) {
+        init: function(config, el, errorHandler) {
             // Render template
             el.innerHTML = template;
             el.querySelector("h2").innerHTML = config.title;
@@ -29,7 +29,7 @@ define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access
             common.init(config, el);
 
             // Setup SOS data access
-            var data = data_access(config, redraw);
+            var data = data_access(config, redraw, errorHandler);
             var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 

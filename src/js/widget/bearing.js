@@ -22,7 +22,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
         optional_inputs: ["title"].concat(common.optional_inputs),
         preferredSizes: [{w: 570, h: 380}, {w: 280, h: 540}],
 
-        init: function(config, el) {
+        init: function(config, el, errorHandler) {
             // Render template
             el.innerHTML = template;
             var arrow = el.querySelector(".arrow");
@@ -37,7 +37,7 @@ define(['sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-com
             }
 
             // Setup SOS data access
-            var data = data_access(config, redraw);
+            var data = data_access(config, redraw, errorHandler);
             var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 

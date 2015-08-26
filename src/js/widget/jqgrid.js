@@ -11,7 +11,7 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 530, h: 440}],
 
-        init: function(config, el) {
+        init: function(config, el, errorHandler) {
             // Render template
             el.innerHTML = [
                 '<div class="jqgrid widget">',
@@ -27,7 +27,7 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget
             common.init(config, el);
 
             // Setup SOS data access
-            var data = data_access(config, redraw);
+            var data = data_access(config, redraw, errorHandler);
             data.read();
 
             function redraw(data) {

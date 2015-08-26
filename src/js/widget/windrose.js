@@ -11,7 +11,7 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
         optional_inputs: ["subtitle"].concat(common.optional_inputs),
         preferredSizes: [{w: 620, h: 450}],
 
-        init: function(config, el) {
+        init: function(config, el, errorHandler) {
             // Main div
             var main_div = document.createElement("div");
             main_div.className = "windrose widget";
@@ -30,7 +30,7 @@ define(['sos-data-access', 'widget-common', 'highcharts-more'], function(data_ac
             el.appendChild(main_div);
 
             //load widget common features
-            common.init(config, el);
+            common.init(config, el, errorHandler);
         	
             // Setup SOS data access
             var data = data_access(config, redraw);

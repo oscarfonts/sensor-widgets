@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'daterangepicker', 'jquery-ui', 'bootstrap'], function(SensorWidget, SOS, $, moment, errorhandler) {
+define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 'jquery-ui', 'bootstrap'], function(SensorWidget, SOS, $, moment) {
     "use strict";
 
     menu();
@@ -14,6 +14,8 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
         handles: 'e, w'
     });
     $("#widget-container").resizable();
+
+    var renderTo = document.getElementById("widget-view");
 
     function menu() {
         var widgets = ["bearing", "gauge", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
@@ -121,7 +123,6 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
             contents += '</fieldset>';
 
             contents += '<input type="button" name="build" class="btn btn-primary pull-right" value="Create Widget&nbsp;&nbsp;»"/>';
-            contents += '<div id="builderError"  class="text-danger"></div>';
 
             $("#widget-form").html(contents);
 
@@ -136,7 +137,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
             setService(["http://demo.geomati.co/sos/json", "http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
 
             $('#service').change(function() {
-                errorhandler.hideError();
+                errorHandler();
                 var service = $('#service').find('option:selected').attr("id");
                 setOfferings(service);
             });
@@ -192,7 +193,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
 
                 $("#offering").append($('<option>').attr('id', offering.identifier).data('procedure', offering.procedure[0]).append(offering.name));
             }
-        });
+        }, errorHandler);
     }
 
     function setProperties(procedure) {
@@ -227,7 +228,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
 
             }
 
-        });
+        }, errorHandler);
     }
 
     function setFeatures(procedure) {
@@ -246,7 +247,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
                 $("#feature, #features").append($('<option>').attr('id', id).append(name));
             }
 
-        });
+        }, errorHandler);
     }
 
     function setDateRange() {
@@ -314,7 +315,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
                     picker.setEndDate(moment.min(moment.utc(abs_to), to));
                 }
 
-            });
+            }, errorHandler);
         }
     }
 
@@ -384,7 +385,7 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
         widgetContainer.resizable("destroy");
         $("#widget-container").width(preferredSize.w).height(preferredSize.h+39);
 
-        var instance = new SensorWidget(params.name, config, document.getElementById("widget-view"));
+        var instance = new SensorWidget(params.name, config, renderTo);
 
         widgetContainer.resizable({
             helper: "ui-resizable-helper",
@@ -398,6 +399,20 @@ define('wizard', ['SensorWidget', 'SOS', 'jquery', 'moment', 'errorhandler', 'da
         document.getElementById('code').innerHTML = instance.javascript();
         document.getElementById('embed').innerHTML = htmlDecode(instance.iframe(preferredSize.w, preferredSize.h));
         document.getElementById('link').innerHTML = '<a href="'+instance.url()+'" target="_blank">'+instance.url()+'</a>';
+    }
+
+    function errorHandler(message, url, request) {
+        var text = "";
+        if (url){
+            text = "[" + url + "] ";
+        }
+        if (request && request.request) {
+            text += request.request + ": ";
+        }
+        if (message) {
+            text += message;
+        }
+        renderTo.innerHTML = '<div class="text-danger">' + text + '</div>';
     }
 
     function capitalize(string) {

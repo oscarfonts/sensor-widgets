@@ -27,7 +27,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
         optional_inputs: common.optional_inputs,
         preferredSizes: [{w: 500, h: 220}],
 
-        init: function(config, el) {
+        init: function(config, el, errorHandler) {
             // Render template
             el.innerHTML = template;
             el.querySelector(".min").innerHTML = config.min_value;
@@ -37,7 +37,7 @@ define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-
             common.init(config, el);
 
             // Setup SOS data access
-            var data = data_access(config, redraw);
+            var data = data_access(config, redraw, errorHandler);
             var refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
             data.read();
 

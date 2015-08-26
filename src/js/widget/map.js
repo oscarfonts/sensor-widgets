@@ -9,7 +9,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
         optional_inputs: ["max_initial_zoom", "base_layer"].concat(common.optional_inputs),
         preferredSizes: [{w: 550, h: 400}],
 
-        init: function(config, el) {
+        init: function(config, el, errorHandler) {
 
             // Main div
             var main_div = document.createElement("div");
@@ -55,7 +55,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                     for (var i in offerings) {
                         var offering = offerings[i];
                         if (offering.identifier == config.offering) {
-                            SOS.getFeatureOfInterest(offering.procedure[0], addFoIs);
+                            SOS.getFeatureOfInterest(offering.procedure[0], addFoIs, errorHandler);
                         }
                     }
                     function addFoIs(features) {
@@ -65,7 +65,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                             maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14
                         });
                     }
-                });
+                }, errorHandler);
             }
 
             function isArray(obj) {
