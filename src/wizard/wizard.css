@@ -60,5 +60,5 @@ select[multiple] {
 }
 
 .calendar-time:after {
-    content: 'UTC time'
+    content: 'UTC'
 }

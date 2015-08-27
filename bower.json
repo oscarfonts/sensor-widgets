@@ -53,6 +53,10 @@
     },
     "Leaflet.label": {
       "/": "dist/leaflet.label.{js,css}"
+    },
+    "moment": {
+      "/": "moment.js",
+      "/locale": "locale/{es,ca}.js"
     }
   }
 }

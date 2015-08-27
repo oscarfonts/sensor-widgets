@@ -66,6 +66,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'SensorWidget',
                                 'css',
                                 'text'
@@ -81,6 +82,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text'
                             ]
@@ -95,6 +97,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text'
                             ]
@@ -109,6 +112,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text',
                                 'jqgrid',
@@ -127,6 +131,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text',
                                 'widget/panel'
@@ -142,6 +147,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text'
                             ]
@@ -156,6 +162,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text'
                             ]
@@ -170,6 +177,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text'
                             ]
@@ -184,6 +192,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text'
                             ]
@@ -198,6 +207,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text',
                                 'jquery'
@@ -213,6 +223,7 @@ module.exports = function(grunt) {
                                 'sos-data-access',
                                 'widget-common',
                                 'locale-date',
+                                'i18n',
                                 'css',
                                 'text',
                                 'jquery'

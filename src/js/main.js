@@ -18,14 +18,16 @@ require.config({
         'jqgrid-locale-en': '../lib/jqgrid/grid.locale-en',
         'leaflet': '../lib/leaflet/leaflet',
         'leaflet-label': '../lib/Leaflet.label/leaflet.label',
-        'moment': '../lib/moment/moment'
+        'moment': '../lib/moment/moment',
+        'moment-es': '../lib/moment/locale/es',
+        'moment-ca': '../lib/moment/locale/ca'
     },
     shim: {
         'bootstrap': {
             deps: ['jquery']
         },
         'daterangepicker': {
-            deps: ['bootstrap', 'moment', 'jquery', 'css!../lib/bootstrap-daterangepicker/daterangepicker-bs3.css']
+            deps: ['bootstrap', 'moment-es', 'moment-ca', 'jquery', 'css!../lib/bootstrap-daterangepicker/daterangepicker-bs3.css']
         },
         'flot': {
             deps: ['jquery']
@@ -63,6 +65,12 @@ require.config({
         },
         'leaflet-label': {
             deps: ['leaflet', 'css!../lib/Leaflet.label/leaflet.label.css']
+        },
+        'moment-es': {
+            deps: ['moment']
+        },
+        'moment-ca': {
+            deps: ['moment']
         }
     }
 });

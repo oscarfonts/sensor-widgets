@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget/jqgrid.css'], function(data_access, ld, common) {
+define(['i18n', 'sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget/jqgrid.css'], function(i18n, data_access, ld, common) {
     "use strict";
 
     var count = 0;
@@ -36,13 +36,19 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jqgrid', 'css!widget
                     datatype: 'local',
                     height: 'auto',
                     width: '100%',
-                    caption: 'Results',
+                    caption: i18n.t("Results"),
                     data: data,
                     pager: '#pager'+count,
                     rowNum: 12,
                     sortname: 'time',
                     autowidth: true,
-                    colNames: ['Time', 'Feature', 'Property', 'Value', 'Unit'],
+                    colNames: [
+                        i18n.t("Time"),
+                        i18n.t("Feature"),
+                        i18n.t("Property"),
+                        i18n.t("Value"),
+                        i18n.t("Unit")
+                    ],
                     colModel: [{
                         name: 'time',
                         index: 'time',

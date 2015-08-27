@@ -43,6 +43,22 @@
     "es": "ºC",
     "ca": "ºC"
   },
+  "Results": {
+    "es": "Resultados",
+    "ca": "Resultats"
+  },
+  "Time": {
+    "es": "Hora",
+    "ca": "Hora"
+  },
+  "Value": {
+    "es": "Valor",
+    "ca": "Valor"
+  },
+  "Unit": {
+    "es": "Unidad",
+    "ca": "Unitat"
+  },
   "{name} Widget Configuration": {
     "es": "Configuración de {name}",
     "ca": "Configuració de {name}"
@@ -122,6 +138,46 @@
   "Time Range": {
     "es": "Rango de tiempo",
     "ca": "Rang de temps"
+  },
+  "MMM D, YYYY H:mm": {
+    "es": "D MMM YYYY H:mm",
+    "ca": "D MMM YYYY H:mm"
+  },
+  "Custom Range": {
+    "es": "Rango predefinido",
+    "ca": "Rang predefinit"
+  },
+  "Today": {
+    "es": "Hoy",
+    "ca": "Avui"
+  },
+  "Last hour": {
+    "es": "La última hora",
+    "ca": "La última hora"
+  },
+  "Last {n} hours": {
+    "es": "Las últimas {n} horas",
+    "ca": "Les últimes {n} hores"
+  },
+  "From": {
+    "es": "De",
+    "ca": "De"
+  },
+  "To": {
+    "es": "A",
+    "ca": "A"
+  },
+  "Apply": {
+    "es": "Aplicar",
+    "ca": "Aplica"
+  },
+  "Cancel": {
+    "es": "Cancelar",
+    "ca": "Cancel·la"
+  },
+  "W": {
+    "es": "S",
+    "ca": "S"
   },
   "Optional inputs": {
     "es": "Parámetros opcionales",

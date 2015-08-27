@@ -103,6 +103,7 @@ define(['i18n'], function(i18n) {
                     }
                     return key + "=" + encodeURIComponent(val);
                 }).join("&");
+                url += "&lang="+i18n.getLang();
                 return url;
             },
             iframe: function(w, h) {

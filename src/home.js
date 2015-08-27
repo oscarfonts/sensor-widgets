@@ -4,6 +4,43 @@
 define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidget) {
     "use strict";
 
+    var bundle = {
+      "Toggle navigation": {
+        "es": "Conmutar navegación",
+        "ca": "Commuta la navegació"
+      },
+      "#SIGLibre8 slides": {
+        "es": "Presentación #SIGLibre8",
+        "ca": "Presentació #SIGLibre8"
+      },
+      "GitHub Repo": {
+        "es": "Repo GitHub",
+        "ca": "Repo GitHub"
+      },
+      "Examples ": {
+        "es": "Ejemplos ",
+        "ca": "Exemples "
+      },
+      "Configurable graphical components for your ": {
+        "es": "Componentes gráficos configurables para tus datos de sensores ",
+        "ca": "Components gràfics configurables per a les teves dades de sensors "
+      },
+      " sensor data.": {
+        "es": ".",
+        "ca": "."
+      },
+      "100% Javascript. Extensible. MIT licensed.": {
+        "es": "100% Javascript. Extensible. Licencia MIT.",
+        "ca": "100% Javascript. Extensible. Llicència MIT."
+      },
+      "  Build your own  »": {
+        "es": "  Crea tu widget  »",
+        "ca": "  Crea el teu widget  »"
+      }
+    };
+    i18n.addTranslations(bundle);
+    i18n.translateDocTree();
+
     var quick_refresh = 15; // seconds
     var slow_refresh = 120; // seconds
 

@@ -4,6 +4,27 @@
 define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 'jquery-ui', 'bootstrap'], function(i18n, SensorWidget, SOS, $, moment) {
     "use strict";
 
+    var bundle = {
+      "Sensor Widget Wizard": {
+        "es": "Wizard Sensor Widgets",
+        "ca": "Wizard Sensor Widgets"
+      },
+      "Widget Configuration Form": {
+        "es": "Formulario de configuración",
+        "ca": "Formulari de configuració"
+      },
+      "Widget View": {
+        "es": "Vista del Widget",
+        "ca": "Vista del Widget"
+      },
+      "Take Away": {
+        "es": "Para llevar",
+        "ca": "Emporteu-vos-el"
+      }
+    };
+    i18n.addTranslations(bundle);
+    i18n.translateDocTree();
+
     menu();
 
     $(".panel").draggable({
@@ -277,9 +298,19 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
                         abs_to = to;
                     }
                 }
+
+                moment.locale(i18n.getLang());
+
+                var ranges = [];
+                ranges[i18n.t('Today')] = [moment().startOf('day'), moment()];
+                ranges[i18n.t('Last hour')] = [moment().subtract(1, 'hour'), moment()];
+                for(var n in [3, 6, 12, 24]) {
+                    ranges[i18n.t('Last {n} hours', {n: n})] = [moment().subtract(n, 'hours'), moment()];
+                }
+
                 var options = {
                     timePicker: true,
-                    format: 'MMM D, YYYY H:mm',
+                    format: i18n.t('MMM D, YYYY H:mm'),
                     timePickerIncrement: 5,
                     timePicker12Hour: false,
                     timePickerSeconds: false,
@@ -289,13 +320,14 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
                     dateLimit: {
                         days: 7
                     },
-                    ranges: {
-                       'Today': [moment().startOf('day'), moment()],
-                       'Last hour': [moment().subtract(1, 'hour'), moment()],
-                       'Last 3 hours': [moment().subtract(3, 'hours'), moment()],
-                       'Last 6 hours': [moment().subtract(6, 'hours'), moment()],
-                       'Last 12 hours': [moment().subtract(3, 'hours'), moment()],
-                       'Last 24 hours': [moment().subtract(3, 'hours'), moment()]
+                    ranges: ranges,
+                    locale: {
+                        applyLabel: i18n.t('Apply'),
+                        cancelLabel: i18n.t('Cancel'),
+                        fromLabel: i18n.t('From'),
+                        toLabel: i18n.t('To'),
+                        weekLabel: i18n.t('W'),
+                        customRangeLabel: i18n.t('Custom Range')
                     }
                 };
                 var picker;
