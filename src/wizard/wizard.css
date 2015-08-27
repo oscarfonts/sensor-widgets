@@ -47,11 +47,11 @@ select[multiple] {
 }
 
 #widget-container {
-    z-index: 99998;
+    z-index: 998;
 }
 
 .ui-resizable-handle {
-    z-index: 99999 !important;
+    z-index: 999 !important;
 }
 
 .ui-resizable-helper {

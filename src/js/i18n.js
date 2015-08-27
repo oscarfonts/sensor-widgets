@@ -34,6 +34,9 @@ define(['text!translations.json'], function(bundle) {
     }
 
     return {
+        langs: function() {
+            return translations.langs;
+        },
         getLang: function() {
             return activeLang;
         },

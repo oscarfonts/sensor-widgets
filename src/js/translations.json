@@ -1,4 +1,9 @@
 {
+  "langs": {
+    "en": "English",
+    "es": "Español",
+    "ca": "Català"
+  },
   "(no date)": {
     "es": "(sin fecha)",
     "ca": "(sense data)"

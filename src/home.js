@@ -40,6 +40,17 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
     };
     i18n.addTranslations(bundle);
     i18n.translateDocTree();
+    document.getElementById('wizard-link').href = "wizard?lang=" + i18n.getLang();
+
+    var langMenu = '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+i18n.langs()[i18n.getLang()]+' <span class="caret"></span></a>';
+    langMenu += '<ul class="dropdown-menu">';
+    for (var key in i18n.langs()) {
+        if (key != i18n.getLang()) {
+           langMenu += '<li><a href="?lang='+key+'">'+i18n.langs()[key]+'</a></li>';
+        }
+    }
+    langMenu += '</ul>';
+    document.getElementById('lang-selector').innerHTML = langMenu;
 
     var quick_refresh = 15; // seconds
     var slow_refresh = 120; // seconds

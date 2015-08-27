@@ -25,6 +25,16 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
     i18n.addTranslations(bundle);
     i18n.translateDocTree();
 
+    var langMenu = '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'+i18n.langs()[i18n.getLang()]+' <span class="caret"></span></a>';
+    langMenu += '<ul class="dropdown-menu">';
+    for (var key in i18n.langs()) {
+        if (key != i18n.getLang()) {
+           langMenu += '<li><a href="?lang='+key+'">'+i18n.langs()[key]+'</a></li>';
+        }
+    }
+    langMenu += '</ul>';
+    document.getElementById('lang-selector').innerHTML = langMenu;
+
     menu();
 
     $(".panel").draggable({
