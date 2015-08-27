@@ -30,3 +30,10 @@ pre {
 .progressbar.widget .max {
     top: 5px !important;
 }
+.tab-content {
+    border: 1px solid #ecf0f1;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    padding: 15px;
+    padding-bottom: 0;
+}

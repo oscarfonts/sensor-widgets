@@ -72,10 +72,12 @@ js/XML.js
 js/SOS.js
 js/sos-data-access.js
 js/widget-common.js
+lib/requirejs-text/text.js
+text!translations.json
+js/i18n.js
 js/locale-date.js
 js/SensorWidget.js
 js/css.js
-lib/requirejs-text/text.js
 
 js/widget/bearing.js
 ----------------

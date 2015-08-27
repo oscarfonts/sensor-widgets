@@ -39,15 +39,15 @@ select[multiple] {
     height: 225px !important;
 }
 #widget-container {
-    z-index: 99998;
+    z-index: 998;
 }
 .ui-resizable-handle {
-    z-index: 99999 !important;
+    z-index: 999 !important;
 }
 .ui-resizable-helper {
     border-radius: 4px;
     border: 2px dashed #e74c3c;
 }
 .calendar-time:after {
-    content: 'UTC time'
+    content: 'UTC'
 }

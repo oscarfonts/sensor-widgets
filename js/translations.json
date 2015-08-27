@@ -1,0 +1,275 @@
+{
+  "langs": {
+    "en": "English",
+    "es": "Español",
+    "ca": "Català"
+  },
+  "(no date)": {
+    "es": "(sin fecha)",
+    "ca": "(sense data)"
+  },
+  "No widget name specified": {
+    "es": "No se ha especificado ningún nombre de widget",
+    "ca": "Cal especificar un nom de widget"
+  },
+  "Widget '{name}' cannot be found": {
+    "es": "No se ha encontrado el widget de nombre '{name}'",
+    "ca": "No s'ha trobat cap widget anomenat '{name}'"
+  },
+  "The '{name}' widget is missing some mandatory parameters: ": {
+    "es": "Faltan algunos parámetros obligatorios para el widget '{name}': ",
+    "ca": "Cal afegir els següents paràmetres obligatoris al widget '{name}': "
+  },
+  "Loading...": {
+    "es": "Cargando...",
+    "ca": "Carregant..."
+  },
+  "deg": {
+    "es": "º",
+    "ca": "º"
+  },
+  "Request time": {
+    "es": "Petición el",
+    "ca": "Petició el"
+  },
+  "Response time": {
+    "es": "Respuesta el",
+    "ca": "Resposta el"
+  },
+  "(no data)": {
+    "es": "(sin datos)",
+    "ca": "(sense dades)"
+  },
+  "Result time": {
+    "es": "Resultado del",
+    "ca": "Resultat del"
+  },
+  "Cel": {
+    "es": "ºC",
+    "ca": "ºC"
+  },
+  "Results": {
+    "es": "Resultados",
+    "ca": "Resultats"
+  },
+  "Time": {
+    "es": "Hora",
+    "ca": "Hora"
+  },
+  "Value": {
+    "es": "Valor",
+    "ca": "Valor"
+  },
+  "Unit": {
+    "es": "Unidad",
+    "ca": "Unitat"
+  },
+  "{name} Widget Configuration": {
+    "es": "Configuración de {name}",
+    "ca": "Configuració de {name}"
+  },
+  "Mandatory inputs": {
+    "es": "Parámetros obligatorios",
+    "ca": "Paràmetres obligatoris"
+  },
+  "Bearing": {
+    "es": "Rumbo",
+    "ca": "Rumb"
+  },
+  "Gauge": {
+    "es": "Manómetro",
+    "ca": "Manòmetre"
+  },
+  "Jqgrid": {
+    "es": "Tabla JQuery",
+    "ca": "Taula JQuery"
+  },
+  "Map": {
+    "es": "Mapa",
+    "ca": "Mapa"
+  },
+  "Panel": {
+    "es": "Panel",
+    "ca": "Panell"
+  },
+  "Progressbar": {
+    "es": "Barra",
+    "ca": "Barra"
+  },
+  "Table": {
+    "es": "Tabla",
+    "ca": "Taula"
+  },
+  "Thermometer": {
+    "es": "Termómetro",
+    "ca": "Termòmetre"
+  },
+  "Timechart": {
+    "es": "Serie tiempo",
+    "ca": "Sèrie temps"
+  },
+  "Windrose": {
+    "es": "Rosa vientos",
+    "ca": "Rosa vents"
+  },
+  "Select a Service...": {
+    "es": "Seleccione un servicio...",
+    "ca": "Sel·leccioneu un servei..."
+  },
+  "Select an Offering...": {
+    "es": "Seleccione un offering...",
+    "ca": "Sel·leccioneu un offering..."
+  },
+  "(multiselect)": {
+    "es": "(selección múltiple)",
+    "ca": "(selecció múltiple)"
+  },
+  "Service": {
+    "es": "Servicio",
+    "ca": "Servei"
+  },
+  "Property": {
+    "es": "Propiedad",
+    "ca": "Propietat"
+  },
+  "Properties": {
+    "es": "Propiedades",
+    "ca": "Propietats"
+  },
+  "Refresh Interval": {
+    "es": "Intervalo de refresco",
+    "ca": "Intèrval de refresc"
+  },
+  "Time Range": {
+    "es": "Rango de tiempo",
+    "ca": "Rang de temps"
+  },
+  "MMM D, YYYY H:mm": {
+    "es": "D MMM YYYY H:mm",
+    "ca": "D MMM YYYY H:mm"
+  },
+  "Custom Range": {
+    "es": "Rango predefinido",
+    "ca": "Rang predefinit"
+  },
+  "Today": {
+    "es": "Hoy",
+    "ca": "Avui"
+  },
+  "Last hour": {
+    "es": "La última hora",
+    "ca": "La última hora"
+  },
+  "Last {n} hours": {
+    "es": "Las últimas {n} horas",
+    "ca": "Les últimes {n} hores"
+  },
+  "From": {
+    "es": "De",
+    "ca": "De"
+  },
+  "To": {
+    "es": "A",
+    "ca": "A"
+  },
+  "Apply": {
+    "es": "Aplicar",
+    "ca": "Aplica"
+  },
+  "Cancel": {
+    "es": "Cancelar",
+    "ca": "Cancel·la"
+  },
+  "W": {
+    "es": "S",
+    "ca": "S"
+  },
+  "Optional inputs": {
+    "es": "Parámetros opcionales",
+    "ca": "Paràmetres opcionals"
+  },
+  "Title": {
+    "es": "Título",
+    "ca": "Títol"
+  },
+  "Footnote": {
+    "es": "Nota al pie",
+    "ca": "Nota al peu"
+  },
+  "Custom Css Url": {
+    "es": "URL del CSS personalizado",
+    "ca": "URL del CSS personalitzat"
+  },
+  "Max Initial Zoom": {
+    "es": "Zoom Inicial Máximo",
+    "ca": "Zoom Inicial Màxim"
+  },
+  "Base Layer": {
+    "es": "Mapa de Base",
+    "ca": "Mapa de Base"
+  },
+  "Widget dimensions": {
+    "es": "Tamaño del widget",
+    "ca": "Mides del widget"
+  },
+  "Initial Size": {
+    "es": "Tamaño inicial",
+    "ca": "Mida inicial"
+  },
+  "Create Widget": {
+    "es": "Crear Widget",
+    "ca": "Crear Widget"
+  },
+  "{name} Configuration Parameters": {
+    "es": "Parámetros de {name}",
+    "ca": "Paràmetres de {name}"
+  },
+  "jqGrid Example": {
+    "es": "Ejemplo de tabla JQuery",
+    "ca": "Exemple de taula JQuery"
+  },
+  "Last observations": {
+    "es": "Observaciones más recientes",
+    "ca": "Darreres observacions"
+  },
+  "Data Table - last 3 hours": {
+    "es": "Tabla de datos - últimas 3 horas",
+    "ca": "Taula de dades - darreres 3 hores"
+  },
+  "Sirena Windrose": {
+    "es": "Rosa de los Vientos Sirena",
+    "ca": "Rosa dels Vents Sirena"
+  },
+  "Last 3 hours of wind observations": {
+    "es": "Últimas 3 horas de observaciones del viento",
+    "ca": "Darreres 3 hores d'observacions del vent"
+  },
+  "Code": {
+    "es": "Código",
+    "ca": "Codi"
+  },
+  "Embed": {
+    "es": "Incrustar",
+    "ca": "Incrusta"
+  },
+  "Link": {
+    "es": "Enlazar",
+    "ca": "Enllaça"
+  },
+  "Mandatory": {
+    "es": "Obligatorios",
+    "ca": "Obligatoris"
+  },
+  "Optional": {
+    "es": "Opcionales",
+    "ca": "Opcionals"
+  },
+  "Suggested Sizes": {
+    "es": "Tamaños recomendados",
+    "ca": "Mides recomanades"
+  },
+  "A sample footnote for {name} widget": {
+    "es": "Nota al pie de ejemplo en el widget {name}",
+    "ca": "Nota al peu d'exemple al widget {name}"
+  }
+}
