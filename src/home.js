@@ -9,10 +9,6 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
         "es": "Conmutar navegación",
         "ca": "Commuta la navegació"
       },
-      "#SIGLibre8 slides": {
-        "es": "Presentación #SIGLibre8",
-        "ca": "Presentació #SIGLibre8"
-      },
       "GitHub Repo": {
         "es": "Repo GitHub",
         "ca": "Repo GitHub"
@@ -20,6 +16,18 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
       "Examples ": {
         "es": "Ejemplos ",
         "ca": "Exemples "
+      },
+      "Usage in Javascript": {
+        "es": "Uso en Javascript",
+        "ca": "Ús des de Javascript"
+      },
+      "Advanced Composition": {
+        "es": "Composición avanzada",
+        "ca": "Composició avançada"
+      },
+      "Documentation": {
+        "es": "Documentación",
+        "ca": "Documentació"
       },
       "Configurable graphical components for your ": {
         "es": "Componentes gráficos configurables para tus datos de sensores ",

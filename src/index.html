@@ -33,17 +33,28 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="../doc/slides" target="_blank">#SIGLibre8 slides</a>
-                    </li>
-                    <li>
                         <a href="https://github.com/oscarfonts/sensor-widgets" target="_blank">GitHub Repo</a>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Widgets <b class="caret"></b></a>
+                        <ul id="widget-menu" class="dropdown-menu"></ul>
+                    </li>
                     <li>
-                        <a href="wizard" target="_blank">Widget Wizard</a>
+                        <a href="wizard" target="_blank">Wizard</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
-                        <ul id="widget-menu" class="dropdown-menu"></ul>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb" target="_blank">Usage in Javascript</a>
+                            </li>
+                            <li>
+                                <a href="examples/meteo.apb.es" target="_blank">Advanced Composition</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../doc/slides" target="_blank">Documentation</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -62,7 +73,7 @@
             <p>Configurable graphical components for your <a href="http://live.osgeo.org/en/standards/sos_overview.html" target="_blank">SOS</a> sensor data.</p>
             <h3>100% Javascript. Extensible. MIT licensed.</h3>
             <p style="text-align:right;margin:40px 0 0 0;">
-                <a class="btn btn-primary btn-lg" id="wizard-link" role="button" href="wizard">
+                <a class="btn btn-primary btn-lg" id="wizard-link" role="button" href="wizard" target="_blank">
                     <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a>
             </p>
         </div>
