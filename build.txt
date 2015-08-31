@@ -105,6 +105,8 @@ js/widget/map.js
 js/widget/monitor.js
 ----------------
 lib/moment/moment.js
+lib/moment/locale/es.js
+lib/moment/locale/ca.js
 js/widget/monitor.js
 
 js/widget/panel.js
