@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['i18n', 'sos-data-access', 'widget-common', 'moment'], function(i18n, data_access, common, moment) {
+define(['i18n', 'sos-data-access', 'widget-common', 'moment', 'moment-es', 'moment-ca'], function(i18n, data_access, common, moment) {
     "use strict";
 
     moment.locale(i18n.getLang());
