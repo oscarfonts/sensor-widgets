@@ -33,6 +33,7 @@
     "grunt-contrib-uglify": "~0.6.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-gh-pages": "^0.10.0",
+    "grunt-processhtml": "^0.3.8",
     "grunt-requirejs": "^0.4.2",
     "jshint-stylish": "~1.0.0"
   }

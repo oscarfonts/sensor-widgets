@@ -10,6 +10,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-requirejs');
+    grunt.loadNpmTasks('grunt-processhtml');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -40,6 +41,9 @@ module.exports = function(grunt) {
             },
             main: {
                 options: {
+                    'paths': {
+                        'requireLib': "../lib/requirejs/require"
+                    },
                     'modules': [
                         {
                             'name': 'leaflet-label',
@@ -58,8 +62,10 @@ module.exports = function(grunt) {
                             ]
                         },
                         {
-                            'name': 'main',
+                            'name': 'SensorWidgets',
+                            'create': true,
                             'include': [
+                                'requireLib',
                                 'main',
                                 'XML',
                                 'SOS',
@@ -270,6 +276,12 @@ module.exports = function(grunt) {
                 dest: 'dist/'
             }
         },
+        processhtml: {
+            processhtml: {
+                expand: true,
+                src: 'dist/**/*.html'
+            }
+        },
         clean: ["src/lib", "dist"]
     });
 
@@ -282,7 +294,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['connect', 'watch']);
-    grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs', 'copy:docs']);
+    grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs', 'processhtml', 'copy:docs']);
     grunt.registerTask('publish', ['build', 'gh-pages']);
 
 };
