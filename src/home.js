@@ -128,6 +128,10 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
                 defs.feature("P6")
             ]
         },
+        'monitor': {
+            service: defs.service(),
+            offering: defs.offering("30m")
+        },
         'panel': {
             title: i18n.t("Last observations"),
             service: defs.service(),

@@ -13,8 +13,8 @@
 
         function read() {
             var offering = config.offering;
-            var features = config.feature ? [config.feature] : isArray(config.features) ? config.features : JSON.parse(config.features);
-            var properties = config.property ? [config.property] : isArray(config.properties) ? config.properties : JSON.parse(config.properties);
+            var features = config.feature ? [config.feature] : isArray(config.features) ? config.features : config.features ? JSON.parse(config.features) : undefined;
+            var properties = config.property ? [config.property] : isArray(config.properties) ? config.properties : config.properties ? JSON.parse(config.properties) : undefined;
             var time = (config.time_start && config.time_end) ? [config.time_start, config.time_end] : "latest";
             SOS.getObservation(offering, features, properties, time, parse, errorHandler);
         }

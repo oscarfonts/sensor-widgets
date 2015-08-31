@@ -143,6 +143,21 @@ module.exports = function(grunt) {
                                 'widget/panel'
                             ]
                         },{
+                            'name': 'widget/monitor',
+                            'include': [
+                                'widget/monitor'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'i18n',
+                                'css',
+                                'text'
+                            ]
+                        },{
                             'name': 'widget/panel',
                             'include': [
                                 'widget/panel'
