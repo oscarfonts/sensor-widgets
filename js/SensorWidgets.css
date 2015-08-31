@@ -35,6 +35,26 @@ body .widget {
 .widget.gauge svg {
     max-width: 300px;
 }
+.widget.monitor {
+    overflow: auto;
+}
+.widget.monitor th {
+    padding: 4px;
+    background-color: darkgrey;
+}
+.widget.monitor td {
+    padding: 4px;
+    background-color: lightgrey;
+}
+.widget.monitor td.nodata {
+    background-color: whitesmoke;
+    color: darkgrey;
+    font-size: small;
+}
+.widget.monitor .result_time {
+    font-size: small;
+    font-style: italic;
+}
 .widget.panel dl {
     text-align: left;
 }

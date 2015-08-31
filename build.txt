@@ -102,6 +102,11 @@ css!SensorWidgets.css
 js/SensorWidget.js
 js/widget/map.js
 
+js/widget/monitor.js
+----------------
+lib/moment/moment.js
+js/widget/monitor.js
+
 js/widget/panel.js
 ----------------
 js/widget/panel.js
