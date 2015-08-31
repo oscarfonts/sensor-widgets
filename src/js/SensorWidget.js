@@ -1,4 +1,4 @@
-define(['i18n'], function(i18n) {
+define(['i18n', 'css!SensorWidget.css'], function(i18n) {
     "use strict";
 
     var instances = {};
