@@ -11,10 +11,6 @@ css/jquery-ui.css
 ----------------
 css/jquery-ui.css
 
-css/widget.css
-----------------
-css/widget.css
-
 examples/meteo.apb.es/meteo.css
 ----------------
 examples/meteo.apb.es/meteo.css
@@ -22,6 +18,10 @@ examples/meteo.apb.es/meteo.css
 fonts/flaticon.css
 ----------------
 fonts/flaticon.css
+
+js/SensorWidgets.css
+----------------
+js/SensorWidgets.css
 
 js/widget/jqgrid.css
 ----------------
@@ -65,8 +65,9 @@ lib/leaflet/leaflet.js
 css!../lib/leaflet/leaflet.css
 lib/leaflet/leaflet.js
 
-js/main.js
+js/SensorWidgets.js
 ----------------
+lib/requirejs/require.js
 js/main.js
 js/XML.js
 js/SOS.js
@@ -76,8 +77,9 @@ lib/requirejs-text/text.js
 text!translations.json
 js/i18n.js
 js/locale-date.js
-js/SensorWidget.js
 js/css.js
+css!SensorWidgets.css
+js/SensorWidget.js
 
 js/widget/bearing.js
 ----------------
@@ -96,6 +98,7 @@ js/widget/jqgrid.js
 
 js/widget/map.js
 ----------------
+css!SensorWidgets.css
 js/SensorWidget.js
 js/widget/map.js
 
