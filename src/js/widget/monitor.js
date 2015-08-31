@@ -33,8 +33,6 @@ define(['i18n', 'sos-data-access', 'widget-common', 'moment'], function(i18n, da
 
             // Update view
             function redraw(data) {
-                console.log(data);
-
                 var table = {};
                 var features = [];
                 for (var i in data) {
