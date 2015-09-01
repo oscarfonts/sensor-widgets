@@ -112,8 +112,7 @@ define(['i18n', 'css!SensorWidgets.css'], function(i18n) {
                 return '<iframe src="'+this.url()+'" width="'+w+'" height="'+h+'" frameBorder="0"></iframe>';
             },
             javascript: function() {
-                var code_sample = "SensorWidget('"+name+"', " + JSON.stringify(config, null, 3) + ",\r\ndocument.getElementById('"+name+"-container'));\r\n";
-                return "require(['SensorWidget'], function(SensorWidget) {\r\n" + indent(code_sample, 3) + "});";
+                return "SensorWidget('"+name+"', " + JSON.stringify(config, null, 3) + ", document.getElementById('"+name+"-container'));";
             }
         };
     };

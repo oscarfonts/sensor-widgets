@@ -10,18 +10,16 @@
     <script src="../js/main.js"></script>
     <!-- /build -->
     <script>
-        require(['SensorWidget'], function (SensorWidget) {
-            var config = {};
-            var params = window.location.search.substr(1);
-            var arr = params.split("&");
-            for (var i = 0; i < arr.length; i++) {
-                var keyval = arr[i].split("=");
-                config[keyval[0]] = decodeURIComponent(keyval[1]);
-            }
-            var name = config.name;
-            delete config.name;
-            new SensorWidget(name, config);
-        });
+        var config = {};
+        var params = window.location.search.substr(1);
+        var arr = params.split("&");
+        for (var i = 0; i < arr.length; i++) {
+            var keyval = arr[i].split("=");
+            config[keyval[0]] = decodeURIComponent(keyval[1]);
+        }
+        var name = config.name;
+        delete config.name;
+        SensorWidget(name, config);
     </script>
     <style>
         html, body {

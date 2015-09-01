@@ -91,3 +91,11 @@ require.config({
         baseUrl: baseUrl
     });
 })(requirejs);
+
+// 'Leak' SensorWidget to global scope.
+window.SensorWidget = function() {
+    var args = arguments;
+    require(['SensorWidget'], function(SensorWidget) {
+                SensorWidget.apply(this, args);
+    });
+};
