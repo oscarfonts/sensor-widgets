@@ -1,23 +1,18 @@
 <html>
-	<head>
-		<title>Sensor Widgets Simple Example</title>
-        <script src="http://sensors.fonts.cat/js/SensorWidgets.js"></script>
-        <script>
-            require(['SensorWidget'], function(SensorWidget) {
-                SensorWidget('bearing',
-                    {
-                        service: 'http://demo.geomati.co/sos/json',
-                        offering: 'http://sensors.portdebarcelona.cat/def/weather/offerings#1m',
-                        feature: 'http://sensors.portdebarcelona.cat/def/weather/features#02',
-                        property: 'http://sensors.portdebarcelona.cat/def/weather/properties#31',
-                        refresh_interval: 15
-                    },
-                    document.getElementById('widget-container')
-                );
-            });
-        </script>
-	</head>
-	<body>
-        <div id="widget-container"></div>
-    </body>
+<head>
+    <title>Sensor Widgets Simple Example</title>
+    <script src="http://sensors.fonts.cat/js/SensorWidgets.js"></script>
+    <script>
+        SensorWidget('bearing', {
+            service: 'http://sensors.portdebarcelona.cat/sos/json',
+            offering: 'http://sensors.portdebarcelona.cat/def/weather/offerings#1m',
+            feature: 'http://sensors.portdebarcelona.cat/def/weather/features#02',
+            property: 'http://sensors.portdebarcelona.cat/def/weather/properties#31',
+            refresh_interval: 15
+        }, document.getElementById('widget-container'));
+    </script>
+</head>
+<body>
+    <div id="widget-container"></div>
+</body>
 </html>

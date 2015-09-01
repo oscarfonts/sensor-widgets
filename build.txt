@@ -68,18 +68,18 @@ lib/leaflet/leaflet.js
 js/SensorWidgets.js
 ----------------
 lib/requirejs/require.js
+lib/requirejs-text/text.js
+text!translations.json
+js/i18n.js
+js/css.js
+css!SensorWidgets.css
+js/SensorWidget.js
 js/main.js
 js/XML.js
 js/SOS.js
 js/sos-data-access.js
 js/widget-common.js
-lib/requirejs-text/text.js
-text!translations.json
-js/i18n.js
 js/locale-date.js
-js/css.js
-css!SensorWidgets.css
-js/SensorWidget.js
 
 js/widget/bearing.js
 ----------------
