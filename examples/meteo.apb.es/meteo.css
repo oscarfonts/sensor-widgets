@@ -1,7 +1,7 @@
 .section {
     padding-top: 35px;
 }
-.bearing svg {
+.compass svg {
     max-height: 80%;
     max-width: 100%;
 }
@@ -16,7 +16,7 @@
 .widget h2 {
     font-size: 22px;
 }
-.widget.bearing h3,
+.widget.compass h3,
 .widget.timechart h3,
 .widget.thermometer h3 {
     display: none;
@@ -56,7 +56,7 @@
 .xmvqa .left .timechart {
     height: 160px;
 }
-.xmvqa .bearing h2 {
+.xmvqa .compass h2 {
     display: none;
 }
 .xmvqa [class|='panel'] h2 {
@@ -81,7 +81,7 @@
     width: 100%;
     height: 180px;
 }
-.torrecontrol .bearing h1, .torrecontrol .bearing h2 {
+.torrecontrol .compass h1, .torrecontrol .compass h2 {
     display: none;
 }
 .torrecontrol [class|='panel'] h2 {

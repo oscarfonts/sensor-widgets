@@ -81,15 +81,22 @@ js/sos-data-access.js
 js/widget-common.js
 js/locale-date.js
 
-js/widget/bearing.js
+js/widget/compass.js
 ----------------
-text!widget/bearing.svg
-js/widget/bearing.js
+text!widget/compass.svg
+js/widget/compass.js
 
 js/widget/gauge.js
 ----------------
 text!widget/gauge.svg
 js/widget/gauge.js
+
+js/widget/inspector.js
+----------------
+lib/moment/moment.js
+lib/moment/locale/es.js
+lib/moment/locale/ca.js
+js/widget/inspector.js
 
 js/widget/jqgrid.js
 ----------------
@@ -101,13 +108,6 @@ js/widget/map.js
 css!SensorWidgets.css
 js/SensorWidget.js
 js/widget/map.js
-
-js/widget/monitor.js
-----------------
-lib/moment/moment.js
-lib/moment/locale/es.js
-lib/moment/locale/ca.js
-js/widget/monitor.js
 
 js/widget/panel.js
 ----------------
