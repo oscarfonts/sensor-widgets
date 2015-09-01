@@ -38,32 +38,32 @@ body .widget {
     max-width: 300px;
 }
 
-.widget.bearing svg,
+.widget.compass svg,
 .widget.gauge svg {
     max-width: 300px;
 }
 
-.widget.monitor {
+.widget.inspector {
     overflow: auto;
 }
 
-.widget.monitor th {
+.widget.inspector th {
     padding: 4px;
     background-color: darkgrey;
 }
 
-.widget.monitor td {
+.widget.inspector td {
     padding: 4px;
     background-color: lightgrey;
 }
 
-.widget.monitor td.nodata {
+.widget.inspector td.nodata {
     background-color: whitesmoke;
     color: darkgrey;
     font-size: small;
 }
 
-.widget.monitor .result_time {
+.widget.inspector .result_time {
     font-size: small;
     font-style: italic;
 }

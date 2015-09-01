@@ -7,7 +7,7 @@ define(['i18n', 'sos-data-access', 'widget-common', 'moment', 'moment-es', 'mome
     moment.locale(i18n.getLang());
 
     var template = [
-        '<div class="monitor widget">',
+        '<div class="inspector widget">',
             '<div class="table-responsive">' + i18n.t("Loading...") + '</div>',
         '</div>',
         '<div><span class="footnote"></span></div>'].join('');

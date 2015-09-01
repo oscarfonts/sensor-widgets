@@ -89,7 +89,7 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
     a_day_ago = a_day_ago.toISOString().substring(0, 19) + "Z";
 
     var widget_configurations = {
-        'bearing': {
+        'compass': {
             service: defs.service(),
             offering: defs.offering("1m"),
             feature: defs.feature("02"),
@@ -102,6 +102,10 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
             feature: defs.feature("02"),
             property: defs.property("33"),
             refresh_interval: slow_refresh
+        },
+        'inspector': {
+            service: defs.service(),
+            offering: defs.offering("30m")
         },
         'jqgrid': {
             service: defs.service(),
@@ -127,10 +131,6 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
                 defs.feature("P5"),
                 defs.feature("P6")
             ]
-        },
-        'monitor': {
-            service: defs.service(),
-            offering: defs.offering("30m")
         },
         'panel': {
             title: i18n.t("Last observations"),

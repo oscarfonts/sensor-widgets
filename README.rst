@@ -44,8 +44,9 @@ Available widgets
 =========== ====================== ====================== =====================
 Name        Library & dependencies Represented concept    Candidate properties
 =========== ====================== ====================== =====================
-Bearing     (SVG + JS)             Instant angle          Wind direction
+Compass     (SVG + JS)             Instant angle          Wind direction
 Gauge       (SVG + JS)             Percentage             Relative humidity
+Inspector   (HTML + bootstrap-CSS) All measurements       All values
 jqGrid      jqGrid                 Any measurement        Any value
 Map         Leaflet                Geographic Features    Features of Interest
 Panel       (HTML + bootstrap-CSS) Instant quantities     Any collection

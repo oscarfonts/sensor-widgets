@@ -78,9 +78,9 @@ module.exports = function(grunt) {
                                 'text'
                             ]
                         },{
-                            'name': 'widget/bearing',
+                            'name': 'widget/compass',
                             'include': [
-                                'widget/bearing'
+                                'widget/compass'
                             ],
                             'exclude': [
                                 'XML',
@@ -96,6 +96,21 @@ module.exports = function(grunt) {
                             'name': 'widget/gauge',
                             'include': [
                                 'widget/gauge'
+                            ],
+                            'exclude': [
+                                'XML',
+                                'SOS',
+                                'sos-data-access',
+                                'widget-common',
+                                'locale-date',
+                                'i18n',
+                                'css',
+                                'text'
+                            ]
+                        },{
+                            'name': 'widget/inspector',
+                            'include': [
+                                'widget/inspector'
                             ],
                             'exclude': [
                                 'XML',
@@ -141,21 +156,6 @@ module.exports = function(grunt) {
                                 'css',
                                 'text',
                                 'widget/panel'
-                            ]
-                        },{
-                            'name': 'widget/monitor',
-                            'include': [
-                                'widget/monitor'
-                            ],
-                            'exclude': [
-                                'XML',
-                                'SOS',
-                                'sos-data-access',
-                                'widget-common',
-                                'locale-date',
-                                'i18n',
-                                'css',
-                                'text'
                             ]
                         },{
                             'name': 'widget/panel',

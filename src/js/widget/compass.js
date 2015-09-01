@@ -1,11 +1,11 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['i18n', 'sos-data-access', 'text!widget/bearing.svg', 'locale-date', 'widget-common'], function(i18n, data_access, drawing, ld, common) {
+define(['i18n', 'sos-data-access', 'text!widget/compass.svg', 'locale-date', 'widget-common'], function(i18n, data_access, drawing, ld, common) {
     "use strict";
 
     var template = [
-        '<div class="bearing widget">',
+        '<div class="compass widget">',
             '<h1 class="title"></h1>',
             drawing,
             '<div class="data">',

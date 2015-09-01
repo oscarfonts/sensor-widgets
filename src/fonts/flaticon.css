@@ -12,7 +12,7 @@
 	font-style: normal;
 }
 
-.flaticon-bearing:before {
+.flaticon-compass:before {
 	content: "\e000";
 }
 
@@ -32,7 +32,7 @@
 	content: "\e003";
 }
 
-.flaticon-monitor:before {
+.flaticon-inspector:before {
 	content: "\e003";
 }
 

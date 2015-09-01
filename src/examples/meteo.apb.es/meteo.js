@@ -37,13 +37,13 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
 
         case "Sirena":
 
-            new SensorWidget('bearing', {
+            new SensorWidget('compass', {
                 service: defs.service(),
                 offering: defs.offering("1m"),
                 feature: defs.feature("02"),
                 property: defs.property("31"),
                 refresh_interval: 15
-            }, document.querySelector(".sirena .bearing"));
+            }, document.querySelector(".sirena .compass"));
 
             new SensorWidget('thermometer', {
                 service: defs.service(),
@@ -89,14 +89,14 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
 
         case "XMVQA":
 
-            new SensorWidget('bearing', {
+            new SensorWidget('compass', {
                 title: "Sirena",
                 service: defs.service(),
                 offering: defs.offering("1m"),
                 feature: defs.feature("02"),
                 property: defs.property("31"),
                 refresh_interval: 15
-            }, document.querySelector(".xmvqa .left .bearing"));
+            }, document.querySelector(".xmvqa .left .compass"));
 
             new SensorWidget('panel', {
                 title: "Dades minutals",
@@ -138,14 +138,14 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
 
             for (var station in stations) {
 
-                new SensorWidget('bearing', {
+                new SensorWidget('compass', {
                     title: stations[station],
                     service: defs.service(),
                     offering: defs.offering("1m"),
                     feature: defs.feature(station),
                     property: defs.property("31"),
                     refresh_interval: 15
-                }, document.querySelector(".xmvqa .x" + station + " .bearing"));
+                }, document.querySelector(".xmvqa .x" + station + " .compass"));
 
                 new SensorWidget('panel', {
                     title: "Dades minutals",
@@ -168,13 +168,13 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
                 maxInitialZoom: 12
             }, document.querySelector(".torrecontrol .p4 .map"));
 
-            new SensorWidget('bearing', {
+            new SensorWidget('compass', {
                 service: defs.service(),
                 offering: defs.offering("1m"),
                 feature: defs.feature("P4"),
                 property: defs.property("31"),
                 refresh_interval: 15
-            }, document.querySelector(".torrecontrol .p4 .bearing"));
+            }, document.querySelector(".torrecontrol .p4 .compass"));
 
             new SensorWidget('panel', {
                 title: "Dades minutals",
@@ -201,13 +201,13 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
                 maxInitialZoom: 12
             }, document.querySelector(".torrecontrol .x02 .map"));
 
-            new SensorWidget('bearing', {
+            new SensorWidget('compass', {
                 service: defs.service(),
                 offering: defs.offering("1m"),
                 feature: defs.feature("02"),
                 property: defs.property("31"),
                 refresh_interval: 120
-            }, document.querySelector(".torrecontrol .x02 .bearing"));
+            }, document.querySelector(".torrecontrol .x02 .compass"));
 
             new SensorWidget('panel', {
                 title: "Dades minutals",
@@ -234,13 +234,13 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
                 maxInitialZoom: 12
             }, document.querySelector(".torrecontrol .x03 .map"));
 
-            new SensorWidget('bearing', {
+            new SensorWidget('compass', {
                 service: defs.service(),
                 offering: defs.offering("1m"),
                 feature: defs.feature("03"),
                 property: defs.property("31"),
                 refresh_interval: 15
-            }, document.querySelector(".torrecontrol .x03 .bearing"));
+            }, document.querySelector(".torrecontrol .x03 .compass"));
 
             new SensorWidget('panel', {
                 title: "Dades minutals",

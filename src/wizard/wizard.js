@@ -49,7 +49,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
     var renderTo = document.getElementById("widget-view");
 
     function menu() {
-        var widgets = ["bearing", "gauge", "jqgrid", "map", "monitor", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
+        var widgets = ["compass", "gauge", "inspector", "jqgrid", "map", "panel", "progressbar", "table", "thermometer", "timechart", "windrose"];
         var styles = ["default", "primary", "success", "info", "warning", "danger"];
         var html = "";
         for (var i in widgets) {
