@@ -5,8 +5,8 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
     "use strict";
 
     return {
-        inputs: common.inputs.concat(["features"]),
-        optional_inputs: ["max_initial_zoom", "base_layer"].concat(common.optional_inputs),
+        inputs: common.inputs.concat(["features", "properties"]),
+        optional_inputs: ["permanent_tooltips", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
         preferredSizes: [{w: 550, h: 400}],
 
         init: function(config, el, errorHandler) {
@@ -45,7 +45,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
             
             var map = L.map(main_div, {
                 layers: [baseLayer]
-            });
+            }).setView([0, 0], 2);
 
             SOS.setUrl(config.service);
             read();
@@ -59,8 +59,27 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                         }
                     }
                     function addFoIs(features) {
-                        var geojson = L.geoJson(fois2geojson(features));
-                        geojson.addTo(map);
+                        var geojson = L.geoJson(fois2geojson(features),{
+                            onEachFeature: function(feature, layer) {
+                                var id = 'map-tooltip-' + feature.id;
+                                var x = layer.bindLabel('<div id="' + id + '">' + feature.properties.name + '</div>', {noHide: true}).addTo(map);
+                                var el = document.getElementById(id);
+                                if (config.properties && config.properties.length) {
+                                    new SensorWidget('panel', {
+                                        "service": config.service,
+                                        "offering": config.offering,
+                                        "feature": feature.id,
+                                        "properties": config.properties,
+                                        "refresh_interval": "60",
+                                        "title": feature.properties.name
+                                    }, el);
+                                }
+                                if (!config.permanent_tooltips) {
+                                    x.setLabelNoHide(false);
+                                }
+
+                            }
+                        });
                         map.fitBounds(geojson.getBounds(), {
                             maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14
                         });

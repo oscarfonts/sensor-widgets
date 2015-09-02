@@ -124,16 +124,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
                 select = "";
                 label = capitalize(input);
                 options = "";
-                switch(input) {
-                    case "footnote":
-                        select = '<textarea class="form-control" value="" id="' + input + '"></textarea>';
-                        break;
-                    case "base_map":
-                        for (var key in inputs.base_maps) {
-                            options += '<option id="' + key + '">' + key + '</option>';
-                        }
-                        select = '<select class="form-control" id="' + input + '">' + options + '</select>';
-                        break;
+                switch (input) {
                     default:
                         select = '<textarea class="form-control" value="" id="' + input + '"></textarea>';
                 }

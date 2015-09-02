@@ -82,6 +82,45 @@ body .widget {
     display: block;
 }
 
+.widget.map .widget.panel h2 {
+    font-size: small;
+}
+
+.widget.map .widget.panel h3 {
+    font-size: x-small;
+}
+
+.widget.map .widget.panel h2,
+.widget.map .widget.panel h3,
+.widget.map .widget.panel dl,
+.widget.map .widget.panel .footnote {
+    margin: 0;
+}
+
+.widget.map .widget.panel {
+    background-color: transparent;
+}
+
+.widget.map .widget.panel dt {
+    border-top: 1px solid darkgray;
+    clear: left;
+    font-size: x-small;
+    font-weight: normal;
+    line-height: normal;
+    padding-top: 2px;
+    float: none;
+    text-align: left;
+    width: 100%;
+}
+
+.widget.map .widget.panel dd {
+    margin: 0;
+    text-align: right;
+    font-size: x-small;
+    line-height: normal;
+    padding-bottom: 2px;
+}
+
 .widget.table {
     overflow: auto;
     font-size: 12px;

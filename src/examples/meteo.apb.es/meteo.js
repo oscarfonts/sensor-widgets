@@ -165,7 +165,9 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
                 service: defs.service(),
                 offering: defs.offering("30m"),
                 features: [defs.feature("P4")],
-                maxInitialZoom: 12
+                properties: [],
+                permanent_tooltips: true,
+                max_initial_zoom: 12
             }, document.querySelector(".torrecontrol .p4 .map"));
 
             new SensorWidget('compass', {
@@ -198,7 +200,9 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
                 service: defs.service(),
                 offering: defs.offering("30m"),
                 features: [defs.feature("02")],
-                maxInitialZoom: 12
+                properties: [],
+                permanent_tooltips: true,
+                max_initial_zoom: 12
             }, document.querySelector(".torrecontrol .x02 .map"));
 
             new SensorWidget('compass', {
@@ -231,7 +235,9 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i
                 service: defs.service(),
                 offering: defs.offering("30m"),
                 features: [defs.feature("03")],
-                maxInitialZoom: 12
+                properties: [],
+                permanent_tooltips: true,
+                max_initial_zoom: 12
             }, document.querySelector(".torrecontrol .x03 .map"));
 
             new SensorWidget('compass', {

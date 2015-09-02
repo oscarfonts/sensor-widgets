@@ -130,7 +130,8 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
                 defs.feature("10"),
                 defs.feature("P5"),
                 defs.feature("P6")
-            ]
+            ],
+            properties: []
         },
         'panel': {
             title: i18n.t("Last observations"),
@@ -228,14 +229,14 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
                 '<div class="col-md-6">',
                     '<div id="'+name+'-inputs"></div>',
                     '<ul class="nav nav-tabs nav-justified">',
-                        '<li class=""><a href="#'+name+'-code" data-toggle="tab" aria-expanded="true">', i18n.t("Code"), '</a></li>',
+                        '<li class="active"><a href="#'+name+'-code" data-toggle="tab" aria-expanded="true">', i18n.t("Code"), '</a></li>',
                         '<li class=""><a href="#'+name+'-iframe" data-toggle="tab" aria-expanded="false">', i18n.t("Embed"), '</a></li>',
-                        '<li class="active"><a href="#'+name+'-url" data-toggle="tab" aria-expanded="false">', i18n.t("Link"), '</a></li>',
+                        '<li class=""><a href="#'+name+'-url" data-toggle="tab" aria-expanded="false">', i18n.t("Link"), '</a></li>',
                     '</ul>',
                     '<div id="myTabContent" class="tab-content">',
-                        '<div class="tab-pane fade" id="'+name+'-code"></div>',
+                        '<div class="tab-pane fade active in" id="'+name+'-code"></div>',
                         '<div class="tab-pane fade" id="'+name+'-iframe"></div>',
-                        '<div class="tab-pane fade active in" id="'+name+'-url"></div>',
+                        '<div class="tab-pane fade" id="'+name+'-url"></div>',
                     '</div>',
                 '</div>',
             '</div>'].join('');
