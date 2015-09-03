@@ -107,10 +107,6 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
             property: defs.property("33"),
             refresh_interval: slow_refresh
         },
-        'status': {
-            service: defs.service(),
-            offering: defs.offering("30m")
-        },
         'jqgrid': {
             service: defs.service(),
             offering: defs.offering("30m"),
@@ -161,6 +157,10 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
             min_value: "900",
             max_value: "1100",
             refresh_interval: slow_refresh
+        },
+        'status': {
+            service: defs.service(),
+            offering: defs.offering("30m")
         },
         'table': {
             title: i18n.t("Data Table - last 3 hours"),
