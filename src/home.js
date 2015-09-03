@@ -21,6 +21,10 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
         "es": "Uso en Javascript",
         "ca": "Ús des de Javascript"
       },
+      "Complete Map Widget Example": {
+        "es": "Ejemplo completo de Mapa",
+        "ca": "Exemple complet de Mapa"
+      },
       "Advanced Composition": {
         "es": "Composición avanzada",
         "ca": "Composició avançada"

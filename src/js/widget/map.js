@@ -6,11 +6,10 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
 
     return {
         inputs: common.inputs.concat(["features", "properties"]),
-        optional_inputs: ["permanent_tooltips", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
+        optional_inputs: ["permanent_tooltips", "popup_widget", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
         preferredSizes: [{w: 550, h: 400}],
 
         init: function(config, el, errorHandler) {
-
             // Main div
             var main_div = document.createElement("div");
             main_div.className = "map widget";
@@ -42,7 +41,12 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
             if (config.footnote) {
                 baseLayer.options.attribution += " | <b>" + config.footnote + "</b>";
             }
-            
+
+            // Parse popup configuration
+            if (typeof config.popup_widget === 'string' || config.popup_widget instanceof String) {
+                config.popup_widget = JSON.parse(config.popup_widget);
+            }
+
             var map = L.map(main_div, {
                 layers: [baseLayer]
             }).setView([0, 0], 2);
@@ -61,10 +65,12 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                     function addFoIs(features) {
                         var geojson = L.geoJson(fois2geojson(features),{
                             onEachFeature: function(feature, layer) {
+
+                                // Tooltip (label)
                                 var id = 'map-tooltip-' + feature.id;
-                                var x = layer.bindLabel('<div id="' + id + '">' + feature.properties.name + '</div>', {noHide: true}).addTo(map);
-                                var el = document.getElementById(id);
-                                if (config.properties && config.properties.length) {
+                                layer.bindLabel('<div id="' + id + '">' + feature.properties.name + '</div>', {noHide: true}).addTo(map);
+                                var el_label = document.getElementById(id);
+                                if (config.properties && config.properties != "[]" && config.properties.length) {
                                     new SensorWidget('panel', {
                                         "service": config.service,
                                         "offering": config.offering,
@@ -72,12 +78,34 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                                         "properties": config.properties,
                                         "refresh_interval": "60",
                                         "title": feature.properties.name
-                                    }, el);
+                                    }, el_label);
                                 }
                                 if (!config.permanent_tooltips) {
-                                    x.setLabelNoHide(false);
+                                    layer.setLabelNoHide(false);
                                 }
 
+                                // Info bubble (popup)
+                                if (config.popup_widget) {
+                                    var el_popup = document.createElement("div");
+                                    var widget_config = JSON.parse(JSON.stringify(config.popup_widget));
+                                    var name = widget_config.name;
+                                    delete widget_config.name;
+                                    widget_config.service = config.service;
+                                    widget_config.offering = config.offering;
+                                    new SensorWidget(name).inspect(function(inputs, optionals, sizes){
+                                        if(inputs.indexOf('feature') != -1) {
+                                            widget_config.feature = feature.id;
+                                        } else if(inputs.indexOf('features') != -1) {
+                                            widget_config.features = [feature.id];
+                                        }
+                                        layer.bindPopup(el_popup, {
+                                            minWidth:  sizes[0].w,
+                                            minHeight: sizes[0].h
+                                        });
+                                        el_popup.setAttribute("style","width:" + sizes[0].w + "px;height:" + sizes[0].h + "px;");
+                                        new SensorWidget(name, widget_config, el_popup);
+                                    });
+                                }
                             }
                         });
                         map.fitBounds(geojson.getBounds(), {
