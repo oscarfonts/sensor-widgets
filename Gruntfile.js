@@ -108,9 +108,9 @@ module.exports = function(grunt) {
                                 'text'
                             ]
                         },{
-                            'name': 'widget/inspector',
+                            'name': 'widget/status',
                             'include': [
-                                'widget/inspector'
+                                'widget/status'
                             ],
                             'exclude': [
                                 'XML',

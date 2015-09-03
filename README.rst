@@ -46,12 +46,12 @@ Name        Library & dependencies Represented concept    Candidate properties
 =========== ====================== ====================== =====================
 Compass     (SVG + JS)             Instant angle          Wind direction
 Gauge       (SVG + JS)             Percentage             Relative humidity
-Inspector   (HTML + bootstrap-CSS) All measurements       All values
 jqGrid      jqGrid                 Any measurement        Any value
 Map         Leaflet                Geographic Features    Features of Interest
 Panel       (HTML + bootstrap-CSS) Instant quantities     Any collection
 Progressbar (HTML + CSS)           Instant quantity       Pressure, wind speed,
                                                           solar radiation, etc.
+Status      (HTML + bootstrap-CSS) All measurements       All values
 Table       (HTML + bootstrap-CSS) Any measurement        Any value
 Thermometer (SVG + JS)             Temperature            Temperature
 Timechart   Flot Charts            Time series            Any numeric quantity

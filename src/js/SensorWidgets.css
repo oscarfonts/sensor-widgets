@@ -43,27 +43,27 @@ body .widget {
     max-width: 300px;
 }
 
-.widget.inspector {
+.widget.status {
     overflow: auto;
 }
 
-.widget.inspector th {
+.widget.status th {
     padding: 4px;
     background-color: darkgrey;
 }
 
-.widget.inspector td {
+.widget.status td {
     padding: 4px;
     background-color: lightgrey;
 }
 
-.widget.inspector td.nodata {
+.widget.status td.nodata {
     background-color: whitesmoke;
     color: darkgrey;
     font-size: small;
 }
 
-.widget.inspector .result_time {
+.widget.status .result_time {
     font-size: small;
     font-style: italic;
 }

@@ -107,7 +107,7 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
             property: defs.property("33"),
             refresh_interval: slow_refresh
         },
-        'inspector': {
+        'status': {
             service: defs.service(),
             offering: defs.offering("30m")
         },
