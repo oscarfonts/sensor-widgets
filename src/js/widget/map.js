@@ -80,7 +80,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                                         "title": feature.properties.name
                                     }, el_label);
                                 }
-                                if (!config.permanent_tooltips) {
+                                if (!config.permanent_tooltips && layer.setLabelNoHide) {
                                     layer.setLabelNoHide(false);
                                 }
 
