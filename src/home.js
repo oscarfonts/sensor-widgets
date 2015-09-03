@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidget) {
+define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n, SensorWidget) {
     "use strict";
 
     var bundle = {
@@ -277,8 +277,10 @@ define('home', ["i18n", "SensorWidget", "bootstrap"], function(i18n, SensorWidge
         );
 
         document.getElementById(name+'-url').innerHTML = '<pre>' + '<a href="'+widget.url()+'" target="_blank">'+widget.url()+'</a>' + '</pre>';
-        document.getElementById(name+'-iframe').innerHTML = '<pre>' + htmlDecode(widget.iframe()) + '</pre>';
-        document.getElementById(name+'-code').innerHTML = '<pre>' + widget.javascript() + '</pre>';
+        document.getElementById(name+'-iframe').innerHTML = '<pre class="html">' + htmlDecode(widget.iframe()) + '</pre>';
+        hljs.highlightBlock(document.getElementById(name+'-iframe').firstChild);
+        document.getElementById(name+'-code').innerHTML = '<pre class="javascript">' + widget.javascript() + '</pre>';
+        hljs.highlightBlock(document.getElementById(name+'-code').firstChild);
     }
 
 });

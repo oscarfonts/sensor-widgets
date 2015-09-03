@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 'jquery-ui', 'bootstrap'], function(i18n, SensorWidget, SOS, $, moment) {
+define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangepicker', 'jquery-ui', 'bootstrap', 'highlight'], function(i18n, SensorWidget, SOS, $, moment) {
     "use strict";
 
     var bundle = {
@@ -430,7 +430,9 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
 
         //refresh code snippets for the first time
         document.getElementById('code').innerHTML = instance.javascript();
+        hljs.highlightBlock(document.getElementById('code'));
         document.getElementById('embed').innerHTML = htmlDecode(instance.iframe(preferredSize.w, preferredSize.h));
+        hljs.highlightBlock(document.getElementById('embed'));
         document.getElementById('link').innerHTML = '<a href="'+instance.url()+'" target="_blank">'+instance.url()+'</a>';
     }
 

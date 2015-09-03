@@ -12,6 +12,7 @@ require.config({
         'flot-tooltip': '../lib/flot.tooltip/jquery.flot.tooltip',
         'highcharts': '../lib/highcharts/highcharts',
         'highcharts-more': '../lib/highcharts/highcharts-more',
+        'highlight': '../lib/highlightjs/highlight.pack',
         'jquery': '../lib/jquery/jquery',
         'jquery-ui': '../lib/jquery-ui/jquery-ui',
         'jqgrid': '../lib/jqgrid/jquery.jqGrid',
@@ -50,6 +51,9 @@ require.config({
         },
         'highcharts-more': {
             deps: ['highcharts']
+        },
+        'highlight': {
+            deps: ['css!../lib/highlightjs/color-brewer.css']
         },
         'jquery-ui': {
             deps: ['jquery', 'css!../css/jquery-ui.css']
