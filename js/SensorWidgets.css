@@ -66,6 +66,39 @@ body .widget {
     font-size: 9px;
     display: block;
 }
+.widget.map .leaflet-label .widget.panel h2 {
+    font-size: small;
+}
+.widget.map .leaflet-label .widget.panel h3 {
+    font-size: x-small;
+}
+.widget.map .leaflet-label .widget.panel h2,
+.widget.map .leaflet-label .widget.panel h3,
+.widget.map .leaflet-label .widget.panel dl,
+.widget.map .leaflet-label .widget.panel .footnote {
+    margin: 0;
+}
+.widget.map .leaflet-label .widget.panel {
+    background-color: transparent;
+}
+.widget.map .leaflet-label .widget.panel dt {
+    border-top: 1px solid darkgray;
+    clear: left;
+    font-size: x-small;
+    font-weight: normal;
+    line-height: normal;
+    padding-top: 2px;
+    float: none;
+    text-align: left;
+    width: 100%;
+}
+.widget.map .leaflet-label .widget.panel dd {
+    margin: 0;
+    text-align: right;
+    font-size: x-small;
+    line-height: normal;
+    padding-bottom: 2px;
+}
 .widget.table {
     overflow: auto;
     font-size: 12px;
