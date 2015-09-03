@@ -39,6 +39,10 @@ lib/bootstrap-daterangepicker/daterangepicker-bs3.css
 ----------------
 lib/bootstrap-daterangepicker/daterangepicker-bs3.css
 
+lib/highlightjs/color-brewer.css
+----------------
+lib/highlightjs/color-brewer.css
+
 lib/jqgrid/ui.jqgrid.css
 ----------------
 lib/jqgrid/ui.jqgrid.css
@@ -91,12 +95,12 @@ js/widget/gauge.js
 text!widget/gauge.svg
 js/widget/gauge.js
 
-js/widget/inspector.js
+js/widget/status.js
 ----------------
 lib/moment/moment.js
 lib/moment/locale/es.js
 lib/moment/locale/ca.js
-js/widget/inspector.js
+js/widget/status.js
 
 js/widget/jqgrid.js
 ----------------
