@@ -29,9 +29,9 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         "es": "Composición avanzada",
         "ca": "Composició avançada"
       },
-      "Documentation": {
-        "es": "Documentación",
-        "ca": "Documentació"
+      "Documentation ": {
+        "es": "Documentación ",
+        "ca": "Documentació "
       },
       "Configurable graphical components for your ": {
         "es": "Componentes gráficos configurables para tus datos de sensores ",
