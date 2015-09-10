@@ -1,3 +1,4 @@
-make -C en html
-make -C es html
-make -C ca html
+for lang in en es ca; do
+    make -C $lang html
+    xdg-open $lang/_build/html/index.html
+done

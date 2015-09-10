@@ -1,10 +1,8 @@
-¡Bienvenido a la documentación de Sensor Widgets!
-=================================================
+==============
+Sensor Widgets
+==============
 
-Esta es la versión en español de la documentación.
-
-Contenido:
+.. warning:: La documentación en español aún no está disponible. Por favor, consulte la `documentación en inglés <../en/>`_.
 
 .. toctree::
    :maxdepth: 2
-

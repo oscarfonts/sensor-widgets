@@ -1,10 +1,15 @@
-Welcome to Sensor Widgets's documentation!
-==========================================
+==============
+Sensor Widgets
+==============
 
-This is the English version of the docs.
+.. warning:: Documentation under construction.
 
-Contents:
+[about the project]
 
 .. toctree::
    :maxdepth: 2
 
+    sos
+    use
+    widgets
+    contribute

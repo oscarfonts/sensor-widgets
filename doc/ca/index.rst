@@ -1,10 +1,8 @@
-Benvinguts a la documentació dels Sensor Widgets!
-=================================================
+==============
+Sensor Widgets
+==============
 
-Aquesta és la versió en català de la documentació.
-
-Continguts:
+.. warning:: La documentació en català encara no està disponible. Si us plau, consulteu la `documentació en anglès <../en/>`_.
 
 .. toctree::
    :maxdepth: 2
-
