@@ -105,8 +105,21 @@ Specifically, the ``contents`` section describes the service as a collection of 
 * The geographical extent of the measurements (the bbox containing all the Features of Interest),
 * The time span of the measurements (the time range containing all the Observations),
 
+Full GetCapabilities JSON request example::
+
+    POST http://sensors.fonts.cat/sos/json
+    Content-Type: application/json
+    Payload:
+        {
+            "service":"SOS",
+            "version":"2.0.0",
+            "request":"GetCapabilities",
+            "sections":["Contents"]
+        }
+
 This Capabilities-contents document is used as an entry point to discover the SOS service structure and available data.
-It provides a lot of identifiers, but little details, which have to be queried with subsequent requests.
+It provides a lot of identifiers, but little details, which have to be retrieved with subsequent requests to
+DescribeSensor or GetFeatureOfInterest operations.
 
 
 DescribeSensor
@@ -126,8 +139,21 @@ The relevant contents are:
 * The collection of Offering Identifiers using this procedure (a back reference),
 * An Output list: A collection of ObservableProperties with their corresponding IDs, names, types and Units of Measure.
 
-This request is normally used to enrich the information that GetCapabilities doesn't provide, especially the description
-of Observable Properties.
+This request is normally used to get the details that GetCapabilities doesn't provide, especially the description of
+Observable Properties (names and units of measure).
+
+Full DescribeSensor JSON request example::
+
+    POST http://sensors.fonts.cat/sos/json
+    Content-Type: application/json
+    Payload:
+        {
+            "service":"SOS",
+            "version":"2.0.0",
+            "request":"DescribeSensor",
+            "procedure":"http://sensors.portdebarcelona.cat/def/weather/procedure",
+            "procedureDescriptionFormat":"http://www.opengis.net/sensorML/1.0.1"
+        }
 
 
 GetFeatureOfInterest
@@ -140,15 +166,41 @@ of all possible Feature values.
 It is useful to get the location details, such as their names and geometries. So, it's usually used to draw a map or a
 place chooser.
 
+Full GetFeatureOfInterest JSON request example::
+
+    POST http://sensors.fonts.cat/sos/json
+    Content-Type: application/json
+    Payload:
+        {
+            "service":"SOS",
+            "version":"2.0.0",
+            "request":"GetFeatureOfInterest",
+            "procedure":"http://sensors.portdebarcelona.cat/def/weather/procedure"
+        }
+
 
 GetDataAvailability
 -------------------
 
 The getDataAvailability request accepts a ``procedure``, and optionally a collection of ``FeatureOfInterest`` and/or
-``ObservedProperties`` as parameters.
+``ObservedProperty`` as parameters.
 
 It returns the time span of the available observations for each combination of Procedure-Feature-Property. So we can
 query the available data time span for any particular location and sensor.
+
+Full GetDataAvailability JSON request example::
+
+    POST http://sensors.fonts.cat/sos/json
+    Content-Type: application/json
+    Payload:
+        {
+            "service":"SOS",
+            "version":"2.0.0",
+            "request":"GetDataAvailability",
+            "procedure":"http://sensors.portdebarcelona.cat/def/weather/procedure",
+            "featureOfInterest":["http://sensors.portdebarcelona.cat/def/weather/features#02"],
+            "observedProperty":["http://sensors.portdebarcelona.cat/def/weather/properties#31"]
+        }
 
 
 GetObservation
@@ -166,6 +218,27 @@ A GetObservation request accepts as parameters:
 Specially interesting is the filtering, so one can constrain the query to a particular time period or geographical area.
 Sensor Widgets only use the temporal filtering to get either the "lastest" available observation, or a collection of
 observation in a given time period.
+
+Full GetObservation JSON request example::
+
+    POST http://sensors.fonts.cat/sos/json
+    Content-Type: application/json
+    Payload:
+        {
+            "service":"SOS",
+            "version":"2.0.0",
+            "request":"GetObservation",
+            "offering":"http://sensors.portdebarcelona.cat/def/weather/offerings#10m",
+            "featureOfInterest":["http://sensors.portdebarcelona.cat/def/weather/features#P3"],
+            "observedProperty":["http://sensors.portdebarcelona.cat/def/weather/properties#31"],
+            "temporalFilter":[{
+                "equals":{
+                    "ref":"om:resultTime",
+                    "value":"latest"
+                }
+            }]
+        }
+
 
 The response is a collection of observations, each one containing:
 
