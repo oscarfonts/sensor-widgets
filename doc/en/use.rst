@@ -90,3 +90,37 @@ See a live example here: http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb
 .. note:: The ``SensorWidget`` function has no return value or callback function. Widgets are created asynchronously.
    In case of error, an error message will be displayed to the user in place of the widget, but there's no way to
    programmatically interactuate with the widget. This is an area for future improvement.
+
+
+Custom styling
+==============
+
+All the widgets accept a ``custom_css_url`` input parameter. You can point to a css stylesheet published elsewhere that
+overrides the default widget styles.
+
+All widgets are contained in a div element with two classes: the ``widget`` class, and the widget's name class. For
+instance, the following rule will apply to all widgets::
+
+    .widget {
+        border: 2px solid black;
+    }
+
+And the following one will apply only to the ``compass`` widget::
+
+    .widget.compass {
+        background-color: grey;
+    }
+
+Another common element is the ``footnote`` class::
+
+    .widget .footnote {
+        font-color: red;
+    }
+
+One could even hide some components if not needed. For example, the title::
+
+    .widget.thermometer h1 {
+        display: none;
+    }
+
+For more specific styling, the best practice is to inspect the widget DOM, and apply css rules to the observed elements.
