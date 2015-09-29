@@ -6,8 +6,8 @@ Sensor Widgets
 *100% Javascript. Extensible. MIT licensed.*
 
 * Demo & samples: http://sensors.fonts.cat/
-* #SIGLibre8 slides (spanish): http://sensors.fonts.cat/doc/slides/
-* Configure your own widgets:
+* Documentation: http://sensor-widgets.readthedocs.org/en/latest/
+* Configure your own widget:
 
   1. Go to http://sensors.fonts.cat/wizard/
   2. Choose a widget from the left menu.
@@ -37,6 +37,13 @@ Simply use the "publish" grunt task::
     grunt publish
 
 This will push an optimized version of the library along with examples and documentation.
+
+
+Updating documentation
+======================
+
+Just push the changes. GitHub will automatically trigger a build on readthedocs.
+
 
 Available widgets
 =================
