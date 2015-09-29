@@ -156,8 +156,7 @@ This module provides:
     inputs: ["service", "offering"]
     optional_inputs: ["footnote", "custom_css_url"]
 
-* An initialization method that renders the footnote and loads the custom CSS stylesheet, when provided. So any widget
-that wants to implement these functions will call ``common.init`` method within its own init method.
+* An initialization method that renders the footnote and loads the custom CSS stylesheet, when provided. So any widget that wants to implement these functions will call ``common.init`` method within its own init method.
 
 
 i18n.js and translations.json
@@ -225,8 +224,8 @@ The callback is needed because the SensorWidget factory will load the widget cod
 is only accessible asynchronously. This dynamic (lazy) loading mechanism avoids having to load widget code and the respective
 library dependencies unless needed. For instance, don't load the Leaflet library until a Map widget has to be created.
 
-widget/*.js
------------
+widget/<widget_name>.js
+-----------------------
 
 As all the common functionality (data access, shared inputs, instantiation) is placed in other modules, the actual widget
 code is really concise. The "gauge" widget is only 50 lines of code, and the most complex ones ("map", "windrose")
@@ -252,22 +251,66 @@ A widget has to implement the following interface, needed by the ``SensorWidget`
 Automated tasks
 ===============
 
+`Grunt <http://gruntjs.com/>`_ is used to automate common javascript development tasks.
+
+Grunt itself is run on nodejs and its dependencies managed with ``npm`` and the ``package.json`` file. Make sure to
+have node and npm installed on your system:
+
+* Mac & Windows: http://nodejs.org/download/
+* Debian & Ubuntu: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
+
+Then:
+
+* Install grunt-cli. For example: `sudo npm install -g grunt-cli`.
+* Get the project's npm dependenciess (such as grunt itself and its extensions) running `npm install`.
+
+Now we are prepared to run the different `grunt` tasks:
+
 Bower
 -----
+
+Gets the javascript dependencies, such as RequireJS, jQuery, jQuery UI, jqGrid, Flot Charts, Leaflet, Highcharts, etc.
+
+It also picks the needed library files from the ``bower_components`` directory and places them on the cleaner ``js/lib/`` directory.
+This is where requirejs expects to find the external dependencies.
+
 
 Default
 -------
 
+The default task (run as `grunt` without arguments) is to start a local http server that exposes the whole project so
+it can be tested on the browser. It also uses a  `watch` subtask that will reload the page every time a javascript file
+is changed on disk.
+
+
 Build
 -----
+
+For development purposes, we work on the `src/` directory. But the distribution files are a concatenated and minified
+version of the source ones. The build task will perform the following subtasks:
+
+* Clean: cleans the `lib` contents (dependencies) and the `dist` contents.
+* Bower: fetches the libraries and places the needed files into `lib` again.
+* JSHint: warns about coding errors in javascript. The build process will break at this stage until no hint warnings are detected.
+* RequireJS: This task concatenates and minifies the source code (using the r.js optimizer and uglify) into various modules:
+  * SensorWidgets.js: The base module, containing requirejs, the main config, and 'XML', 'SOS', 'sos-data-access', 'widget-common', 'i18n', and 'SensorWidget' modules, among others.
+  * widget/<widget_name>.js: Contains the minified version of the widget, and its dependencies inlined (such as svg content). Each widget is kept in a separate module so optimized code can be loaded dinamically as well.
+* ProcessHTML: Manipulates the sample page HTML headers so they load the optimized SensorWidget version.
+
+It is recommended to run the 'build' task and test the 'dist' version before pushing changes to the main branch.
 
 Publish
 -------
 
-
-Widget Creation Tutorial
-========================
+This is not to push source code to git, but to update the  http://sensors.fonts.cat contents with an optimized version
+of your local code status. It runs the build task and uploads the resulting 'dist' directory.
 
 
 How to document
 ===============
+
+This documentation is written in `Sphinx <http://sphinx-doc.org/>`_ and hosted in
+ `ReadTheDocs <http://sensor-widgets.readthedocs.org/en/latest/>`_. Documentation is automatically rebuilt on ReadTheDocs
+ when a change is pushed to GitHub.
+
+Please contribute to this documentation via pull request.
