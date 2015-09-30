@@ -1,42 +1,43 @@
-========================
-Using the Sensor Widgets
-========================
+============================
+Cómo usar los Sensor Widgets
+============================
 
-Each widget has a collection of mandatory inputs, and some optional inputs. Setting up a widget is essentially choosing
-the correct input values to get the desired result.
-
-
-The Wizard
-==========
-
-The easiest way to configure a Widget is using the Wizard, which will help us choose the input values based in a range
-of valid values. For instance, most of the widgets take an "offering", one or more "features" and one or
-more "properties" as mandatory inputs. The wizard will inspect a SOS service for you and let you pick from a list of
-existing offerings, features and properties.
-
-Other typical mandatory inputs are the refresh interval, for widgets showing live data that has to be updated
-periodically, or the time range, for widgets that show different values during a period of time. In the later case, the
-time picker will limit its possible values to the available data time range, and will format the initial and final dates
-for us.
-
-Typical optional parameters are the "footnote", a free text to be displayed along with the widget, and a Custom CSS URL,
-a mechanism to override the default widget style.
-
-For details on each widget inputs and their format, please refer to the next chapter.
-
-So, once we fill the widget configuration form, we can click on "Create Widget", and will get a widget preview, and
-three ways to "take away" the resulting widget: As a standalone web page, as an embeddable HTML component, or as a
-piece of code to be integrated in a larger javascript application.
+Cada widget tiene una colección de parámetros obligatorios y otros opcionales. Configurar un widget es básicamente
+definir los valores adecuados de estos parámetros para obtener el resultado deseado.
 
 
-Take away: Link and Embed
-=========================
+El Wizard
+=========
 
-If we click on the generated "link" from the Wizard, we will get a rather long URL. This URL opens a web page with
-the configured widget. We can just use the widget as is and stop bothering about the link's internal structure.
+La manera más fácil de configurar un widget es usando el Wizard, que nos asistirá en la selección de los parámetros
+basándose en una lista de posibles valores. Por ejemplo, la mayoría de widgets tienen como parámetros obligatorios un
+"offering", uno o más "features" y una o más "properties". El wizard inspeccionará los recursos del servicio SOS y nos
+permitirá elegir de entre una lista de offerings, features y properties existentes.
 
-But for those that want to understand how the links work (for instance, to generate or manipulate widgets manually,
-without having to go through the wizard), let's see how they are built, decomposing an example into its parameters::
+Otros parámetros habituales son el tiempo de refresco (refresh_interval), para widgets que muestran datos en vivo que
+deben actualizarse periódicamente, o el rango de tiempo (time_start, time_end), para widgets que muestran una colección
+de mediciones a lo largo del tiempo. En este último caso, el wizard nos asistirá con un selector de rango de tiempo
+restringido al período temporal en el que existen datos disponibles.
+
+Parámetros opcionales típicos son la nota a pie ("footnote"), que es un texto que se mostrará junto al widget, y la
+dirección a una hoja de estilos propia ("custom_css_url"), un mecanismo para adaptar el aspecto de los widgets.
+
+Los detalles acerca de los parámetros que acepta de cada widget y su uso están descritos en el próximo capítulo.
+
+Una vez ajustados los valores en el formulario del wizard, al clicar en el botón "Crear Widget", se visualizará
+el resultado en el recuadro "Vista del Widget", así como tres maneras de utilizarlo en el recuadro "Para llevar":
+Como una página HTML ("Enlazar"), como un componente utilizable en otra página ("Incrustar") y como un bloque de
+código para integrar el widget dentro de un aplicación Javascript de mayor alcance ("Código").
+
+
+Para llevar: Enlace e incrustación
+==================================
+
+Si hacemos clic en el enlace bajo "Enlazar", obtendremos una URL bastante larga. Esta URL abre una página con el
+widget que hemos configurado. Si lo único que nos interesa es el widget tal cual, no hace falta saber más.
+
+Pero para quien esté interesado en comprender cómo funcionan estos enlaces (por ejemplo, para modificarlos manualmente,
+sin tener que pasar por el wizard), veamos cómo están formados, descomponiendo los parámetros de uno de los ejemplos::
 
     http://sensors.fonts.cat/widget/
         name=compass
@@ -47,80 +48,81 @@ without having to go through the wizard), let's see how they are built, decompos
         refresh_interval=5
         lang=en
 
-.. note:: To have a valid URL, the parameter values have to be encoded using javascript's standard
-   ``encodeURIComponent`` function (or equivalent in your language of choice). For clarity, we have presented them
-   decoded in this example.
+.. note:: Una URL válida debe codificar cada parámetro utilizando la función estándar de javascript
+   ``encodeURIComponent`` (o su equivalente en otros lenguages). Por claridad, en el ejemplo se muestran los parámetros
+   decodificados.
 
-This is mostly the widget form input values. The widget presented us the offering, feature and property names, but
-for the widget configuration, their corresponding identifiers are used instead. The wizard inspected the SOS service
-for us to grab all the possible offerings, features and properties. You can get the valid identifiers manually via a
-``GetCapabilities`` operation.
+Como se puede ver, los parámetros de la URL son mayormente los parámetros de entrada del widget. El formulario del wizard
+nos presenta los nombres de todos los offerings, features y properties, pero los parámetros del widget usan sus correspondientes
+identificadores. El wizard interrogó el servicio SOS para recuperar todos los posibles pares de nombre e identificador.
+En caso de querer acceder a los identificadores manualmente, puede hacerse a través de la operación ``GetCapabilities``.
 
-There are a couple of extra parameters which are not widget inputs:
+La URL también contiene un par de parámetros extra que no son estrictamente parámetros de configuración del widget:
 
-* The first one "name": It is the widget name, to know which widget has to be created.
-* The last one, "lang": It is used to translate the possible text labels. It is optional and defaults to English ("en"). Other supported languages are Spanish ("es") and Catalan ("ca").
+* El primero, "name": Es el nombre del widget a crear.
+* The último, "lang": Se utiliza para determinar el idioma de los posibles textos del widget. Es un parámetro opcional, y su valor por defecto es el inglés ("en"). Otras lenguas soportadas son el Español ("es") y el Catalán ("ca").
 
-The "embed" option just wraps the link in an iframe tag, so it can be embedded in any other web site::
+La opción "incrustar" simplemente incluye el enlace anterior en un elemento HTML <iframe>, de modo que pueda ser usado como componente en otras páginas::
 
    <iframe src="..." width="570" height="380" frameBorder="0"></iframe>
 
-Width and height are taken from the widget form (recommended dimensions) but can be customized by just resizing
-the widget view (mind the handle in the bottom left corner).
+El ancho y alto del <iframe> vienen determinados en primera instancia por el tamaño inicial indicado en el formulario del wizard,
+pero pueden cambiarse mediante el wizard simplemente redimensionando el recuadro de "Vista del Wizard" (nótese el control en su esquina inferior izquierda).
 
 
-Usage in Javascript
-===================
+Uso en Javascript
+=================
 
-Finally, the most flexible way of using the widgets is programmatically. You just need to load the Sensor Widgets
-javascript library, which is available at http://sensors.fonts.cat/js/SensorWidgets.js , and instantiate the widget
-using the SensorWidget constructor it takes three parameters::
+Pro último, la forma más flexible de usar los widgets es por programación. Simplemente ha de incluírse la librería
+de Sensor Widgets en la página, que está disponible en http://sensors.fonts.cat/js/SensorWidgets.js , e instanciar
+el widget usando la factoría ``SensorWidget``, que toma 3 parámetros:
 
-    SensorWidget(widget_name, widget_configuration, dom_element);
+    SensorWidget(nombre, configuracion, elemento);
 
-The widget name is a string, the widget configuration is an object whose properties are the input name&values, and the
-DOM element indicates where in the HTML page to render the widget.
+El nombre del widget es una cadena de texto, la configuracion es un objeto cuyas propiedades son sus parámetros de
+configuración, y el elemento es el elemento DOM donde dibujar el widget.
 
-The most practical way to generate a widget is to use the wizard and copy&paste the code snippet. Then you can add
-dynamism by changing some of its configuration values.
+La forma más práctica de crear un widget programáticamente es usando el wizard y copiando y pegando el trozo de código
+javascript que genera. A partir de este código, se puede añadir dinamismo al código cambiando alguno de sus parámetros
+de configuración antes de instanciarlo.
 
-See a live example here: http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb
-
-
-.. note:: The ``SensorWidget`` function has no return value or callback function. Widgets are created asynchronously.
-   In case of error, an error message will be displayed to the user in place of the widget, but there's no way to
-   programmatically interactuate with the widget. This is an area for future improvement.
+Véase un ejemplo de integración práctico en: http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb
 
 
-Custom styling
-==============
+.. note:: La función ``SensorWidget`` no devuelve ningún resultado o función de callback. Los widgets se crean de forma asíncrona.
+   En caso de error, se mostrará un mensaje al usuario en el elemento donde debía dibujarse el widget, pero no hay manera de
+   interactuar programáticamente con el widget. Este es un aspecto candidato a las mejoras futuras.
 
-All the widgets accept a ``custom_css_url`` input parameter. You can point to a css stylesheet published elsewhere that
-overrides the default widget styles.
 
-All widgets are contained in a div element with two classes: the ``widget`` class, and the widget's name class. For
-instance, the following rule will apply to all widgets::
+Personalización del aspecto gráfico
+===================================
+
+Todos los widgets admiten un parámetro opcional ``custom_css_url``. En él se puede apuntar a una hoja de estilos CSS
+cuyas reglas sobreescriban el estilo por defecto de los widgets.
+
+Todos los widgets están contenidos en un elemento <div> con dos clases: la clase ``widget``, y una clase con el nombre del widget.
+Por ejemplo, la siguiente regla CSS se aplicará a todos los widgets::
 
     .widget {
         border: 2px solid black;
     }
 
-And the following one will apply only to the ``compass`` widget::
+Y la siguiente se aplicará sólo para widgets del tipo ``compass``::
 
     .widget.compass {
         background-color: grey;
     }
 
-Another common element is the ``footnote`` class::
+Otro elemento común es la nota al pie, que se encuentra bajo un elemento de la clase ``footnote``. Puede cambiarse el aspecto de la nota a pie así::
 
     .widget .footnote {
         font-color: red;
     }
 
-One could even hide some components if not needed. For example, the title::
+Incluso pueden ocultarse ciertos elementos del widget. Por ejemplo, el título principal en un termómetro::
 
     .widget.thermometer h1 {
         display: none;
     }
 
-For more specific styling, the best practice is to inspect the widget DOM, and apply css rules to the observed elements.
+Para simbolización más específica, una buena práctica es inspeccionar el DOM del widget, y aplicar las reglas CSS según los elementos observados.
