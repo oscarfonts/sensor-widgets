@@ -310,7 +310,7 @@ How to document
 ===============
 
 This documentation is written in `Sphinx <http://sphinx-doc.org/>`_ and hosted in
- `ReadTheDocs <http://sensor-widgets.readthedocs.org/en/latest/>`_. Documentation is automatically rebuilt on ReadTheDocs
- when a change is pushed to GitHub.
+`ReadTheDocs <http://sensor-widgets.readthedocs.org/en/latest/>`_. Documentation is automatically rebuilt on ReadTheDocs
+when a change is pushed to GitHub.
 
 Please contribute to this documentation via pull request.
