@@ -20,7 +20,22 @@ Conceptos
 =========
 
 .. warning:: La siguiente es una visión simplificada de los principales conceptos de SOS, así como una referencia rápida para los recién llegados,
-   que probablemente estén más interesados en visualizar algunos datos que en la plena comprensión de los conceptos tras los estándares SWE, SOS y O&M de OGC.
+   que probablemente estén más interesados e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   n visualizar algunos datos que en la plena comprensión de los conceptos tras los estándares SWE, SOS y O&M de OGC.
    Si se va a implementar un servicio SOS, se recomienda no tomar este resumen como referencia, y acudir a las
    especificaciones estándar de OGC (ver referencias al final de este capítulo).
 
