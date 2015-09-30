@@ -54,7 +54,7 @@ Other optional inputs:
 * "footnote": Optional small text caption at the bottom.
 * "custom_css_url": css stylesheet to be applied to the widget. Please note that jqGrid look & feel is taken from the underlying jQuery-ui theme.
 
-.. note:: this plugin depends on jQuery, jQuery UI and the jgGrid plugin itself. It's a rather heavy and not much
+.. note:: this widget depends on jQuery, jQuery UI and the jgGrid plugin itself. It's a rather heavy and not much
    customizable (it was made as an integration exercise with a legacy application). We recommend the use of other
    widgets such as the "table" one, which is more in the spirit of Sensor Widgets: lightweight, compact and easily
    customizable.
@@ -111,7 +111,7 @@ For instance, if we want to open a popup containing a "timechart" on each featur
    * "name": "timechart",
    * ...all the timechart widget inputs, except for "service" and "offering".
 
-For instance::
+That is::
 
    {
        "name": "timechart",
@@ -165,11 +165,13 @@ There's a good collection of free tile layers here: http://leaflet-extras.github
 
    Map with a custom base WMS layer.
 
+The "url" and "options" parameters correspond to `Leaflet's TileLayer.WMS <http://leafletjs.com/reference.html#tilelayer-wms>`_
+"baseUrl" and "TileLayer.WMS_options" respectively.
+
 Another optional input is "max_initial_zoom": It indicates the maximum zoom level to use when the map is
 first rendered. This avoids to zoom in too much, so we loose context, especially when a single point feature is drawn.
 
 Finally, the common "footnote" and  "custom_css_url" inputs are also available.
-
 
 See a **complete live example** here: http://bl.ocks.org/oscarfonts/265d734349396cf4372c
 

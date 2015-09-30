@@ -72,10 +72,7 @@ Observation
 -----------
 
 Finally, an observation is the value of an observed property at a particular time and place (Feature Of Interest).
-For example: The temperature at location X on 22/09/2015 at 11:52 AM is 23 degrees celsius".
-
-Usual data representations are a particular observation for a particular time and place, or a series of observations in
-a given time span.
+For example: "The temperature at Barcelona on 22/09/2015 at 11:52 AM is 23 degrees celsius".
 
 
 Operations
@@ -103,7 +100,7 @@ Specifically, the ``contents`` section describes the service as a collection of 
 * The related Procedure identifier,
 * The collection of Observable Properties (their identifiers),
 * The geographical extent of the measurements (the bbox containing all the Features of Interest),
-* The time span of the measurements (the time range containing all the Observations),
+* The time span of the measurements (the time range containing all the Observations).
 
 Full GetCapabilities JSON request example::
 

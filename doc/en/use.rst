@@ -51,10 +51,9 @@ without having to go through the wizard), let's see how they are built, decompos
    ``encodeURIComponent`` function (or equivalent in your language of choice). For clarity, we have presented them
    decoded in this example.
 
-This is mostly the widget form input values. The widget presented us the offering, feature and property names, but
-for the widget configuration, their corresponding identifiers are used instead. The wizard inspected the SOS service
-for us to grab all the possible offerings, features and properties. You can get the valid identifiers manually via a
-``GetCapabilities`` operation.
+This is mostly the widget form input values. The wizard form let us choose an offering, feature and property names, but
+the widget configuration works with identifiers instead. The wizard inspected the SOS service for us to grab all the
+available name-identifier pairs. You can get the valid identifiers manually via a ``GetCapabilities`` operation.
 
 There are a couple of extra parameters which are not widget inputs:
 
@@ -74,7 +73,7 @@ Usage in Javascript
 
 Finally, the most flexible way of using the widgets is programmatically. You just need to load the Sensor Widgets
 javascript library, which is available at http://sensors.fonts.cat/js/SensorWidgets.js , and instantiate the widget
-using the SensorWidget constructor it takes three parameters::
+using the SensorWidget factory, which takes three parameters::
 
     SensorWidget(widget_name, widget_configuration, dom_element);
 
