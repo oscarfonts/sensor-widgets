@@ -1,286 +1,272 @@
 ========================
-Resumen del estándar SOS
+Resum de l'estàndard SOS
 ========================
 
-Los Sensor Widgets son una herramienta de visualización de datos para servicios que cumplan con el estándar `Sensor Observation Service (SOS)
-<http://www.opengeospatial.org/standards/sos>`_ de la OGC.
+Els Sensor Widgets són una eina de visualització de dades per a serveis que compleixin amb l'estàndard
+`Sensor Observation Service (SOS) <http://www.opengeospatial.org/standards/sos>`_ de l'OGC.
 
-Los widgets implementan un cliente SOS que soporta la versión 2.0 de estándard, y, en estos momentos, necesitan un endpoint
-en formato JSON, que resulta no ser un requisito del estándar, sino una funcionalidad opcional que proporciona la implementación de `servidor SOS de 52 north
-en su versión 4.0.0 o superior <http://52north.org/communities/sensorweb/sos/download.html>`_.
+Els widgets inclouen un client SOS que suporta la versió 2.0 de estàndard, i, en aquests moments, necessiten un endpoint
+en format JSON, que no és part de l'estàndard, sinó un format opcional que proporciona la implementació de
+`52 north en la seva versió 4.0.0 o superior <http://52north.org/communities/sensorweb/sos/download.html>`_.
 
-.. note:: De hecho, el cliente SOS podría ser extendido para soportar la codificación obligatoria KVP/XML,
-   con lo que los Sensor Widgets serían compatibles con otras implementaciones de servidores SOS 2.0.
+.. note:: De fet, el client SOS podria extendre's per suportar la codificació
+   obligatòria KVP/XML, de manera que els Sensor widgets serien compatibles amb
+   altres implementacions de servidors SOS 2.0.
 
-Un *Sensor Observation Service* ofrece datos procedentes de una colección de sensores. Así es como está organizado un
-servicio SOS:
+Un *Sensor Observation Service* ofereix dades procedents d'una col·lecció de sensors. Així és com està organitzat un
+servei SOS:
 
 
-Conceptos
+Conceptes
 =========
 
-.. warning:: La siguiente es una visión simplificada de los principales conceptos de SOS, así como una referencia rápida para los recién llegados,
-   que probablemente estén más interesados e
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   n visualizar algunos datos que en la plena comprensión de los conceptos tras los estándares SWE, SOS y O&M de OGC.
-   Si se va a implementar un servicio SOS, se recomienda no tomar este resumen como referencia, y acudir a las
-   especificaciones estándar de OGC (ver referencias al final de este capítulo).
+.. warning:: La següent és una visió simplificada dels principals conceptes de SOS, una referència ràpida per als nouvinguts,
+   que probablement estiguin més interessats en visualitzar algunes dades que en la plena comprensió dels conceptes que s'amaguen als estàndards SWE, SOS i O&M de l'OGC.
+   Si es pretén implementar un servei SOS, es recomana no prendre aquesta guia com a referència, i referir-se a les especificacions OGC oficials
+   (veure referències al final d'aquest capítol).
 
 
 Offering
 --------
 
-Los datos servidos por un servicio SOS se agrupan en diferentes *offerings*. Por ejemplo, un servicio SOS "meteo" podría tener
-los siguientes offerings: imágenes de satélite, datos de radar, medidas de estaciones meteorológicas, mapas de predicción, etc. Cada offering expone datos de
-un sensor o una red de sensores, descritos como un *procedure*.
+Les dades servides per un servei SOS s'agrupen en diferents *Offerings*. Per exemple, un servei SOS "meteo" podria tenir
+els següents Offerings: imatges de satèl·lit, dades de radar, mesures d'estacions meteorològiques, mapes de predicció, etc.
+Cada offering exposa dades d'un sensor o una xarxa de sensors, descrits com un *procedure*.
 
-Se pueden considerarlos distintos Offerings como secciones co cajones que clasifican los diferentes datos según su origen o naturaleza.
+Es poden interpretar els Offerings com a seccions o calaixos que classifiquen les diferents dades segons el seu origen o naturalesa.
 
 
 Procedure
 ---------
 
-Una procedure describe un sensor, una colección de sensores, or un proceso que produce un conjunto de observaciones. Proporciona metadatos sobre
-las entradas y salidas del sensor, datos de calibración y procesado, información de contacto, y la disponibilidad de datos (extensiones espacial y temporal), etc.
+Una procedure descriu un sensor, un conjunt de sensors, or un procés, que en genera un conjunt d'observacions. Proporciona metadades sobre
+les entrades i sortides del sensor, dades de calibració i processat, informació de contacte, i la disponibilitat de dades (extensions espacial i temporal), etc.
 
-Normalmente viene descrito en el formato `SensorML <http://www.opengeospatial.org/standards/sensorml>`_.
+Normalment ve descrit en el format `SensorML <http://www.opengeospatial.org/standards/sensorml>`_.
 
-Se puede considerar una Procedure como una ficha de metadatos acerca del (los) sensor(es) o proceso(s) a cargo de generar los datos que ofrece el servicio.
+Es pot considerar una Procedure com un document de metadades sobre el(s) sensor(s) o procés(sos) a càrrec de generar les dades que ofereix el servei.
 
-Un Offering está relacionado con una sola Procedure, mientras que una Procedure puede ser usada en diferentes Offerings.
-Por ejemplo, una Procedure podría ser una "Red de Estaciones Meteorológicas", y ésta misma red de estaciones ser usada en
-diferentes Offerings, por ejemplo para diferentes períodos de tiempo. El Offerinf sería "Medidas de la Red de Estaciones
-Meteorológicas para el año 2015".
+Un Offering està relacionat amb una sola Procedure, mentre que una Procedure pot ser usada per diferents Offerings.
+Per exemple, una Procedure podria ser una "Xarxa d'Estacions Meteorològiques", i aquesta mateixa xarxa d'estacions ser usada en
+diferents Offerings, per exemple per a diferents períodes de temps. L'Offerig corresponent podria ser: "Mesures de la Xarxa d'Estacions
+Meteorològiques per a l'any 2015".
 
 
 Feature of Interest
 -------------------
 
-Cada observacion en un servicio SOS está ligada a una *Feature Of Interest* (FoI), que habitualmente determina el lugar
-donde el fenómeno observado tuvo lugar. Por ejemplo, para imágenes satélite, la FoI podría ser su *footprint* (polígono que
-determina el área fotografiada sobre la superficie de la tierra), o para una medición de temperatura, la FoI podría ser la
-ubicación del termómetro (punto).
+Cada observació d'un servei SOS està referida a una *Feature Of Interest* (FOI), que habitualment determina el lloc
+on el fenomen observat ha tingut lloc. Per exemple, per a imatges satèl·lit, la FoI podria ser el seu *footprint* (polígon que
+determina l'àrea fotografiada sobre la superfície de la terra), o per a una mesura de temperatura, la FoI podria ser la
+ubicació del termòmetre (puntual).
 
-Las FoI pueden considerarse como el conjunto de lugares a los que están referidos los datos.
+Les FoI poden veure's com el conjunt de llocs als quals estan referides les dades.
 
 
 Observed Property
 -----------------
 
-La propiedad que se mide, tal que: Temperatura, Dirección del viento, Nubosidad, Número de vehículos... puede ser un valor
-numérico (una cantidad y una unidad de medida), lógico (toma los valores verdadero o falso), categórico (un valor de
-entre una lista: soleado, nublado, lluvioso), o descriptivo (un texto).
+La propietat que es mesura, tal que: Temperatura, Direcció del vent, Nuvolositat, Nombre de vehicles... pot ser un valor
+numèric (una quantitat i una unitat de mesura), lògic (pren els valors verdader o fals), categòric (un valor d'entre
+una llista: assolellat, ennuvolat, plujós), o descriptiu (un text).
 
 
 Observation
 -----------
 
-Finalmente, una *Observation* es el valor que toma una *Observed Property* en un momento (Phenomenon Time) y un lugar (Feature Of Interest) dados.
-Por ejemplo: "La temperatura en Barcelona el 22/09/2015 a las 11:52 es de 23 grados centígrados".
+Finalment, una *Observation* és el valor que pren una *Observed Property* en un moment (Phenomenon Time) i un lloc (Feature Of Interest) determinats.
+Per exemple: "La temperatura a Barcelona el 22/09/2015 a les 11:52 és de 23 graus centígrads".
 
 
-Peticiones
-==========
+Peticions
+=========
 
-Todas las peticiones SOS han de indicar los siguientes parámetros::
+Totes les peticions SOS han de contenir els següents paràmetres mínims:
 
 * Service: ``SOS``.
-* Version: ``2.0.0`` (es la versión soportada por los Sensor Widgets).
-* Request: el nombre de la petición, por ejemplo ``GetCapabilities``.
+* Version: ``2.0.0`` (és la versió suportada pels Sensor Widgets).
+* Request: el nom de la petició, per exemple ``GetCapabilities``.
 
-A continuación presentamos las peticiones SOS 2.0 que usadas en los Sensor Widgets:
+A continuació presentem les peticions SOS 2.0 que es fan servir als Sensor Widgets:
 
 
 GetCapabilities
 ---------------
 
-Puesto que la respuesta de un GetCapabilites es bastante prolija, la petición GetCapabilities permite especificar un parámetro ``sections`` para
-recuperar sólo parte del documento.
+Com que la resposta d'un GetCapabilites pot ser bastant llarga, la petició GetCapabilities permet especificar un paràmetre ``sections`` per
+recuperar només les parts del document que ens interessen.
 
-En concreto, la sección ``contents`` describe el servicio como una colección de Offerings. Cada Offering contiene los siguientes detalles:
+En concret, la secció ``contents`` descriu el servei com una col·lecció d'Offerings. Cada Offering conté els següents detalls:
 
-* El nombre del Offering (por ejemplo "observaciones diezminutales"),
-* El identificador del Offering,
-* El identificador del Procedure ligado a éste offering,
-* La colección de Observable Properties (sus identificadores),
-* La extensión espacial de las observaciones que contiene (el rectángulo contenedor -bbox- de todas las Features of Interest),
-* La extensión temporal de las observaciones que contiene (período de tiempo que acota todas las Observations).
+* El nom de l'Offering (per exemple "observacions deuminutals"),
+* L'identificador de l'Offering,
+* L'identificador del Procedure lligat a aquest offering,
+* La col·lecció d'Observable Properties (els seus identificadors),
+* L'extensió espacial de les observacions que conté (el rectangle contenidor -bbox- de totes les Features of Interest),
+* L'extensió temporal de les observacions que conté (període de temps que delimita totes les Observations).
 
-Ejemplo de petición GetCapabilities en formato JSON::
+Exemple de petició GetCapabilities en format JSON::
 
     POST http://sensors.fonts.cat/sos/json
     Content-Type: application/json
-    Contenido:
+    Contingut:
         {
-            "service":"SOS",
-            "version":"2.0.0",
-            "request":"GetCapabilities",
-            "sections":["Contents"]
+            "service": "SOS",
+            "version": "2.0.0",
+            "request": "GetCapabilities",
+            "sections": ["Contents"]
         }
 
-Éste documento de Capabilities (sección contents) es el punto de entada para descubrir cómo está estructurado determinado servicio SOS, así como los datos que contiene.
-El documento contiene muchos identificadores de los distintos elementos (procedures, properties) pero no sus detalles, que deberán obtenerse mediante otras peticiones
-como DescribeSensor o GetFeatureOfInterest.
+Aquest document de Capabilities (secció contents) és el punt de partida per descobrir com està estructurat determinat servei SOS, així com les dades que conté.
+El document conté molts identificadors dels diferents elements (procedures, properties) però no el seu detall, que s'hauran d'obtenir mitjançant altres peticions
+com DescribeSensor i GetFeatureOfInterest.
 
 
 DescribeSensor
 --------------
 
-La petición DescribeSensor accepta como parámetro un identificador de ``procedure``, y devuelve un documento SensorML que contiene
-metadatos acerta de el (los) sensor(es) o proceso(s) que genera(n) las observaciones.
+La petició DescribeSensor accepta com a paràmetre un identificador de ``procedure``, i retorna un document SensorML que conté
+metadades sobre el() sensor(s) o procés(sos) encarregats de produïr les observacions.
 
-Los contenidos más relevantes de este documento son:
+Els continguts més rellevants d'aquest document són:
 
-* El identificador de la Procedure, un nombre corto y un nombre más largo,
-* Una colección de palabras clave (útiles para servicios de búsqueda en catálogos de metadatos),
-* Información de contacto,
-* El período de tiempo de validez (redundante con la respuesta de Capabilities),
-* El BBOX observado (redundante con la respuesta de Capabilities),
-* La colección de Features of Interest (sus identificadores - nueva información que no se encuentra en el GetCapabilities),
-* La colección de Offerings (sus identificadores) que se basan en esta procedure,
-* Una lista de salidas (Optputs): Una colección de ObservableProperties y su descripción: IDs, nombres, tipos y unidades de medida.
+* L'identificador de la Procedure, un nom curt, i un nom més llarg,
+* Una col·lecció de paraules clau (útils per als serveis de cerca dels catàlegs de metadades),
+* Informació de contacte,
+* El període de temps de validesa (redundant amb la resposta de Capabilities),
+* El BBOX observat (redundant amb la resposta de Capabilities),
+* La col·lecció de Features of Interest (els seus identificadors - nova informació que no es troba en el GetCapabilities),
+* La col·lecció de Offerings (els seus identificadors) que es basen en aquesta procedure,
+* Una llista de sortides (Optputs): Una col·lecció de ObservableProperties i la seva descripció: IDs, noms, tipus i unitats de mesura.
 
-Esta petición se usa para ampliar detalles que no se ofrecen a través del GetCapabilities, en especial la descripción de las
-Observable Properties (sus nombres y unidades de medida).
+Aquesta petició es fa servir per ampliar detalls que no s'ofereixen a través del GetCapabilities, especialment la descripció de les
+Observable Properties (els seus noms i unitats de mesura).
 
-Ejemplo de petición DescribeSensor en formato JSON::
+Exemple de petició DescribeSensor en format JSON::
 
     POST http://sensors.fonts.cat/sos/json
     Content-Type: application/json
-    Contenido:
+    Contingut:
         {
-            "service":"SOS",
-            "version":"2.0.0",
-            "request":"DescribeSensor",
-            "procedure":"http://sensors.portdebarcelona.cat/def/weather/procedure",
-            "procedureDescriptionFormat":"http://www.opengis.net/sensorML/1.0.1"
+            "service": "SOS",
+            "version": "2.0.0",
+            "request": "DescribeSensor",
+            "procedure": "http://sensors.portdebarcelona.cat/def/weather/procedure",
+            "procedureDescriptionFormat": "http://www.opengis.net/sensorML/1.0.1"
         }
 
 
 GetFeatureOfInterest
 --------------------
 
-La operación GetFeatureOfInterest acepta una ``procedure`` como parámetro, y devuelve todas las Features of Interest relacionadas con dicho
-procedure. De hecho, las Features of Interest están vinculadas a cada una de las Observation, pero esta operación nos devuelve una suerte de inventario
-de todos sus posibles valores.
+L'operació GetFeatureOfInterest accepta una ``procedure`` com a paràmetre, i retorna totes les Features of Interest relacionades amb aquest
+procedure. De fet, les Features of Interest estan vinculades a cadascuna de les Observation, però aquesta operació ens retorna una mena d'inventari
+de tots els seus possibles valors.
 
-Es útil para obtener los detalles de las diversas localizaciones, como sus nombres y geometrías. Así que generalmente se utiliza ésta operación para poder dibujar un mapa
-o un selector de Features por nombre.
+És útil per obtenir els detalls de les diverses localitzacions, com els seus noms i geometries. Així que generalment s'utilitza aquesta operació per poder dibuixar un mapa
+o un selector de Features per nom.
 
-Ejemplo de petición GetFeatureOfInterest en formato JSON::
+Exemple de petició GetFeatureOfInterest en format JSON::
 
     POST http://sensors.fonts.cat/sos/json
     Content-Type: application/json
-    Contenido:
+    Contingut:
         {
-            "service":"SOS",
-            "version":"2.0.0",
-            "request":"GetFeatureOfInterest",
-            "procedure":"http://sensors.portdebarcelona.cat/def/weather/procedure"
+            "service": "SOS",
+            "version": "2.0.0",
+            "request": "GetFeatureOfInterest",
+            "procedure": "http://sensors.portdebarcelona.cat/def/weather/procedure"
         }
 
 
 GetDataAvailability
 -------------------
 
-La petición GetDataAvailability también acepta una ``procedure``, y opcionalmente una colección de ``FeatureOfInterest`` y/o
-``ObservedProperty`` como parámetros.
+La petició GetDataAvailability també accepta una ``procedure``, i, opcionalment, una col·lecció de ``FeatureOfInterest`` i/o
+``ObservedProperty`` com a paràmetres.
 
-Devuelve el rango temporal dentro del cual existen datos para cada combinación Procedure-Feature-Property. Así,
-dado un sensor determinado, sabemos para qué fechas vamos a disponer de datos.
+Retorna el rang temporal dins del qual hi ha dades per a cada combinació Procedure-Feature-Property. Així,
+donat un sensor determinat, sabem per a quines dates disposarem de dades.
 
-Ejemplo de petición GetDataAvailability en formato JSON::
+Exemple de petició GetDataAvailability en format JSON::
 
     POST http://sensors.fonts.cat/sos/json
     Content-Type: application/json
-    Contenido:
+    Contingut:
         {
-            "service":"SOS",
-            "version":"2.0.0",
-            "request":"GetDataAvailability",
-            "procedure":"http://sensors.portdebarcelona.cat/def/weather/procedure",
-            "featureOfInterest":["http://sensors.portdebarcelona.cat/def/weather/features#02"],
-            "observedProperty":["http://sensors.portdebarcelona.cat/def/weather/properties#31"]
+            "service": "SOS",
+            "version": "2.0.0",
+            "request": "GetDataAvailability",
+            "procedure": "http://sensors.portdebarcelona.cat/def/weather/procedure",
+            "featureOfInterest": ["http://sensors.portdebarcelona.cat/def/weather/features#02"],
+            "observedProperty": ["http://sensors.portdebarcelona.cat/def/weather/properties#31"]
         }
 
 
 GetObservation
 --------------
 
-Y, finalmente, los datos de medida.
+I, finalment, les dades mesurades.
 
-Una petición GetObservation acepta los siguientes parámetros:
+Una petició GetObservation accepta els següents paràmetres:
 
 * Un ``offering``,
-* Una colección de ``FeatureOfInterest``,
-* Una colección de ``ObservedProperties``,
-* Filtros espaciales y/o temporales.
+* Una col·lecció de ``FeatureOfInterest``,
+* Una col·lecció de ``ObservedProperties``,
+* Filtres espacials i/o temporals.
 
-El filtrado es especialmente interesante, puesto que pueden restringirse las búsquedas de datos a un período de tiempo o
-un área geográfica concreta. Los Sensor Widgets existentes hasta la fecha sólo usan el filtrado temporal para obtener, o
-bien el último dato disponible ("latest"), o bien una serie temporal de datos en un período dado (por ejemplo, últimas 3 horas).
+El filtrat és especialment interessant, ja que permet restringir les cerques de dades a un període de temps o
+una àrea geogràfica concreta. Els Sensor Widgets existents fins a la data només usen el filtrat temporal per a obtenir, o
+bé l'última dada disponible ("latest"), o bé una sèrie temporal de dades d'un període concret (per exemple, les darreres 3 hores).
 
 
-Ejemplo de petición GetObservation en formato JSON::
+Exemple de petició GetObservation en format JSON::
 
     POST http://sensors.fonts.cat/sos/json
     Content-Type: application/json
-    Contenido:
+    Contingut:
         {
-            "service":"SOS",
-            "version":"2.0.0",
-            "request":"GetObservation",
-            "offering":"http://sensors.portdebarcelona.cat/def/weather/offerings#10m",
-            "featureOfInterest":["http://sensors.portdebarcelona.cat/def/weather/features#P3"],
-            "observedProperty":["http://sensors.portdebarcelona.cat/def/weather/properties#31"],
-            "temporalFilter":[{
-                "equals":{
-                    "ref":"om:resultTime",
-                    "value":"latest"
+            "service": "SOS",
+            "version": "2.0.0",
+            "request": "GetObservation",
+            "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#10m",
+            "featureOfInterest": ["http://sensors.portdebarcelona.cat/def/weather/features#P3"],
+            "observedProperty": ["http://sensors.portdebarcelona.cat/def/weather/properties#31"],
+            "temporalFilter": [{
+                "equals": {
+                    "ref": "om: resultTime",
+                    "value": "latest"
                 }
             }]
         }
 
 
-La respuesta es una colección de observaciones, donde cada observacion consta de:
+La resposta és una col·lecció d'observacions, on cada observació consta de:
 
-* El identificador del Offering del que procede,
-* El identificador del Procedure que la generó,
-* La Feature of Interest a la que se refieren (descripción completa, con su ID, nombre y geometría),
-* El identificador de la Property que se ha observado (pero no su nombre),
-* Phenomenon time (cuándo ha sucedido lo que se ha medido) y result time (cuándo se ha obtenido el dato),
-* Y, por fin, el resultado, que consta de un **valor** y una unidad de medida.
+* L'identificador de l'Offering del qual procedeix,
+* L'identificador del Procedure que la va generar,
+* La Feature of Interest a què va referida la observació (descripció completa, amb el seu ID, nom i geometria),
+* L'identificador de la Property que s'ha observat (però no el seu nom),
+* Phenomenon time (quan ha ocorregut el que s'ha mesurat) i result time (quan s'ha generat la dada),
+* I, per fi, el resultat en si, que consta d'un **valor** i d'una unitat de mesura.
 
-Así, la respuesta completa es tediosamente prolija y redundante, conteniendo centenares o miles de repeticiones sucesivas
-de algunos de los elementos decriptivos en el mismo documento de respuesta. Imaginemos una serie temporal de 5000 observaciones
-del mismo sensor. Lo único que cambia es el tiempo y el valor. El resto de contenidos (IDs, Features, etc) se repiten 5000 veces
-sin necesidad alguna. Esto impacta severamente la agilidad del servicio SOS.
+Així, la resposta completa és tediosament redundant, i pot contenir centenars o milers de repeticions successives
+d'alguns dels elements decriptius en el mateix document de resposta. Imaginem una sèrie temporal de 5000 observacions
+del mateix sensor. L'única cosa que canvia és el temps i el valor. La resta de continguts (IDs, Features, unitats de mesura, etc) es repetiran 5000 vegades
+sense cap necessitat. Això impacta severament en l'agilitat del servei SOS.
 
-Algunas implementaciones de SOS (en concreto, 52n SOS v.4.0.0+) ofrecen algunas estrategias que extienden el estándar
-para subsanar esta situación, como la ya mencionada codificación de los mensajes en JSON, y una extensión llamada
-``MergeObservationsIntoDataArray`` que "compactan" todas las observaciones que proceden del mismo procedure, feature of interest
-y observed property en un ``SweArrayObservation`` (serie temporal de datos del mismo sensor).
+Algunes implementacions de SOS (en concret, 52n SOS v.4.0.0+) ofereixen algunes estratègies que extenen l'estàndard
+per tractar de paliar aquesta situació, com la ja esmentada codificació dels missatges en JSON, i una extensió anomenada
+``MergeObservationsIntoDataArray`` que "compacta" totes les observacions que procedeixen del mateix procedure, feature of interest
+i observed property en un ``SweArrayObservation`` (sèrie temporal de dades del mateix sensor sevida com un array de valors).
 
-.. note:: Los Sensor Widgets no aprovechan aún la extensión ``MergeObservationsIntoDataArray``. Es una posible mejora futura.
+.. note:: Els Sensor Widgets no aprofiten encara l'extensió ``MergeObservationsIntoDataArray``. És una possible millora futura.
 
 
-Referencias
+Referències
 ===========
 
-Especificaciones oficiales del Open Geospatial Consortium:
+Especificacions oficials de l'Open Geospatial Consortium:
 
 * OGC® Sensor Web Enablement: Overview And High Level Architecture v. 3 (White Paper). Ref. OGC 07-165.
 * OpenGIS® SWE Service Model Implementation Standard v. 2.0. Ref. OGC 09-001.
@@ -288,5 +274,5 @@ Especificaciones oficiales del Open Geospatial Consortium:
 * Sensor Observation Service v. 1.0. Ref. OGC 06-009r6.
 * OGC® Sensor Observation Service Interface Standard v. 2.0. Ref. OGC 12-006.
 * OpenGIS® Sensor Model Language (SensorML) Implementation Specification v. 1.0.0. Ref. OGC 07-000.
-* OGC Abstract Specification - Geographic information — Observations and measurements v.2.0. Ref. OGC 10-004r3.
-* Observations and Measurements - XML Implementation v.2.0. Ref. OGC 10-025r1.
+* OGC Abstract Specification - Geographic information - Observations and measurements v.2.0. Ref. OGC 10-004r3.
+* Observations and Measurements - XML ​​Implementation v.2.0. Ref. OGC 10-025r1.

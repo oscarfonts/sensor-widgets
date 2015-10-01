@@ -1,5 +1,5 @@
-===========================
-Cómo contribuir al proyecto
-===========================
+==========================
+Com contribuir al projecte
+==========================
 
-La documentación para desarrolladores está disponible únicamente `en inglés <../../en/latest/contribute.html>`_.
+La documentació per a desenvolupadors està disponible únicament `en anglès <../../en/latest/ contribute.html>`_.

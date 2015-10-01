@@ -1,43 +1,43 @@
-============================
-Cómo usar los Sensor Widgets
-============================
+================================
+Com utilitzar els Sensor Widgets
+================================
 
-Cada widget tiene una colección de parámetros obligatorios y otros opcionales. Configurar un widget es básicamente
-definir los valores adecuados de estos parámetros para obtener el resultado deseado.
+Cada widget té una col·lecció de paràmetres obligatoris i d'altres opcionals. Configurar un widget és bàsicament
+escollir els valors adequats d'aquests paràmetres per tal d'obtenir el resultat desitjat.
 
 
 El Wizard
 =========
 
-La manera más fácil de configurar un widget es usando el Wizard, que nos asistirá en la selección de los parámetros
-basándose en una lista de posibles valores. Por ejemplo, la mayoría de widgets tienen como parámetros obligatorios un
-"offering", uno o más "features" y una o más "properties". El wizard inspeccionará los recursos del servicio SOS y nos
-permitirá elegir de entre una lista de offerings, features y properties existentes.
+La manera més fàcil de configurar un widget és usant el Wizard, que ens assistirà en la selecció dels paràmetres
+basant-se en una llista de possibles valors. Per exemple, la majoria de widgets tenen com a paràmetres obligatoris un
+"offering", un o més "features" i una o més "properties". El wizard inspeccionarà el servei SOS i ens
+permetrà triar d'entre una llista d'Offerings, features i properties existents.
 
-Otros parámetros habituales son el tiempo de refresco (refresh_interval), para widgets que muestran datos en vivo que
-deben actualizarse periódicamente, o el rango de tiempo (time_start, time_end), para widgets que muestran una colección
-de mediciones a lo largo del tiempo. En este último caso, el wizard nos asistirá con un selector de rango de tiempo
-restringido al período temporal en el que existen datos disponibles.
+Altres paràmetres habituals són el temps de refresc (refresh_interval), per als widgets que mostren dades en viu i que
+cal actualitzar periòdicament, o el rang de temps (time_start, time_end), per als widgets que mostren una col·lecció
+de mesures al llarg del temps. En aquest últim cas, el wizard ens assistirà amb un selector de rang de temps
+restringit al període temporal en què hi ha dades disponibles.
 
-Parámetros opcionales típicos son la nota a pie ("footnote"), que es un texto que se mostrará junto al widget, y la
-dirección a una hoja de estilos propia ("custom_css_url"), un mecanismo para adaptar el aspecto de los widgets.
+Paràmetres opcionals típics són la nota a peu ("footnote"), que és un text que es mostrarà al costat del widget, i l'adreça
+URL a un full d'estils CSS propi ("custom_css_url"), un mecanisme que permet personalitzar l'aspecte gràfic dels widgets.
 
-Los detalles acerca de los parámetros que acepta de cada widget y su uso están descritos en el próximo capítulo.
+Els detalls sobre els paràmetres que accepta de cada widget i el seu ús estan descrits en el proper capítol.
 
-Una vez ajustados los valores en el formulario del wizard, al clicar en el botón "Crear Widget", se visualizará
-el resultado en el recuadro "Vista del Widget", así como tres maneras de utilizarlo en el recuadro "Para llevar":
-Como una página HTML ("Enlazar"), como un componente utilizable en otra página ("Incrustar") y como un bloque de
-código para integrar el widget dentro de un aplicación Javascript de mayor alcance ("Código").
+Un cop ajustats els valors en el formulari del wizard, al clicar al botó "Crea Widget", es visualitzarà
+el resultat en el requadre "Vista del Widget", i s'oferiran tres maneres de utilitzar-lo en el requadre "Emporteu-vos-el":
+Com una pàgina HTML ("Enllaça"), com un component a incloure en una altra pàgina ("Incrusta") i com un bloc de
+codi per utilitzar el widget dins d'un aplicació Javascript més gran ("Codi").
 
 
-Para llevar: Enlace e incrustación
-==================================
+Emporteu-vos-el: Enllaça i incrusta
+===================================
 
-Si hacemos clic en el enlace bajo "Enlazar", obtendremos una URL bastante larga. Esta URL abre una página con el
-widget que hemos configurado. Si lo único que nos interesa es el widget tal cual, no hace falta saber más.
+Si fem clic al contingut d'"Enllaça", obtindrem un URL bastant llarga. Aquesta URL obre una pàgina amb el
+widget que hem configurat. Si l'únic que ens interessa és fer servir el widget tal qual, ja hem acabat.
 
-Pero para quien esté interesado en comprender cómo funcionan estos enlaces (por ejemplo, para modificarlos manualmente,
-sin tener que pasar por el wizard), veamos cómo están formados, descomponiendo los parámetros de uno de los ejemplos::
+Però per a qui estigui interessat en comprendre com està construït aquest enllaç (per exemple, perquè vulgui modificar-lo manualment,
+sense haver de passar pel wizard), vegem com està format, descomposant un exemple en els seus paràmetres::
 
     http://sensors.fonts.cat/widget/
         name=compass
@@ -48,81 +48,81 @@ sin tener que pasar por el wizard), veamos cómo están formados, descomponiendo
         refresh_interval=5
         lang=en
 
-.. note:: Una URL válida debe codificar cada parámetro utilizando la función estándar de javascript
-   ``encodeURIComponent`` (o su equivalente en otros lenguages). Por claridad, en el ejemplo se muestran los parámetros
-   decodificados.
+.. note:: Una URL vàlida ha de codificar cada paràmetre utilitzant la funció estàndard de javascript
+   ``encodeURIComponent`` (o el seu equivalent en un altre llenguatge). Per claredat, en l'exemple es mostren els paràmetres
+   ja descodificats.
 
-Como se puede ver, los parámetros de la URL son mayormente los parámetros de entrada del widget. El formulario del wizard
-nos presenta los nombres de todos los offerings, features y properties, pero los parámetros del widget usan sus correspondientes
-identificadores. El wizard interrogó el servicio SOS para recuperar todos los posibles pares de nombre e identificador.
-En caso de querer acceder a los identificadores manualmente, puede hacerse a través de la operación ``GetCapabilities``.
+Com es pot veure, els paràmetres de la URL són bàsicament els paràmetres d'entrada del widget. El formulari del wizard
+ens presenta els noms de tots els Offerings, features i properties, però els paràmetres del widget usen els seus corresponents
+identificadors. El wizard interroga el servei SOS per nosaltres i recupera tots els possibles parells de nom-identificador.
+En cas de voler accedir als identificadors manualment, es pot fer a través de l'operació ``GetCapabilities``.
 
-La URL también contiene un par de parámetros extra que no son estrictamente parámetros de configuración del widget:
+La URL també conté un parell de paràmetres extra que no són estrictament paràmetres de configuració del widget:
 
-* El primero, "name": Es el nombre del widget a crear.
-* The último, "lang": Se utiliza para determinar el idioma de los posibles textos del widget. Es un parámetro opcional, y su valor por defecto es el inglés ("en"). Otras lenguas soportadas son el Español ("es") y el Catalán ("ca").
+* El primer, "name": És el nom del widget a crear.
+* El darrer, "lang": S'utilitza per indicar l'idioma en què volem veure els textos del widget. És un paràmetre opcional, i el seu valor per defecte és l'anglès ("en"). Altres llengües suportades són l'Espanyol ("és") i el Català ("ca").
 
-La opción "incrustar" simplemente incluye el enlace anterior en un elemento HTML <iframe>, de modo que pueda ser usado como componente en otras páginas::
+L'opció "incrusta" simplement embolcalla l'enllaç anteriord dins un element HTML <iframe>, de manera que pugui ser usat com a component en altres pàgines::
 
-   <iframe src="..." width="570" height="380" frameBorder="0"></iframe>
+   <iframe src = "..." width = "570" height = "380" frameBorder = "0"> </iframe>
 
-El ancho y alto del <iframe> vienen determinados en primera instancia por el tamaño inicial indicado en el formulario del wizard,
-pero pueden cambiarse mediante el wizard simplemente redimensionando el recuadro de "Vista del Wizard" (nótese el control en su esquina inferior izquierda).
-
-
-Uso en Javascript
-=================
-
-Pro último, la forma más flexible de usar los widgets es por programación. Simplemente ha de incluírse la librería
-de Sensor Widgets en la página, que está disponible en http://sensors.fonts.cat/js/SensorWidgets.js , e instanciar
-el widget usando la factoría ``SensorWidget``, que toma 3 parámetros:
-
-    SensorWidget(nombre, configuracion, elemento);
-
-El nombre del widget es una cadena de texto, la configuracion es un objeto cuyas propiedades son sus parámetros de
-configuración, y el elemento es el elemento DOM donde dibujar el widget.
-
-La forma más práctica de crear un widget programáticamente es usando el wizard y copiando y pegando el trozo de código
-javascript que genera. A partir de este código, se puede añadir dinamismo al código cambiando alguno de sus parámetros
-de configuración antes de instanciarlo.
-
-Véase un ejemplo de integración práctico en: http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb
+L'amplada i alçada de l'<iframe> vénen determinades en primera instància per les mides inicials indicades al formulari del wizard,
+però poden canviar-se des del mateix wizard simplement redimensionant el requadre de "Vista del Wizard" (vegeu el control per redimensionar a la cantonada inferior esquerra de la vista).
 
 
-.. note:: La función ``SensorWidget`` no devuelve ningún resultado o función de callback. Los widgets se crean de forma asíncrona.
-   En caso de error, se mostrará un mensaje al usuario en el elemento donde debía dibujarse el widget, pero no hay manera de
-   interactuar programáticamente con el widget. Este es un aspecto candidato a las mejoras futuras.
+Ús des de Javascript
+====================
+
+La forma més flexible d'usar els widgets és per programació. Simplement s'ha de incloure la llibreria
+de Sensor widgets a la pàgina, que està disponible a http://sensors.fonts.cat/js/SensorWidgets.js, i instanciar
+el widget usant la factoria ``SensorWidget``, que pren 3 paràmetres::
+
+    SensorWidget (nom, configuració, element);
+
+El nom del widget és una cadena de text, la configuració és un objecte on llurs propietats són els paràmetres de
+configuració, i l'element és el DOM Element on es dibuixarà el widget.
+
+La forma més pràctica de crear un widget programàticament és usant el wizard i copiant i enganxant el tros de codi
+javascript que ens ofereix. A partir d'aquesta base, s'hi pot afegir dinamisme canviant algun dels paràmetres
+de configuració.
+
+Vegeu un exemple pràctic d'integració a: http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb
 
 
-Personalización del aspecto gráfico
+.. note:: La funció ``SensorWidget`` no retorna cap valor ni accepta cap funció de callback. Els widgets es creen de forma assíncrona.
+   En cas d'error, es mostrarà un missatge a l'usuari en l'element on havia dibuixar-se el widget, però no hi ha manera de
+   interactuar programàticament amb el widget. Aquest és un aspecte per millorar en el futur.
+
+
+Personalització de l'aspecte gràfic
 ===================================
 
-Todos los widgets admiten un parámetro opcional ``custom_css_url``. En él se puede apuntar a una hoja de estilos CSS
-cuyas reglas sobreescriban el estilo por defecto de los widgets.
+Tots els widgets admeten un paràmetre opcional ``custom_css_url``, que permet indicar la localització d'un full d'estils CSS
+amb regles que sobreescriguin l'estil per defecte dels widgets.
 
-Todos los widgets están contenidos en un elemento <div> con dos clases: la clase ``widget``, y una clase con el nombre del widget.
-Por ejemplo, la siguiente regla CSS se aplicará a todos los widgets::
+Tots els widgets estan continguts dins un element <div> amb dues classes: la classe ``widget``, i una classe amb el nom del widget.
+Per exemple, la següent regla CSS aplicarà a tots els widgets::
 
     .widget {
         border: 2px solid black;
     }
 
-Y la siguiente se aplicará sólo para widgets del tipo ``compass``::
+Mentre que la següent s'aplicarà només per a widgets del tipus ``compass``::
 
     .widget.compass {
         background-color: grey;
     }
 
-Otro elemento común es la nota al pie, que se encuentra bajo un elemento de la clase ``footnote``. Puede cambiarse el aspecto de la nota a pie así::
+Un altre element comú és la nota al peu, que es troba sota un element de la classe ``footnote``. Pot canviar l'aspecte de la nota a peu::
 
     .widget .footnote {
         font-color: red;
     }
 
-Incluso pueden ocultarse ciertos elementos del widget. Por ejemplo, el título principal en un termómetro::
+Fins i tot es poden ocultar certs elements del widget mitjançant CSS. Per exemple, el títol principal en un termòmetre::
 
     .widget.thermometer h1 {
         display: none;
     }
 
-Para simbolización más específica, una buena práctica es inspeccionar el DOM del widget, y aplicar las reglas CSS según los elementos observados.
+Per a regles de simbolització més específiques, es recomana inspeccionar el DOM del widget, i aplicar les regles CSS segons els elements observats.

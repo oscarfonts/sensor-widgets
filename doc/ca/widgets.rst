@@ -1,120 +1,120 @@
-=====================
-Los Widgets uno a uno
-=====================
+===================
+Els Widgets un a un
+===================
 
-Rumbo (compass)
-===============
+Rumb (compass)
+==============
 
-El widget "compass" pertenece a la categoría de "valor instantáneo único". Muestra el último valor disponible para
-una Property específica, que en este caso expresa un azimut o ángulo respecto al norte. El widget interrogará al servidor
-periódicamente para actualizar el valor mostrado.
+El widget "compass" pertany a la categoria dels widgets de "valor instantani únic". Mostra l'últim valor disponible per
+a una Property específica, que en aquest cas expressa un azimut o angle respecte al nord. El widget interrogarà le servidor
+de forma periòdica per actualitzar el valor mostrat.
 
-Sus parámetros obligatorios son:
+Els seus paràmetres obligatoris són:
 
-* "service", "offering", "feature" y "property": determinan la propiedad cuyos valores quieren mostrarse. La propiedad debe tomar valores entre 0 y 360 (y la unidad de medida se supone que son grados centesimales).
-* "refresh_interval" (en segundos): es el tiempo entre dos interrogaciones al servidor (el widget lanza GetObservations periódicas cada X segundos).
+* "Service", "offering", "feature" i "property": determinen la propietat que es vol mostrar. La propietat ha de prendre valors entre 0 i 360 (a la que se suposa una unitat de mesura de graus centessimals).
+* "Refresh_interval" (en segons): és el temps entre dues interrogacions al servidor (el widget llança GetObservations periòdiques cada X segons).
 
-Otros parámetros opcionales:
+Altres paràmetres opcionals:
 
-* "title": Si no se especifica, por defecto se usa como título el nombre de la Feature.
-* "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
-* "custom_css_url": hoja de estilos css que se aplicará al widget.
+* "Title": Si no s'especifica, per defecte es fa servir com a títol el nom de la Feature.
+* "Footnote": Text opcional que apareixerà com una petita nota al peu.
+* "Custom_css_url": full d'estils css que s'aplicarà al widget.
 
 
-Manómetro (gauge)
+Manòmetre (gauge)
 =================
 
-Otro widget de "valor instantáneo único", en esta ocasión para presentar valores de porcentaje entre 0 y 100.
+Un altre widget de "valor instantani únic", en aquesta ocasió per presentar valors de percentatge entre 0 i 100.
 
-Parámetros obligatorios:
+Paràmetres obligatoris:
 
-* "service", "offering", "feature" y "property":  determinan la propiedad cuyos valores quieren mostrarse. La propiedad debe tomar valores entre 0 y 100 (y la unidad de medida se supone que es un tanto porciento).
-* "refresh_interval" (en segundos): es el tiempo entre dos interrogaciones al servidor (el widget lanza GetObservations periódicas cada X segundos).
+* "Service", "offering", "feature" i "property": determinen la propietat que es vol mostrar. La propietat ha de prendre valors entre 0 i 100 (a la que se suposa una unitat de mesura de tant per cent).
+* "Refresh_interval" (en segons): és el temps entre dues interrogacions al servidor (el widget llança GetObservations periòdiques cada X segons).
 
-Parámetros opcionales:
+Paràmetres opcionals:
 
-* "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
-* "custom_css_url": hoja de estilos css que se aplicará al widget.
+* "Footnote": Text opcional que apareixerà com una petita nota al peu.
+* "Custom_css_url": full d'estils css que s'aplicarà al widget.
 
 
-Tabla jQuery (jqgrid)
+Taula jQuery (jqgrid)
 =====================
 
-Muestra una `tabla jqGrid <http://www.trirand.com/blog/>`_ con un conjunto de observaciones para un período de tiempo determinado,
-donde cada registro es una observación. La lista de resultados se muestra paginada y puede ser ordenada por los valores de cualquiera
-de las columnas (Hora, Feature, Propiedad, Valor y Unidad de medida).
+Mostra una `taula jqGrid <http://www.trirand.com/blog/>`_ amb un conjunt d'observacions per a un període de temps determinat,
+on cada registre és una observació. La llista de resultats es mostra paginada i pot ser ordenada pels valors de qualsevol
+de les columnes (Hora, Feature, Propietat, Valor i Unitat de mesura).
 
-Parámetros obligatorios:
+Paràmetres obligatoris:
 
-* "service", "offering", un conjunto de "features" y un conjunto de "properties": selecciona el conjunto de combinaciones feature-property a mostrar.
-* "time_start" and "time_end": Selecciona las observaciones que caen dentro de este rango de tiempo.
-* "title": el título del widget.
+* "Service", "offering", un conjunt de "features" i un conjunt de "properties": selecciona el conjunt de combinacions feature-property a mostrar.
+* "Time_start" i "time_end": Selecciona les observacions que cauen dins d'aquest rang de temps.
+* "Title": el títol del widget.
 
-Parámetros opcionales:
+Paràmetres opcionals:
 
-* "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
-* "custom_css_url": hoja de estilos css que se aplicará al widget. Nótese que el aspecto de jqGrid se toma del tema jQuery-ui subyacente.
+* "Footnote": Text opcional que apareixerà com una petita nota al peu.
+* "Custom_css_url": full d'estils css que s'aplicarà al widget. Tingueu en compte que l'aspecte de jqGrid ve determinat pel tema jQuery-ui subjacent.
 
-.. note:: este widget depende de jQuery, jQuery UI y el plugin jgGrid. Es un widget bastante pesado y no muy
-   personalizable (se desarrolló como un ejercicio de integración con una aplicación existente). Se recomienda el uso de otros
-   widgets como el "table", que van más en la línea de lo que pretenden ser los Sensor Widgets: ligeros, compactos y flexibles.
+.. note:: aquest widget depèn de jQuery, jQuery UI i el plugin jgGrid. És un widget bastant pesat i no gaire
+   personalitzable (es va desenvolupar com un exercici d'integració amb una aplicació antiga existent). Es recomana l'ús d'altres
+   widgets com el "table", que van més en la línia del que pretenen ser els Sensor widgets: ser lleugers, compactes i flexibles.
 
 
 Mapa (map)
 ==========
 
-Este widget es especial en varios sentidos. En primer lugar, muestra la respuesta a una petición GetFeatureOfInterest, en lugar del caso más
-habitual en que un widget representa la respuesta a un GetObservation.
+Aquest widget és especial en diversos sentits. En primer lloc, mostra la resposta a una petició GetFeatureOfInterest, en lloc del cas més
+habitual en què un widget representa la resposta d'un GetObservation.
 
-En segundo lugar, es un widget muy configurable, a través de algunos parámetros complejos. Afortunadamente la mayoría
-de parámetros son opcionales, de modo que su uso más elemental es de hecho muy sencillo.
+En segon lloc, és un widget molt configurable, a través d'alguns paràmetres complexos. Afortunadament la majoria
+de paràmetres són opcionals, de manera que el seu ús més elemental és de fet molt senzill.
 
-Está basado en la librería de mapas `Leaflet <http://leafletjs.com/>`_.
+Està basat en la llibreria de mapes `Leaflet <http://leafletjs.com/>`_.
 
-Los únicos parámetros estrictamente obligatorios son:
+Els únics paràmetres estrictament obligatoris són:
 
-* "service" y "offering": Determinan el offering cuyos Features of Interest quieren mostrarse sobre el mapa.
+* "Service" i "offering": Determinen l'offering dels quals mostrarem Features of Interest al mapa.
 
-Esto mostrará un mapa con las Features. Pasando el ratón por encima de una Feature, se mostrará una pequeña
-etiqueta con el nombre de la feature.
+Això mostrarà un mapa amb les Features. Passant el ratolí per sobre d'una Feature, es mostrarà una petita
+etiqueta amb el nom de la feature.
 
 .. figure:: ../img/map-no-features-no-properties.png
    :align: center
 
-   Mapa simple donde no se han indicado ni features ni properties.
+   Mapa simple on no s'han indicat ni features ni properties.
 
-Hay otro par de parámentros formalmente obligatorios (aunque pueden dejarse vacíos):
+Hi ha un altre parell de parámentros formalment obligatoris (encara que poden deixar-se buits):
 
-* "features": Podemos seleccionar sólo algunas features para mostrar en el mapa. Si no se indica ninguna, de hecho se mostrarán *todas* (no se aplica ningún filtrado). Pero este parámetro debe existir, aunque sea como una lista vacía.
-* "properties": Si se indican una o más properties, la etiqueta de cada feature se convertirá de hecho en un pequeño widget de tipo "panel", mostrando los últimos valores de cada property para cada una de las features. Nuevamente, puede indicarse una ista vacía de properties, en cuyo caso, NO se mostrará ningún valor.
+* "Features": Podem seleccionar només algunes features per mostrar al mapa. Si no se n'indica cap, de fet es mostraran *totes* (no s'aplica cap filtrat). Però aquest paràmetre s'ha d'indicar igual, encara que sigui com a una llista buida.
+* "Properties": Si s'indiquen una o més properties, l'etiqueta de cada feature es convertirà de fet en un petit widget de tipus "panel", mostrant els últims valors de cada property per a cadascuna de les features. Novament, pot indicar-se una llista buida de properties, i en aquest cas, NO es mostrarà cap valor.
 
 .. figure:: ../img/map-some-features-some-properties.png
    :align: center
 
-   Mapa donde se han seleccionado cuatro features y una property, cuyo valor se muestra en la etiqueta.
+   Mapa on s'han seleccionat quatre features i una property, el valor de la qual es mostra a l'etiqueta.
 
-El parámetro opcional "permanent_tooltips", si toma el valor "true", hará que se muestren todas las etiquetas permanentemente, no sólo cuando
-se pase el ratón por encima.
+El paràmetre opcional "permanent_tooltips", si pren el valor "true", farà que es mostrin totes les etiquetes permanentment, no només quan
+es passi el ratolí per sobre.
 
 .. figure:: ../img/map-permanent-tooltips.png
    :align: center
 
-   Mapa con etiquetas permanentes.
+   Mapa amb etiquetes permanents.
 
-Además de las etiquetas, también podemos vincular un sub-widget a cada feature, que se mostrará en un globo al hacer clic sobre ella.
-El parámetro "popup_widget" toma como valor un JSON de configuración de dicho sub-widget. En esta configuracion, los parámetros "service", "offering" y
-"feature(s)" se obtienen del widget *padre* (el mapa), así que no deben indicarse. La propiedad "name" indica qué clase de widget queremos incrustar.
+A més de les etiquetes, també podem vincular un sub-widget a cada feature, que es mostrarà en un globus en fer clic sobre ella.
+El paràmetre "popup_widget" pren com a valor un JSON amb la configuració del sub-widget. En aquesta configuració, els paràmetres "service", "offering" i
+"feature(s)" s'obtenen del widget *pare* (el mapa), així que no s'han d'indicar. La propietat "name" indica quina classe de widget volem incrustar.
 
-Por ejemplo, si queremos que se abra un globo conteniendo una gráfica temporal al hacer clic en cada feature, debemos indicar:
+Per exemple, si volem que s'obri un globus contenint una gràfica temporal, hem d'indicar:
 
-   * "name": "timechart",
-   * ...todos los parámetros del widget timechart, excepto "service" y "offering".
+   * "Name": "timechart",
+   * ... Tots els paràmetres del widget timechart, excepte "service" i "offering".
 
-Es decir::
+És a dir::
 
    {
        "name": "timechart",
-       "title": "Temperatures",
+       "title": "temperatures",
        "properties": [
            "http://sensors.portdebarcelona.cat/def/weather/properties#32M",
            "http://sensors.portdebarcelona.cat/def/weather/properties#32",
@@ -127,27 +127,27 @@ Es decir::
 .. figure:: ../img/map-with-custom-popup.png
    :align: center
 
-   Mapa con un "popup_widget" de tipo "compass".
+   Mapa amb un "popup_widget" de tipus "compass".
 
-Además de personalizar las etiquetas y los globos con detalles acerca de cada feature, podemos cambiar la cartografía
-de base del mapa mediante el parámetro "base_layer". Se pueden especificar dos tipos de capa base:
+A més de personalitzar les etiquetes i els globus amb detalls sobre cada feature, podem canviar la cartografia
+de base del mapa amb el paràmetre "base_layer". Es poden especificar dos tipus de capa base:
 
-* Una capa de teselas: Debe indicarse una "url" y un conjunto de "options". Por ejemplo::
+* Una capa de tessel·les: Cal indicar una "url" i un conjunt de "options". Per exemple::
 
    {
       "url": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       "options": {
-	     "maxZoom": 19,
-	     "attribution": "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
-	  }
+         "maxZoom": 19,
+         "attribution": "&copy; <a href='http://www.openstreetmap.org/copyright'> OpenStreetMap contributors </a>"
+      }
    }
 
-Los parámetros "url" y "options" se corresponden con los parámetros del `constructor TileLayer de Leaflet <http://leafletjs.com/reference.html#tilelayer>`_
-"urlTemplate" y "TileLayer_options" respectivamente.
+Els paràmetres "url" i "options" es corresponen respectivament amb els paràmetres del `constructor TileLayer de Leaflet <http://leafletjs.com/reference.html#tilelayer>`_
+"urlTemplate" i "TileLayer_options".
 
-Se puede escoger entre una buena colección de capas de teselas: http://leaflet-extras.github.io/leaflet-providers/preview/
+Es pot escollir entre una bona col·lecció de capes de tessel·les aquí: http://leaflet-extras.github.io/leaflet-providers/preview/
 
-* Una capa WMS: Debe especificarse "type"="wms", una "url" y un conjunto de "options". Por ejemplo::
+* Una capa WMS: Cal especificar "type"="wms", una "url" i un conjunt d'"options". Per exemple::
 
    {
       "type": "wms",
@@ -162,162 +162,162 @@ Se puede escoger entre una buena colección de capas de teselas: http://leaflet-
 .. figure:: ../img/map-custom-base-layer.png
    :align: center
 
-   Mapa con cartografía WMS.
+   Mapa amb cartografia WMS.
 
-Los parámetros "url" y "options" se corresponden con los parámetros del `constructor TileLayer.WMS de Leaflet <http://leafletjs.com/reference.html#tilelayer-wms>`_
-"baseUrl" y "TileLayer.WMS_options" respectivamente.
+Els paràmetres "url" i "options" es corresponen amb els paràmetres del `constructor TileLayer.WMS de Leaflet <http://leafletjs.com/reference.html#tilelayer-wms>`_
+"baseUrl" i "TileLayer.WMS_options" respectivament.
 
-Otro parámetro opcional es "max_initial_zoom": Indica el nivel de zoom máximo a utilizar en la vista inicial del mapa.
-Esto evita acercarse demasiado y perder contexto cartográfico, especialmente cuando se muestra una única feature puntual.
+Un altre paràmetre opcional és "max_initial_zoom": Indica el nivell de zoom màxim a utilitzar en la vista inicial del mapa.
+Això evita acostar-se massa i perdre context cartogràfic, especialment útil quan es mostra una única feature puntual.
 
-Por último, los parámetros opcionales habituales "footnote" y "custom_css_url" también están disponibles.
+Finalment, els paràmetres opcionals habituals "footnote" i "custom_css_url" també estan disponibles.
 
-Véase un **ejemplo funcional completo** aquí: http://bl.ocks.org/oscarfonts/265d734349396cf4372c
+Vegeu un **exemple funcional complet** aquí: http://bl.ocks.org/oscarfonts/265d734349396cf4372c
 
 
-Panel (panel)
-=============
+Panell (panel)
+==============
 
-El widget "panel" se usa para mostrar los útimos valores de un conjunto de propiedades de una Feature dada. Está construido
-como una Lista de Definiciones (<dl>) de HTML, compatible con las clases CSS de Bootstrap. El contenido del widget se actualizará automáticamente de forma periódica.
+El widget "panel" s'usa per mostrar els útims valors d'un conjunt de propietats d'una Feature donada. Està construït
+com una Llista de Definicions (<dl>) d'HTML, compatible amb les classes CSS de Bootstrap. El contingut del widget s'actualitzarà automàticament de forma periòdica.
 
-Sus parámetros obligatorios son:
+Els seus paràmetres obligatoris són:
 
-* Los habituales "service", "offering" y "feature".
-* Una lista de "properties" a mostrar.
-* El "refresh_interval", en segundos.
-* Un "title" para el panel.
+* Els habituals "service", "offering" i "feature".
+* Una llista de "properties" a mostrar.
+* El "refresh_interval", en segons.
+* Un "title" per al panell.
 
-Y los parámetros opcionales habituales: "footnote" y "custom_css_url".
+I els paràmetres opcionals habituals: "footnote" i "custom_css_url".
 
-El panel también mostrará la fecha de las observaciones como subtitulo. En caso de que alguno de los valores sea de una fecha anterior a la fecha común,
-se mostará el valor en color rojo y se mostrará la fecha para dicha observación en particular.
+El panell també mostrarà la data de les observacions com a subtítol. En el cas que algun dels valors sigui d'una data anterior a la data comú,
+es mostrarà el valor en color vermell i es mostrarà la data per a aquesta observació en particular.
 
 .. figure:: ../img/panel.png
    :align: center
 
-   Tres widgets de tipo Panel, algunos de ellos mostrando valores antiguos.
+   Tres widgets de tipus Panell, alguns d'ells mostrant valors amb un temps distint.
 
 
 Barra (progressbar)
 ===================
 
-Otro widget que muestra un valor instantáneo, esta vez mostrado como una barra proporcional entre dos valores. Es útil para mostrar
-gráficamente dónde cae un valor respecto a sus valores límite. Se puede usar para mostrar un porcentaje si se ajustan los valores
-mínimo y máximo a 0 y 100 respectivamente, en cuyo caso sería muy similar a un widget de tipo "gauge" pero mostrando el valor
-linealmente, pero "progressbar" también puede tomar otros valores límite distintos, con lo que es más flexible que "gauge". Además
-el contenido es HTML, cuyo aspecto es más fácil de personalizar mediante CSS.
+Un altre widget que mostra un valor instantani, aquest cop mostrat com una barra proporcional entre dos valors. És útil per mostrar
+gràficament on cau un valor respecte els seus valors límit. Es pot usar per a mostrar un percentatge si s'ajusten els valors
+mínim i màxim a 0 i 100 respectivament, en aquest cas seria molt similar a un widget de tipus "gauge" però mostrant el valor
+linealment. "ProgressBar" també pot prendre altres valors límit diferents, amb el que és més flexible que "gauge". A més
+el contingut és HTML, l'aspecte és més fàcil de personalitzar mitjançant CSS.
 
-Parámetros obligatorios:
+Paràmetres obligatoris:
 
-* Los habituales "service", "offering", "feature" y "property".
-* "min_value" y "max_value", que determinan los valores extremos.
-* "refresh_interval" en segundos.
+* Els habituals "service", "offering", "feature" i "property".
+* "min_value" i "max_value", que determinen els valors extrems.
+* "refresh_interval" en segons.
 
-Y los parámetros opcionales habituales: "footnote" y "custom_css_url".
+I els paràmetres opcionals habituals: "footnote" i "custom_css_url".
 
 
 Status (status)
 ===============
 
-El widget "status" muestra el estado global de todo un offering de un vistazo. Dado un offering, construye una tabla cuyas
-celdas representan todas las possibles combinaciones de feature-property. Para cada una, se muestra el último valor observado
-y su antigüedad. Es una buena forma de inspeccionar el estado de salud de un offering: Si están llegando nuevas observaciones,
-y para qué sensores.
+El widget "status" mostra l'estat global de tot un offering d'un cop d'ull. Donat un offering, construeix una taula on cada
+cel·la representa una de les possibles combinacions de feature-property. Per a cada combinació, es mostra el darrer valor observat
+i la seva antiguitat. És una bona manera d'inspeccionar l'estat de salut d'un offering: Es veu ràpid si estan arribant noves observacions,
+i per a quins sensors.
 
-Este widget está pensado como una herramienta de supervisón (una especie de hiper-tabla), y es más útil si se muestra a pantalla completa.
+Aquest widget està pensat com una eina de gestió (una espècie d'hiper-taula), i és més pràctica si es mostra a pantalla completa.
 
-Sus únicos parámetros obligatorios son "service" y "offering".
+Els seus únics paràmetres obligatoris són "service" i "offering".
 
-Y los parámetros opcionales habituales: "footnote" y "custom_css_url".
+I els paràmetres opcionals habituals: "footnote" i "custom_css_url".
 
 
-Tabla (table)
+Taula (table)
 =============
 
-Dados un feature y un período de tiempo, un widget "table" muestra las observaciones de un conjunto de propiedades a lo
-largo del tiempo. Es similar a "jqgrid" pero proporciona una vista más compacta. El widget es una simple tabla HTML con
-clases CSS compatibles con Bootstrap.
+Donats un feature i un període de temps, un widget "table" mostra les observacions d'un conjunt de propietats al
+llarg del temps. És similar a "jqgrid" però proporciona una vista més compacta. El widget és una simple taula HTML amb
+classes CSS compatibles amb Bootstrap.
 
-Parámetros:
+Paràmetres:
 
-* Los habituales "service", "offering" y "feature".
-* Una lista de "properties" a mostrar.
-* "time_start" y "time_end": Período de tiempo del que quieren obtenerse observaciones.
-* Y el "title".
+* Els habituals "service", "offering" i "feature".
+* Una llista de "properties" a mostrar.
+* "time_start" i "time_end": Període de temps del que volem obtenir observacions.
+* I el "title".
 
-Además de los parámetros opcionales comunes: "footnote" y "custom_css_url".
+A més dels paràmetres opcionals comuns: "footnote" i "custom_css_url".
 
 
-Termómetro (thermometer)
+Termòmetre (thermometer)
 ========================
 
-Otro widget de tipo "valor instantáneo único", tal como Compass y Gauge, pero para mostrar una temperatura ambiental en grados Celsius.
+Un altre widget de tipus "valor instantani únic", tal com Compass i Gauge, però per mostrar una temperatura ambiental en graus Celsius.
 
-Muestra el dibujo de un termómetro que puede tomar valores de los -24ºC a los 56ºC. También se muestra el valor numérico. Como otros widgets
-de su categoría, incorpora un mecanismo de actualización periódica.
+Mostra el dibuix d'un termòmetre que pot prendre valors dels -24ºC als 56ºC. També es mostra el valor numèric. Com altres widgets
+de la seva categoria, incorpora un mecanisme d'actualització periòdica.
 
-Parámetros obligatorios:
+Paràmetres obligatoris:
 
-* "service", "offering", "feature" y "property": Determinan la property cuyos valores quieren mostrarse. Se le supone grados centígrados como unidad de medida.
-* "refresh_interval" (en segundos): el tiempo entre actualizaciones del valor.
+* "service", "offering", "feature" i "property": Determinen la propietat de la qual volen mostrar-se mesures. Se li suposa graus centígrads com a unitat de mesura.
+* "Refresh_interval" (en segons): el temps entre actualitzacions del valor.
 
-Otros parámetros opcionales:
+Altres paràmetres opcionals:
 
-* "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
-* "custom_css_url": hoja de estilos css que se aplicará al widget.
-
-
-Serie tiempo (timechart)
-========================
-
-Dados una feature y un rango de tiempo, muestra los valores que van tomando ciartas propiedades a lo largo del tiempo.
-Su interfaz es la misma que el widget "table", pero los resultados se muestran en una gráfica.
-
-Las gráficas se construyen gracias a la `librería Flot <http://www.flotcharts.org/>`_, que a su vez depende de jQuery.
-
-Parámetros:
-
-* Los habituales "service", "offering" y"feature".
-* La lisa de "properties" a mostrar.
-* "time_start" y "time_end": Período de tiempo del que quieren obtenerse observaciones.
-* Y el "title".
-
-Además de los parámetros opcionales comunes: "footnote" y "custom_css_url".
+* "Footnote": Text opcional que apareixerà com una petita nota al peu.
+* "Custom_css_url": full d'estils css que s'aplicarà al widget.
 
 
-Rosa vientos (windrose)
+Sèrie temps (timechart)
 =======================
 
-Este es un widget para un caso de uso muy específico: mostrar estadísticas del régimen de vientos, donde se puede
-apreciar de un vistazo la dirección y velocidad predominante del viento, y también su variabilidad sobre un período
-de tiempo.
+Donats una feature i un rang de temps, mostra els valors que van prenent certes propietats al llarg del temps.
+La seva interfície és la mateixa que el widget "table", però els resultats es mostren sobre una gràfica.
 
-.. note:: La gráfica polar está basada en la librería `Highcharts <http://www.highcharts.com/>`_. Esta librería es gratuíta
-   para usos no comerciales, pero **debe adquirirse una licencia para su uso comercial**.
+Les gràfiques estan basades en la `llibreria Flot Charts <http://www.flotcharts.org/>`_, que al seu torn depèn de jQuery.
 
-Parámetros obligatorios:
+Paràmetres:
 
-* "service", "offering", "feature": determinan una localización, de la que deben existir datos de dirección y velocidad del viento.
-* "properties": admite un array de dos (y sólo dos) properties. Una será la velocidad del viento en ``m/s``, y la otra su dirección en ``deg``. Las observaciones para ambas properties deben producirse a intervalos regulares y de forma síncrona.
-* "time_start" y "time_end": el período de tiempo sobre el que se descargarán datos y se extraerán estadísticas.
-* "refresh_interval" (en segundos): tiempo entre actualizaciones del widget. Se recomiendan valores de varios minutos para no saturar el servidor, puesto que la cantidad de datos a descargar es grande, pero las estadísticas sobre un período de tiempo largo no cambian bruscamente.
-* "title" el título del widget.
+* Els habituals "service", "offering" i "feature".
+* La llisa de "properties" a mostrar.
+* "time_start" i "time_end": Període de temps del qual volem obtenir observacions.
+* I el "title".
 
-Parámetros opcionales:
+A més dels paràmetres opcionals comuns: "footnote" i "custom_css_url".
 
-* "subtitle".
-* "footnote" y "custom_css_url".
 
-Así es como se agrupan los datos para construír la gráfica de la rosa de los vientos:
+Rosa vents (windrose)
+=====================
 
-a) Los valores de dirección del viento se clasifican en 16 sectores: N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW and N.
-b) Para cada sector, las velocidades del viento correspondeoentes se clasifican en rangos: 0-2 m/s, 2-4 m/s, 4-6 m/s, 6-8 m/s , 8-10 m/s y > 10 m/s.
+Aquest és un widget per a un cas d'ús molt específic: mostra estadístiques del règim de vents, on es pot
+apreciar d'una ullada la direcció i velocitat predominants del vent, així com la seva variabilitat al llarg d'un període
+de temps.
 
-Se dibuja entonces una gráfica polar con 16 columnas, en cada una de las cuales apilan diferentes segmentos coloreados, proporcionales al conteo de observaciones para cada rango de velocidades.
+.. note:: La gràfica polar restultant  està basada en la llibreria `Highcharts <http://www.highcharts.com/>`_. Aquesta llibreria és gratuïta
+   per a usos no comercials, però **se n'ha d'adquirir una llicència per al seu ús comercial**.
 
-.. note:: A diferencia de otros widgets, más ligeros y flexibles, este requiere que el servicio SOS del que se alimenta exponga los
-   datos de una forma muy concreta. Además, depende de una librería de gráficos no exactamente libre. Pero los resultados para el caso de uso
-   que cubre son excelentes. Así pues, tómese éste widget no como uno genérico y reusable, sino como un ejemple de la
-   *especialización* a la que se puede llegar programando widgets propios. Para desarrollar widgets propios que le ayuden a expresar mejor sus propios datos, consulte el capítulo
-   sobre cómo contribuir al proyecto (en ingles).
+Paràmetres obligatoris:
+
+* "service", "offering", "feature": determinen una localització, de la qual ha d'haver dades de direcció i velocitat del vent.
+* "properties": admet un array de dos (i només dos) properties. Una serà la velocitat del vent en ``m/ s``, i l'altra la seva direcció en ``deg``. Les observacions per a ambdues properties s'han de produir a intervals regulars i de forma síncrona.
+* "time_start" i "time_end": el període de temps sobre el qual es descarregaran dades i s'extrauran les estadístiques.
+* "refresh_interval" (en segons): temps entre actualitzacions del widget. Es recomanen valors de diversos minuts per no saturar el servidor, ja que la quantitat de dades a descarregar és gran, i les estadístiques sobre un període de temps més o menys llarg tampoc no canviaran bruscament.
+* "title" el títol del widget.
+
+Paràmetres opcionals:
+
+* "Subtitle".
+* "Footnote" i "custom_css_url".
+
+Així és com s'agrupen les dades per construïr la gràfica de la rosa dels vents:
+
+a) Els valors de direcció del vent es classifiquen en 16 sectors: N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW and N.
+b) Per a cada sector, les velocitats del vent corresponents es classifiquen en rangs: 0-2 m/s, 2-4 m/s, 4-6 m/s, 6-8 m/s, 8-10 m/s i > 10 m/s.
+
+Es dibuixa llavors una gràfica polar amb 16 columnes, en cadascuna de les quals s'hi apilen els diferents segments acolorits segons la seva velocitat, d'alçada proporcionas al recompte d'observacions d'aquest rang.
+
+.. note:: A diferència d'altres widgets, més lleugers i flexibles, aquest requereix que el servei SOS de què s'alimenta exposi les
+   dades d'una manera molt concreta. A més, depèn d'una llibreria de gràfics no estrictament lliure. Però els resultats per al cas d'ús
+   que cobreix són excel·lents. Així doncs, preneu aquest widget no com un cas de widget genèric i reusable, sinó com un exemple de
+   l'*especialització* a la qual es pot arribar programant widgets propis. Per a desenvolupar els vostres propis widgets que us ajudin a expressar millor
+   les vostres pròpies dades, consulteu el capítol sobre com contribuir al projecte (en anglès).
