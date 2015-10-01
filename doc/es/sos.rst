@@ -80,7 +80,7 @@ Por ejemplo: "La temperatura en Barcelona el 22/09/2015 a las 11:52 es de 23 gra
 Peticiones
 ==========
 
-Todas las peticiones SOS han de indicar los siguientes parámetros::
+Todas las peticiones SOS han de indicar los siguientes parámetros:
 
 * Service: ``SOS``.
 * Version: ``2.0.0`` (es la versión soportada por los Sensor Widgets).

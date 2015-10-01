@@ -275,4 +275,5 @@ Especificacions oficials de l'Open Geospatial Consortium:
 * OGC® Sensor Observation Service Interface Standard v. 2.0. Ref. OGC 12-006.
 * OpenGIS® Sensor Model Language (SensorML) Implementation Specification v. 1.0.0. Ref. OGC 07-000.
 * OGC Abstract Specification - Geographic information - Observations and measurements v.2.0. Ref. OGC 10-004r3.
-* Observations and Measurements - XML ​​Implementation v.2.0. Ref. OGC 10-025r1.
+* Observations and Measurements - XML Implementation v.2.0. Ref. OGC 10-025r1.
+
