@@ -35,5 +35,8 @@
     "grunt-processhtml": "^0.3.8",
     "grunt-requirejs": "^0.4.2",
     "jshint-stylish": "~1.0.0"
+  },
+  "dependencies": {
+    "grunt-wrap": "^0.3.0"
   }
 }

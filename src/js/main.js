@@ -3,30 +3,35 @@ require.config({
     baseUrl: '../js',
     paths: {
         'text': '../lib/requirejs-text/text',
-        'bootstrap': '../lib/bootstrap/bootstrap',
+        'bootstrap': '../lib/bootstrap/bootstrap.amd',
         'daterangepicker': '../lib/bootstrap-daterangepicker/daterangepicker',
-        'flot': '../lib/flot/jquery.flot',
-        'flot-navigate': '../lib/flot/jquery.flot.navigate',
-        'flot-resize': '../lib/flot/jquery.flot.resize',
-        'flot-time': '../lib/flot/jquery.flot.time',
-        'flot-tooltip': '../lib/flot.tooltip/jquery.flot.tooltip',
+        'flot': '../lib/flot/jquery.flot.amd',
+        'flot-navigate': '../lib/flot/jquery.flot.navigate.amd',
+        'flot-resize': '../lib/flot/jquery.flot.resize.amd',
+        'flot-time': '../lib/flot/jquery.flot.time.amd',
+        'flot-tooltip': '../lib/flot.tooltip/jquery.flot.tooltip.amd',
         'highcharts': '../lib/highcharts/highcharts',
         'highcharts-more': '../lib/highcharts/highcharts-more',
         'highlight': '../lib/highlightjs/highlight.pack',
         'jquery': '../lib/jquery/jquery',
         'jquery-ui': '../lib/jquery-ui/jquery-ui',
-        'jqgrid': '../lib/jqgrid/jquery.jqGrid',
-        'jqgrid-locale-en': '../lib/jqgrid/grid.locale-en',
+        'jqgrid': '../lib/jqgrid/jquery.jqGrid.amd',
+        'jqgrid-locale-en': '../lib/jqgrid/grid.locale-en.amd',
         'leaflet': '../lib/leaflet/leaflet',
         'leaflet-label': '../lib/Leaflet.label/leaflet.label',
         'moment': '../lib/moment/moment',
         'moment-es': '../lib/moment/locale/es',
         'moment-ca': '../lib/moment/locale/ca'
     },
-    shim: {
-        'bootstrap': {
-            deps: ['jquery']
+    map: {
+        "*": {
+            "jquery": "jquery-noconflict"
         },
+        "jquery-noconflict": {
+            "jquery": "jquery"
+        }
+    },
+    shim: {
         'daterangepicker': {
             deps: ['bootstrap', 'moment-es', 'moment-ca', 'jquery', 'css!../lib/bootstrap-daterangepicker/daterangepicker-bs3.css']
         },
@@ -46,8 +51,7 @@ require.config({
             deps: ['flot']
         },
         'highcharts': {
-            exports: 'Highcharts',
-            deps: ['jquery']
+            exports: 'Highcharts'
         },
         'highcharts-more': {
             deps: ['highcharts']
@@ -60,9 +64,6 @@ require.config({
         },
         'jqgrid': {
             deps: ['jquery-ui', 'jqgrid-locale-en', 'css!../lib/jqgrid/ui.jqgrid.css']
-        },
-        'jqgrid-locale-en': {
-            deps: ['jquery']
         },
         'leaflet': {
             deps: ['css!../lib/leaflet/leaflet.css']

@@ -3,6 +3,7 @@ var compression = require('compression');
 module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-wrap');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -18,6 +19,37 @@ module.exports = function(grunt) {
                 options: {
                     targetDir: 'src/lib',
                     layout: 'byComponent'
+                }
+            }
+        },
+        wrap: {
+            jquery: {
+                files: {
+                    'src/lib/bootstrap/bootstrap.amd.js': 'src/lib/bootstrap/bootstrap.js',
+                    'src/lib/flot/jquery.flot.amd.js': 'src/lib/flot/jquery.flot.js',
+                    'src/lib/jqgrid/grid.locale-en.amd.js': 'src/lib/jqgrid/grid.locale-en.js'
+                },
+                options: {
+                    wrapper: ['require(["jquery"], function(jQuery) {\n', '\n});']
+                }
+            },
+            jqgrid: {
+                files: {
+                    'src/lib/jqgrid/jquery.jqGrid.amd.js': 'src/lib/jqgrid/jquery.jqGrid.js'
+                },
+                options: {
+                    wrapper: ['require(["jquery", "jquery-ui"], function(jQuery) {\n', '\n});']
+                }
+            },
+            flot: {
+                files: {
+                    'src/lib/flot/jquery.flot.navigate.amd.js': 'src/lib/flot/jquery.flot.navigate.js',
+                    'src/lib/flot/jquery.flot.resize.amd.js': 'src/lib/flot/jquery.flot.resize.js',
+                    'src/lib/flot/jquery.flot.time.amd.js': 'src/lib/flot/jquery.flot.time.js',
+                    'src/lib/flot.tooltip/jquery.flot.tooltip.amd.js': 'src/lib/flot.tooltip/jquery.flot.tooltip.js',
+                },
+                options: {
+                    wrapper: ['require(["jquery", "flot"], function(jQuery) {\n', '\n});']
                 }
             }
         },
@@ -300,8 +332,9 @@ module.exports = function(grunt) {
         grunt.config('jshint.files', filepath);
     });
 
+    grunt.registerTask('fetch', ['clean', 'bower', 'wrap']);
     grunt.registerTask('default', ['connect', 'watch']);
-    grunt.registerTask('build', ['clean', 'bower', 'jshint', 'requirejs', 'processhtml']);
+    grunt.registerTask('build', ['fetch', 'jshint', 'requirejs', 'processhtml']);
     grunt.registerTask('publish', ['build', 'gh-pages']);
 
 };
