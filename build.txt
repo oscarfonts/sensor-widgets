@@ -133,11 +133,11 @@ js/widget/thermometer.js
 
 js/widget/timechart.js
 ----------------
-lib/flot/jquery.flot.js
-lib/flot/jquery.flot.resize.js
-lib/flot/jquery.flot.time.js
-lib/flot.tooltip/jquery.flot.tooltip.js
-lib/flot/jquery.flot.navigate.js
+lib/flot/jquery.flot.amd.js
+lib/flot/jquery.flot.resize.amd.js
+lib/flot/jquery.flot.time.amd.js
+lib/flot.tooltip/jquery.flot.tooltip.amd.js
+lib/flot/jquery.flot.navigate.amd.js
 js/widget/timechart.js
 
 js/widget/windrose.js
