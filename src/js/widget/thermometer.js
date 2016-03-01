@@ -43,16 +43,20 @@ define(['i18n', 'sos-data-access', 'text!widget/thermometer.svg', 'locale-date',
             // Update view
             function redraw(data) {
                 var measure = data[0];
-                el.querySelector(".feature").innerHTML = measure.feature;
-                el.querySelector(".property").innerHTML = measure.property;
-                el.querySelector(".value").innerHTML = measure.value;
-                el.querySelector(".request_time").innerHTML = ld.display(new Date());
-                el.querySelector(".result_time").innerHTML = ld.display(measure.time);
+                if (measure) {
+                    el.querySelector(".feature").innerHTML = measure.feature;
+                    el.querySelector(".property").innerHTML = measure.property;
+                    el.querySelector(".value").innerHTML = measure.value;
+                    el.querySelector(".request_time").innerHTML = ld.display(new Date());
+                    el.querySelector(".result_time").innerHTML = ld.display(measure.time);
 
-                var h = dy * (measure.value - t_min);
-                var y_min = y_max - h;
-                clip.setAttribute("height", h.toString());
-                clip.setAttribute("y", y_min.toString());
+                    var h = dy * (measure.value - t_min);
+                    var y_min = y_max - h;
+                    clip.setAttribute("height", h.toString());
+                    clip.setAttribute("y", y_min.toString());
+                } else {
+                    el.querySelector(".value").innerHTML = i18n.t("(no data)");
+                }
             }
 
             return {
