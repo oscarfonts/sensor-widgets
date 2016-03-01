@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'bootstrap'], function(i18n, SensorWidget, ld) {
+define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], function(i18n, SensorWidget, ld, $) {
     "use strict";
 
     ld.utc(false);
