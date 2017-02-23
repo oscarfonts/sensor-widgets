@@ -84,6 +84,13 @@ module.exports = function(grunt) {
                             ]
                         },
                         {
+                            'name': 'leaflet-cluster',
+                            'exclude': [
+                                'css',
+                                'leaflet'
+                            ]
+                        },
+                        {
                             'name': 'leaflet',
                             'include': [
                                 'leaflet'
@@ -178,6 +185,7 @@ module.exports = function(grunt) {
                             'exclude': [
                                 'leaflet',
                                 'leaflet-label',
+                                'leaflet-cluster',
                                 'XML',
                                 'SOS',
                                 'sos-data-access',
