@@ -160,6 +160,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
               "http://sensorweb.demo.52north.org/sensorwebtestbed/service",
               "http://sensors.portdebarcelona.cat/sos/json",
               "http://wsncentral.iecolab.es/sos/service",
+              "http://84.88.72.222/52n-sos/service",
               "http://localhost:8080/52n-sos/service"
             ]);
 
