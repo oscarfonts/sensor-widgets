@@ -55,6 +55,14 @@ lib/leaflet/leaflet.css
 ----------------
 lib/leaflet/leaflet.css
 
+lib/leaflet.markercluster/MarkerCluster.Default.css
+----------------
+lib/leaflet.markercluster/MarkerCluster.Default.css
+
+lib/leaflet.markercluster/MarkerCluster.css
+----------------
+lib/leaflet.markercluster/MarkerCluster.css
+
 wizard/wizard.css
 ----------------
 wizard/wizard.css
@@ -63,6 +71,12 @@ lib/Leaflet.label/leaflet.label.js
 ----------------
 css!../lib/Leaflet.label/leaflet.label.css
 lib/Leaflet.label/leaflet.label.js
+
+lib/leaflet.markercluster/leaflet.markercluster.js
+----------------
+css!../lib/leaflet.markercluster/MarkerCluster.css
+css!../lib/leaflet.markercluster/MarkerCluster.Default.css
+lib/leaflet.markercluster/leaflet.markercluster.js
 
 lib/leaflet/leaflet.js
 ----------------
