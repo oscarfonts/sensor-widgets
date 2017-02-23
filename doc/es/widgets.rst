@@ -83,7 +83,7 @@ etiqueta con el nombre de la feature.
 
    Mapa simple donde no se han indicado ni features ni properties.
 
-Hay otro par de parámentros formalmente obligatorios (aunque pueden dejarse vacíos):
+Hay otro par de parámetros formalmente obligatorios (aunque pueden dejarse vacíos):
 
 * "features": Podemos seleccionar sólo algunas features para mostrar en el mapa. Si no se indica ninguna, de hecho se mostrarán *todas* (no se aplica ningún filtrado). Pero este parámetro debe existir, aunque sea como una lista vacía.
 * "properties": Si se indican una o más properties, la etiqueta de cada feature se convertirá de hecho en un pequeño widget de tipo "panel", mostrando los últimos valores de cada property para cada una de las features. Nuevamente, puede indicarse una ista vacía de properties, en cuyo caso, NO se mostrará ningún valor.
@@ -100,6 +100,9 @@ se pase el ratón por encima.
    :align: center
 
    Mapa con etiquetas permanentes.
+
+Si los elementos sobre el mapa aparecen en la otra punta del mundo, es probable que haya que cambiar el orden de los ejes de coordenadas.
+Añadiendo el parámetro opcional "swap_axis"=true, se intercambiarán latitud y longitud, y se corregirá este efecto.
 
 Además de las etiquetas, también podemos vincular un sub-widget a cada feature, que se mostrará en un globo al hacer clic sobre ella.
 El parámetro "popup_widget" toma como valor un JSON de configuración de dicho sub-widget. En esta configuracion, los parámetros "service", "offering" y

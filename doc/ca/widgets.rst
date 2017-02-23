@@ -101,6 +101,9 @@ es passi el ratolí per sobre.
 
    Mapa amb etiquetes permanents.
 
+Si els elements sobre el mapa apareixen a l'altra punta del món, és probable que s'hagi de canviar l'ordre dels eixos de coordenades.
+Afegint-hi el paràmetre opcional "swap_axis"=true, s'intercanviaran latitud i longitud, y es corregirà aquest efecte.
+
 A més de les etiquetes, també podem vincular un sub-widget a cada feature, que es mostrarà en un globus en fer clic sobre ella.
 El paràmetre "popup_widget" pren com a valor un JSON amb la configuració del sub-widget. En aquesta configuració, els paràmetres "service", "offering" i
 "feature(s)" s'obtenen del widget *pare* (el mapa), així que no s'han d'indicar. La propietat "name" indica quina classe de widget volem incrustar.

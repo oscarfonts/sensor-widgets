@@ -101,6 +101,9 @@ mouse hover.
 
    Map with permanent tooltips.
 
+If map elements appear located in the opposite side of the world, you probably have to change the coordinate axis order.
+Setting the optional parameter "swap_axis"=true, latitude and longitude will be switched, and this effect will be fixed.
+
 Besides the tooltip, we can also attach a sub-widget to each feature, which will be displayed when clicking the feature.
 The "popup_widget" input is a JSON structure which contains a Widget definition. The "service", "offering" and
 "feature(s)" inputs for the widget are taken from the *parent* map widget, so are not needed. The "name" property
