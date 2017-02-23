@@ -28,6 +28,7 @@
     "jqgrid": "~4.6.0",
     "leaflet": "~0.7.3",
     "Leaflet.label": "~0.2.1",
+    "leaflet.markercluster": "~0.5.0",
     "moment": "~2.9.0",
     "bootstrap": "~3.3.4",
     "bootstrap-daterangepicker": "~1.3.21",
@@ -57,6 +58,9 @@
     },
     "Leaflet.label": {
       "/": "dist/leaflet.label.{js,css}"
+    },
+    "leaflet.markercluster": {
+      "/": "dist/{leaflet.markercluster.js,*.css}"
     },
     "moment": {
       "/": "moment.js",

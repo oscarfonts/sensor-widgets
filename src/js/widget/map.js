@@ -1,12 +1,31 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], function(SOS, L, SensorWidget, common) {
+define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label', 'leaflet-cluster'], function(SOS, L, SensorWidget, common) {
     "use strict";
+
+    // Overriding Leaflet.label so it accepts a DOM element as argument
+    // (not only a string). Needed for async loading of content to label
+    L.Label.prototype._updateContent = function() {
+        if (!this._content || !this._map || this._prevContent === this._content) {
+            return;
+        }
+
+        if (typeof this._content === 'string') {
+            this._container.innerHTML = this._content;
+        } else {
+            while (this._container.hasChildNodes()) {
+                this._container.removeChild(this._container.firstChild);
+            }
+            this._container.appendChild(this._content);
+        }
+        this._prevContent = this._content;
+        this._labelWidth = this._container.offsetWidth;
+    };
 
     return {
         inputs: common.inputs.concat(["features", "properties"]),
-        optional_inputs: ["permanent_tooltips", "popup_widget", "swap_axis", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
+        optional_inputs: ["permanent_tooltips", "popup_widget", "no_clustering", "swap_axis", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
         preferredSizes: [{w: 550, h: 400}],
 
         init: function(config, el, errorHandler) {
@@ -63,13 +82,27 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                         }
                     }
                     function addFoIs(features) {
+
+                        // Clustering
+                        var featureContainer;
+                        if (config.no_clustering) {
+                            featureContainer = map;
+                        } else {
+                            featureContainer = L.markerClusterGroup({
+                                showCoverageOnHover: false,
+                                maxClusterRadius: 50
+                            });
+                            map.addLayer(featureContainer);
+                        }
+
                         var geojson = L.geoJson(fois2geojson(features),{
                             onEachFeature: function(feature, layer) {
 
                                 // Tooltip (label)
-                                var id = 'map-tooltip-' + feature.id;
-                                layer.bindLabel('<div id="' + id + '">' + feature.properties.name + '</div>', {noHide: true}).addTo(map);
-                                var el_label = document.getElementById(id);
+                                var labelElement = document.createElement('div');
+                                labelElement.id = 'map-tooltip-' + feature.id;
+                                labelElement.appendChild(document.createTextNode(feature.properties.name));
+                                layer.bindLabel(labelElement, {noHide: true}).addTo(featureContainer);
                                 if (config.properties && config.properties != "[]" && config.properties.length) {
                                     new SensorWidget('panel', {
                                         "service": config.service,
@@ -78,7 +111,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                                         "properties": config.properties,
                                         "refresh_interval": "60",
                                         "title": feature.properties.name
-                                    }, el_label);
+                                    }, labelElement);
                                 }
                                 if (!config.permanent_tooltips && layer.setLabelNoHide) {
                                     layer.setLabelNoHide(false);

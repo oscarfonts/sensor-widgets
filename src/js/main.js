@@ -18,6 +18,7 @@ require.config({
         'jqgrid': '../lib/jqgrid/jquery.jqGrid.amd',
         'jqgrid-locale-en': '../lib/jqgrid/grid.locale-en.amd',
         'leaflet': '../lib/leaflet/leaflet',
+        'leaflet-cluster': '../lib/leaflet.markercluster/leaflet.markercluster',
         'leaflet-label': '../lib/Leaflet.label/leaflet.label',
         'moment': '../lib/moment/moment',
         'moment-es': '../lib/moment/locale/es',
@@ -67,6 +68,9 @@ require.config({
         },
         'leaflet': {
             deps: ['css!../lib/leaflet/leaflet.css']
+        },
+        'leaflet-cluster': {
+            deps: ['leaflet', 'css!../lib/leaflet.markercluster/MarkerCluster.css', 'css!../lib/leaflet.markercluster/MarkerCluster.Default.css']
         },
         'leaflet-label': {
             deps: ['leaflet', 'css!../lib/Leaflet.label/leaflet.label.css']
