@@ -159,6 +159,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
             setService([
               "http://sensorweb.demo.52north.org/sensorwebtestbed/service",
               "http://sensors.portdebarcelona.cat/sos/json",
+              "http://wsncentral.iecolab.es/sos/service",
               "http://localhost:8080/52n-sos/service"
             ]);
 
