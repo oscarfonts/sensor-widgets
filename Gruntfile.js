@@ -334,7 +334,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('fetch', ['clean', 'bower', 'wrap']);
     grunt.registerTask('default', ['connect', 'watch']);
-    grunt.registerTask('build', ['fetch', 'jshint', 'requirejs', 'processhtml']);
+    grunt.registerTask('build', ['fetch', 'requirejs', 'processhtml']);
     grunt.registerTask('publish', ['build', 'gh-pages']);
 
 };
