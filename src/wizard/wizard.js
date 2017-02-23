@@ -156,7 +156,11 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
             }).click(loadWidget);
 
             // Setup the SOS parameters: service, offering, feature(s) and property(ies)
-            setService(["http://demo.geomati.co/sos/json", "http://sensors.portdebarcelona.cat/sos/json", "/52n-sos/sos/json"]);
+            setService([
+              "http://sensorweb.demo.52north.org/sensorwebtestbed/service",
+              "http://sensors.portdebarcelona.cat/sos/json",
+              "http://localhost:8080/52n-sos/service"
+            ]);
 
             $('#service').change(function() {
                 errorHandler();
@@ -213,7 +217,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
             for (var i in offerings) {
                 var offering = offerings[i];
 
-                $("#offering").append($('<option>').attr('id', offering.identifier).data('procedure', offering.procedure[0]).append(offering.name));
+                $("#offering").append($('<option>').attr('id', offering.identifier).data('procedure', offering.procedure[0]).append(offering.name || offering.identifier));
             }
         }, errorHandler);
     }
@@ -264,7 +268,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
             for (var i in features) {
                 var feature = features[i];
                 var id = feature.identifier.value;
-                var name = feature.name.value;
+                var name = feature.name ? feature.name.value : id;
 
                 $("#feature, #features").append($('<option>').attr('id', id).append(name));
             }

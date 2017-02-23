@@ -6,7 +6,7 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
 
     return {
         inputs: common.inputs.concat(["features", "properties"]),
-        optional_inputs: ["permanent_tooltips", "popup_widget", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
+        optional_inputs: ["permanent_tooltips", "popup_widget", "swap_axis", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
         preferredSizes: [{w: 550, h: 400}],
 
         init: function(config, el, errorHandler) {
@@ -123,18 +123,34 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label'], fun
                 return array.indexOf(value) > -1;
             }
 
+            function swap_axis(geometry) {
+                var ret = [];
+                for (var i=0; i < geometry.length; i++) {
+                    if(isArray(geometry[i])) {
+                        ret[i]=swap_axis(geometry[i]);
+                    } else if(!i%2) {
+                        ret[i]=geometry[i+1];
+                        ret[i+1]=geometry[i];
+                    }
+                }
+                return ret;
+            }
+
             function fois2geojson(fois) {
                 var config_features = isArray(config.features) ? config.features : JSON.parse(config.features);
                 var features = [];
                 for (var i in fois) {
                     var foi = fois[i];
                     if (foi.geometry && (!config_features.length || isInArray(foi.identifier.value, config.features))) {
+                        if (!config.swap_axis) {
+                            foi.geometry.coordinates  = swap_axis(foi.geometry.coordinates);
+                        }
                         var feature = {
                             type: "Feature",
                             geometry: foi.geometry,
                             id: foi.identifier.value,
                             properties: {
-                                name: foi.name.value
+                                name: foi.name ? foi.name.value : foi.identifier.value
                             }
                         };
                         features.push(feature);

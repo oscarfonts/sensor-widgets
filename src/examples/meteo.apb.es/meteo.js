@@ -167,6 +167,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
                 features: [defs.feature("P4")],
                 properties: [],
                 permanent_tooltips: true,
+                swap_axis: true,
                 max_initial_zoom: 12
             }, document.querySelector(".torrecontrol .p4 .map"));
 
@@ -202,6 +203,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
                 features: [defs.feature("02")],
                 properties: [],
                 permanent_tooltips: true,
+                swap_axis: true,
                 max_initial_zoom: 12
             }, document.querySelector(".torrecontrol .x02 .map"));
 
@@ -237,6 +239,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
                 features: [defs.feature("03")],
                 properties: [],
                 permanent_tooltips: true,
+                swap_axis: true,
                 max_initial_zoom: 12
             }, document.querySelector(".torrecontrol .x03 .map"));
 

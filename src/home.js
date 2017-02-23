@@ -131,7 +131,8 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
                 defs.feature("P5"),
                 defs.feature("P6")
             ],
-            properties: []
+            properties: [],
+            swap_axis: true
         },
         'panel': {
             title: i18n.t("Last observations"),

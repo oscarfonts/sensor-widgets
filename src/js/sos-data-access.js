@@ -39,7 +39,7 @@
                 data.push({
                     time: new Date(observation.resultTime),
                     value: observation.result.hasOwnProperty("value") ? observation.result.value : observation.result,
-                    feature: observation.featureOfInterest.name.value,
+                    feature: observation.featureOfInterest.name ? observation.featureOfInterest.name.value : observation.featureOfInterest.identifier.value,
                     property: property,
                     uom: observation.result.hasOwnProperty("uom") ? observation.result.uom : "(N/A)"
                 });
