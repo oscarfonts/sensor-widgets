@@ -69,7 +69,7 @@ And a collection of methods named after the SOS 2.0 operations they implement:
 * getCapabilities(callback, errorHandler).
 * describeSensor(procedure, callback, errorHandler).
 * getFeatureOfInterest(procedure, callback, errorHandler).
-* getDataAvailability(procedure, features, properties, callback, errorHandler).
+* getDataAvailability(procedure, offering, features, properties, callback, errorHandler).
 * getObservation(offering, features, properties, time, callback, errorHandler).
 
 Methods accept the parameters required to build the SOS query:

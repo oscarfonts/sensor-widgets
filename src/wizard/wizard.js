@@ -282,6 +282,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
         var control = $('#time_range');
         if (control.length) {
             var procedure = $('#offering').find('option:selected').data("procedure");
+            var offering = $('#offering').find('option:selected').attr("id");
             var feature = $('#feature').find('option:selected').attr("id");
             var property = $('#property').find('option:selected').attr("id");
             var features = feature ? feature : $('#features').find('option:selected').map(function() {
@@ -291,7 +292,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
                 return this.id;
             }).get();
 
-            SOS.getDataAvailability(procedure, features, properties, function(availabilities) {
+            SOS.getDataAvailability(procedure, offering, features, properties, function(availabilities) {
                 var abs_from = availabilities[0].phenomenonTime[0];
                 var abs_to = availabilities[0].phenomenonTime[1];
                 var from, to;
@@ -393,10 +394,10 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
                     value = el.find('option:selected').map(getId).get();
                     break;
                 case "time_start":
-                    value = $('#time_range').data('daterangepicker').startDate.utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
+                    value = $('#time_range').data('daterangepicker').startDate.subtract(1, 'second').utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
                     break;
                 case "time_end":
-                    value = $('#time_range').data('daterangepicker').endDate.utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
+                    value = $('#time_range').data('daterangepicker').endDate.add(1, 'second').utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]");
                     break;
                 default:
                     value = el.val();
