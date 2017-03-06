@@ -36,10 +36,11 @@
             }
 
             function addObservation(property, observation) {
+                var foi = observation.featureOfInterest;
                 data.push({
                     time: new Date(observation.resultTime),
                     value: observation.result.hasOwnProperty("value") ? observation.result.value : observation.result,
-                    feature: observation.featureOfInterest.name ? observation.featureOfInterest.name.value : observation.featureOfInterest.identifier.value,
+                    feature: foi.name ? foi.name.value : (foi.identifier ? foi.identifier.value : foi),
                     property: property,
                     uom: observation.result.hasOwnProperty("uom") ? observation.result.uom : "(N/A)"
                 });

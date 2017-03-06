@@ -269,7 +269,7 @@ define('wizard', ['i18n', 'SensorWidget', 'SOS', 'jquery', 'moment', 'daterangep
         SOS.getFeatureOfInterest(procedure, function(features) {
             for (var i in features) {
                 var feature = features[i];
-                var id = feature.identifier.value;
+                var id = feature.identifier ? feature.identifier.value : feature;
                 var name = feature.name ? feature.name.value : id;
 
                 $("#feature, #features").append($('<option>').attr('id', id).append(name));
