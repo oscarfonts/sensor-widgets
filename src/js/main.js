@@ -108,3 +108,10 @@ window.SensorWidget = function() {
                 SensorWidget.apply(this, args);
     });
 };
+
+// Expose SOS as well.
+window.getSOS = function(callback) {
+    require(['SOS'], function(sos) {
+        callback(sos);
+    });
+};
