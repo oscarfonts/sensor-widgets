@@ -92,9 +92,9 @@ js/i18n.js
 js/css.js
 css!SensorWidgets.css
 js/SensorWidget.js
-js/main.js
 js/XML.js
 js/SOS.js
+js/main.js
 js/sos-data-access.js
 js/widget-common.js
 js/locale-date.js
