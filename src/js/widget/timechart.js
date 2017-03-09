@@ -8,7 +8,7 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jquery', 'flot', 'fl
         '<div class="timechart widget">',
             '<h3 style="width:100%"></h3>',
             '<div class="graph" style="height:75%; width: 100%; max-height: 380px;"></div>',
-            '<div id="legend" style="display: inline-block; float: right; margin-right: 15px; margin-left: 50px; margin-top: 10px"></div>',
+            '<div class="legend" style="display: inline-block; float: right; margin-right: 15px; margin-left: 50px; margin-top: 10px"></div>',
             '<div><span class="footnote"></span></div>',
         '</div>'
     ].join('');
@@ -69,7 +69,7 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jquery', 'flot', 'fl
                         hoverable: true
                     },
                     legend: {
-                    	container: "#legend"
+                        container: el.querySelector(".legend")
                     },
                     series: {
                         lines: {
@@ -91,7 +91,15 @@ define(['sos-data-access', 'locale-date', 'widget-common', 'jquery', 'flot', 'fl
                     }
                 };
 
-                $.plot(graph, arr, options);
+                if(config.colors) {
+                    options.colors = config.colors;
+                }
+
+                var plot = $.plot(graph, arr, options);
+
+                if(config.callback) {
+                    config.callback(plot, graph);
+                }
 
             }
         }
