@@ -6,7 +6,7 @@
     <script src="../js/main.js"></script>
     <!-- /build -->
     <script>
-        SensorWidget('map', {
+        new SensorWidget('map', {
             "service": "http://sensors.portdebarcelona.cat/sos/json",
             "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#10m",
             "features": [
@@ -39,6 +39,9 @@
                     "format": "image/jpeg",
                     "attribution": 'Ortofoto 1:5.000: CC-by <a href="http://www.icc.cat" target="_blank">Institut Cartogràfic de Catalunya</a>'
                 }
+            },
+            "on_click": function(marker) {
+              console.log(marker.feature.id);
             }
         }, document.getElementById('map-container'));
     </script>

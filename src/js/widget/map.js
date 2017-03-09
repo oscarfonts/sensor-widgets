@@ -97,6 +97,12 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label', 'lea
 
                         var geojson = L.geoJson(fois2geojson(features),{
                             onEachFeature: function(feature, layer) {
+                                // OnClick event
+                                if(config.on_click) {
+                                    layer.on('click', function(e) {
+                                        config.on_click(e.target);
+                                    });
+                                }
 
                                 // Tooltip (label)
                                 var labelElement = document.createElement('div');
