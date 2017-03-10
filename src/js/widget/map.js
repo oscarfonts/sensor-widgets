@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label', 'leaflet-cluster'], function(SOS, L, SensorWidget, common) {
+define(['i18n', 'SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label', 'leaflet-cluster'], function(i18n, SOS, L, SensorWidget, common) {
     "use strict";
 
     // Overriding Leaflet.label so it accepts a DOM element as argument
@@ -29,11 +29,8 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label', 'lea
         preferredSizes: [{w: 550, h: 400}],
 
         init: function(config, el, errorHandler) {
-            // Main div
-            var main_div = document.createElement("div");
-            main_div.className = "map widget";
-            el.appendChild(main_div);
-        	
+
+            el.innerHTML = i18n.t("Loading...");
             //load widget common features
             common.init(config, el);
         	
@@ -66,10 +63,6 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label', 'lea
                 config.popup_widget = JSON.parse(config.popup_widget);
             }
 
-            var map = L.map(main_div, {
-                layers: [baseLayer]
-            }).setView([0, 0], 2);
-
             SOS.setUrl(config.service);
             read();
 
@@ -82,6 +75,14 @@ define(['SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-label', 'lea
                         }
                     }
                     function addFoIs(features) {
+                        // Map div
+                        var map_div = document.createElement("div");
+                        map_div.className = "map widget";
+                        el.appendChild(map_div);
+
+                        var map = L.map(map_div, {
+                            layers: [baseLayer]
+                        }).setView([0, 0], 2);
 
                         // Clustering
                         var featureContainer;
