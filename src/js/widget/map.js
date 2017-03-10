@@ -76,6 +76,7 @@ define(['i18n', 'SOS', 'leaflet', 'SensorWidget', 'widget-common', 'leaflet-labe
                     }
                     function addFoIs(features) {
                         // Map div
+                        el.innerHTML="";
                         var map_div = document.createElement("div");
                         map_div.className = "map widget";
                         el.appendChild(map_div);
