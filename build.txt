@@ -96,8 +96,8 @@ js/XML.js
 js/SOS.js
 js/main.js
 js/sos-data-access.js
-js/widget-common.js
 js/locale-date.js
+js/widget-common.js
 
 js/widget/compass.js
 ----------------
