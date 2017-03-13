@@ -2,7 +2,7 @@
  * @author Martí Pericay <marti@pericay.com>
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(function() {
+define(['locale-date'], function(ld) {
     "use strict";
 
     function loadCSS(url) {
@@ -17,7 +17,7 @@ define(function() {
 
     return {
         inputs: ["service", "offering"],
-        optional_inputs: ["footnote", "custom_css_url"],
+        optional_inputs: ["footnote", "custom_css_url", "display_utc_times"],
 
         init: function(config, el) {
             if (config.custom_css_url !== undefined) {
@@ -25,6 +25,9 @@ define(function() {
             }
             if (config.footnote !== undefined && el.querySelector(".footnote")) {
                 el.querySelector(".footnote").innerHTML = config.footnote;
+            }
+            if(config.display_utc_times) {
+                ld.utc(true);
             }
         }
     };
