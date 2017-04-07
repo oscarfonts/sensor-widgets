@@ -14,14 +14,14 @@ define(['i18n', 'sos-data-access', 'locale-date', 'widget-common'], function(i18
     ].join('');
 
     return {
-        inputs: common.inputs.concat(["feature", "properties", "refresh_interval", "title"]),
-        optional_inputs: common.optional_inputs,
+        inputs: common.inputs.concat(["feature", "properties", "refresh_interval"]),
+        optional_inputs: ["title"].concat(common.optional_inputs),
         preferredSizes: [{w: 400, h: 400}],
 
         init: function(config, el, errorHandler) {
             // Render template
             el.innerHTML = template;
-            el.querySelector("h2").innerHTML = config.title;
+            var title = el.querySelector("h2");
             var subtitle = el.querySelector("h3");
             var panel = el.querySelector("dl");
 
@@ -36,6 +36,7 @@ define(['i18n', 'sos-data-access', 'locale-date', 'widget-common'], function(i18
             // Update view
             function redraw(data) {
                 if (!data.length) {
+                    title.innerHTML = config.title || "";
                     subtitle.innerHTML = i18n.t("(no data)");
                     return;
                 }
@@ -48,6 +49,7 @@ define(['i18n', 'sos-data-access', 'locale-date', 'widget-common'], function(i18
                     return a.property.localeCompare(b.property);
                 });
 
+                title.innerHTML = config.title || i18n.t("Last measures from") + " " + data[0].feature;
                 subtitle.innerHTML = ld.display(mostRecentTime);
                 var html = "";
                 for (var i in data) {

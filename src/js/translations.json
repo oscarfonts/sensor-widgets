@@ -271,5 +271,9 @@
   "A sample footnote for {name} widget": {
     "es": "Nota al pie de ejemplo en el widget {name}",
     "ca": "Nota al peu d'exemple al widget {name}"
+  },
+  "Last measures from": {
+    "es": "Últimas mediciones de",
+    "ca": "Darreres mesures de"
   }
 }
