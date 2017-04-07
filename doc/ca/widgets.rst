@@ -189,9 +189,8 @@ Els seus paràmetres obligatoris són:
 * Els habituals "service", "offering" i "feature".
 * Una llista de "properties" a mostrar.
 * El "refresh_interval", en segons.
-* Un "title" per al panell.
 
-I els paràmetres opcionals habituals: "footnote" i "custom_css_url".
+I els paràmetres opcionals: "title", "footnote" i "custom_css_url".
 
 El panell també mostrarà la data de les observacions com a subtítol. En el cas que algun dels valors sigui d'una data anterior a la data comú,
 es mostrarà el valor en color vermell i es mostrarà la data per a aquesta observació en particular.

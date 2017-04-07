@@ -189,9 +189,8 @@ Sus parámetros obligatorios son:
 * Los habituales "service", "offering" y "feature".
 * Una lista de "properties" a mostrar.
 * El "refresh_interval", en segundos.
-* Un "title" para el panel.
 
-Y los parámetros opcionales habituales: "footnote" y "custom_css_url".
+Y los parámetros opcionales: "title", "footnote" y "custom_css_url".
 
 El panel también mostrará la fecha de las observaciones como subtitulo. En caso de que alguno de los valores sea de una fecha anterior a la fecha común,
 se mostará el valor en color rojo y se mostrará la fecha para dicha observación en particular.

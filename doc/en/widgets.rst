@@ -190,9 +190,8 @@ Its mandatory inputs are:
 * The usual "service", "offering" and "feature".
 * A list of "properties" to be displayed.
 * The "refresh_interval", in seconds.
-* The Panel's "title".
 
-And the usual optional inputs: "footnote" and "custom_css_url".
+And the optional inputs: "title", "footnote" and "custom_css_url".
 
 The panel will show the result time as a subtitle. In case some of the propertie's result time is previous to the common
 one, the value will be displayed in red and the particular result time for that observation displayed explicitly.
