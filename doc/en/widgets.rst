@@ -16,6 +16,7 @@ Mandatory inputs are:
 Other optional inputs:
 
 * "title": If not specified, defaults to the name of the Feature.
+* "display_utc_times": The SOS service dates are in UTC, and they are converted to local time fuse by default. To display them in UTC, set this parameter to `true`.
 * "footnote": Optional small text caption at the bottom.
 * "custom_css_url": css stylesheet to be applied to the widget.
 
@@ -33,6 +34,7 @@ Mandatory inputs are:
 Other optional inputs:
 
 * "footnote": Optional small text caption at the bottom.
+* "display_utc_times": The SOS service dates are in UTC, and they are converted to local time fuse by default. To display them in UTC, set this parameter to `true`.
 * "custom_css_url": css stylesheet to be applied to the widget.
 
 
@@ -52,6 +54,7 @@ Mandatory inputs:
 Other optional inputs:
 
 * "footnote": Optional small text caption at the bottom.
+* "display_utc_times": The SOS service dates are in UTC, and they are converted to local time fuse by default. To display them in UTC, set this parameter to `true`.
 * "custom_css_url": css stylesheet to be applied to the widget. Please note that jqGrid look & feel is taken from the underlying jQuery-ui theme.
 
 .. note:: this widget depends on jQuery, jQuery UI and the jgGrid plugin itself. It's a rather heavy and not much
@@ -183,7 +186,7 @@ If creating the widget with Javascript, it is possible to capture the "click" ev
       console.log(marker.feature);
    }
 
-Finally, the common "footnote" and  "custom_css_url" inputs are also available.
+Finally, the common "display_utc_times", "footnote" and  "custom_css_url" inputs are also available.
 
 See a **complete live example** here: http://bl.ocks.org/oscarfonts/265d734349396cf4372c
 
@@ -200,7 +203,7 @@ Its mandatory inputs are:
 * A list of "properties" to be displayed.
 * The "refresh_interval", in seconds.
 
-And the optional inputs: "title", "footnote" and "custom_css_url".
+And the optional inputs: "title", "display_utc_times", "footnote" and "custom_css_url".
 
 The panel will show the result time as a subtitle. In case some of the propertie's result time is previous to the common
 one, the value will be displayed in red and the particular result time for that observation displayed explicitly.
@@ -225,7 +228,7 @@ Its mandatory inputs:
 * "min_value" and "max_value", which will determine the extreme values.
 * "refresh_interval" in seconds.
 
-And the usual optional inputs: "footnote" and "custom_css_url".
+And the usual optional inputs: "display_utc_times", "footnote" and "custom_css_url".
 
 
 Status
@@ -239,7 +242,7 @@ This widget is meant as a monitoring tool (sort of hypertable), and it's better 
 
 Its only mandatory inputs are "service" and "offering".
 
-And the common optional inputs: "footnote" and "custom_css_url".
+And the common optional inputs: "display_utc_times", "footnote" and "custom_css_url".
 
 
 Table
@@ -253,7 +256,7 @@ compact view than jqGrid widget. The widget is built as a plain HTML table suppo
 * "time_start" and "time_end": The result time range of the observations to be displayed.
 * The table's "title".
 
-And the common optional inputs: "footnote" and "custom_css_url".
+And the common optional inputs: "display_utc_times", "footnote" and "custom_css_url".
 
 
 Thermometer
@@ -271,6 +274,7 @@ Mandatory inputs are:
 Other optional inputs:
 
 * "footnote": Optional small text caption at the bottom.
+* "display_utc_times", to force times to be expressed in universal time and not in local fuse.
 * "custom_css_url": css stylesheet to be applied to the widget.
 
 
@@ -287,7 +291,7 @@ Charts are built with the `Flot charting library <http://www.flotcharts.org/>`_,
 * "time_start" and "time_end": Determines the time period of the observations to be displayed.
 * The timechart's "title".
 
-And the common optional inputs: "footnote" and "custom_css_url".
+And the common optional inputs: "display_utc_times", "footnote" and "custom_css_url".
 
 Windrose
 ========
@@ -315,7 +319,7 @@ Parámetros opcionales:
 Optional inputs:
 
 * "subtitle".
-* "footnote" and "custom_css_url".
+* "display_utc_times", "footnote" and "custom_css_url".
 
 This is how data is grouped to build the windrose chart:
 

@@ -17,6 +17,7 @@ Sus parámetros obligatorios son:
 Otros parámetros opcionales:
 
 * "title": Si no se especifica, por defecto se usa como título el nombre de la Feature.
+* "display_utc_times": Las fechas del servicio SOS se obtienen en UTC, y por defecto se convierten al huso horario local del navegador. Si se quieren mostrar en UTC, poner este parámetro a `true`.
 * "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
 * "custom_css_url": hoja de estilos css que se aplicará al widget.
 
@@ -34,6 +35,7 @@ Parámetros obligatorios:
 Parámetros opcionales:
 
 * "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
+* "display_utc_times": Las fechas del servicio SOS se obtienen en UTC, y por defecto se convierten al huso horario local del navegador. Si se quieren mostrar en UTC, poner este parámetro a `true`.
 * "custom_css_url": hoja de estilos css que se aplicará al widget.
 
 
@@ -53,6 +55,7 @@ Parámetros obligatorios:
 Parámetros opcionales:
 
 * "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
+* "display_utc_times": Las fechas del servicio SOS se obtienen en UTC, y por defecto se convierten al huso horario local del navegador. Si se quieren mostrar en UTC, poner este parámetro a `true`.
 * "custom_css_url": hoja de estilos css que se aplicará al widget. Nótese que el aspecto de jqGrid se toma del tema jQuery-ui subyacente.
 
 .. note:: este widget depende de jQuery, jQuery UI y el plugin jgGrid. Es un widget bastante pesado y no muy
@@ -183,7 +186,7 @@ Si se está usando el widget con Javascript, es posible capturar el "click" sobr
    }
 
 
-Por último, los parámetros opcionales habituales "footnote" y "custom_css_url" también están disponibles.
+Por último, los parámetros opcionales habituales "display_utc_times", "footnote" y "custom_css_url" también están disponibles.
 
 Véase un **ejemplo funcional completo** aquí: http://bl.ocks.org/oscarfonts/265d734349396cf4372c
 
@@ -200,7 +203,7 @@ Sus parámetros obligatorios son:
 * Una lista de "properties" a mostrar.
 * El "refresh_interval", en segundos.
 
-Y los parámetros opcionales: "title", "footnote" y "custom_css_url".
+Y los parámetros opcionales: "title", "display_utc_times", "footnote" y "custom_css_url".
 
 El panel también mostrará la fecha de las observaciones como subtitulo. En caso de que alguno de los valores sea de una fecha anterior a la fecha común,
 se mostará el valor en color rojo y se mostrará la fecha para dicha observación en particular.
@@ -226,7 +229,7 @@ Parámetros obligatorios:
 * "min_value" y "max_value", que determinan los valores extremos.
 * "refresh_interval" en segundos.
 
-Y los parámetros opcionales habituales: "footnote" y "custom_css_url".
+Y los parámetros opcionales habituales: "display_utc_times", "footnote" y "custom_css_url".
 
 
 Status (status)
@@ -241,7 +244,7 @@ Este widget está pensado como una herramienta de supervisón (una especie de hi
 
 Sus únicos parámetros obligatorios son "service" y "offering".
 
-Y los parámetros opcionales habituales: "footnote" y "custom_css_url".
+Y los parámetros opcionales habituales: "display_utc_times", "footnote" y "custom_css_url".
 
 
 Tabla (table)
@@ -258,7 +261,7 @@ Parámetros:
 * "time_start" y "time_end": Período de tiempo del que quieren obtenerse observaciones.
 * Y el "title".
 
-Además de los parámetros opcionales comunes: "footnote" y "custom_css_url".
+Además de los parámetros opcionales comunes: "display_utc_times", "footnote" y "custom_css_url".
 
 
 Termómetro (thermometer)
@@ -277,6 +280,7 @@ Parámetros obligatorios:
 Otros parámetros opcionales:
 
 * "footnote": Texto opcional que aparecerá como una pequeña nota al pie.
+* "display_utc_times", para mostrar la hora en tiempo universal y no en el huso horario local.
 * "custom_css_url": hoja de estilos css que se aplicará al widget.
 
 
@@ -300,7 +304,7 @@ Parámetros opcionales:
 * "colors": Array de colores en formato `#rrggbb`, que se aplicarán al dibujar las líneas de cada una de las properties indicadas.
 * "callback": Función que se llamará tras instanciar el widget. Recoge la instancia del Flot chart como parámetro.
 
-Además de los parámetros opcionales comunes: "footnote" y "custom_css_url".
+Además de los parámetros opcionales comunes: "display_utc_times", "footnote" y "custom_css_url".
 
 
 Rosa vientos (windrose)
@@ -324,7 +328,7 @@ Parámetros obligatorios:
 Parámetros opcionales:
 
 * "subtitle".
-* "footnote" y "custom_css_url".
+* "display_utc_times", "footnote" y "custom_css_url".
 
 Así es como se agrupan los datos para construír la gráfica de la rosa de los vientos:
 

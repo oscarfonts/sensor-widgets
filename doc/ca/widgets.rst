@@ -17,6 +17,7 @@ Els seus paràmetres obligatoris són:
 Altres paràmetres opcionals:
 
 * "Title": Si no s'especifica, per defecte es fa servir com a títol el nom de la Feature.
+* "display_utc_times": Les dates del servei SOS s'obtenen en UTC, i per defecte es converteixen al fus horari local del navegador. Si es volen mostrar en UTC, posar aquest paràmetre a `true`.
 * "Footnote": Text opcional que apareixerà com una petita nota al peu.
 * "Custom_css_url": full d'estils css que s'aplicarà al widget.
 
@@ -34,6 +35,7 @@ Paràmetres obligatoris:
 Paràmetres opcionals:
 
 * "Footnote": Text opcional que apareixerà com una petita nota al peu.
+* "display_utc_times": Les dades del servei SOS s'obtenen en UTC, i per defecte es converteixen al fus horari local del navegador. Si es volen mostrar en UTC, posar aquest paràmetre a `true`.
 * "Custom_css_url": full d'estils css que s'aplicarà al widget.
 
 
@@ -53,6 +55,7 @@ Paràmetres obligatoris:
 Paràmetres opcionals:
 
 * "Footnote": Text opcional que apareixerà com una petita nota al peu.
+* "display_utc_times": Les dades del servei SOS s'obtenen en UTC, i per defecte es converteixen al fus horari local del navegador. Si es volen mostrar en UTC, posar aquest paràmetre a `true`.
 * "Custom_css_url": full d'estils css que s'aplicarà al widget. Tingueu en compte que l'aspecte de jqGrid ve determinat pel tema jQuery-ui subjacent.
 
 .. note:: aquest widget depèn de jQuery, jQuery UI i el plugin jgGrid. És un widget bastant pesat i no gaire
@@ -182,7 +185,7 @@ Si s'està utilitzant el widget amb Javascript, és possible capturar el "click"
       console.log(marker.feature);
    }
 
-Finalment, els paràmetres opcionals habituals "footnote" i "custom_css_url" també estan disponibles.
+Finalment, els paràmetres opcionals habituals "display_utc_times", "footnote" i "custom_css_url" també estan disponibles.
 
 Vegeu un **exemple funcional complet** aquí: http://bl.ocks.org/oscarfonts/265d734349396cf4372c
 
@@ -199,7 +202,7 @@ Els seus paràmetres obligatoris són:
 * Una llista de "properties" a mostrar.
 * El "refresh_interval", en segons.
 
-I els paràmetres opcionals: "title", "footnote" i "custom_css_url".
+I els paràmetres opcionals: "title", "display_utc_times", "footnote" i "custom_css_url".
 
 El panell també mostrarà la data de les observacions com a subtítol. En el cas que algun dels valors sigui d'una data anterior a la data comú,
 es mostrarà el valor en color vermell i es mostrarà la data per a aquesta observació en particular.
@@ -225,7 +228,7 @@ Paràmetres obligatoris:
 * "min_value" i "max_value", que determinen els valors extrems.
 * "refresh_interval" en segons.
 
-I els paràmetres opcionals habituals: "footnote" i "custom_css_url".
+I els paràmetres opcionals habituals: "display_utc_times", "footnote" i "custom_css_url".
 
 
 Status (status)
@@ -240,7 +243,7 @@ Aquest widget està pensat com una eina de gestió (una espècie d'hiper-taula),
 
 Els seus únics paràmetres obligatoris són "service" i "offering".
 
-I els paràmetres opcionals habituals: "footnote" i "custom_css_url".
+I els paràmetres opcionals habituals: "display_utc_times", "footnote" i "custom_css_url".
 
 
 Taula (table)
@@ -257,7 +260,7 @@ Paràmetres:
 * "time_start" i "time_end": Període de temps del que volem obtenir observacions.
 * I el "title".
 
-A més dels paràmetres opcionals comuns: "footnote" i "custom_css_url".
+A més dels paràmetres opcionals comuns: "display_utc_times", "footnote" i "custom_css_url".
 
 
 Termòmetre (thermometer)
@@ -275,8 +278,9 @@ Paràmetres obligatoris:
 
 Altres paràmetres opcionals:
 
-* "Footnote": Text opcional que apareixerà com una petita nota al peu.
-* "Custom_css_url": full d'estils css que s'aplicarà al widget.
+* "footnote": Text opcional que apareixerà com una petita nota al peu.
+* "display_utc_times", per mostrar l'hora en temps universal i no en el fus horari local.
+* "custom_css_url": full d'estils css que s'aplicarà al widget.
 
 
 Sèrie temps (timechart)
@@ -299,7 +303,7 @@ Paràmetres opcionals:
 * "colors": Array de colors en format `#rrggbb`, que s'aplicarà en dibuixar les línies de cadascuna de les properties.
 * "callback": Funció que es crida després d'instanciar el widget. Recull la instància del Flot chart com a paràmetre.
 
-A més dels paràmetres opcionals comuns: "footnote" i "custom_css_url".
+A més dels paràmetres opcionals comuns: "display_utc_times", "footnote" i "custom_css_url".
 
 
 Rosa vents (windrose)
@@ -322,8 +326,8 @@ Paràmetres obligatoris:
 
 Paràmetres opcionals:
 
-* "Subtitle".
-* "Footnote" i "custom_css_url".
+* "subtitle".
+* "display_utc_times", "footnote" i "custom_css_url".
 
 Així és com s'agrupen les dades per construïr la gràfica de la rosa dels vents:
 
