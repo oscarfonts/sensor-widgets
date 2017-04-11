@@ -306,6 +306,12 @@ Mandatory inputs are:
 * "refresh_interval" (in seconds): is the time between updates. As the windrose displays statistcs over a large dataset whose retrieval is expensive, it is recommended that the refresh interval is set to a high value (several minutes).
 * "title" the widget's title.
 
+Parámetros opcionales:
+
+* "colors": Array of colors in `#rrggbb` format, which will be applied to the chart lines for each of the properties.
+* "callback": Function to be called after widget instantiation. It will get the internal Flot chart instance as parameter.
+
+
 Optional inputs:
 
 * "subtitle".

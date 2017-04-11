@@ -290,9 +290,14 @@ Les gràfiques estan basades en la `llibreria Flot Charts <http://www.flotcharts
 Paràmetres:
 
 * Els habituals "service", "offering" i "feature".
-* La llisa de "properties" a mostrar.
+* La llista de "properties" a mostrar.
 * "time_start" i "time_end": Període de temps del qual volem obtenir observacions.
 * I el "title".
+
+Paràmetres opcionals:
+
+* "colors": Array de colors en format `#rrggbb`, que s'aplicarà en dibuixar les línies de cadascuna de les properties.
+* "callback": Funció que es crida després d'instanciar el widget. Recull la instància del Flot chart com a paràmetre.
 
 A més dels paràmetres opcionals comuns: "footnote" i "custom_css_url".
 

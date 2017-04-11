@@ -291,9 +291,14 @@ Las gráficas se construyen gracias a la `librería Flot <http://www.flotcharts.
 Parámetros:
 
 * Los habituales "service", "offering" y"feature".
-* La lisa de "properties" a mostrar.
+* La lista de "properties" a mostrar.
 * "time_start" y "time_end": Período de tiempo del que quieren obtenerse observaciones.
 * Y el "title".
+
+Parámetros opcionales:
+
+* "colors": Array de colores en formato `#rrggbb`, que se aplicarán al dibujar las líneas de cada una de las properties indicadas.
+* "callback": Función que se llamará tras instanciar el widget. Recoge la instancia del Flot chart como parámetro.
 
 Además de los parámetros opcionales comunes: "footnote" y "custom_css_url".
 

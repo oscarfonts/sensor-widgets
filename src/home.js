@@ -29,9 +29,9 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         "es": "Composición avanzada",
         "ca": "Composició avançada"
       },
-      "Sync charts": {
-        "es": "Gráficas sincronizadas",
-        "ca": "Gràfiques sincronitzades"
+      "Timechart: sync and custom colors": {
+        "es": "Timechart: sincronització i colors personalitzats",
+        "ca": "Timechart: sincronización y colores personalizados"
       },
       "Low-level SOS access (experimental)": {
         "es": "Acceso de bajo nivel al SOS (experimental)",
