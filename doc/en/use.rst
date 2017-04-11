@@ -86,9 +86,48 @@ dynamism by changing some of its configuration values.
 See a live example here: http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb
 
 
-.. note:: The ``SensorWidget`` function has no return value or callback function. Widgets are created asynchronously.
-   In case of error, an error message will be displayed to the user in place of the widget, but there's no way to
-   programmatically interactuate with the widget. This is an area for future improvement.
+.. note:: The ``SensorWidget`` function has no return value, but some of the parameters accept a callback function.
+   Widgets are created asynchronously. In case of error, an error message will be displayed to the user in place of the widget.
+
+
+Making low level SOS calls with Javascript
+------------------------------------------
+
+.. warning:: Direct access to low-level SOS operations is experimental.
+   The API described here can change at any time.
+
+The SOS client instance is obtained asynchronously::
+
+    getSOS(function(SOS) {
+        // You must indicate a 52n SOS 4.x UrL with JSON encoding
+        SOS.setUrl("http://sensorweb.demo.52north.org/sensorwebtestbed/service");
+        // Then call any other SOS method
+    });
+
+This is the API::
+
+    SOS.getCapabilities(callback, error); // Get the GetCapabilties "contents" section.
+    SOS.describeSensor(procedure, callback, error); // Get the SensorML document converted to a JSON structure.
+    SOS.getFeatureOfInterest(procedure, callback, error); // Get all the FeatureOfInterest for the given procedure.
+    SOS.getDataAvailability(procedure, offering, features, properties, callback, error); // Get the time range of availability for each combination of procedure + feature + property.
+    SOS.getObservation(offering, features, properties, time, callback, error); // Get the observations for the given combination of parameters.
+
+Where the parameters are:
+
+ * `callback` (function) gathers the response as a Javascript object (parsed JSON).
+ * `error` (function) callback invoked in case the SOS service returns an error.
+ * `procedure` (string) procedure identifier.
+ * `offering` (string) offering identifier.
+ * `features` (array de strings) list of Features Of Interest for which we want to get a response.
+ * `properties` (array de strings) list of Observable Properties for which we want to get a response.
+ * `time` the instant (if it's a string) or time range (if it's an array of 2 strings) for which we eant to get a response.
+   Times are indicated in UTC, format "yyyy-mm-ddThh:mm:ssZ". The special "latest" value is used to get the most recent available observation.
+
+And their optionality:
+
+* The `callback` function is always mandatory, and the `error` function is always optional.
+* It is mandatory to indicate the `procedure` for `describeSensor` and `getFeatureOfInterest` methods.
+* For `getDataAvailability` and `getObservation`, the filters (procedure, offering, features, properties, time) are optiona. Set them to `undefined` in case you don't want to filter by a particular concept.
 
 
 Custom styling

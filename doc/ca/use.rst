@@ -89,9 +89,49 @@ de configuració.
 Vegeu un exemple pràctic d'integració a: http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb
 
 
-.. note:: La funció ``SensorWidget`` no retorna cap valor ni accepta cap funció de callback. Els widgets es creen de forma assíncrona.
-   En cas d'error, es mostrarà un missatge a l'usuari en l'element on havia dibuixar-se el widget, però no hi ha manera de
-   interactuar programàticament amb el widget. Aquest és un aspecte per millorar en el futur.
+.. note:: La funció ``SensorWidget`` no retorna cap valor, però en alguns casos accepta funcions de callback
+   com a paràmetre. Els widgets es creen de forma assíncrona. En cas d'error, es mostrarà un missatge a
+   l'usuari en l'element on havia dibuixar-se el widget.
+
+
+Fent crides SOS de baix nivell amb Javascript
+---------------------------------------------
+
+.. warning:: L'accés directe a les operacions SOS de baix nivell és experimental.
+   La API aquí descrita pot canviar en qualsevol moment.
+
+La instància del client SOS s'obté de forma asíncrona::
+
+    getSOS(function(SOS) {
+        // Cal indicar una URL d'un servei 52n SOS 4.x amb encoding JSON
+        SOS.setUrl("http://sensorweb.demo.52north.org/sensorwebtestbed/service");
+        // A partir d'aquí, es poden invocar els altres mètodes de SOS
+    });
+
+Aquesta és la API::
+
+    SOS.getCapabilities(callback, error); // Obté la secció "contents" del GetCapabilties.
+    SOS.describeSensor(procedure, callback, error); // Obté el document SensorML convertit a una estructura JSON.
+    SOS.getFeatureOfInterest(procedure, callback, error); // Obté totes les FeatureOfInterest del procedure indicat.
+    SOS.getDataAvailability(procedure, offering, features, properties, callback, error); // Obté rang de dates vàlid per a cada combinació de procedure, feature i property.
+    SOS.getObservation(offering, features, properties, time, callback, error); // Obté les observacions per a la combinació de paràmetres donada.
+
+On els paràmetres són:
+
+ * `callback` (funció) recollirà la resposta com un objecte Javascript (JSON parsejat).
+ * `error` (funció) de callback que es cridarà en cas que el servei SOS retorni un error.
+ * `procedure` (string) identificador de la procedure.
+ * `offering` (string) identificador d'offering.
+ * `features` (array de strings) llista de les Features Of Interest de les que es vol obtenir resposta.
+ * `properties` (array de strings) llista de les Observable Properties de les que es vol obtenir resposta.
+ * `time` l'instant (si és string) o rang de temps (si és array de 2 strings) per al que es vol obtenir resposta.
+   Les dates s'indiquen en hora UTC, format "yyyy-mm-ddThh:mm:ssZ". També pot prendre el valor especial "latest" per obtenir la observació més recent disponible.
+
+I la seva obligatorietat és:
+
+* La funció de `callback` és sempre obligatòria, i la funció d'`error` és sempre opcional.
+* Per a `describeSensor` i `getFeatureOfInterest`, és obligatori indicar la `procedure`.
+* Per a `getDataAvailability` i `getObservation` els filtres (procedure, offering, features, properties, time) són opcionals. Indiqueu `undefined` en cas de no voler filtrar per un d'aquests conceptes.
 
 
 Personalització de l'aspecte gràfic
