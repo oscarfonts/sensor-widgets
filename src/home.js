@@ -29,6 +29,14 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         "es": "Composición avanzada",
         "ca": "Composició avançada"
       },
+      "Sync charts": {
+        "es": "Gráficas sincronizadas",
+        "ca": "Gràfiques sincronitzades"
+      },
+      "Low-level SOS access (experimental)": {
+        "es": "Acceso de bajo nivel al SOS (experimental)",
+        "ca": "Accés de baix nivell al SOS (experimental)"
+      },
       "Documentation ": {
         "es": "Documentación ",
         "ca": "Documentació "
