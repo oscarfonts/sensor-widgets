@@ -174,6 +174,15 @@ The "url" and "options" parameters correspond to `Leaflet's TileLayer.WMS <http:
 Another optional input is "max_initial_zoom": It indicates the maximum zoom level to use when the map is
 first rendered. This avoids to zoom in too much, so we loose context, especially when a single point feature is drawn.
 
+When there is a risk of marker overlapping on the map, a clustering mechanism is applied automatically.
+This automatic clustering can be disabled setting to `true` the optional "no_clustering" parameter.
+
+If creating the widget with Javascript, it is possible to capture the "click" event on a map marker and get its details::
+
+   "on_click": function(marker) {
+      console.log(marker.feature);
+   }
+
 Finally, the common "footnote" and  "custom_css_url" inputs are also available.
 
 See a **complete live example** here: http://bl.ocks.org/oscarfonts/265d734349396cf4372c

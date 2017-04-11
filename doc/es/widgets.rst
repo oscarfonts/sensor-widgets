@@ -173,6 +173,16 @@ Los parámetros "url" y "options" se corresponden con los parámetros del `const
 Otro parámetro opcional es "max_initial_zoom": Indica el nivel de zoom máximo a utilizar en la vista inicial del mapa.
 Esto evita acercarse demasiado y perder contexto cartográfico, especialmente cuando se muestra una única feature puntual.
 
+Cuando existen muchos marcadores sobre el mapa, se aplica automáticamente una función de agrupación de los mismos (clustering).
+Si no se quiere aplicar el clustering de forma automática, debe ponerse a `true` el parámetro opcional "no_clustering".
+
+Si se está usando el widget con Javascript, es posible capturar el "click" sobre los marcadores y obtener sus detalles::
+
+   "on_click": function(marker) {
+      console.log(marker.feature);
+   }
+
+
 Por último, los parámetros opcionales habituales "footnote" y "custom_css_url" también están disponibles.
 
 Véase un **ejemplo funcional completo** aquí: http://bl.ocks.org/oscarfonts/265d734349396cf4372c
