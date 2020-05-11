@@ -10,7 +10,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
     var defs = {
         service: function() {
-            return "http://sensors.portdebarcelona.cat/sos/json";
+            return "https://demo.geomatico.es/52n-sos/service";
             //return "http://172.17.4.37:8080/52n-sos/sos/json";
             //return "/52n-sos/sos/json";
         },

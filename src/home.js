@@ -82,8 +82,8 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
 
     var defs = {
         service: function() {
-            //return "http://demo.geomati.co/sos/json";
-            return "http://sensors.portdebarcelona.cat/sos/json";
+            return "https://demo.geomatico.es/52n-sos/service";
+            //return "http://sensors.portdebarcelona.cat/sos/json";
         },
         offering: function(p) {
             return "http://sensors.portdebarcelona.cat/def/weather/offerings#" + p;
