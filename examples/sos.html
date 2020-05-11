@@ -4,7 +4,7 @@
     <script src="../js/SensorWidgets.js"></script>
     <script>
         getSOS(function(SOS) {
-            SOS.setUrl("http://sensors.portdebarcelona.cat/sos/json");
+            SOS.setUrl("https://demo.geomatico.es/52n-sos/service");
             SOS.getCapabilities(function(capabilities) {
                 document.getElementById("capabilities").innerHTML = JSON.stringify(capabilities, null, 2);
             });
