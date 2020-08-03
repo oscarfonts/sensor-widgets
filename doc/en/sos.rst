@@ -225,7 +225,7 @@ Full GetObservation JSON request example::
             "service":"SOS",
             "version":"2.0.0",
             "request":"GetObservation",
-            "offering":"http://sensors.portdebarcelona.cat/def/weather/offerings#10m",
+            "offering":"http://sensors.portdebarcelona.cat/def/weather/offerings#10M",
             "featureOfInterest":["http://sensors.portdebarcelona.cat/def/weather/features#P3"],
             "observedProperty":["http://sensors.portdebarcelona.cat/def/weather/properties#31"],
             "temporalFilter":[{

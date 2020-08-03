@@ -42,7 +42,7 @@ sense haver de passar pel wizard), vegem com està format, descomposant un exemp
     http://sensors.fonts.cat/widget/
         name=compass
         service=http://demo.geomati.co/sos/json
-        offering=http://sensors.portdebarcelona.cat/def/weather/offerings#10m
+        offering=http://sensors.portdebarcelona.cat/def/weather/offerings#10M
         feature=http://sensors.portdebarcelona.cat/def/weather/features#P3
         property=http://sensors.portdebarcelona.cat/def/weather/properties#31
         refresh_interval=5

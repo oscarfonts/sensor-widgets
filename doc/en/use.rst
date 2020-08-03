@@ -41,7 +41,7 @@ without having to go through the wizard), let's see how they are built, decompos
     http://sensors.fonts.cat/widget/
         name=compass
         service=http://demo.geomati.co/sos/json
-        offering=http://sensors.portdebarcelona.cat/def/weather/offerings#10m
+        offering=http://sensors.portdebarcelona.cat/def/weather/offerings#10M
         feature=http://sensors.portdebarcelona.cat/def/weather/features#P3
         property=http://sensors.portdebarcelona.cat/def/weather/properties#31
         refresh_interval=5

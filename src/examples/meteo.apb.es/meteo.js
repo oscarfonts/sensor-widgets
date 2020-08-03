@@ -39,7 +39,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
             new SensorWidget('compass', {
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("02"),
                 property: defs.property("31"),
                 refresh_interval: 15
@@ -47,7 +47,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
             new SensorWidget('thermometer', {
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("02"),
                 property: defs.property("32"),
                 refresh_interval: 15
@@ -56,7 +56,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('timechart', {
                 title: "Velocitat Vent",
                 service: defs.service(),
-                offering: defs.offering("10m"),
+                offering: defs.offering("10M"),
                 features: [defs.feature("02")],
                 properties: [defs.property("30M"), defs.property("30")],
                 time_start: a_day_ago.toISOString().substring(0, 19) + "Z",
@@ -67,7 +67,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
                 title: "Rosa vents últimes 3h",
                 subtitle: "Sirena, mostres minutals",
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("02"),
                 properties: [defs.property("30"), defs.property("31")],
                 time_start: three_hours_ago.toISOString().substring(0, 19) + "Z",
@@ -78,7 +78,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('table', {
                 title: "Taula de dades",
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 feature: defs.feature("02"),
                 properties: [defs.property("30"), defs.property("30M"), defs.property("31"), defs.property("32"), defs.property("33"), defs.property("35"), defs.property("36"), defs.property("34")],
                 time_start: back_33_samples.toISOString().substring(0, 19) + "Z",
@@ -92,7 +92,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('compass', {
                 title: "Sirena",
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("02"),
                 property: defs.property("31"),
                 refresh_interval: 15
@@ -101,16 +101,16 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('panel', {
                 title: "Dades minutals",
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("02"),
                 properties: [defs.property("30"), defs.property("31"), defs.property("32"), defs.property("33"), defs.property("34"), defs.property("35"), defs.property("36")],
                 refresh_interval: 15
-            }, document.querySelector(".xmvqa .left .panel-10m"));
+            }, document.querySelector(".xmvqa .left .panel-10M"));
 
             new SensorWidget('timechart', {
                 title: "Velocitat Vent",
                 service: defs.service(),
-                offering: defs.offering("10m"),
+                offering: defs.offering("10M"),
                 features: [defs.feature("02")],
                 properties: [defs.property("30")],
                 time_start: two_hours_ago.toISOString().substring(0, 19) + "Z",
@@ -120,11 +120,11 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('panel', {
                 title: "Darrers valors 30-minutals",
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 feature: defs.feature("02"),
                 properties: [defs.property("30"), defs.property("31"), defs.property("32"), defs.property("33"), defs.property("34"), defs.property("35"), defs.property("36")],
                 refresh_interval: 120
-            }, document.querySelector(".xmvqa .left .panel-30m"));
+            }, document.querySelector(".xmvqa .left .panel-30M"));
 
             var stations = {
                 "01": "Dispensari",
@@ -141,7 +141,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
                 new SensorWidget('compass', {
                     title: stations[station],
                     service: defs.service(),
-                    offering: defs.offering("1m"),
+                    offering: defs.offering("1M"),
                     feature: defs.feature(station),
                     property: defs.property("31"),
                     refresh_interval: 15
@@ -150,7 +150,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
                 new SensorWidget('panel', {
                     title: "Dades minutals",
                     service: defs.service(),
-                    offering: defs.offering("1m"),
+                    offering: defs.offering("1M"),
                     feature: defs.feature(station),
                     properties: [defs.property("30"), defs.property("31"), defs.property("32"), defs.property("33"), defs.property("34"), defs.property("35"), defs.property("36")],
                     refresh_interval: 15
@@ -163,7 +163,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
             new SensorWidget('map', {
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 features: [defs.feature("P4")],
                 properties: [],
                 permanent_tooltips: true,
@@ -173,7 +173,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
             new SensorWidget('compass', {
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("P4"),
                 property: defs.property("31"),
                 refresh_interval: 15
@@ -182,24 +182,24 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('panel', {
                 title: "Dades minutals",
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("P4"),
                 properties: [defs.property("31"), defs.property("30")],
                 refresh_interval: 15
-            }, document.querySelector(".torrecontrol .p4 .panel-10m"));
+            }, document.querySelector(".torrecontrol .p4 .panel-10M"));
 
             new SensorWidget('panel', {
                 title: "Dades 30-minutals",
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 feature: defs.feature("P4"),
                 properties: [defs.property("31"), defs.property("30")],
                 refresh_interval: 120
-            }, document.querySelector(".torrecontrol .p4 .panel-30m"));
+            }, document.querySelector(".torrecontrol .p4 .panel-30M"));
 
             new SensorWidget('map', {
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 features: [defs.feature("02")],
                 properties: [],
                 permanent_tooltips: true,
@@ -209,7 +209,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
             new SensorWidget('compass', {
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("02"),
                 property: defs.property("31"),
                 refresh_interval: 120
@@ -218,24 +218,24 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('panel', {
                 title: "Dades minutals",
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("02"),
                 properties: [defs.property("31"), defs.property("30")],
                 refresh_interval: 15
-            }, document.querySelector(".torrecontrol .x02 .panel-10m"));
+            }, document.querySelector(".torrecontrol .x02 .panel-10M"));
 
             new SensorWidget('panel', {
                 title: "Dades 30-minutals",
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 feature: defs.feature("02"),
                 properties: [defs.property("31"), defs.property("30")],
                 refresh_interval: 120
-            }, document.querySelector(".torrecontrol .x02 .panel-30m"));
+            }, document.querySelector(".torrecontrol .x02 .panel-30M"));
 
             new SensorWidget('map', {
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 features: [defs.feature("03")],
                 properties: [],
                 permanent_tooltips: true,
@@ -245,7 +245,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
             new SensorWidget('compass', {
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("03"),
                 property: defs.property("31"),
                 refresh_interval: 15
@@ -254,20 +254,20 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
             new SensorWidget('panel', {
                 title: "Dades minutals",
                 service: defs.service(),
-                offering: defs.offering("1m"),
+                offering: defs.offering("1M"),
                 feature: defs.feature("03"),
                 properties: [defs.property("31"), defs.property("30")],
                 refresh_interval: 15
-            }, document.querySelector(".torrecontrol .x03 .panel-10m"));
+            }, document.querySelector(".torrecontrol .x03 .panel-10M"));
 
             new SensorWidget('panel', {
                 title: "Dades 30-minutals",
                 service: defs.service(),
-                offering: defs.offering("30m"),
+                offering: defs.offering("30M"),
                 feature: defs.feature("03"),
                 properties: [defs.property("31"), defs.property("30")],
                 refresh_interval: 120
-            }, document.querySelector(".torrecontrol .x03 .panel-30m"));
+            }, document.querySelector(".torrecontrol .x03 .panel-30M"));
 
             break;
 
@@ -275,7 +275,7 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
             var features = ["01", "02", "03", "10", "P1", "P3", "P4", "P5", "P6", "P7"];
             var featureNames = ["01 - Dispensari", "02 - Sirena", "03 - Adossat", "10 - ZAL2", "P1 - ESCU", "P3 - Unitat Mobil", "P4 - Dic Sud", "P5 - Dàrsena sud B", "P6 - Contradic", "P7 - Torre Control"];
-            var offerings = ["1m", "10m", "30m"];
+            var offerings = ["1M", "10M", "30M"];
             var offeringNames = ["Minutals", "10 minutals", "30 minutals"];
 
             var tpl = $('#item-template').html();

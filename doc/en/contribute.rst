@@ -193,7 +193,7 @@ specified HTML DOM Element::
 
     var inputs = {
         service: "http://sensors.portdebarcelona.cat/sos/json",
-        offering: "http://sensors.portdebarcelona.cat/def/weather/offerings#10m",
+        offering: "http://sensors.portdebarcelona.cat/def/weather/offerings#10M",
         features: [],
         properties: []
     };

@@ -103,21 +103,21 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
     var widget_configurations = {
         'compass': {
             service: defs.service(),
-            offering: defs.offering("1m"),
+            offering: defs.offering("1M"),
             feature: defs.feature("02"),
             property: defs.property("31"),
             refresh_interval: quick_refresh
         },
         'gauge': {
             service: defs.service(),
-            offering: defs.offering("10m"),
+            offering: defs.offering("10M"),
             feature: defs.feature("02"),
             property: defs.property("33"),
             refresh_interval: slow_refresh
         },
         'jqgrid': {
             service: defs.service(),
-            offering: defs.offering("30m"),
+            offering: defs.offering("30M"),
             title: i18n.t("jqGrid Example"),
             features: [
                 defs.feature("02"),
@@ -129,7 +129,7 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         },
         'map': {
             service: defs.service(),
-            offering: defs.offering("30m"),
+            offering: defs.offering("30M"),
             features: [
                 defs.feature("01"),
                 defs.feature("02"),
@@ -145,7 +145,7 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         'panel': {
             title: i18n.t("Last observations"),
             service: defs.service(),
-            offering: defs.offering("1m"),
+            offering: defs.offering("1M"),
             feature: defs.feature("02"),
             properties: [
                 defs.property("30"),
@@ -160,7 +160,7 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         },
         'progressbar': {
             service: defs.service(),
-            offering: defs.offering("10m"),
+            offering: defs.offering("10M"),
             feature: defs.feature("01"),
             property: defs.property("34"),
             min_value: "900",
@@ -169,12 +169,12 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         },
         'status': {
             service: defs.service(),
-            offering: defs.offering("30m")
+            offering: defs.offering("30M")
         },
         'table': {
             title: i18n.t("Data Table - last 3 hours"),
             service: defs.service(),
-            offering: defs.offering("30m"),
+            offering: defs.offering("30M"),
             feature: defs.feature("02"),
             properties: [
                 defs.property("30"),
@@ -189,14 +189,14 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
         },
         'thermometer': {
             service: defs.service(),
-            offering: defs.offering("10m"),
+            offering: defs.offering("10M"),
             feature: defs.feature("01"),
             property: defs.property("32"),
             refresh_interval: slow_refresh
         },
         'timechart': {
             service: defs.service(),
-            offering: defs.offering("30m"),
+            offering: defs.offering("30M"),
             title: "Temperatures",
             features: [
                 defs.feature("02"),
@@ -210,7 +210,7 @@ define('home', ["i18n", "SensorWidget", "highlight", "bootstrap"], function(i18n
             title: i18n.t("Sirena Windrose"),
             subtitle: i18n.t("Last 3 hours of wind observations"),
             service: defs.service(),
-            offering: defs.offering("1m"),
+            offering: defs.offering("1M"),
             feature: defs.feature("02"),
             properties: [defs.property("30"), defs.property("31")],
             time_start: three_hours_ago,
