@@ -273,8 +273,8 @@ define('meteo', ['i18n', 'SensorWidget', 'locale-date', 'jquery', 'bootstrap'], 
 
         case "Data Browser":
 
-            var features = ["01", "02", "03", "10", "P1", "P3", "P4", "P5", "P6", "P7"];
-            var featureNames = ["01 - Dispensari", "02 - Sirena", "03 - Adossat", "10 - ZAL2", "P1 - ESCU", "P3 - Unitat Mobil", "P4 - Dic Sud", "P5 - Dàrsena sud B", "P6 - Contradic", "P7 - Torre Control"];
+            var features = ["01", "02", "03", "10", "11", "12", "P5"];
+            var featureNames = ["01 - Dispensari", "02 - Sirena", "03 - Adossat", "10 - ZAL Prat", "11 - Bocana Sud", "12 - BEST", "P5 - Dàrsena Sud"];
             var offerings = ["1M", "10M", "30M"];
             var offeringNames = ["Minutals", "10 minutals", "30 minutals"];
 
