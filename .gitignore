@@ -1,7 +1,7 @@
-.project
 node_modules/
-bower_components/
-src/lib/
 dist/
+
+# IDEA
+sensor-widgets.iml
+.project
 .idea/
-.grunt/
