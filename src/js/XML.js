@@ -5,7 +5,7 @@
  Author:  Stefan Goessner/2006
  See:     http://goessner.net/download/prj/jsonxml/
  */
-define(function() {
+define('XML', function() {
     "use strict";
 
     return {

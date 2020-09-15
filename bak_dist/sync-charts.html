@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>Sensor Widgets Simple Example</title>
+    <script src="SensorWidgets.js"></script>
+</head>
+<body>
+    <div id="widget-container" style="height:50%"></div>
+    <div id="widget-container-2" style="height:50%"></div>
+    <script>
+        var now = new Date();
+        var a_day_ago = new Date(now.getTime() - 1000 * 60 * 60 * 24);
+        var in_three_hours = new Date(now.getTime() + 1000 * 60 * 60 * 3);
+
+        now = now.toISOString().substring(0, 19) + "Z";
+        a_day_ago = a_day_ago.toISOString().substring(0, 19) + "Z";
+        in_three_hours = in_three_hours.toISOString().substring(0, 19) + "Z";
+
+        var charts = [];
+        function syncPanZoom(chart) {
+          charts.push(chart);
+          chart.getPlaceholder().bind("plotpan", function (event, plot, args) {
+            charts.map(function(target) {
+              if(target != chart) {
+                args.preventEvent = true;
+                target.pan(args);
+              }
+            });
+          });
+
+          chart.getPlaceholder().bind("plotzoom", function (event, plot, args) {
+            charts.map(function(target) {
+              if (target != chart) {
+                args.preventEvent = true;
+                target.zoom(args);
+              }
+            });
+          });
+        }
+
+        new SensorWidget('timechart', {
+           "service": "https://demo.geomatico.es/52n-sos/service",
+           "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#30M",
+           "title": "Temperature",
+           "features": [
+              "http://sensors.portdebarcelona.cat/def/weather/features#02",
+              "http://sensors.portdebarcelona.cat/def/weather/features#01"
+           ],
+           "properties": [
+              "http://sensors.portdebarcelona.cat/def/weather/properties#32"
+           ],
+           "colors": ["#edc240"],
+           "time_start": a_day_ago,
+           "time_end": in_three_hours,
+           "display_utc_times": true,
+           callback: syncPanZoom
+        }, document.getElementById('widget-container'));
+
+        new SensorWidget('timechart', {
+           "service": "https://demo.geomatico.es/52n-sos/service",
+           "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#30M",
+           "title": "Wind Speed",
+           "features": [
+              "http://sensors.portdebarcelona.cat/def/weather/features#02",
+              "http://sensors.portdebarcelona.cat/def/weather/features#01"
+           ],
+           "properties": [
+              "http://sensors.portdebarcelona.cat/def/weather/properties#30"
+           ],
+           "colors": ["#afd8f8"],
+           "time_start": a_day_ago,
+           "time_end": in_three_hours,
+           "display_utc_times": true,
+           callback: syncPanZoom
+        }, document.getElementById('widget-container-2'));
+    </script>
+</body>
+</html>

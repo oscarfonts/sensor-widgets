@@ -1,3 +1,4 @@
+/*
 require.config({
     waitSeconds: 30,
     baseUrl: '../js',
@@ -100,18 +101,20 @@ require.config({
         baseUrl: baseUrl
     });
 })(requirejs);
+*/
+
+import SensorWidget from './SensorWidget.js';
+import sos from './SOS.js';
 
 // 'Leak' SensorWidget to global scope.
 window.SensorWidget = function() {
     var args = arguments;
-    require(['SensorWidget'], function(SensorWidget) {
-                SensorWidget.apply(this, args);
-    });
+    window.onload = function() {
+        SensorWidget.apply(this, args);
+    }
 };
 
 // Expose SOS as well.
 window.getSOS = function(callback) {
-    require(['SOS'], function(sos) {
-        callback(sos);
-    });
+    callback(sos);
 };

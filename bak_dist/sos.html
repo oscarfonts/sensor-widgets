@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Sensor Widgets Direct SOS Example</title>
+    <script src="SensorWidgets.js"></script>
+    <script>
+        getSOS(function(SOS) {
+            SOS.setUrl("https://demo.geomatico.es/52n-sos/service");
+            SOS.getCapabilities(function(capabilities) {
+                document.getElementById("capabilities").innerHTML = JSON.stringify(capabilities, null, 2);
+            });
+        });
+    </script>
+</head>
+<body>
+    <pre id="capabilities"></pre>
+</body>
+</html>

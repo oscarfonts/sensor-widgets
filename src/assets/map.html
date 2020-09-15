@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Map Widget Example</title>
+    <script src="SensorWidgets.js"></script>
+    <script>
+        new SensorWidget('map', {
+            "service": "https://demo.geomatico.es/52n-sos/service",
+            "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#10M",
+            "features": [
+                "http://sensors.portdebarcelona.cat/def/weather/features#10",
+                "http://sensors.portdebarcelona.cat/def/weather/features#02"
+            ],
+            "properties": [
+                "http://sensors.portdebarcelona.cat/def/weather/properties#30",
+                "http://sensors.portdebarcelona.cat/def/weather/properties#31"
+            ],
+            "permanent_tooltips": "true",
+            "swap_axis": "true",
+            "popup_widget": {
+                "name": "timechart",
+                "title": "Temperatures",
+                "properties": [
+                    "http://sensors.portdebarcelona.cat/def/weather/properties#32M",
+                    "http://sensors.portdebarcelona.cat/def/weather/properties#32",
+                    "http://sensors.portdebarcelona.cat/def/weather/properties#32N"
+                ],
+                "time_start": "2020-04-05T05:05:40Z",
+                "time_end": "2020-04-05T08:05:40Z"
+            },
+            "max_initial_zoom": 14,
+            "base_layer": {
+                "type": "wms",
+                "url": "http://geoserveis.icc.cat/icc_mapesbase/wms/service",
+                "options": {
+                    "layers": "orto5m",
+                    "format": "image/jpeg",
+                    "attribution": 'Ortofoto 1:5.000: CC-by <a href="http://www.icc.cat" target="_blank">Institut Cartogràfic de Catalunya</a>'
+                }
+            },
+            "on_click": function(marker) {
+              console.log(marker.feature.id);
+            }
+        }, document.getElementById('map-container'));
+    </script>
+</head>
+<body>
+<div id="map-container"></div>
+</body>
+</html>

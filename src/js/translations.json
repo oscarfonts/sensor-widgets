@@ -12,9 +12,9 @@
     "es": "No se ha especificado ningún nombre de widget",
     "ca": "Cal especificar un nom de widget"
   },
-  "Widget '{name}' cannot be found": {
-    "es": "No se ha encontrado el widget de nombre '{name}'",
-    "ca": "No s'ha trobat cap widget anomenat '{name}'"
+  "Widget '{name}' cannot be found, or there was an error instantiating it": {
+    "es": "No se ha encontrado el widget de nombre '{name}', o se produjo un error instanciándolo",
+    "ca": "No s'ha trobat cap widget anomenat '{name}', o s'ha produit un error en instanciar-lo"
   },
   "The '{name}' widget is missing some mandatory parameters: ": {
     "es": "Faltan algunos parámetros obligatorios para el widget '{name}': ",

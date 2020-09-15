@@ -1,10 +1,8 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['text!translations.json'], function(bundle) {
+define('i18n', ['./translations.json'], function(translations) {
     "use strict";
-
-    var translations = JSON.parse(bundle);
 
     var params = {};
     location.search.substr(1).split("&").forEach(function(item) {

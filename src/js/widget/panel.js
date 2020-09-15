@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['i18n', 'sos-data-access', 'locale-date', 'widget-common'], function(i18n, data_access, ld, common) {
+define(['../i18n', '../sos-data-access', '../locale-date', '../widget-common'], function(i18n, data_access, ld, common) {
     "use strict";
 
     var template = [

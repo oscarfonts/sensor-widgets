@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['i18n'], function(i18n) {
+define(['./i18n'], function(i18n) {
     "use strict";
 
     var date = {

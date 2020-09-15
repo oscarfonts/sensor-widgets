@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'css!widget/progressbar.css', 'locale-date', 'widget-common'], function(data_access, drawing, ld, common) {
+define(['../sos-data-access', './progressbar.css', '../locale-date', '../widget-common'], function(data_access, drawing, ld, common) {
     "use strict";
 
     var template = [

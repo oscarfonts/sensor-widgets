@@ -2,7 +2,7 @@
  * @author Martí Pericay <marti@pericay.com>
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['locale-date'], function(ld) {
+define(['./locale-date'], function(ld) {
     "use strict";
 
     function loadCSS(url) {

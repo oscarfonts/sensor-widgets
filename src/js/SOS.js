@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['XML'], function(XML) {
+define('SOS', ['./XML'], function(XML) {
     "use strict";
 
     var SOS = {

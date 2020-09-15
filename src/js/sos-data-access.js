@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
- define(['SOS'], function(SOS) {
+ define(['./SOS'], function(SOS) {
     "use strict";
 
     var propertyNames = {};

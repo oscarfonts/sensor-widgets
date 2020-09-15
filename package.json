@@ -2,13 +2,14 @@
   "name": "sensor-widgets",
   "version": "0.2.0",
   "description": "Configurable graphical components for your SOS sensor data.",
-  "main": "dist/js/factory.js",
   "directories": {
     "doc": "doc",
     "example": "examples"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,17 @@
   "bugs": {
     "url": "https://github.com/oscarfonts/sensor-widgets/issues"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "copy-webpack-plugin": "^6.1.0",
+    "css-loader": "^4.3.0",
+    "raw-loader": "^4.0.1",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "write-file-webpack-plugin": "^4.5.1"
+  },
   "dependencies": {
     "bootstrap": "^3.4.1",
     "daterangepicker": "^3.1.0",

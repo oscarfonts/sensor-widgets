@@ -1,7 +1,7 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
-define(['sos-data-access', 'locale-date', 'widget-common'], function(data_access, ld, common) {
+define(['../sos-data-access', '../locale-date', '../widget-common'], function(data_access, ld, common) {
     "use strict";
 
     var template = [

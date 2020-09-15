@@ -1,0 +1,81 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["widget-jqgrid-js"],{
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/js/widget/jqgrid.css":
+/*!************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/js/widget/jqgrid.css ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);\n// Imports\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(false);\n// Module\n___CSS_LOADER_EXPORT___.push([module.i, \"table.results {\\n    border: 1px solid black;\\n    margin-left: 10px;\\n    margin-top: 10px;\\n}\\ntable.results td {\\n    background: #DDD;\\n    color: #333;\\n    padding: 3px;\\n    text-align: left;\\n}\\ntable.results th {\\n    background: #333;\\n    color: #DDD;\\n    padding: 3px;\\n}\\n#gbox_grid1 {\\n\\tmargin: auto;\\n}\", \"\"]);\n// Exports\n/* harmony default export */ __webpack_exports__[\"default\"] = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack:///./src/js/widget/jqgrid.css?./node_modules/css-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/jqgrid/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/jqgrid/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("var jqgrid;\n\nmodule.exports = jqgrid;\n\n\n//# sourceURL=webpack:///./node_modules/jqgrid/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/locale-date.js":
+/*!*******************************!*\
+  !*** ./src/js/locale-date.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**\n * @author Oscar Fonts <oscar.fonts@geomati.co>\n */\n!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! ./i18n */ \"./src/js/i18n.js\")], __WEBPACK_AMD_DEFINE_RESULT__ = (function(i18n) {\n    \"use strict\";\n\n    var date = {\n        utc: false,\n        locale: navigator.language || navigator.browserLanguage\n    };\n\n    return {\n        display: function(d) {\n            if (!d) {\n                return i18n.t(\"(no date)\");\n            }\n            if (date.utc) {\n                return d.toLocaleString(date.locale, {\n                    timeZone: \"UTC\"\n                }) + \" UTC\";\n            } else {\n                return d.toLocaleString(date.locale);\n            }\n        },\n        locale: function(l) {\n            if (l) {\n                date.locale = l;\n            }\n            return date.locale;\n        },\n        utc: function(u) {\n            if (typeof u !== 'undefined') {\n                date.utc = u;\n            }\n            return date.utc;\n        }\n    };\n}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n\n\n//# sourceURL=webpack:///./src/js/locale-date.js?");
+
+/***/ }),
+
+/***/ "./src/js/sos-data-access.js":
+/*!***********************************!*\
+  !*** ./src/js/sos-data-access.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**\n * @author Oscar Fonts <oscar.fonts@geomati.co>\n */\n !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! ./SOS */ \"./src/js/SOS.js\")], __WEBPACK_AMD_DEFINE_RESULT__ = (function(SOS) {\n    \"use strict\";\n\n    var propertyNames = {};\n    var waitingDescribeResponse = {};\n    var propertyCallbackQueue = {};\n\n\treturn function(config, redraw, errorHandler) {\n        SOS.setUrl(config.service);\n\n        function read() {\n            var offering = config.offering;\n            var features = config.feature ? [config.feature] : isArray(config.features) ? config.features : config.features ? JSON.parse(config.features) : undefined;\n            var properties = config.property ? [config.property] : isArray(config.properties) ? config.properties : config.properties ? JSON.parse(config.properties) : undefined;\n            var time = (config.time_start && config.time_end) ? [config.time_start, config.time_end] : \"latest\";\n            SOS.getObservation(offering, features, properties, time, parse, errorHandler);\n        }\n\n        function isArray(obj) {\n            return Object.prototype.toString.call(obj) === '[object Array]';\n        }\n\n        function parse(observations) {\n            if (!observations.length) {\n                redraw([]);\n            }\n\n            // Get tabular data from observations\n            var data = [];\n            for (var i in observations) {\n                var observation = observations[i];\n                getPropertyName(observation.procedure, observation.observableProperty, addObservation, observation);\n            }\n\n            function addObservation(property, observation) {\n                var foi = observation.featureOfInterest;\n                data.push({\n                    time: new Date(observation.resultTime),\n                    value: observation.result.hasOwnProperty(\"value\") ? observation.result.value : observation.result,\n                    feature: foi.name ? foi.name.value : (foi.identifier ? foi.identifier.value : foi),\n                    property: property,\n                    uom: observation.result.hasOwnProperty(\"uom\") ? observation.result.uom : \"(N/A)\"\n                });\n                if (data.length == observations.length) {\n                    redraw(data);\n                }\n            }\n        }\n\n        function getPropertyName(procedure, id, callback, context) {\n            if (!propertyNames[procedure]) {\n                // Queue callback call\n                if (!propertyCallbackQueue[procedure]) {\n                    propertyCallbackQueue[procedure] = [];\n                }\n\n                propertyCallbackQueue[procedure].push({\n                    callback: callback,\n                    id: id,\n                    context: context\n                });\n\n                if (!waitingDescribeResponse[procedure]) {\n                    waitingDescribeResponse[procedure] = true;\n                    // Trigger a DescribeSensor, cache all property names for this procedure\n                    SOS.describeSensor(procedure, function(description) {\n                        var properties = description.hasOwnProperty(\"ProcessModel\") ? description.ProcessModel.outputs.OutputList.output : description.System.outputs.OutputList.output;\n                        properties = properties instanceof Array ? properties : [properties];\n                        var types = [\"Quantity\", \"Count\", \"Boolean\", \"Category\", \"Text\", \"ObservableProperty\"];\n\n                        var names = [];\n                        for (var i in properties) {\n                            var property = properties[i];\n                            for (var j in types) {\n                                var type = types[j];\n                                if (property.hasOwnProperty(type)) {\n                                    property.id = property[type].definition;\n                                }\n                            }\n                            names[property.id] = property.name;\n                        }\n                        propertyNames[procedure] = names;\n\n                        // Clear propertyCallbackQueue\n                        while (propertyCallbackQueue[procedure].length) {\n                            var elem = propertyCallbackQueue[procedure].shift();\n                            elem.callback.call(undefined, propertyNames[procedure][elem.id], elem.context);\n                        }\n                    }, errorHandler);\n                }\n            } else {\n                callback(propertyNames[procedure][id], context);\n            }\n        }\n\n        return {\n            read: read\n        };\n\t};\n}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n\n\n//# sourceURL=webpack:///./src/js/sos-data-access.js?");
+
+/***/ }),
+
+/***/ "./src/js/widget-common.js":
+/*!*********************************!*\
+  !*** ./src/js/widget-common.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**\n * @author Martí Pericay <marti@pericay.com>\n * @author Oscar Fonts <oscar.fonts@geomati.co>\n */\n!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! ./locale-date */ \"./src/js/locale-date.js\")], __WEBPACK_AMD_DEFINE_RESULT__ = (function(ld) {\n    \"use strict\";\n\n    function loadCSS(url) {\n        var link = document.createElement(\"link\");\n        link.setAttribute(\"rel\", \"stylesheet\");\n        link.setAttribute(\"type\", \"text/css\");\n        link.setAttribute(\"href\", url);\n        if (typeof link != \"undefined\") {\n            document.getElementsByTagName(\"head\")[0].appendChild(link);\n        }\n    }\n\n    return {\n        inputs: [\"service\", \"offering\"],\n        optional_inputs: [\"footnote\", \"custom_css_url\", \"display_utc_times\"],\n\n        init: function(config, el) {\n            if (config.custom_css_url !== undefined) {\n                loadCSS(config.custom_css_url);\n            }\n            if (config.footnote !== undefined && el.querySelector(\".footnote\")) {\n                el.querySelector(\".footnote\").innerHTML = config.footnote;\n            }\n            if(config.display_utc_times) {\n                ld.utc(true);\n            }\n        }\n    };\n}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n\n\n//# sourceURL=webpack:///./src/js/widget-common.js?");
+
+/***/ }),
+
+/***/ "./src/js/widget/jqgrid.css":
+/*!**********************************!*\
+  !*** ./src/js/widget/jqgrid.css ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!./jqgrid.css */ \"./node_modules/css-loader/dist/cjs.js!./src/js/widget/jqgrid.css\");\n\n            content = content.__esModule ? content.default : content;\n\n            if (typeof content === 'string') {\n              content = [[module.i, content, '']];\n            }\n\nvar options = {};\n\noptions.insert = \"head\";\noptions.singleton = false;\n\nvar update = api(content, options);\n\n\n\nmodule.exports = content.locals || {};\n\n//# sourceURL=webpack:///./src/js/widget/jqgrid.css?");
+
+/***/ }),
+
+/***/ "./src/js/widget/jqgrid.js":
+/*!*********************************!*\
+  !*** ./src/js/widget/jqgrid.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**\n * @author Oscar Fonts <oscar.fonts@geomati.co>\n */\n!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! ../i18n */ \"./src/js/i18n.js\"), __webpack_require__(/*! ../sos-data-access */ \"./src/js/sos-data-access.js\"), __webpack_require__(/*! ../locale-date */ \"./src/js/locale-date.js\"), __webpack_require__(/*! ../widget-common */ \"./src/js/widget-common.js\"), __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\"), __webpack_require__(/*! jqgrid */ \"./node_modules/jqgrid/index.js\"), __webpack_require__(/*! ./jqgrid.css */ \"./src/js/widget/jqgrid.css\")], __WEBPACK_AMD_DEFINE_RESULT__ = (function(i18n, data_access, ld, common, $) {\n    \"use strict\";\n\n    var count = 0;\n\n    return {\n        inputs: common.inputs.concat([\"features\", \"properties\", \"time_start\", \"time_end\", \"title\"]),\n        optional_inputs: common.optional_inputs,\n        preferredSizes: [{w: 530, h: 440}],\n\n        init: function(config, el, errorHandler) {\n            // Render template\n            el.innerHTML = [\n                '<div class=\"jqgrid widget\">',\n                    '<h1 class=\"title\"></h1>',\n                    '<table id=\"grid',++count,'\"></table>',\n                    '<div id=\"pager',count,'\"></div>',\n                    '<div><span class=\"footnote\"></span></div>',\n                '</div>'\n            ].join('');\n            el.querySelector(\".title\").innerHTML = config.title;\n\n            //load widget common features\n            common.init(config, el);\n\n            // Setup SOS data access\n            var data = data_access(config, redraw, errorHandler);\n            data.read();\n\n            function redraw(data) {\n                // jqGrid table\n                $(\"#grid\"+count).first().jqGrid({\n                    datatype: 'local',\n                    height: 'auto',\n                    width: '100%',\n                    caption: i18n.t(\"Results\"),\n                    data: data,\n                    pager: '#pager'+count,\n                    rowNum: 12,\n                    sortname: 'time',\n                    autowidth: true,\n                    colNames: [\n                        i18n.t(\"Time\"),\n                        i18n.t(\"Feature\"),\n                        i18n.t(\"Property\"),\n                        i18n.t(\"Value\"),\n                        i18n.t(\"Unit\")\n                    ],\n                    colModel: [{\n                        name: 'time',\n                        index: 'time',\n                        width: '160',\n                        formatter: function(cellvalue) {\n                            return ld.display(cellvalue);\n                        }\n                    }, {\n                        name: 'feature',\n                        index: 'feature',\n                        width: '150'\n                    }, {\n                        name: 'property',\n                        index: 'property',\n                        width: '150'\n                    }, {\n                        name: 'value',\n                        index: 'value',\n                        width: '80',\n                        align: \"right\"\n                    }, {\n                        name: 'uom',\n                        index: 'uom',\n                        width: '60'\n                    }]\n                });\n\n                $(window).bind('resize', setFullWidth);\n                setFullWidth();\n            }\n\n            function setFullWidth() {\n                $(\".grid\").setGridWidth($(window).width() - 2);\n            }\n        }\n    };\n\n}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),\n\t\t\t\t__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));\n\n\n//# sourceURL=webpack:///./src/js/widget/jqgrid.js?");
+
+/***/ })
+
+}]);
