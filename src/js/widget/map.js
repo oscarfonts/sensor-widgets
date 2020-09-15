@@ -5,30 +5,41 @@ import SensorWidget from '../SensorWidget';
 import i18n from '../i18n';
 import SOS from '../SOS';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import common from '../widget-common';
 import 'leaflet.markercluster';
-    "use strict";
 
-    // Overriding Leaflet.label so it accepts a DOM element as argument
-    // (not only a string). Needed for async loading of content to label
-    /*
-    L.Label.prototype._updateContent = function() {
-        if (!this._content || !this._map || this._prevContent === this._content) {
-            return;
-        }
+"use strict";
 
-        if (typeof this._content === 'string') {
-            this._container.innerHTML = this._content;
-        } else {
-            while (this._container.hasChildNodes()) {
-                this._container.removeChild(this._container.firstChild);
-            }
-            this._container.appendChild(this._content);
+// Overriding Leaflet.label so it accepts a DOM element as argument
+// (not only a string). Needed for async loading of content to label
+/*
+L.Label.prototype._updateContent = function() {
+    if (!this._content || !this._map || this._prevContent === this._content) {
+        return;
+    }
+
+    if (typeof this._content === 'string') {
+        this._container.innerHTML = this._content;
+    } else {
+        while (this._container.hasChildNodes()) {
+            this._container.removeChild(this._container.firstChild);
         }
-        this._prevContent = this._content;
-        this._labelWidth = this._container.offsetWidth;
-    };
-    */
+        this._container.appendChild(this._content);
+    }
+    this._prevContent = this._content;
+    this._labelWidth = this._container.offsetWidth;
+};
+*/
+
+
+// Ugly hack to import icons with Webpack
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png').default,
+    iconUrl: require('leaflet/dist/images/marker-icon.png').default,
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
+});
 
 export default {
     inputs: common.inputs.concat(["features", "properties"]),
@@ -93,16 +104,16 @@ export default {
                     }).setView([0, 0], 2);
 
                     // Clustering
-                    var featureContainer;
-                    if (config.no_clustering) {
-                        featureContainer = map;
-                    } else {
-                        featureContainer = L.markerClusterGroup({
-                            showCoverageOnHover: false,
-                            maxClusterRadius: 50
-                        });
-                        map.addLayer(featureContainer);
-                    }
+                    //var featureContainer;
+                    //if (config.no_clustering) {
+                    //    featureContainer = map;
+                    //} else {
+                    //   featureContainer = L.markerClusterGroup({
+                    //        showCoverageOnHover: false,
+                    //        maxClusterRadius: 50
+                    //    });
+                    //    map.addLayer(featureContainer);
+                    //}
 
                     var geojson = L.geoJson(fois2geojson(features),{
                         onEachFeature: function(feature, layer) {
@@ -158,6 +169,7 @@ export default {
                             }
                         }
                     });
+                    map.addLayer(geojson);
                     map.fitBounds(geojson.getBounds(), {
                         maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14
                     });
@@ -192,7 +204,7 @@ export default {
             for (var i in fois) {
                 var foi = fois[i];
                 if (foi.geometry && (!config_features.length || isInArray(foi.identifier.value, config.features))) {
-                    if (!config.swap_axis) {
+                    if (config.swap_axis) {
                         foi.geometry.coordinates  = swap_axis(foi.geometry.coordinates);
                     }
                     var feature = {

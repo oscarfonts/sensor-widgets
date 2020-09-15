@@ -49,7 +49,7 @@ export default {
                 // Build a sparse array where index is timestamp, and member is a 2-element array
                 // First element is wind speed, second element is wind direction
                 var timestamp = measure.time.getTime();
-                var magnitude = measure.uom == "deg" ? 1 : 0;
+                var magnitude = measure.uom == "º" ? 1 : 0;
 
                 if (!arr[timestamp]) {
                     arr[timestamp] = [];

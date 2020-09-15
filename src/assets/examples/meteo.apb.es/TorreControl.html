@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/yeti/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="meteo.css" rel="stylesheet">
     <title>meteo.apb.es</title>
 </head>
 
@@ -26,13 +25,13 @@
             </div>
             <div class="navbar-collapse navbar-inverse-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="../../../../../../..">Sirena</a>
+                    <li>
+                        <a href="../../../../../../../..">Sirena</a>
                     </li>
                     <li>
                         <a href="XMVQA.html">XMVQA</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="TorreControl.html">Torre Control</a>
                     </li>
                     <li>
@@ -44,37 +43,55 @@
         </div>
     </div>
 
-    <div class="container section" id="Sirena">
-        <h1>Sirena</h1>
-        <div class="row sirena">
-            <div class="col-md-5">
+    <div class="container section" id="TorreControl">
+        <h1>Torre Control</h1>
+        <div class="row torrecontrol">
+            <div class="col-md-4 p4">
                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">P4-DIC SUD: Edifici PIF ZAL Prat</h3>
+                    </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-6 compass">
-                            </div>
-                            <div class="col-xs-6 meteo-thermometer">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 timechart">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 windrose">
-                            </div>
-                        </div>
+                        <div class="map"></div>
+                        <div class="compass"></div>
+                        <div class="panel-10M"></div>
+                        <div class="panel-30M"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7 tablex">
+            <div class="col-md-4 x02">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">02-SIRENA: Balisa moll nou Contradic</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="map"></div>
+                        <div class="compass"></div>
+                        <div class="panel-10M"></div>
+                        <div class="panel-30M"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 x03">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">03-ADOSSAT: BOCANA NORD</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="map"></div>
+                        <div class="compass"></div>
+                        <div class="panel-10M"></div>
+                        <div class="panel-30M"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <!-- /container -->
 
-    <script src="../SensorWidgets.js"></script>
-    <script src="../meteo.apb.es.js"></script>
+    <script src="../../SensorWidgets.js"></script>
+    <script src="../../meteo.apb.es.js"></script>
 </body>
 
 </html>
