@@ -103,8 +103,7 @@ require.config({
 })(requirejs);
 */
 
-const url = new URL(document.currentScript.src);
-
+//const url = new URL(document.currentScript.src);
 //__webpack_public_path__ = (url.origin + '/');
 
 import SensorWidget from './SensorWidget.js';

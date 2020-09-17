@@ -5,9 +5,8 @@ import '../jQuery-globals';
 import i18n from '../i18n';
 import SensorWidget from '../SensorWidget';
 import hljs from 'highlightjs';
+import 'highlightjs/styles/color-brewer.css';
 import 'bootstrap';
-
-"use strict";
 
 var bundle = {
   "Toggle navigation": {

@@ -12,22 +12,15 @@ import "flot/source/jquery.canvaswrapper"
 import "flot/source/jquery.colorhelpers"
 import "flot/source/jquery.flot"
 import "flot/source/jquery.flot.uiConstants"
+
 const flotReq = require.context("../../../node_modules/flot/source/", true, /flot.*\.js$/)
 flotReq.keys().forEach(flotReq);
 
-//import "flot/source/jquery.flot.saturated"
-//import "flot/source/jquery.flot.axislabels"
-//import "flot/source/jquery.flot.browser"
-//import "flot/source/jquery.flot.categories"
-//import "flot/source/jquery.flot.time"
-//import "flot/source/jquery.flot.resize"
-//import "flot/source/jquery.flot.navigate"
-//import "flot/source/jquery.flot.drawSeries"
+import 'flot-plugins/dist/source/misc/jquery.flot.tooltip';
 
+// TODO readd legend
+// TODO readd pan and zoom
 
-require('flot-plugins/dist/source/misc/jquery.flot.tooltip');
-
-"use strict";
 
 var template = [
     '<div class="timechart widget">',

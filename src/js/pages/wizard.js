@@ -10,9 +10,11 @@ import moment from 'moment';
 import 'daterangepicker';
 import 'bootstrap';
 import hljs from 'highlightjs';
+import 'highlightjs/styles/color-brewer.css';
 
-require("jquery-ui/ui/widgets/draggable");
-require("jquery-ui/ui/widgets/resizable");
+import '../../assets/css/jquery-ui.css';
+import "jquery-ui/ui/widgets/draggable";
+import "jquery-ui/ui/widgets/resizable";
 
 var bundle = {
     "Sensor Widget Wizard": {

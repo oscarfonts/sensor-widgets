@@ -1,18 +1,12 @@
 import i18n from './i18n';
 import './SensorWidgets.css';
 
-"use strict";
-
 var instances = {};
 var uid = function (i) {
     return function () {
         return 'SensorWidgetTarget-' + (++i);
     };
 }(0);
-
-function indent(str, spaces) {
-    return str.replace(/^(?=.)/gm, new Array(spaces + 1).join(' '));
-}
 
 export default function(name, config, renderTo) {
     if (!renderTo) {

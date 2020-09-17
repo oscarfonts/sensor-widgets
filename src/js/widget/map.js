@@ -9,7 +9,13 @@ import 'leaflet/dist/leaflet.css';
 import common from '../widget-common';
 import 'leaflet.markercluster';
 
-"use strict";
+import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
+import iconUrl from'leaflet/dist/images/marker-icon.png';
+import shadowUrl from'leaflet/dist/images/marker-shadow.png';
+
+// TODO readd tooltips
+// TODO readd clustering
+// TODO readd popups
 
 // Overriding Leaflet.label so it accepts a DOM element as argument
 // (not only a string). Needed for async loading of content to label
@@ -36,9 +42,9 @@ L.Label.prototype._updateContent = function() {
 // Ugly hack to import icons with Webpack
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png').default,
-    iconUrl: require('leaflet/dist/images/marker-icon.png').default,
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
+    iconRetinaUrl,
+    iconUrl,
+    shadowUrl
 });
 
 export default {
