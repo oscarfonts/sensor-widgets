@@ -1,17 +1,17 @@
 /**
  * @author Oscar Fonts <oscar.fonts@geomati.co>
  */
+import L from 'leaflet';
 import SensorWidget from '../SensorWidget';
 import i18n from '../i18n';
 import SOS from '../SOS';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import common from '../widget-common';
-import 'leaflet.markercluster';
+// import 'leaflet.markercluster';
 
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import iconUrl from'leaflet/dist/images/marker-icon.png';
-import shadowUrl from'leaflet/dist/images/marker-shadow.png';
+import iconUrl from 'leaflet/dist/images/marker-icon.png';
+import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
 // TODO readd tooltips
 // TODO readd clustering
@@ -38,100 +38,98 @@ L.Label.prototype._updateContent = function() {
 };
 */
 
-
 // Ugly hack to import icons with Webpack
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-    iconRetinaUrl,
-    iconUrl,
-    shadowUrl
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
 });
 
 export default {
-    inputs: common.inputs.concat(["features", "properties"]),
-    optional_inputs: ["permanent_tooltips", "popup_widget", "no_clustering", "swap_axis", "max_initial_zoom", "base_layer"].concat(common.optional_inputs),
-    preferredSizes: [{w: 550, h: 400}],
+  inputs: common.inputs.concat(['features', 'properties']),
+  optional_inputs: ['permanent_tooltips', 'popup_widget', 'no_clustering', 'swap_axis', 'max_initial_zoom', 'base_layer'].concat(common.optional_inputs),
+  preferredSizes: [{ w: 550, h: 400 }],
 
-    init: function(config, el, errorHandler) {
+  init(config, el, errorHandler) {
+    el.innerHTML = i18n.t('Loading...');
+    // load widget common features
+    common.init(config, el);
 
-        el.innerHTML = i18n.t("Loading...");
-        //load widget common features
-        common.init(config, el);
+    let baseLayer;
+    if (config.base_layer) {
+      const params = (typeof config.base_layer === 'string' || config.base_layer instanceof String) ? JSON.parse(config.base_layer) : config.base_layer;
+      if (params.type && params.type.toUpperCase() === 'WMS') {
+        // WMS Layer
+        baseLayer = L.tileLayer.wms(params.url, params.options);
+      } else {
+        // XYZ TileLayer
+        baseLayer = L.tileLayer(params.url, params.options);
+      }
+    } else {
+      // A default base layer, taken from http://leaflet-extras.github.io/leaflet-providers/preview/
+      baseLayer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        subdomains: 'abcd',
+        maxZoom: 19,
+      });
+    }
 
-        var baseLayer;
-        if (config.base_layer) {
-            var params = (typeof config.base_layer == 'string' || config.base_layer instanceof String) ? JSON.parse(config.base_layer) : config.base_layer;
-            if (params.type && params.type.toUpperCase() === 'WMS') {
-                // WMS Layer
-                baseLayer = L.tileLayer.wms(params.url, params.options);
-            } else {
-                // XYZ TileLayer
-                baseLayer = L.tileLayer(params.url, params.options);
-            }
-        } else {
-            // A default base layer, taken from http://leaflet-extras.github.io/leaflet-providers/preview/
-            baseLayer =  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            });
+    // Add footnote to attribution string
+    if (config.footnote) {
+      baseLayer.options.attribution += ` | <b>${config.footnote}</b>`;
+    }
+
+    // Parse popup configuration
+    if (typeof config.popup_widget === 'string' || config.popup_widget instanceof String) {
+      config.popup_widget = JSON.parse(config.popup_widget);
+    }
+
+    SOS.setUrl(config.service);
+    read();
+
+    function read() {
+      SOS.getCapabilities((offerings) => {
+        for (const i in offerings) {
+          const offering = offerings[i];
+          if (offering.identifier == config.offering) {
+            SOS.getFeatureOfInterest(offering.procedure[0], addFoIs, errorHandler);
+          }
         }
+        function addFoIs(features) {
+          // Map div
+          el.innerHTML = '';
+          const map_div = document.createElement('div');
+          map_div.className = 'map widget';
+          el.appendChild(map_div);
 
-        // Add footnote to attribution string
-        if (config.footnote) {
-            baseLayer.options.attribution += " | <b>" + config.footnote + "</b>";
-        }
+          const map = L.map(map_div, {
+            layers: [baseLayer],
+          }).setView([0, 0], 2);
 
-        // Parse popup configuration
-        if (typeof config.popup_widget === 'string' || config.popup_widget instanceof String) {
-            config.popup_widget = JSON.parse(config.popup_widget);
-        }
+          // Clustering
+          // var featureContainer;
+          // if (config.no_clustering) {
+          //    featureContainer = map;
+          // } else {
+          //   featureContainer = L.markerClusterGroup({
+          //        showCoverageOnHover: false,
+          //        maxClusterRadius: 50
+          //    });
+          //    map.addLayer(featureContainer);
+          // }
 
-        SOS.setUrl(config.service);
-        read();
+          const geojson = L.geoJson(fois2geojson(features), {
+            onEachFeature(feature, layer) {
+              // OnClick event
+              if (config.on_click) {
+                layer.on('click', (e) => {
+                  config.on_click(e.target);
+                });
+              }
 
-        function read() {
-            SOS.getCapabilities(function(offerings) {
-                for (var i in offerings) {
-                    var offering = offerings[i];
-                    if (offering.identifier == config.offering) {
-                        SOS.getFeatureOfInterest(offering.procedure[0], addFoIs, errorHandler);
-                    }
-                }
-                function addFoIs(features) {
-                    // Map div
-                    el.innerHTML="";
-                    var map_div = document.createElement("div");
-                    map_div.className = "map widget";
-                    el.appendChild(map_div);
-
-                    var map = L.map(map_div, {
-                        layers: [baseLayer]
-                    }).setView([0, 0], 2);
-
-                    // Clustering
-                    //var featureContainer;
-                    //if (config.no_clustering) {
-                    //    featureContainer = map;
-                    //} else {
-                    //   featureContainer = L.markerClusterGroup({
-                    //        showCoverageOnHover: false,
-                    //        maxClusterRadius: 50
-                    //    });
-                    //    map.addLayer(featureContainer);
-                    //}
-
-                    var geojson = L.geoJson(fois2geojson(features),{
-                        onEachFeature: function(feature, layer) {
-                            // OnClick event
-                            if(config.on_click) {
-                                layer.on('click', function(e) {
-                                    config.on_click(e.target);
-                                });
-                            }
-
-                            // Tooltip (label)
-                            /*
+              // Tooltip (label)
+              /*
                             var labelElement = document.createElement('div');
                             labelElement.id = 'map-tooltip-' + feature.id;
                             labelElement.appendChild(document.createTextNode(feature.properties.name));
@@ -151,84 +149,84 @@ export default {
                             }
                             */
 
-                            // Info bubble (popup)
-                            if (config.popup_widget) {
-                                var el_popup = document.createElement("div");
-                                var widget_config = JSON.parse(JSON.stringify(config.popup_widget));
-                                var name = widget_config.name;
-                                delete widget_config.name;
-                                widget_config.service = config.service;
-                                widget_config.offering = config.offering;
-                                new SensorWidget(name).inspect(function(inputs, optionals, sizes){
-                                    if(inputs.indexOf('feature') != -1) {
-                                        widget_config.feature = feature.id;
-                                    } else if(inputs.indexOf('features') != -1) {
-                                        widget_config.features = [feature.id];
-                                    }
-                                    layer.bindPopup(el_popup, {
-                                        minWidth:  sizes[0].w,
-                                        minHeight: sizes[0].h
-                                    });
-                                    el_popup.setAttribute("style","width:" + sizes[0].w + "px;height:" + sizes[0].h + "px;");
-                                    new SensorWidget(name, widget_config, el_popup);
-                                });
-                            }
-                        }
-                    });
-                    map.addLayer(geojson);
-                    map.fitBounds(geojson.getBounds(), {
-                        maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14
-                    });
-                }
-            }, errorHandler);
+              // Info bubble (popup)
+              if (config.popup_widget) {
+                const el_popup = document.createElement('div');
+                const widget_config = JSON.parse(JSON.stringify(config.popup_widget));
+                const { name } = widget_config;
+                delete widget_config.name;
+                widget_config.service = config.service;
+                widget_config.offering = config.offering;
+                new SensorWidget(name).inspect((inputs, optionals, sizes) => {
+                  if (inputs.indexOf('feature') != -1) {
+                    widget_config.feature = feature.id;
+                  } else if (inputs.indexOf('features') != -1) {
+                    widget_config.features = [feature.id];
+                  }
+                  layer.bindPopup(el_popup, {
+                    minWidth: sizes[0].w,
+                    minHeight: sizes[0].h,
+                  });
+                  el_popup.setAttribute('style', `width:${sizes[0].w}px;height:${sizes[0].h}px;`);
+                  new SensorWidget(name, widget_config, el_popup);
+                });
+              }
+            },
+          });
+          map.addLayer(geojson);
+          map.fitBounds(geojson.getBounds(), {
+            maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14,
+          });
         }
-
-        function isArray(obj) {
-            return Object.prototype.toString.call(obj) === '[object Array]';
-        }
-
-        function isInArray(value, array) {
-            return array.indexOf(value) > -1;
-        }
-
-        function swap_axis(geometry) {
-            var ret = [];
-            for (var i=0; i < geometry.length; i++) {
-                if(isArray(geometry[i])) {
-                    ret[i]=swap_axis(geometry[i]);
-                } else if(!i%2) {
-                    ret[i]=geometry[i+1];
-                    ret[i+1]=geometry[i];
-                }
-            }
-            return ret;
-        }
-
-        function fois2geojson(fois) {
-            var config_features = isArray(config.features) ? config.features : JSON.parse(config.features);
-            var features = [];
-            for (var i in fois) {
-                var foi = fois[i];
-                if (foi.geometry && (!config_features.length || isInArray(foi.identifier.value, config.features))) {
-                    if (config.swap_axis) {
-                        foi.geometry.coordinates  = swap_axis(foi.geometry.coordinates);
-                    }
-                    var feature = {
-                        type: "Feature",
-                        geometry: foi.geometry,
-                        id: foi.identifier.value,
-                        properties: {
-                            name: foi.name ? foi.name.value : foi.identifier.value
-                        }
-                    };
-                    features.push(feature);
-                }
-            }
-            var featureCollection = {
-                type: "FeatureCollection",
-                features: features
-            };
-            return featureCollection;
-        }
+      }, errorHandler);
     }
+
+    function isArray(obj) {
+      return Object.prototype.toString.call(obj) === '[object Array]';
+    }
+
+    function isInArray(value, array) {
+      return array.indexOf(value) > -1;
+    }
+
+    function swap_axis(geometry) {
+      const ret = [];
+      for (let i = 0; i < geometry.length; i++) {
+        if (isArray(geometry[i])) {
+          ret[i] = swap_axis(geometry[i]);
+        } else if (!i % 2) {
+          ret[i] = geometry[i + 1];
+          ret[i + 1] = geometry[i];
+        }
+      }
+      return ret;
+    }
+
+    function fois2geojson(fois) {
+      const config_features = isArray(config.features) ? config.features : JSON.parse(config.features);
+      const features = [];
+      for (const i in fois) {
+        const foi = fois[i];
+        if (foi.geometry && (!config_features.length || isInArray(foi.identifier.value, config.features))) {
+          if (config.swap_axis) {
+            foi.geometry.coordinates = swap_axis(foi.geometry.coordinates);
+          }
+          const feature = {
+            type: 'Feature',
+            geometry: foi.geometry,
+            id: foi.identifier.value,
+            properties: {
+              name: foi.name ? foi.name.value : foi.identifier.value,
+            },
+          };
+          features.push(feature);
+        }
+      }
+      const featureCollection = {
+        type: 'FeatureCollection',
+        features,
+      };
+      return featureCollection;
+    }
+  },
 };
