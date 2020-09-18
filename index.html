@@ -17,90 +17,90 @@
 
 <body role="document">
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Sensor Widgets</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="https://github.com/oscarfonts/sensor-widgets" target="_blank">GitHub Repo</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Widgets <b class="caret"></b></a>
-                        <ul id="widget-menu" class="dropdown-menu"></ul>
-                    </li>
-                    <li>
-                        <a href="wizard" target="_blank">Wizard</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb" target="_blank">Usage in Javascript</a>
-                            </li>
-                            <li>
-                                <a href="http://bl.ocks.org/oscarfonts/265d734349396cf4372c" target="_blank">Complete Map Widget Example</a>
-                            </li>
-                            <li>
-                                <a href="examples/meteo.apb.es" target="_blank">Advanced Composition</a>
-                            </li>
-                            <li>
-                                <a href="examples/sync-charts.html" target="_blank">Timechart: sync and custom colors</a>
-                            </li>
-                            <li>
-                                <a href="examples/sos.html" target="_blank">Low-level SOS access (experimental)</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="http://sensor-widgets.readthedocs.org/en/latest/" target="_blank">English</a>
-                            </li>
-                            <li>
-                                <a href="http://sensor-widgets.readthedocs.org/es/latest/" target="_blank">Español</a>
-                            </li>
-                            <li>
-                                <a href="http://sensor-widgets.readthedocs.org/ca/latest/" target="_blank">Català</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown" id="lang-selector">
-                    </li>
-                </ul>
-            </div>
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Sensor Widgets</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="https://github.com/oscarfonts/sensor-widgets" target="_blank">GitHub Repo</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Widgets <b class="caret"></b></a>
+                    <ul id="widget-menu" class="dropdown-menu"></ul>
+                </li>
+                <li>
+                    <a href="wizard" target="_blank">Wizard</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="http://bl.ocks.org/oscarfonts/5ad801cf830d421e55eb" target="_blank">Usage in Javascript</a>
+                        </li>
+                        <li>
+                            <a href="http://bl.ocks.org/oscarfonts/265d734349396cf4372c" target="_blank">Complete Map Widget Example</a>
+                        </li>
+                        <li>
+                            <a href="examples/meteo.apb.es/" target="_blank">Advanced Composition</a>
+                        </li>
+                        <li>
+                            <a href="examples/sync-charts.html" target="_blank">Timechart: sync and custom colors</a>
+                        </li>
+                        <li>
+                            <a href="examples/sos.html" target="_blank">Low-level SOS access (experimental)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="http://sensor-widgets.readthedocs.org/en/latest/" target="_blank">English</a>
+                        </li>
+                        <li>
+                            <a href="http://sensor-widgets.readthedocs.org/es/latest/" target="_blank">Español</a>
+                        </li>
+                        <li>
+                            <a href="http://sensor-widgets.readthedocs.org/ca/latest/" target="_blank">Català</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="lang-selector">
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 
-    <div class="container theme-showcase" role="main">
+<div class="container theme-showcase" role="main">
 
-        <div class="jumbotron">
-            <img src="img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
-            <h1>Sensor Widgets</h1>
-            <p>Configurable graphical components for your <a href="http://sensor-widgets.readthedocs.org/en/latest/sos.html" target="_blank">SOS</a> sensor data.</p>
-            <h3>100% Javascript. Extensible. MIT licensed.</h3>
-            <p style="text-align:right;margin:40px 0 0 0;">
-                <a class="btn btn-primary btn-lg" id="wizard-link" role="button" href="wizard" target="_blank">
-                    <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a>
-            </p>
-        </div>
-
-        <div id="widget-list"></div>
+    <div class="jumbotron">
+        <img src="img/s_logo.svg" style="float:left;height:150px;margin:15px 40px 15px 15px;">
+        <h1>Sensor Widgets</h1>
+        <p>Configurable graphical components for your <a href="http://sensor-widgets.readthedocs.org/en/latest/sos.html" target="_blank">SOS</a> sensor data.</p>
+        <h3>100% Javascript. Extensible. MIT licensed.</h3>
+        <p style="text-align:right;margin:40px 0 0 0;">
+            <a class="btn btn-primary btn-lg" id="wizard-link" role="button" href="wizard" target="_blank">
+                <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Build your own&nbsp;&nbsp;»</a>
+        </p>
     </div>
 
-    <script src="js/SensorWidgets.js"></script>
-    <script src="home.js"></script>
+    <div id="widget-list"></div>
+</div>
+
+<script src="SensorWidgets.js"></script>
+<script src="home.js"></script>
 </body>
 </html>

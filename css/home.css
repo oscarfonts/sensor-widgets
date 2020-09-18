@@ -2,11 +2,13 @@ body {
     padding-top: 70px;
     padding-bottom: 30px;
 }
+
 .theme-dropdown .dropdown-menu {
     position: static;
     display: block;
     margin-bottom: 20px;
 }
+
 pre {
   overflow: auto;
   word-wrap: normal;
@@ -14,22 +16,28 @@ pre {
   font-size: 11px;
   color: black;
 }
+
 .theme-showcase > p > .btn {
     margin: 5px 0;
 }
+
 .anchor {
     display: block;
     position: relative;
     top: -70px;
     visibility: hidden;
 }
+
 .widget-container {
     height: 450px;
 }
+
+/* Override progressbar label positioning */
 .progressbar.widget .min,
 .progressbar.widget .max {
     top: 5px !important;
 }
+
 .tab-content {
     border: 1px solid #ecf0f1;
     border-top: none;

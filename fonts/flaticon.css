@@ -5,44 +5,58 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
 	font-family: Flaticon;
 	font-size: 48px;
 	font-style: normal;
 }
+
 .flaticon-compass:before {
 	content: "\e000";
 }
+
 .flaticon-windrose:before {
 	content: "\e000";
 }
+
 .flaticon-flask:before {
 	content: "\e001";
 }
+
 .flaticon-timechart:before {
 	content: "\e002";
 }
+
 .flaticon-table:before {
 	content: "\e003";
 }
+
 .flaticon-status:before {
 	content: "\e003";
 }
+
 .flaticon-jqgrid:before {
 	content: "\e003";
 }
+
 .flaticon-panel:before {
 	content: "\e003";
 }
+
 .flaticon-map:before {
 	content: "\e004";
 }
+
 .flaticon-progressbar:before {
 	content: "\e005";
 }
+
 .flaticon-gauge:before {
 	content: "\e006";
 }
+
 .flaticon-thermometer:before {
 	content: "\e007";
 }
+

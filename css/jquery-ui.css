@@ -3,6 +3,9 @@
 * Includes: core.css, draggable.css, resizable.css, button.css, datepicker.css, dialog.css, slider.css, theme.css
 * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=%22Source%20Sans%20Pro%22%2Chelvetica%2Csans-serif&fwDefault=bold&fsDefault=1.0em&cornerRadius=6px&bgColorHeader=%234A4A4A&bgTextureHeader=highlight_soft&bgImgOpacityHeader=15&borderColorHeader=%238C8C8C&fcHeader=%23ffffff&iconColorHeader=%23ffffff&bgColorContent=%23ffffff&bgTextureContent=flat&bgImgOpacityContent=75&borderColorContent=%23eeeeee&fcContent=%23333333&iconColorContent=%234A4A4A&bgColorDefault=%23eeeeee&bgTextureDefault=highlight_hard&bgImgOpacityDefault=100&borderColorDefault=%23d8dcdf&fcDefault=%234A4A4A&iconColorDefault=%234A4A4A&bgColorHover=%23f6f6f6&bgTextureHover=highlight_hard&bgImgOpacityHover=100&borderColorHover=%23cdd5da&fcHover=%23111111&iconColorHover=%234A4A4A&bgColorActive=%23ffffff&bgTextureActive=flat&bgImgOpacityActive=65&borderColorActive=%23eeeeee&fcActive=%234A4A4A&iconColorActive=%234A4A4A&bgColorHighlight=%23fbf8ee&bgTextureHighlight=glass&bgImgOpacityHighlight=55&borderColorHighlight=%23fcd3a1&fcHighlight=%23444444&iconColorHighlight=%23004276&bgColorError=%23f3d8d8&bgTextureError=diagonals_thick&bgImgOpacityError=75&borderColorError=%234A4A4A&fcError=%232e2e2e&iconColorError=%234A4A4A&bgColorOverlay=%23a6a6a6&bgTextureOverlay=dots_small&bgImgOpacityOverlay=65&opacityOverlay=40&bgColorShadow=%23333333&bgTextureShadow=flat&bgImgOpacityShadow=0&opacityShadow=10&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px&tr%26ffDefault=Helvetica%2CArial%2Csans-serif
 * Copyright 2015 jQuery Foundation and other contributors; Licensed MIT */
+
+/* Layout helpers
+----------------------------------*/
 .ui-helper-hidden {
 	display: none;
 }
@@ -36,7 +39,7 @@
 	clear: both;
 }
 .ui-helper-clearfix {
-	min-height: 0; 
+	min-height: 0; /* support: IE7 */
 }
 .ui-helper-zfix {
 	width: 100%;
@@ -45,20 +48,37 @@
 	left: 0;
 	position: absolute;
 	opacity: 0;
-	filter:Alpha(Opacity=0); 
+	filter:Alpha(Opacity=0); /* support: IE8 */
 }
+
 .ui-front {
 	z-index: 100;
 }
+
+
+/* Interaction Cues
+----------------------------------*/
 .ui-state-disabled {
 	cursor: default !important;
 }
+
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
 .ui-icon {
 	display: block;
 	text-indent: -99999px;
 	overflow: hidden;
 	background-repeat: no-repeat;
 }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
 .ui-widget-overlay {
 	position: fixed;
 	top: 0;
@@ -149,7 +169,7 @@
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
-	overflow: visible; 
+	overflow: visible; /* removes extra width in IE */
 }
 .ui-button,
 .ui-button:link,
@@ -158,9 +178,11 @@
 .ui-button:active {
 	text-decoration: none;
 }
+/* to make room for the icon, a width needs to be set here */
 .ui-button-icon-only {
 	width: 2.2em;
 }
+/* button elements seem to need a little more width */
 button.ui-button-icon-only {
 	width: 2.4em;
 }
@@ -170,6 +192,8 @@ button.ui-button-icon-only {
 button.ui-button-icons-only {
 	width: 3.7em;
 }
+
+/* button text element */
 .ui-button .ui-button-text {
 	display: block;
 	line-height: normal;
@@ -194,9 +218,12 @@ button.ui-button-icons-only {
 	padding-left: 2.1em;
 	padding-right: 2.1em;
 }
+/* no icon support for input elements, provide padding by default */
 input.ui-button {
 	padding: .4em 1em;
 }
+
+/* button icon element(s) */
 .ui-button-icon-only .ui-icon,
 .ui-button-text-icon-primary .ui-icon,
 .ui-button-text-icon-secondary .ui-icon,
@@ -220,6 +247,8 @@ input.ui-button {
 .ui-button-icons-only .ui-button-icon-secondary {
 	right: .5em;
 }
+
+/* button sets */
 .ui-buttonset {
 	margin-right: 7px;
 }
@@ -227,6 +256,9 @@ input.ui-button {
 	margin-left: 0;
 	margin-right: -.3em;
 }
+
+/* workarounds */
+/* reset extra padding in Firefox, see h5bp.com/l */
 input.ui-button::-moz-focus-inner,
 button.ui-button::-moz-focus-inner {
 	border: 0;
@@ -328,6 +360,8 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
 	float: left;
 }
+
+/* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi {
 	width: auto;
 }
@@ -359,6 +393,8 @@ button.ui-button::-moz-focus-inner {
 	width: 100%;
 	font-size: 0;
 }
+
+/* RTL support */
 .ui-datepicker-rtl {
 	direction: rtl;
 }
@@ -474,10 +510,13 @@ button.ui-button::-moz-focus-inner {
 	border: 0;
 	background-position: 0 0;
 }
+
+/* support: IE8 - See #6727 */
 .ui-slider.ui-state-disabled .ui-slider-handle,
 .ui-slider.ui-state-disabled .ui-slider-range {
 	filter: inherit;
 }
+
 .ui-slider-horizontal {
 	height: .8em;
 }
@@ -495,6 +534,7 @@ button.ui-button::-moz-focus-inner {
 .ui-slider-horizontal .ui-slider-range-max {
 	right: 0;
 }
+
 .ui-slider-vertical {
 	width: .8em;
 	height: 100px;
@@ -514,9 +554,12 @@ button.ui-button::-moz-focus-inner {
 .ui-slider-vertical .ui-slider-range-max {
 	top: 0;
 }
+
+/* Component containers
+----------------------------------*/
 .ui-widget {
 	font-family: "Source Sans Pro",helvetica,sans-serif;
-	
+	/*font-size: 1.0em;*/
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
@@ -545,6 +588,9 @@ button.ui-button::-moz-focus-inner {
 .ui-widget-header a {
 	color: #ffffff;
 }
+
+/* Interaction states
+----------------------------------*/
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
@@ -595,6 +641,9 @@ button.ui-button::-moz-focus-inner {
 	color: #4A4A4A;
 	text-decoration: none;
 }
+
+/* Interaction Cues
+----------------------------------*/
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
@@ -633,19 +682,24 @@ button.ui-button::-moz-focus-inner {
 .ui-widget-content .ui-priority-secondary,
 .ui-widget-header .ui-priority-secondary {
 	opacity: .7;
-	filter:Alpha(Opacity=70); 
+	filter:Alpha(Opacity=70); /* support: IE8 */
 	font-weight: normal;
 }
 .ui-state-disabled,
 .ui-widget-content .ui-state-disabled,
 .ui-widget-header .ui-state-disabled {
 	opacity: .35;
-	filter:Alpha(Opacity=35); 
+	filter:Alpha(Opacity=35); /* support: IE8 */
 	background-image: none;
 }
 .ui-state-disabled .ui-icon {
-	filter:Alpha(Opacity=35); 
+	filter:Alpha(Opacity=35); /* support: IE8 - See #6059 */
 }
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
 .ui-icon {
 	width: 16px;
 	height: 16px;
@@ -674,6 +728,8 @@ button.ui-button::-moz-focus-inner {
 .ui-state-error-text .ui-icon {
 	background-image: url("images/ui-icons_4A4A4A_256x240.png");
 }
+
+/* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
 .ui-icon-carat-1-n { background-position: 0 0; }
 .ui-icon-carat-1-ne { background-position: -16px 0; }
@@ -811,6 +867,7 @@ button.ui-button::-moz-focus-inner {
 .ui-icon-seek-prev { background-position: -48px -160px; }
 .ui-icon-seek-end { background-position: -64px -160px; }
 .ui-icon-seek-start { background-position: -80px -160px; }
+/* ui-icon-seek-first is deprecated, use ui-icon-seek-start instead */
 .ui-icon-seek-first { background-position: -80px -160px; }
 .ui-icon-stop { background-position: -96px -160px; }
 .ui-icon-eject { background-position: -112px -160px; }
@@ -849,6 +906,12 @@ button.ui-button::-moz-focus-inner {
 .ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
 .ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
 .ui-icon-grip-diagonal-se { background-position: -80px -224px; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Corner radius */
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-left,
@@ -873,16 +936,18 @@ button.ui-button::-moz-focus-inner {
 .ui-corner-br {
 	border-bottom-right-radius: 6px;
 }
+
+/* Overlays */
 .ui-widget-overlay {
 	background: #a6a6a6 url("images/ui-bg_dots-small_65_a6a6a6_2x2.png") 50% 50% repeat;
 	opacity: .4;
-	filter: Alpha(Opacity=40); 
+	filter: Alpha(Opacity=40); /* support: IE8 */
 }
 .ui-widget-shadow {
 	margin: -8px 0 0 -8px;
 	padding: 8px;
 	background: #333333 url("images/ui-bg_flat_0_333333_40x100.png") 50% 50% repeat-x;
 	opacity: .1;
-	filter: Alpha(Opacity=10); 
+	filter: Alpha(Opacity=10); /* support: IE8 */
 	border-radius: 8px;
 }
