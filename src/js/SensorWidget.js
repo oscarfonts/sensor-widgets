@@ -1,6 +1,8 @@
 import i18n from './i18n';
 import './SensorWidgets.css';
 
+__webpack_public_path__ = document.currentScript.src.replace(/[^\/]*$/, '');
+
 var instances = {};
 var uid = function (i) {
     return function () {
