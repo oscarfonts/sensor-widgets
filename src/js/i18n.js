@@ -1,61 +1,65 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
 import translations from './translations.json';
 
-var params = {};
-location.search.substr(1).split("&").forEach(function(item) {
-    var kv = item.split("=");
-    params[kv[0]] = kv[1];
+const params = {};
+window.location.search.substr(1).split('&').forEach((item) => {
+  const [key, value] = item.split('=');
+  params[key] = value;
 });
 
-var activeLang;
-setLang(params.hasOwnProperty('lang') ? params.lang : 'en');
+let activeLang;
 
 function setLang(lang) {
-    activeLang = lang;
-    console.debug('Language set to ' + activeLang);
+  activeLang = lang;
+  console.debug(`Language set to ${activeLang}`);
 }
 
-function template(string, values){
-    for (var key in values)
-        string = string.replace(new RegExp('{'+key+'}','g'), values[key]);
-    return string;
+setLang(Object.prototype.hasOwnProperty.call(params, 'lang') ? params.lang : 'en');
+
+function template(templ, dict) {
+  let result = templ;
+  if (dict) {
+    Object.entries(dict).forEach(([key, value]) => {
+      result = result.replace(new RegExp(`{${key}}`, 'g'), value);
+    });
+  }
+  return result;
 }
 
 function t(string, values) {
-    if (translations.hasOwnProperty(string) && translations[string].hasOwnProperty(activeLang)) {
-        string = translations[string][activeLang];
-    }
-    return template(string, values);
+  let translated = string;
+  if (Object.prototype.hasOwnProperty.call(translations, string)
+    && Object.prototype.hasOwnProperty.call(translations[string], activeLang)) {
+    translated = translations[string][activeLang];
+  }
+  return template(translated, values);
 }
 
 export default {
-    langs: function() {
-        return translations.langs;
-    },
-    getLang: function() {
-        return activeLang;
-    },
-    setLang: setLang,
-    t: t,
-    addTranslations: function(bundle) {
-        Object.keys(bundle).forEach(function(key) {
-            if (!translations.hasOwnProperty(key)) {
-                translations[key] = bundle[key];
-            } else {
-                console.warn("Skipping duplicate entry '" + key + "' in translation bundle.");
-            }
-        });
-    },
-    translateDocTree: function(el) {
-        if (!el) el = document;
-        var treeWalker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
-        while (treeWalker.nextNode()) {
-            var node = treeWalker.currentNode;
-            if(/\S/.test(node.nodeValue)) { // Not a whitespace-only text node
-                node.nodeValue = t(node.nodeValue);
-            }
-        }
+  langs() {
+    return translations.langs;
+  },
+  getLang() {
+    return activeLang;
+  },
+  setLang,
+  t,
+  addTranslations(bundle) {
+    Object.keys(bundle).forEach((key) => {
+      if (!Object.prototype.hasOwnProperty.call(translations, key)) {
+        translations[key] = bundle[key];
+      } else {
+        console.warn(`Skipping duplicate entry '${key}' in translation bundle.`);
+      }
+    });
+  },
+  translateDocTree(el) {
+    const element = el || document;
+    const treeWalker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+    while (treeWalker.nextNode()) {
+      const node = treeWalker.currentNode;
+      if (/\S/.test(node.nodeValue)) { // Not a whitespace-only text node
+        node.nodeValue = t(node.nodeValue);
+      }
     }
+  },
 };

@@ -1,3 +1,5 @@
 import $ from 'jquery';
 
-window.$ = window.jQuery = $; // what a shit
+window.$ = $;
+window.jQuery = $;
+export default $;
