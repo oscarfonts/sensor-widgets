@@ -1,9 +1,7 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
+/* eslint-disable no-param-reassign */
 import './progressbar.css';
 
-import data_access from '../sos-data-access';
+import dataAccess from '../sos-data-access';
 import ld from '../locale-date';
 import common from '../widget-common';
 
@@ -39,11 +37,6 @@ export default {
     // load widget common features
     common.init(config, el);
 
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
-    data.read();
-
     // Update view
     function redraw(data) {
       const measure = data[0];
@@ -58,6 +51,11 @@ export default {
 
       el.querySelector('.bar').style.width = `${width}px`;
     }
+
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
+    data.read();
 
     return {
       destroy() {

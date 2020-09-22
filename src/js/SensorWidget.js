@@ -1,19 +1,16 @@
+/* eslint-disable no-param-reassign */
 import i18n from './i18n';
 import './SensorWidgets.css';
 
-__webpack_public_path__ = document.currentScript.src.replace(/[^\/]*$/, '');
+// eslint-disable-next-line camelcase,no-undef
+__webpack_public_path__ = document.currentScript.src.replace(/[^/]*$/, '');
 
 const instances = {};
-const uid = (function (i) {
-  return function () {
-    return `SensorWidgetTarget-${++i}`;
-  };
-}(0));
+// eslint-disable-next-line no-plusplus
+const uid = ((i) => () => `SensorWidgetTarget-${++i}`)(0);
 
-export default function (name, config, renderTo) {
-  if (!renderTo) {
-    renderTo = document.body;
-  }
+export default function SensorWidget(name, config, renderTo) {
+  const target = renderTo || document.body;
 
   function errorHandler(message, url, request) {
     let text = '';
@@ -26,26 +23,25 @@ export default function (name, config, renderTo) {
     if (message) {
       text += message;
     }
-    renderTo.innerHTML = `<div class="text-danger">${text}</div>`;
+    target.innerHTML = `<div class="text-danger">${text}</div>`;
   }
 
-  function checkConfig(name, inputs, config) {
+  function checkConfig(widgetName, widgetInputs, widgetConfig) {
     const missing = [];
 
-    for (const i in inputs) {
-      const input = inputs[i];
-      if (!config.hasOwnProperty(input)) {
+    Object.values(widgetInputs).forEach((input) => {
+      if (!Object.prototype.hasOwnProperty.call(widgetConfig, input)) {
         missing.push(input);
       }
-    }
+    });
     if (missing.length) {
-      errorHandler(i18n.t("The '{name}' widget is missing some mandatory parameters: ", { name }) + missing.join(', '));
+      errorHandler(i18n.t("The '{name}' widget is missing some mandatory parameters: ", { name: widgetName }) + missing.join(', '));
     }
     return !missing.length;
   }
 
   if (name && config) {
-    if (!renderTo.id) renderTo.id = uid();
+    if (!target.id) target.id = uid();
 
     if (!config.service) {
       config.service = '/52n-sos/sos/json';
@@ -53,15 +49,15 @@ export default function (name, config, renderTo) {
 
     import(/* webpackChunkName: "widget-[request]" */ `./widget/${name}.js`)
       .then(({ default: widget }) => {
-        renderTo.innerHTML = '';
-        if (instances.hasOwnProperty(renderTo.id) && instances[renderTo.id] && instances[renderTo.id].hasOwnProperty('destroy')) {
-          console.debug(`Destroying previous widget on ElementId=${renderTo.id}`);
-          instances[renderTo.id].destroy();
-          delete instances[renderTo.id];
+        target.innerHTML = '';
+        if (Object.prototype.hasOwnProperty.call(instances, target.id) && instances[target.id] && Object.prototype.hasOwnProperty.call(instances[target.id], 'destroy')) {
+          console.debug(`Destroying previous widget on ElementId=${target.id}`);
+          instances[target.id].destroy();
+          delete instances[target.id];
         }
         if (checkConfig(name, widget.inputs, config)) {
-          console.debug(`Creating new ${name} widget on ElementId=${renderTo.id}`);
-          instances[renderTo.id] = widget.init(config, renderTo, errorHandler);
+          console.debug(`Creating new ${name} widget on ElementId=${target.id}`);
+          instances[target.id] = widget.init(config, target, errorHandler);
         }
       }).catch((cause) => {
         console.error(cause);
@@ -73,7 +69,7 @@ export default function (name, config, renderTo) {
   return {
     name,
     config,
-    renderTo,
+    renderTo: target,
     inspect(cb) {
       import(/* webpackChunkName: "widget-[request]" */ `./widget/${name}.js`)
         .then(({ default: widget }) => {
@@ -86,7 +82,7 @@ export default function (name, config, renderTo) {
         pathname.replace(/^(\.\.?(\/|$))+/, '')
           .replace(/\/(\.(\/|$))+/g, '/')
           .replace(/\/\.\.$/, '/../')
-          .replace(/\/?[^\/]*/g, (p) => {
+          .replace(/\/?[^/]*/g, (p) => {
             if (p === '/..') {
               output.pop();
             } else {

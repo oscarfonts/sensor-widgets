@@ -1,17 +1,15 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
+/* eslint-disable no-param-reassign */
 import L from 'leaflet';
+import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
+import iconUrl from 'leaflet/dist/images/marker-icon.png';
+import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+
 import SensorWidget from '../SensorWidget';
 import i18n from '../i18n';
 import SOS from '../SOS';
 import 'leaflet/dist/leaflet.css';
 import common from '../widget-common';
 // import 'leaflet.markercluster';
-
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
 // TODO readd tooltips
 // TODO readd clustering
@@ -39,6 +37,7 @@ L.Label.prototype._updateContent = function() {
 */
 
 // Ugly hack to import icons with Webpack
+// eslint-disable-next-line no-underscore-dangle
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl,
@@ -85,25 +84,67 @@ export default {
       config.popup_widget = JSON.parse(config.popup_widget);
     }
 
-    SOS.setUrl(config.service);
-    read();
+    function isArray(obj) {
+      return Object.prototype.toString.call(obj) === '[object Array]';
+    }
+
+    function isInArray(value, array) {
+      return array.indexOf(value) > -1;
+    }
+
+    function swapAxis(geometry) {
+      const ret = [];
+      for (let i = 0; i < geometry.length; i += 1) {
+        if (isArray(geometry[i])) {
+          ret[i] = swapAxis(geometry[i]);
+        } else if (!i % 2) {
+          ret[i] = geometry[i + 1];
+          ret[i + 1] = geometry[i];
+        }
+      }
+      return ret;
+    }
+
+    function fois2geojson(fois) {
+      const configFeatures = isArray(config.features)
+        ? config.features
+        : JSON.parse(config.features);
+      const features = [];
+      Object.keys(fois).forEach((i) => {
+        const foi = fois[i];
+        if (foi.geometry
+          && (!configFeatures.length || isInArray(foi.identifier.value, config.features))
+        ) {
+          if (config.swap_axis) {
+            foi.geometry.coordinates = swapAxis(foi.geometry.coordinates);
+          }
+          const feature = {
+            type: 'Feature',
+            geometry: foi.geometry,
+            id: foi.identifier.value,
+            properties: {
+              name: foi.name ? foi.name.value : foi.identifier.value,
+            },
+          };
+          features.push(feature);
+        }
+      });
+      return {
+        type: 'FeatureCollection',
+        features,
+      };
+    }
 
     function read() {
       SOS.getCapabilities((offerings) => {
-        for (const i in offerings) {
-          const offering = offerings[i];
-          if (offering.identifier == config.offering) {
-            SOS.getFeatureOfInterest(offering.procedure[0], addFoIs, errorHandler);
-          }
-        }
         function addFoIs(features) {
           // Map div
           el.innerHTML = '';
-          const map_div = document.createElement('div');
-          map_div.className = 'map widget';
-          el.appendChild(map_div);
+          const mapDiv = document.createElement('div');
+          mapDiv.className = 'map widget';
+          el.appendChild(mapDiv);
 
-          const map = L.map(map_div, {
+          const map = L.map(mapDiv, {
             layers: [baseLayer],
           }).setView([0, 0], 2);
 
@@ -130,103 +171,65 @@ export default {
 
               // Tooltip (label)
               /*
-                            var labelElement = document.createElement('div');
-                            labelElement.id = 'map-tooltip-' + feature.id;
-                            labelElement.appendChild(document.createTextNode(feature.properties.name));
-                            layer.bindLabel(labelElement, {noHide: true}).addTo(featureContainer);
-                            if (config.properties && config.properties != "[]" && config.properties.length) {
-                                new SensorWidget('panel', {
-                                    "service": config.service,
-                                    "offering": config.offering,
-                                    "feature": feature.id,
-                                    "properties": config.properties,
-                                    "refresh_interval": "60",
-                                    "title": feature.properties.name
-                                }, labelElement);
-                            }
-                            if (!config.permanent_tooltips && layer.setLabelNoHide) {
-                                layer.setLabelNoHide(false);
-                            }
-                            */
+              var labelElement = document.createElement('div');
+              labelElement.id = 'map-tooltip-' + feature.id;
+              labelElement.appendChild(document.createTextNode(feature.properties.name));
+              layer.bindLabel(labelElement, {noHide: true}).addTo(featureContainer);
+              if (config.properties && config.properties != "[]" && config.properties.length) {
+                  new SensorWidget('panel', {
+                      "service": config.service,
+                      "offering": config.offering,
+                      "feature": feature.id,
+                      "properties": config.properties,
+                      "refresh_interval": "60",
+                      "title": feature.properties.name
+                  }, labelElement);
+              }
+              if (!config.permanent_tooltips && layer.setLabelNoHide) {
+                  layer.setLabelNoHide(false);
+              }
+              */
 
               // Info bubble (popup)
               if (config.popup_widget) {
-                const el_popup = document.createElement('div');
-                const widget_config = JSON.parse(JSON.stringify(config.popup_widget));
-                const { name } = widget_config;
-                delete widget_config.name;
-                widget_config.service = config.service;
-                widget_config.offering = config.offering;
+                const elPopup = document.createElement('div');
+                const widgetConfig = JSON.parse(JSON.stringify(config.popup_widget));
+                const { name } = widgetConfig;
+                delete widgetConfig.name;
+                widgetConfig.service = config.service;
+                widgetConfig.offering = config.offering;
                 new SensorWidget(name).inspect((inputs, optionals, sizes) => {
-                  if (inputs.indexOf('feature') != -1) {
-                    widget_config.feature = feature.id;
-                  } else if (inputs.indexOf('features') != -1) {
-                    widget_config.features = [feature.id];
+                  if (inputs.indexOf('feature') !== -1) {
+                    widgetConfig.feature = feature.id;
+                  } else if (inputs.indexOf('features') !== -1) {
+                    widgetConfig.features = [feature.id];
                   }
-                  layer.bindPopup(el_popup, {
+                  layer.bindPopup(elPopup, {
                     minWidth: sizes[0].w,
                     minHeight: sizes[0].h,
                   });
-                  el_popup.setAttribute('style', `width:${sizes[0].w}px;height:${sizes[0].h}px;`);
-                  new SensorWidget(name, widget_config, el_popup);
+                  elPopup.setAttribute('style', `width:${sizes[0].w}px;height:${sizes[0].h}px;`);
+                  SensorWidget(name, widgetConfig, elPopup);
                 });
               }
             },
           });
           map.addLayer(geojson);
           map.fitBounds(geojson.getBounds(), {
-            maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom) : 14,
+            maxZoom: config.max_initial_zoom ? parseInt(config.max_initial_zoom, 10) : 14,
           });
         }
+
+        Object.keys(offerings).forEach((i) => {
+          const offering = offerings[i];
+          if (offering.identifier === config.offering) {
+            SOS.getFeatureOfInterest(offering.procedure[0], addFoIs, errorHandler);
+          }
+        });
       }, errorHandler);
     }
 
-    function isArray(obj) {
-      return Object.prototype.toString.call(obj) === '[object Array]';
-    }
-
-    function isInArray(value, array) {
-      return array.indexOf(value) > -1;
-    }
-
-    function swap_axis(geometry) {
-      const ret = [];
-      for (let i = 0; i < geometry.length; i++) {
-        if (isArray(geometry[i])) {
-          ret[i] = swap_axis(geometry[i]);
-        } else if (!i % 2) {
-          ret[i] = geometry[i + 1];
-          ret[i + 1] = geometry[i];
-        }
-      }
-      return ret;
-    }
-
-    function fois2geojson(fois) {
-      const config_features = isArray(config.features) ? config.features : JSON.parse(config.features);
-      const features = [];
-      for (const i in fois) {
-        const foi = fois[i];
-        if (foi.geometry && (!config_features.length || isInArray(foi.identifier.value, config.features))) {
-          if (config.swap_axis) {
-            foi.geometry.coordinates = swap_axis(foi.geometry.coordinates);
-          }
-          const feature = {
-            type: 'Feature',
-            geometry: foi.geometry,
-            id: foi.identifier.value,
-            properties: {
-              name: foi.name ? foi.name.value : foi.identifier.value,
-            },
-          };
-          features.push(feature);
-        }
-      }
-      const featureCollection = {
-        type: 'FeatureCollection',
-        features,
-      };
-      return featureCollection;
-    }
+    SOS.setUrl(config.service);
+    read();
   },
 };

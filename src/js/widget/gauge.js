@@ -1,7 +1,5 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
-import data_access from '../sos-data-access';
+/* eslint-disable no-param-reassign */
+import dataAccess from '../sos-data-access';
 import drawing from './gauge.svg';
 import common from '../widget-common';
 
@@ -26,11 +24,6 @@ export default {
     // load widget common features
     common.init(config, el);
 
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
-    data.read();
-
     // Update view
     function redraw(data) {
       const measure = data[0];
@@ -38,6 +31,11 @@ export default {
       value.innerHTML = `${measure.value} %`;
       arrow.setAttribute('transform', `rotate(${2.7 * measure.value}, 365.396, 495)`);
     }
+
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
+    data.read();
 
     return {
       destroy() {

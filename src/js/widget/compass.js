@@ -1,8 +1,6 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
+/* eslint-disable no-param-reassign */
 import i18n from '../i18n';
-import data_access from '../sos-data-access';
+import dataAccess from '../sos-data-access';
 import drawing from './compass.svg';
 import ld from '../locale-date';
 import common from '../widget-common';
@@ -30,7 +28,8 @@ export default {
     el.innerHTML = template;
     const arrow = el.querySelector('.arrow');
     const shadow = el.querySelector('.shadow');
-    arrow.style.visibility = shadow.style.visibility = 'hidden';
+    arrow.style.visibility = 'hidden';
+    shadow.style.visibility = 'hidden';
 
     // load widget common features
     common.init(config, el);
@@ -38,11 +37,6 @@ export default {
     if (config.title) {
       el.querySelector('.title').innerHTML = config.title;
     }
-
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
-    data.read();
 
     // Update view
     function redraw(data) {
@@ -58,9 +52,15 @@ export default {
         el.querySelector('.property').innerHTML = measure.property;
         arrow.setAttribute('transform', `rotate(${measure.value}, 256, 256)`);
         shadow.setAttribute('transform', `translate(5, 5) rotate(${measure.value}, 256, 256)`);
-        arrow.style.visibility = shadow.style.visibility = 'visible';
+        arrow.style.visibility = 'visible';
+        shadow.style.visibility = 'visible';
       }
     }
+
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
+    data.read();
 
     return {
       destroy() {

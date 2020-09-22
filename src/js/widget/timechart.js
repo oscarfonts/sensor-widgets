@@ -1,11 +1,9 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
-import data_access from '../sos-data-access';
+/* eslint-disable no-param-reassign */
+import dataAccess from '../sos-data-access';
 import ld from '../locale-date';
 import common from '../widget-common';
 
-import '../jQuery-globals';
+import $ from '../jQuery-globals';
 
 import 'flot/lib/jquery.mousewheel';
 import 'flot/source/jquery.canvaswrapper';
@@ -44,13 +42,9 @@ const timechart = {
     // load widget common features
     common.init(config, el);
 
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    data.read();
-
     function redraw(data) {
       const series = {};
-      for (const i in data) {
+      Object.keys(data).forEach((i) => {
         const measure = data[i];
         const label = `${measure.property} (${measure.feature})`;
         if (!series[label]) {
@@ -60,18 +54,14 @@ const timechart = {
           };
         }
         series[label].data.push([measure.time.getTime() / 1000, measure.value]);
-      }
-
-      const sortFunction = function (a, b) {
-        return b[0] - a[0];
-      };
+      });
 
       // Sort data by time, convert to array
       const arr = [];
-      for (const k in series) {
-        series[k].data.sort(sortFunction);
+      Object.keys(series).forEach((k) => {
+        series[k].data.sort((a, b) => b[0] - a[0]);
         arr.push(series[k]);
-      }
+      });
 
       const options = {
         xaxis: {
@@ -118,6 +108,10 @@ const timechart = {
         config.callback(plot, graph);
       }
     }
+
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    data.read();
   },
 };
 

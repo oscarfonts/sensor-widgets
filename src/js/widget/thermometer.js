@@ -1,8 +1,6 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
+/* eslint-disable no-param-reassign */
 import i18n from '../i18n';
-import data_access from '../sos-data-access';
+import dataAccess from '../sos-data-access';
 import drawing from './thermometer.svg';
 import ld from '../locale-date';
 import common from '../widget-common';
@@ -21,8 +19,8 @@ const template = [
 ].join('');
 
 const dy = 3.342574;
-const y_max = 206.34359 + 267.40595;
-const t_min = -24;
+const yMax = 206.34359 + 267.40595;
+const tMin = -24;
 
 export default {
   inputs: common.inputs.concat(['feature', 'property', 'refresh_interval']),
@@ -38,11 +36,6 @@ export default {
     // load widget common features
     common.init(config, el);
 
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
-    data.read();
-
     // Update view
     function redraw(data) {
       const measure = data[0];
@@ -53,14 +46,19 @@ export default {
         el.querySelector('.request_time').innerHTML = ld.display(new Date());
         el.querySelector('.result_time').innerHTML = ld.display(measure.time);
 
-        const h = dy * (measure.value - t_min);
-        const y_min = y_max - h;
+        const h = dy * (measure.value - tMin);
+        const yMin = yMax - h;
         clip.setAttribute('height', h.toString());
-        clip.setAttribute('y', y_min.toString());
+        clip.setAttribute('y', yMin.toString());
       } else {
         el.querySelector('.value').innerHTML = i18n.t('(no data)');
       }
     }
+
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    const refreshIntervalId = setInterval(data.read, config.refresh_interval * 1000);
+    data.read();
 
     return {
       destroy() {

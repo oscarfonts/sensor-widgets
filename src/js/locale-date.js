@@ -1,6 +1,3 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
 import i18n from './i18n';
 
 const date = {

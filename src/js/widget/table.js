@@ -1,7 +1,5 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
-import data_access from '../sos-data-access';
+/* eslint-disable no-param-reassign */
+import dataAccess from '../sos-data-access';
 import ld from '../locale-date';
 import common from '../widget-common';
 
@@ -27,16 +25,43 @@ export default {
     // load widget common features
     common.init(config, el);
 
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    data.read();
-
     // Update view
+    function createTable(measures, properties) {
+      let html = '<table class="table table-striped table-condensed table-hover table-bordered">';
+      html += '<thead>';
+      html += '<tr>';
+      html += '<th>Result Time</th>';
+
+      const sortedNames = Object.keys(properties).sort();
+      Object.keys(sortedNames).forEach((i) => {
+        const name = sortedNames[i];
+        const { uom } = properties[name];
+        html += `<th>${name} (${uom})</th>`;
+      });
+      html += '</tr>';
+      html += '</thead>';
+
+      const times = Object.keys(measures);
+      times.sort().reverse();
+      Object.keys(times).forEach((i) => {
+        const time = times[i];
+        const values = measures[time];
+        html += '<tr>';
+        html += `<th class="time">${ld.display(new Date(parseInt(time, 10)))}</th>`;
+        Object.keys(sortedNames).forEach((j) => {
+          html += `<td>${values[sortedNames[j]]}</td>`;
+        });
+        html += '</tr>';
+      });
+      html += '</table>';
+      table.innerHTML = html;
+    }
+
     function redraw(data) {
       // Get tabular data from observations
       const measures = {};
       const properties = {};
-      for (const i in data) {
+      Object.keys(data).forEach((i) => {
         const measure = data[i];
 
         // Add value in a time-indexed "measures" object
@@ -53,40 +78,13 @@ export default {
             uom: measure.uom,
           };
         }
-      }
+      });
 
       createTable(measures, properties);
     }
 
-    function createTable(measures, properties) {
-      let html = '<table class="table table-striped table-condensed table-hover table-bordered">';
-      html += '<thead>';
-      html += '<tr>';
-      html += '<th>Result Time</th>';
-
-      const sortedNames = Object.keys(properties).sort();
-      for (var i in sortedNames) {
-        const name = sortedNames[i];
-        const { uom } = properties[name];
-        html += `<th>${name} (${uom})</th>`;
-      }
-      html += '</tr>';
-      html += '</thead>';
-
-      const times = Object.keys(measures);
-      times.sort().reverse();
-      for (i in times) {
-        const time = times[i];
-        const values = measures[time];
-        html += '<tr>';
-        html += `<th class="time">${ld.display(new Date(parseInt(time)))}</th>`;
-        for (const j in sortedNames) {
-          html += `<td>${values[sortedNames[j]]}</td>`;
-        }
-        html += '</tr>';
-      }
-      html += '</table>';
-      table.innerHTML = html;
-    }
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    data.read();
   },
 };

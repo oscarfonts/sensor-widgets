@@ -1,9 +1,7 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
+/* eslint-disable no-param-reassign */
 import moment from 'moment';
 import i18n from '../i18n';
-import data_access from '../sos-data-access';
+import dataAccess from '../sos-data-access';
 import common from '../widget-common';
 
 // TODO moment locale?
@@ -31,35 +29,31 @@ export default {
     config.features = undefined;
     config.properties = undefined;
 
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    data.read();
-
     // Update view
     function redraw(data) {
       const table = {};
       const features = [];
-      for (const i in data) {
+      Object.keys(data).forEach((i) => {
         const measure = data[i];
         if (!table[measure.property]) {
           table[measure.property] = [];
         }
         table[measure.property][measure.feature] = measure;
-        if (features.indexOf(measure.feature) == -1) {
+        if (features.indexOf(measure.feature) === -1) {
           features.push(measure.feature);
         }
-      }
+      });
 
       let html = '<table class="table table-striped table-condensed table-hover table-bordered">';
       html += '<thead>';
       html += '<tr><th></th>';
-      for (const c in features) {
+      Object.keys(features).forEach((c) => {
         html += `<th>${features[c]}</th>`;
-      }
+      });
       html += '</tr></thead>';
-      for (const p in table) {
+      Object.keys(table).forEach((p) => {
         html += `<tr><th>${p}</th>`;
-        for (let f in features) {
+        Object.keys(features).forEach((f) => {
           f = features[f];
           if (table[p][f]) {
             html += '<td>';
@@ -72,10 +66,14 @@ export default {
             html += '(N/A)';
           }
           html += '</td>';
-        }
+        });
         html += '</tr>';
-      }
+      });
       el.querySelector('.table-responsive').innerHTML = html;
     }
+
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    data.read();
   },
 };

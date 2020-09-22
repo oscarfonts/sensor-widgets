@@ -11,7 +11,7 @@ module.exports = {
     wizard: './src/js/pages/wizard.js',
     'meteo.apb.es': './src/js/pages/meteo.apb.es.js',
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
   },
@@ -51,6 +51,5 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     path: path.resolve(__dirname, 'dist'),
-    // publicPath: '/',
   },
 };

@@ -1,22 +1,20 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
+/* eslint-disable no-param-reassign */
 import $ from 'jquery';
+import grid from 'jqgrid/js/jquery.jqGrid.src';
+import gridLocaleEn from 'jqgrid/js/i18n/grid.locale-en';
 import i18n from '../i18n';
-import data_access from '../sos-data-access';
+import dataAccess from '../sos-data-access';
 import ld from '../locale-date';
 import common from '../widget-common';
 
 import 'jquery-ui';
 import '../../assets/css/jquery-ui.css';
 
-import grid from 'jqgrid/js/jquery.jqGrid.src';
-import grid_locale_en from 'jqgrid/js/i18n/grid.locale-en';
 import 'jqgrid/css/ui.jqgrid.css';
 import './jqgrid.css';
 
 grid($);
-grid_locale_en($);
+gridLocaleEn($);
 
 let count = 0;
 
@@ -30,6 +28,7 @@ export default {
     el.innerHTML = [
       '<div class="jqgrid widget">',
       '<h1 class="title"></h1>',
+      // eslint-disable-next-line no-plusplus
       '<table id="grid', ++count, '"></table>',
       '<div id="pager', count, '"></div>',
       '<div><span class="footnote"></span></div>',
@@ -40,9 +39,9 @@ export default {
     // load widget common features
     common.init(config, el);
 
-    // Setup SOS data access
-    const data = data_access(config, redraw, errorHandler);
-    data.read();
+    function setFullWidth() {
+      $('.grid').setGridWidth($(window).width() - 2);
+    }
 
     function redraw(data) {
       // jqGrid table
@@ -94,8 +93,8 @@ export default {
       setFullWidth();
     }
 
-    function setFullWidth() {
-      $('.grid').setGridWidth($(window).width() - 2);
-    }
+    // Setup SOS data access
+    const data = dataAccess(config, redraw, errorHandler);
+    data.read();
   },
 };

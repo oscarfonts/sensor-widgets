@@ -7,34 +7,34 @@
  */
 export default {
   read(xml, clean) {
-    var X = {
+    const X = {
       at: (clean ? '' : '@'),
 
-      toObj(xml) {
+      toObj(elem) {
         let o = {};
-        if (xml.nodeType == 1) { // element node
-          if (xml.attributes.length) { // element with attributes
-            for (let i = 0; i < xml.attributes.length; i++) {
-              const { name } = xml.attributes[i];
-              const { value } = xml.attributes[i];
-              const is_ns = name.lastIndexOf('xmlns:', 0) === 0;
-              if (!(clean && is_ns)) { // Hide xmlns attributes
+        if (elem.nodeType === 1) { // element node
+          if (elem.attributes.length) { // element with attributes
+            for (let i = 0; i < elem.attributes.length; i += 1) {
+              const { name } = elem.attributes[i];
+              const { value } = elem.attributes[i];
+              const isNs = name.lastIndexOf('xmlns:', 0) === 0;
+              if (!(clean && isNs)) { // Hide xmlns attributes
                 o[X.at + name] = (value || '').toString();
               }
             }
           }
-          if (xml.firstChild) { // element has child nodes
+          if (elem.firstChild) { // element has child nodes
             let textChild = 0;
             let cdataChild = 0;
             let hasElementChild = false;
-            for (var n = xml.firstChild; n; n = n.nextSibling) {
-              if (n.nodeType == 1) {
+            for (let n = elem.firstChild; n; n = n.nextSibling) {
+              if (n.nodeType === 1) {
                 hasElementChild = true;
-              } else if (n.nodeType == 3 && n.nodeValue.match(/[^ \f\n\r\t\v]/)) {
-                textChild++;
+              } else if (n.nodeType === 3 && n.nodeValue.match(/[^ \f\n\r\t\v]/)) {
+                textChild += 1;
                 // non-whitespace text
-              } else if (n.nodeType == 4) {
-                cdataChild++;
+              } else if (n.nodeType === 4) {
+                cdataChild += 1;
                 // cdata section node
               }
             }
@@ -42,11 +42,11 @@ export default {
               if (textChild < 2 && cdataChild < 2) {
                 // structured element with evtl.
                 // a single text or/and cdata node
-                X.removeWhite(xml);
-                for (n = xml.firstChild; n; n = n.nextSibling) {
-                  if (n.nodeType == 3) { // text node
+                X.removeWhite(elem);
+                for (let n = elem.firstChild; n; n = n.nextSibling) {
+                  if (n.nodeType === 3) { // text node
                     o['#text'] = X.escape(n.nodeValue);
-                  } else if (n.nodeType == 4) { // cdata node
+                  } else if (n.nodeType === 4) { // cdata node
                     o['#cdata'] = X.escape(n.nodeValue);
                   } else if (o[n.nodeName]) {
                     // multiple occurence of element
@@ -59,54 +59,52 @@ export default {
                     o[n.nodeName] = X.toObj(n);
                   }
                 }
-              } else { // mixed content
-                if (!xml.attributes.length) {
-                  o = X.escape(X.innerXml(xml));
-                } else {
-                  o['#text'] = X.escape(X.innerXml(xml));
-                }
+              } else if (!elem.attributes.length) {
+                o = X.escape(X.innerXml(elem));
+              } else {
+                o['#text'] = X.escape(X.innerXml(elem));
               }
             } else if (textChild) { // pure text
-              if (!xml.attributes.length) {
-                o = X.escape(X.innerXml(xml));
+              if (!elem.attributes.length) {
+                o = X.escape(X.innerXml(elem));
               } else {
-                o['#text'] = X.escape(X.innerXml(xml));
+                o['#text'] = X.escape(X.innerXml(elem));
               }
             } else if (cdataChild) { // cdata
               if (cdataChild > 1) {
-                o = X.escape(X.innerXml(xml));
+                o = X.escape(X.innerXml(elem));
               } else {
-                for (n = xml.firstChild; n; n = n.nextSibling) {
+                for (let n = elem.firstChild; n; n = n.nextSibling) {
                   o['#cdata'] = X.escape(n.nodeValue);
                 }
               }
             }
           }
-          if (!xml.attributes.length && !xml.firstChild) {
+          if (!elem.attributes.length && !elem.firstChild) {
             o = null;
           }
-        } else if (xml.nodeType == 9) { // document.node
-          o = X.toObj(xml.documentElement);
-        } else if (xml.nodeType == 8) {
-          return xml.data;
+        } else if (elem.nodeType === 9) { // document.node
+          o = X.toObj(elem.documentElement);
+        } else if (elem.nodeType === 8) {
+          return elem.data;
           // A comment
         } else {
-          console.error(`unhandled node type: ${xml.nodeType}`);
+          // console.error(`unhandled node type: ${elem.nodeType}`);
         }
 
         return o;
       },
 
       innerXml(node) {
-        let s = '';
+        let str = '';
         if ('innerHTML' in node) {
-          s = node.innerHTML;
+          str = node.innerHTML;
         } else {
-          var asXml = function (n) {
+          const asXml = (n) => {
             let s = '';
-            if (n.nodeType == 1) {
+            if (n.nodeType === 1) {
               s += `<${n.nodeName}`;
-              for (let i = 0; i < n.attributes.length; i++) {
+              for (let i = 0; i < n.attributes.length; i += 1) {
                 const { name } = n.attributes[i];
                 const value = n.attributes[i].value || '';
                 s += ` ${name}="${value.toString()}"`;
@@ -120,29 +118,29 @@ export default {
               } else {
                 s += '/>';
               }
-            } else if (n.nodeType == 3) {
+            } else if (n.nodeType === 3) {
               s += n.nodeValue;
-            } else if (n.nodeType == 4) {
+            } else if (n.nodeType === 4) {
               s += `<![CDATA[${n.nodeValue}]]>`;
             }
             return s;
           };
 
           for (let c = node.firstChild; c; c = c.nextSibling) {
-            s += asXml(c);
+            str += asXml(c);
           }
         }
-        return s;
+        return str;
       },
 
       escape(txt) {
-        return txt.replace(/[\\]/g, '\\\\').replace(/[\"]/g, '\\"').replace(/[\n]/g, '\\n').replace(/[\r]/g, '\\r');
+        return txt.replace(/[\\]/g, '\\\\').replace(/["]/g, '\\"').replace(/[\n]/g, '\\n').replace(/[\r]/g, '\\r');
       },
 
       removeWhite(e) {
         e.normalize();
         for (let n = e.firstChild; n;) {
-          if (n.nodeType == 3) { // text node
+          if (n.nodeType === 3) { // text node
             if (!n.nodeValue.match(/[^ \f\n\r\t\v]/)) {
               // pure whitespace text node
               const nxt = n.nextSibling;
@@ -151,7 +149,7 @@ export default {
             } else {
               n = n.nextSibling;
             }
-          } else if (n.nodeType == 1) { // element node
+          } else if (n.nodeType === 1) { // element node
             X.removeWhite(n);
             n = n.nextSibling;
           } else { // any other node
@@ -163,52 +161,48 @@ export default {
     };
 
     // Strip namespaces from XML tags
-    if (clean) {
-      xml = xml.replace(/<(\/?)([^:>\s]*:)?([^>]+)>/g, '<$1$3>');
-    }
+    const cleanXml = clean ? xml.replace(/<(\/?)([^:>\s]*:)?([^>]+)>/g, '<$1$3>') : xml;
 
     // Convert to an XML DOM Document
-    xml = (new DOMParser()).parseFromString(xml, 'text/xml');
+    const domRoot = (new DOMParser()).parseFromString(cleanXml, 'text/xml');
 
     // Start from document's root element
-    if (xml.nodeType == 9) {
-      xml = xml.documentElement;
-    }
+    const domElem = (domRoot.nodeType === 9) ? domRoot.documentElement : domRoot;
 
     const ret = {};
-    ret[xml.nodeName] = X.toObj(X.removeWhite(xml));
+    ret[domElem.nodeName] = X.toObj(X.removeWhite(domElem));
     return ret;
   },
 
   write(object) {
-    var toXml = function (v, name, ind) {
+    const toXml = (v, name, ind) => {
       let xml = '';
       if (v instanceof Array) {
-        for (let i = 0, n = v.length; i < n; i++) {
+        for (let i = 0, n = v.length; i < n; i += 1) {
           xml += `${ind + toXml(v[i], name, `${ind}\t`)}\n`;
         }
       } else if (typeof (v) === 'object') {
         let hasChild = false;
         xml += `${ind}<${name}`;
-        for (var m in v) {
-          if (m.charAt(0) == '@') {
+        Object.keys(v).forEach((m) => {
+          if (m.charAt(0) === '@') {
             xml += ` ${m.substr(1)}="${v[m].toString()}"`;
           } else {
             hasChild = true;
           }
-        }
+        });
         xml += hasChild ? '>' : '/>';
         if (hasChild) {
-          for (m in v) {
-            if (m == '#text') {
+          Object.keys(v).forEach((m) => {
+            if (m === '#text') {
               xml += v[m];
-            } else if (m == '#cdata') {
+            } else if (m === '#cdata') {
               xml += `<![CDATA[${v[m]}]]>`;
-            } else if (m.charAt(0) != '@') {
+            } else if (m.charAt(0) !== '@') {
               xml += toXml(v[m], m, `${ind}\t`);
             }
-          }
-          xml += `${xml.charAt(xml.length - 1) == '\n' ? ind : ''}</${name}>`;
+          });
+          xml += `${xml.charAt(xml.length - 1) === '\n' ? ind : ''}</${name}>`;
         }
       } else {
         xml += `${ind}<${name}>${v.toString()}</${name}>`;
@@ -217,9 +211,9 @@ export default {
     };
 
     let xml = '';
-    for (const i in object) {
+    Object.keys(object).forEach((i) => {
       xml += toXml(object[i], i, '');
-    }
+    });
     return xml;
   },
 };

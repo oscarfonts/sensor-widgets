@@ -1,7 +1,3 @@
-/**
- * @author Martí Pericay <marti@pericay.com>
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
 import ld from './locale-date';
 
 function loadCSS(url) {
@@ -23,6 +19,7 @@ export default {
       loadCSS(config.custom_css_url);
     }
     if (config.footnote !== undefined && el.querySelector('.footnote')) {
+      // eslint-disable-next-line no-param-reassign
       el.querySelector('.footnote').innerHTML = config.footnote;
     }
     if (config.display_utc_times) {

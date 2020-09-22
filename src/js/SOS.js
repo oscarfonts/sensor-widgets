@@ -1,6 +1,5 @@
-/**
- * @author Oscar Fonts <oscar.fonts@geomati.co>
- */
+/* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+
 import XML from './XML';
 
 export default {
@@ -30,10 +29,10 @@ export default {
 
     this._send(request, (response) => {
       // Convert the SensorML description to a JSON object
-      const description = response.procedureDescription.hasOwnProperty('description')
-        ? response.procedureDescription.description : response.procedureDescription;
-      const json = XML.read(description, true);
-      callback(json.SensorML.member);
+      const { procedureDescription } = response;
+      const { description } = procedureDescription;
+      const { SensorML } = XML.read(description || procedureDescription, true);
+      callback(SensorML.member);
     }, errorHandler);
   },
 
@@ -65,8 +64,8 @@ export default {
       request.observedProperty = properties;
     }
 
-    this._send(request, (response) => {
-      callback(response.dataAvailability);
+    this._send(request, ({ dataAvailability }) => {
+      callback(dataAvailability);
     }, errorHandler);
   },
 
@@ -89,7 +88,7 @@ export default {
 
     if (time) {
       let operation;
-      if (time.length && time.length == 2) {
+      if (time.length && time.length === 2) {
         // Time Range
         operation = 'during';
       } else {
@@ -104,8 +103,8 @@ export default {
       request.temporalFilter = [filter];
     }
 
-    this._send(request, (response) => {
-      callback(response.observations);
+    this._send(request, ({ observations }) => {
+      callback(observations);
     }, errorHandler);
   },
 
@@ -115,15 +114,15 @@ export default {
 
     const xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4) {
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
         let response = xhr.responseText;
         try {
           response = JSON.parse(response);
         } catch (e) {
           // OK, not JSON
         }
-        if (xhr.status == 200) {
+        if (xhr.status === 200) {
           onSuccess.call(this, response);
         } else {
           const e = {
@@ -132,13 +131,12 @@ export default {
             request,
             response,
           };
-          console.log(e);
           if (onError) {
             onError.call(this, e.status, e.url, e.request, e.response);
           }
         }
       }
-    }.bind(this);
+    };
 
     xhr.open('POST', this._url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
