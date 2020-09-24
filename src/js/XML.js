@@ -179,7 +179,7 @@ export default {
       let xml = '';
       if (v instanceof Array) {
         for (let i = 0, n = v.length; i < n; i += 1) {
-          xml += `${ind + toXml(v[i], name, `${ind}\t`)}\n`;
+          xml += `${ind + toXml(v[i], name, `${ind}`)}\n`;
         }
       } else if (typeof (v) === 'object') {
         let hasChild = false;
@@ -199,7 +199,7 @@ export default {
             } else if (m === '#cdata') {
               xml += `<![CDATA[${v[m]}]]>`;
             } else if (m.charAt(0) !== '@') {
-              xml += toXml(v[m], m, `${ind}\t`);
+              xml += toXml(v[m], m, `${ind}`);
             }
           });
           xml += `${xml.charAt(xml.length - 1) === '\n' ? ind : ''}</${name}>`;
