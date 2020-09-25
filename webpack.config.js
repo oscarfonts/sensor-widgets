@@ -29,7 +29,7 @@ module.exports = (env) => ({
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.svg$/i,
+        test: /\.(svg|xml)$/i,
         use: 'raw-loader',
       },
       {

@@ -1,0 +1,24 @@
+<sos:GetObservation
+        xmlns:sos="http://www.opengis.net/sos/2.0"
+        xmlns:fes="http://www.opengis.net/fes/2.0"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        service="SOS"
+        version="2.0.0"
+        xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd">
+    <sos:procedure>http://sensors.portdebarcelona.cat/def/weather/procedure</sos:procedure>
+    <sos:offering>http://sensors.portdebarcelona.cat/def/weather/offerings#1M</sos:offering>
+    <sos:observedProperty>http://sensors.portdebarcelona.cat/def/weather/properties#33M</sos:observedProperty>
+    <sos:temporalFilter>
+        <fes:TEquals>
+            <fes:ValueReference>resultTime</fes:ValueReference>
+            <gml:TimeInstant gml:id="ti_1">
+                <gml:timePosition>latest</gml:timePosition>
+            </gml:TimeInstant>
+        </fes:TEquals>
+    </sos:temporalFilter>
+
+    <sos:featureOfInterest>http://sensors.portdebarcelona.cat/def/weather/features#02</sos:featureOfInterest>
+
+    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+</sos:GetObservation>

@@ -10,6 +10,8 @@ export default {
     const X = {
       at: (clean ? '' : '@'),
 
+      cleanName: (name) => (clean ? name.split(/:(.+)/)[1] || name : name),
+
       toObj(elem) {
         let o = {};
         if (elem.nodeType === 1) { // element node
@@ -19,7 +21,7 @@ export default {
               const { value } = elem.attributes[i];
               const isNs = name.lastIndexOf('xmlns:', 0) === 0;
               if (!(clean && isNs)) { // Hide xmlns attributes
-                o[X.at + name] = (value || '').toString();
+                o[X.at + X.cleanName(name)] = (value || '').toString();
               }
             }
           }
