@@ -13,7 +13,7 @@ module.exports = (env) => ({
       wizard: './src/js/pages/wizard.js',
       'meteo.apb.es': './src/js/pages/meteo.apb.es.js',
     },
-  devtool: env.prod ? 'source-map' : 'eval-cheap-module-source-map',
+  devtool: env.prod ? 'source-map' : 'eval-source-map',
   devServer: {
     contentBase: './dist',
   },

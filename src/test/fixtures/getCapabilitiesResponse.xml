@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:Capabilities
+        xmlns:sos="http://www.opengis.net/sos/2.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:swes="http://www.opengis.net/swes/2.0"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        version="2.0.0"
+        xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetCapabilities.xsd http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd">
+    <sos:contents>
+        <sos:Contents>
+            <swes:offering>
+                <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+                    <swes:identifier>http://sensors.portdebarcelona.cat/def/weather/offerings#10M</swes:identifier>
+                    <swes:name codeSpace="eng">Weather: 10-minute measures</swes:name>
+                    <swes:procedure>http://sensors.portdebarcelona.cat/def/weather/procedure</swes:procedure>
+                    <swes:procedureDescriptionFormat>http://inspire.ec.europa.eu/schemas/ompr/3.0</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01</swes:observableProperty>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01M</swes:observableProperty>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01N</swes:observableProperty>
+                    <swes:relatedFeature>
+                        <swes:FeatureRelationship>
+                            <swes:target xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#01"/>
+                        </swes:FeatureRelationship>
+                    </swes:relatedFeature>
+                    <swes:relatedFeature>
+                        <swes:FeatureRelationship>
+                            <swes:target xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#02"/>
+                        </swes:FeatureRelationship>
+                    </swes:relatedFeature>
+                    <sos:observedArea>
+                        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+                            <gml:lowerCorner>41.30755 2.13088</gml:lowerCorner>
+                            <gml:upperCorner>41.38001 2.18234</gml:upperCorner>
+                        </gml:Envelope>
+                    </sos:observedArea>
+                    <sos:phenomenonTime>
+                        <gml:TimePeriod gml:id="phenomenonTime_1">
+                            <gml:beginPosition>2020-03-10T12:20:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2020-09-25T07:30:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:phenomenonTime>
+                    <sos:resultTime>
+                        <gml:TimePeriod gml:id="resultTime_1">
+                            <gml:beginPosition>2020-03-10T12:20:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2020-09-25T07:30:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:resultTime>
+                    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:ObservationOffering>
+            </swes:offering>
+            <swes:offering>
+                <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+                    <swes:identifier>http://sensors.portdebarcelona.cat/def/weather/offerings#1M</swes:identifier>
+                    <swes:name codeSpace="eng">Weather: 1-minute measures</swes:name>
+                    <swes:procedure>http://sensors.portdebarcelona.cat/def/weather/procedure</swes:procedure>
+                    <swes:procedureDescriptionFormat>http://inspire.ec.europa.eu/schemas/ompr/3.0</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01</swes:observableProperty>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01M</swes:observableProperty>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01N</swes:observableProperty>
+                    <swes:relatedFeature>
+                        <swes:FeatureRelationship>
+                            <swes:target xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#01"/>
+                        </swes:FeatureRelationship>
+                    </swes:relatedFeature>
+                    <swes:relatedFeature>
+                        <swes:FeatureRelationship>
+                            <swes:target xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#02"/>
+                        </swes:FeatureRelationship>
+                    </swes:relatedFeature>
+                    <sos:observedArea>
+                        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+                            <gml:lowerCorner>41.30755 2.13088</gml:lowerCorner>
+                            <gml:upperCorner>41.38001 2.18234</gml:upperCorner>
+                        </gml:Envelope>
+                    </sos:observedArea>
+                    <sos:phenomenonTime>
+                        <gml:TimePeriod gml:id="phenomenonTime_2">
+                            <gml:beginPosition>2020-08-03T16:15:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2020-09-25T07:33:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:phenomenonTime>
+                    <sos:resultTime>
+                        <gml:TimePeriod gml:id="resultTime_2">
+                            <gml:beginPosition>2020-08-03T16:15:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2020-09-25T07:33:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:resultTime>
+                    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:ObservationOffering>
+            </swes:offering>
+            <swes:offering>
+                <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+                    <swes:identifier>http://sensors.portdebarcelona.cat/def/weather/offerings#30M</swes:identifier>
+                    <swes:name codeSpace="eng">Weather: 30-minute measures</swes:name>
+                    <swes:procedure>http://sensors.portdebarcelona.cat/def/weather/procedure</swes:procedure>
+                    <swes:procedureDescriptionFormat>http://inspire.ec.europa.eu/schemas/ompr/3.0</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+                    <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01</swes:observableProperty>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01M</swes:observableProperty>
+                    <swes:observableProperty>http://sensors.portdebarcelona.cat/def/weather/properties#01N</swes:observableProperty>
+                    <swes:relatedFeature>
+                        <swes:FeatureRelationship>
+                            <swes:target xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#01"/>
+                        </swes:FeatureRelationship>
+                    </swes:relatedFeature>
+                    <swes:relatedFeature>
+                        <swes:FeatureRelationship>
+                            <swes:target xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#02"/>
+                        </swes:FeatureRelationship>
+                    </swes:relatedFeature>
+                    <sos:observedArea>
+                        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+                            <gml:lowerCorner>41.30755 2.13088</gml:lowerCorner>
+                            <gml:upperCorner>41.38001 2.18234</gml:upperCorner>
+                        </gml:Envelope>
+                    </sos:observedArea>
+                    <sos:phenomenonTime>
+                        <gml:TimePeriod gml:id="phenomenonTime_3">
+                            <gml:beginPosition>2020-08-03T16:00:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2020-09-25T07:30:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:phenomenonTime>
+                    <sos:resultTime>
+                        <gml:TimePeriod gml:id="resultTime_3">
+                            <gml:beginPosition>2020-08-03T16:00:00.000Z</gml:beginPosition>
+                            <gml:endPosition>2020-09-25T07:30:00.000Z</gml:endPosition>
+                        </gml:TimePeriod>
+                    </sos:resultTime>
+                    <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:ObservationOffering>
+            </swes:offering>
+        </sos:Contents>
+    </sos:contents>
+</sos:Capabilities>

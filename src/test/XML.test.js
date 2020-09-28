@@ -7,7 +7,7 @@ const removeWhiteSpace = (str) => str.replace(/\s+/g, ' ').replace(/>[\t ]+</g, 
 
 describe('XML', () => {
   describe('#read()', () => {
-    it('reads simple XML', () => {
+    it('should read simple XML', () => {
       // GIVEN
       const givenXml = '<xml><test>Hola</test></xml>';
 
@@ -18,7 +18,7 @@ describe('XML', () => {
       expect(result).to.deep.equal({ xml: { test: 'Hola' } });
     });
 
-    it('reads XML with namespaces', () => {
+    it('should read XML with namespaces', () => {
       // WHEN
       const result = XML.read(getLatestObservationRequest);
 
@@ -51,7 +51,7 @@ describe('XML', () => {
       expect(result).to.deep.equal(expected);
     });
 
-    it('reads XML without namespaces', () => {
+    it('should read XML without namespaces', () => {
       // WHEN
       const result = XML.read(getLatestObservationRequest, true);
 
@@ -82,7 +82,7 @@ describe('XML', () => {
   });
 
   describe('#write()', () => {
-    it('writes simple XML', () => {
+    it('should write simple XML', () => {
       // GIVEN
       const givenObject = { xml: { test: 'Hola' } };
 
@@ -93,7 +93,7 @@ describe('XML', () => {
       expect(result).to.deep.equal('<xml><test>Hola</test></xml>');
     });
 
-    it('writes XML with namespaces', () => {
+    it('should write XML with namespaces', () => {
       // GIVEN
       const givenObject = {
         'sos:GetObservation': {

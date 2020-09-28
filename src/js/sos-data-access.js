@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary, camelcase */
-import SOS from './SOS';
+import SOS, { isArray } from './SOS';
 
 const propertyNames = {};
 const waitingDescribeResponse = {};
@@ -7,10 +7,6 @@ const propertyCallbackQueue = {};
 
 export default (config, redraw, errorHandler) => {
   SOS.setUrl(config.service);
-
-  function isArray(obj) {
-    return Object.prototype.toString.call(obj) === '[object Array]';
-  }
 
   function getPropertyName(procedure, id, callback, context) {
     if (!propertyNames[procedure]) {
