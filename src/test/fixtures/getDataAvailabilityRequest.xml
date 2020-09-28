@@ -1,0 +1,11 @@
+<gda:GetDataAvailability
+        xmlns:gda="http://www.opengis.net/sosgda/1.0"
+        service="SOS"
+        version="2.0.0">
+    <gda:procedure>http://sensors.portdebarcelona.cat/def/weather/procedure</gda:procedure>
+    <gda:offering>http://sensors.portdebarcelona.cat/def/weather/offerings#10M</gda:offering>
+    <gda:featureOfInterest>http://sensors.portdebarcelona.cat/def/weather/features#01</gda:featureOfInterest>
+    <gda:observedProperty>http://sensors.portdebarcelona.cat/def/weather/properties#30</gda:observedProperty>
+    <gda:observedProperty>http://sensors.portdebarcelona.cat/def/weather/properties#30M</gda:observedProperty>
+    <gda:observedProperty>http://sensors.portdebarcelona.cat/def/weather/properties#30N</gda:observedProperty>
+</gda:GetDataAvailability>
