@@ -1,0 +1,7 @@
+<sos:GetFeatureOfInterest
+        xmlns:sos="http://www.opengis.net/sos/2.0"
+        service="SOS"
+        version="2.0.0">
+    <sos:procedure>http://sensors.portdebarcelona.cat/def/weather/procedure</sos:procedure>
+</sos:GetFeatureOfInterest>
+

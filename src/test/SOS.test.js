@@ -11,6 +11,10 @@ import describeSensorXmlRequest from './fixtures/describeSensorRequest.xml';
 import describeSensorXmlResponse from './fixtures/describeSensorResponse.xml';
 import describeSensorJsonResponse from './fixtures/describeSensorResponse.json';
 
+import getFeatureOfInterestXmlRequest from './fixtures/getFeatureOfInterestRequest.xml';
+import getFeatureOfInterestXmlResponse from './fixtures/getFeatureOfInterestResponse.xml';
+import getFeatureOfInterestJsonResponse from './fixtures/getFeatureOfInterestResponse.json';
+
 const removeWhiteSpace = (str) => str.replace(/\s+/g, ' ').replace(/>[\t ]+</g, '><').trim();
 
 let fakeServer;
@@ -60,6 +64,28 @@ describe('SOS', () => {
       expect(fakeServer.requests).to.have.lengthOf(1);
       expect(fakeServer.requests[0].requestBody)
         .to.equal(removeWhiteSpace(describeSensorXmlRequest));
+    });
+  });
+
+  describe('#getFeatureOfInterest()', () => {
+    it('should return a well-formatted feature collection object', () => {
+      // GIVEN
+      const givenProcedure = 'http://sensors.portdebarcelona.cat/def/weather/procedure';
+      fakeServer.respondWith('POST', '/sos', [200, { 'Content-Type': 'application/xml' }, getFeatureOfInterestXmlResponse]);
+      const onSuccess = sinon.spy();
+      const onError = sinon.spy();
+
+      // WHEN
+      SOS.setUrl('/sos').getFeatureOfInterest(givenProcedure, onSuccess, onError);
+      fakeServer.respond();
+
+      // THEN
+      sinon.assert.calledWith(onSuccess, getFeatureOfInterestJsonResponse);
+      sinon.assert.notCalled(onError);
+
+      expect(fakeServer.requests).to.have.lengthOf(1);
+      expect(fakeServer.requests[0].requestBody)
+        .to.equal(removeWhiteSpace(getFeatureOfInterestXmlRequest));
     });
   });
 });

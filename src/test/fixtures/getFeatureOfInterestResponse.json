@@ -1,0 +1,38 @@
+[
+  {
+    "identifier" : {
+      "codespace" : "",
+      "value" : "http://sensors.portdebarcelona.cat/def/weather/features#01"
+    },
+    "name" : {
+      "codespace" : "http://www.opengis.net/def/nil/OGC/0/unknown",
+      "value" : "Dispensari"
+    },
+    "sampledFeature" : "http://planolws.portdebarcelona.cat/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=WS_AGR_20131025:zones_port_area_polygon&SRSNAME=EPSG:4326",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [
+        41.38001,
+        2.18221
+      ]
+    }
+  },
+  {
+    "identifier" : {
+      "codespace" : "",
+      "value" : "http://sensors.portdebarcelona.cat/def/weather/features#02"
+    },
+    "name" : {
+      "codespace" : "http://www.opengis.net/def/nil/OGC/0/unknown",
+      "value" : "Sirena"
+    },
+    "sampledFeature" : "http://planolws.portdebarcelona.cat/geoserver/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=WS_AGR_20131025:zones_port_area_polygon&SRSNAME=EPSG:4326",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [
+        41.34121,
+        2.16611
+      ]
+    }
+  }
+]

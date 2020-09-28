@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:GetFeatureOfInterestResponse xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetFeatureOfInterest.xsd http://www.opengis.net/sampling/2.0 http://schemas.opengis.net/sampling/2.0/samplingFeature.xsd http://inspire.ec.europa.eu/schemas/ef/4.0 http://inspire.ec.europa.eu/schemas/ef/4.0/EnvironmentalMonitoringFacilities.xsd http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd http://www.opengis.net/samplingSpecimen/2.0 http://schemas.opengis.net/samplingSpecimen/2.0/specimen.xsd">
+    <sos:featureMember>
+        <sams:SF_SpatialSamplingFeature xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" gml:id="ssf_56FEDC163DA3E0C8EF58DA0F4BCA2EB6AA0327FD">
+            <gml:identifier codeSpace="">http://sensors.portdebarcelona.cat/def/weather/features#01</gml:identifier>
+            <gml:name codeSpace="http://www.opengis.net/def/nil/OGC/0/unknown">Dispensari</gml:name>
+            <sf:sampledFeature xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://planolws.portdebarcelona.cat/geoserver/wfs?SERVICE=WFS&amp;VERSION=1.0.0&amp;REQUEST=GetFeature&amp;TYPENAME=WS_AGR_20131025:zones_port_area_polygon&amp;SRSNAME=EPSG:4326"/>
+            <sams:shape>
+                <gml:Point gml:id="Point_ssf_56FEDC163DA3E0C8EF58DA0F4BCA2EB6AA0327FD">
+                    <gml:pos srsName="http://www.opengis.net/def/crs/EPSG/0/4326">41.38001 2.18221</gml:pos>
+                </gml:Point>
+            </sams:shape>
+        </sams:SF_SpatialSamplingFeature>
+    </sos:featureMember>
+    <sos:featureMember>
+        <sams:SF_SpatialSamplingFeature xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" gml:id="ssf_0B059F95D5A65CF025CA7CCB857ECAAC26FA5BB3">
+            <gml:identifier codeSpace="">http://sensors.portdebarcelona.cat/def/weather/features#02</gml:identifier>
+            <gml:name codeSpace="http://www.opengis.net/def/nil/OGC/0/unknown">Sirena</gml:name>
+            <sf:sampledFeature xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://planolws.portdebarcelona.cat/geoserver/wfs?SERVICE=WFS&amp;VERSION=1.0.0&amp;REQUEST=GetFeature&amp;TYPENAME=WS_AGR_20131025:zones_port_area_polygon&amp;SRSNAME=EPSG:4326"/>
+            <sams:shape>
+                <gml:Point gml:id="Point_ssf_0B059F95D5A65CF025CA7CCB857ECAAC26FA5BB3">
+                    <gml:pos srsName="http://www.opengis.net/def/crs/EPSG/0/4326">41.34121 2.16611</gml:pos>
+                </gml:Point>
+            </sams:shape>
+        </sams:SF_SpatialSamplingFeature>
+    </sos:featureMember>
+</sos:GetFeatureOfInterestResponse>

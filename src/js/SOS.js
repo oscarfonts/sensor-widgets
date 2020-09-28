@@ -93,12 +93,36 @@ export default {
 
   getFeatureOfInterest(procedure, callback, errorHandler) {
     const request = {
-      request: 'GetFeatureOfInterest',
-      procedure,
+      'sos:GetFeatureOfInterest': {
+        '@xmlns:sos': 'http://www.opengis.net/sos/2.0',
+        '@service': 'SOS',
+        '@version': '2.0.0',
+        'sos:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
+      },
     };
 
-    this._send_json(request, (response) => {
-      callback(response.featureOfInterest);
+    this._send_xml(request, (response) => {
+      const cleanResponse = response.GetFeatureOfInterestResponse.featureMember
+        .map((feature) => feature.SF_SpatialSamplingFeature)
+        .map((feature) => ({
+          identifier: {
+            codespace: '',
+            value: feature.identifier['#text'],
+          },
+          name: {
+            codespace: feature.name.codeSpace,
+            value: feature.name['#text'],
+          },
+          sampledFeature: feature.sampledFeature.href,
+          geometry: {
+            // TODO this won't work for geometry types other than Point
+            type: Object.keys(feature.shape)[0],
+            coordinates: Object.values(feature.shape)[0].pos['#text'].split(' ').map((coord) => Number(coord)),
+          },
+        }));
+
+      console.log(JSON.stringify(cleanResponse, null, 2));
+      callback(cleanResponse);
     }, errorHandler);
 
     return this;
