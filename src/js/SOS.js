@@ -72,17 +72,20 @@ export default {
 
   describeSensor(procedure, callback, errorHandler) {
     const request = {
-      request: 'DescribeSensor',
-      procedure,
-      procedureDescriptionFormat: 'http://www.opengis.net/sensorML/1.0.1',
+      'swes:DescribeSensor': {
+        '@xmlns:swes': 'http://www.opengis.net/swes/2.0',
+        '@service': 'SOS',
+        '@version': '2.0.0',
+        'swes:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
+        'swes:procedureDescriptionFormat': 'http://www.opengis.net/sensorML/1.0.1',
+      },
     };
 
-    this._send_json(request, (response) => {
+    this._send_xml(request, (response) => {
       // Convert the SensorML description to a JSON object
-      const { procedureDescription } = response;
-      const { description } = procedureDescription;
-      const { SensorML } = XML.read(description || procedureDescription, true);
-      callback(SensorML.member);
+      const cleanResponse = response.DescribeSensorResponse.description
+        .SensorDescription.data.SensorML.member;
+      callback(cleanResponse);
     }, errorHandler);
 
     return this;

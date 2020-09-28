@@ -1,0 +1,250 @@
+{
+  "System": {
+    "keywords": {
+      "KeywordList": {
+        "keyword": [
+          "Weather - Port de Barcelona",
+          "Port de Barcelona Weather Station Network",
+          "http://sensors.portdebarcelona.cat/def/weather/procedure",
+          "http://sensors.portdebarcelona.cat/def/weather/offerings#1M",
+          "http://sensors.portdebarcelona.cat/def/weather/offerings#10M",
+          "http://sensors.portdebarcelona.cat/def/weather/offerings#30M",
+          "http://sensors.portdebarcelona.cat/def/weather/features#01",
+          "http://sensors.portdebarcelona.cat/def/weather/features#02",
+          "http://sensors.portdebarcelona.cat/def/weather/properties#01",
+          "http://sensors.portdebarcelona.cat/def/weather/properties#01M",
+          "http://sensors.portdebarcelona.cat/def/weather/properties#01N"
+        ]
+      }
+    },
+    "identification": {
+      "IdentifierList": {
+        "identifier": [
+          {
+            "name": "uniqueID",
+            "Term": {
+              "definition": "urn:ogc:def:identifier:OGC:1.0:uniqueID",
+              "value": "http://sensors.portdebarcelona.cat/def/weather/procedure"
+            }
+          },
+          {
+            "name": "shortName",
+            "Term": {
+              "definition": "urn:ogc:def:identifier:OGC:1.0:shortName",
+              "value": "Weather - Port de Barcelona"
+            }
+          },
+          {
+            "name": "longName",
+            "Term": {
+              "definition": "urn:ogc:def:identifier:OGC:1.0:longName",
+              "value": "Port de Barcelona Weather Station Network"
+            }
+          }
+        ]
+      }
+    },
+    "validTime": {
+      "TimePeriod": {
+        "beginPosition": "2020-08-03T15:44:19.548Z",
+        "endPosition": {
+          "indeterminatePosition": "unknown"
+        }
+      }
+    },
+    "capabilities": [
+      {
+        "name": "observedBBOX",
+        "DataRecord": {
+          "field": {
+            "name": "observedBBOX",
+            "Envelope": {
+              "definition": "urn:ogc:def:property:OGC:1.0:observedBBOX",
+              "referenceFrame": "4326",
+              "lowerCorner": {
+                "Vector": {
+                  "coordinate": [
+                    {
+                      "name": "easting",
+                      "Quantity": {
+                        "axisID": "x",
+                        "uom": {
+                          "code": "degree"
+                        },
+                        "value": "2.13088"
+                      }
+                    },
+                    {
+                      "name": "northing",
+                      "Quantity": {
+                        "axisID": "y",
+                        "uom": {
+                          "code": "degree"
+                        },
+                        "value": "41.30755"
+                      }
+                    }
+                  ]
+                }
+              },
+              "upperCorner": {
+                "Vector": {
+                  "coordinate": [
+                    {
+                      "name": "easting",
+                      "Quantity": {
+                        "axisID": "x",
+                        "uom": {
+                          "code": "degree"
+                        },
+                        "value": "2.18234"
+                      }
+                    },
+                    {
+                      "name": "northing",
+                      "Quantity": {
+                        "axisID": "y",
+                        "uom": {
+                          "code": "degree"
+                        },
+                        "value": "41.38001"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "featuresOfInterest",
+        "SimpleDataRecord": {
+          "field": [
+            {
+              "name": "featureOfInterestID",
+              "Text": {
+                "definition": "http://www.opengis.net/def/featureOfInterest/identifier",
+                "name": {
+                  "codeSpace": "http://www.opengis.net/def/nil/OGC/0/unknown",
+                  "#text": "Dispensari"
+                },
+                "value": "http://sensors.portdebarcelona.cat/def/weather/features#01"
+              }
+            },
+            {
+              "name": "featureOfInterestID",
+              "Text": {
+                "definition": "http://www.opengis.net/def/featureOfInterest/identifier",
+                "name": {
+                  "codeSpace": "http://www.opengis.net/def/nil/OGC/0/unknown",
+                  "#text": "Sirena"
+                },
+                "value": "http://sensors.portdebarcelona.cat/def/weather/features#02"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "offerings",
+        "SimpleDataRecord": {
+          "field": [
+            {
+              "name": "Weather: 10-minute measures",
+              "Text": {
+                "definition": "http://www.opengis.net/def/offering/identifier",
+                "name": {
+                  "codeSpace": "eng",
+                  "#text": "Weather: 10-minute measures"
+                },
+                "value": "http://sensors.portdebarcelona.cat/def/weather/offerings#10M"
+              }
+            },
+            {
+              "name": "Weather: 1-minute measures",
+              "Text": {
+                "definition": "http://www.opengis.net/def/offering/identifier",
+                "name": {
+                  "codeSpace": "eng",
+                  "#text": "Weather: 1-minute measures"
+                },
+                "value": "http://sensors.portdebarcelona.cat/def/weather/offerings#1M"
+              }
+            },
+            {
+              "name": "Weather: 30-minute measures",
+              "Text": {
+                "definition": "http://www.opengis.net/def/offering/identifier",
+                "name": {
+                  "codeSpace": "eng",
+                  "#text": "Weather: 30-minute measures"
+                },
+                "value": "http://sensors.portdebarcelona.cat/def/weather/offerings#30M"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "contact": {
+      "ContactList": {
+        "member": {
+          "ResponsibleParty": {
+            "individualName": "TBA",
+            "organizationName": "52North",
+            "positionName": "TBA",
+            "contactInfo": {
+              "phone": {
+                "voice": "+49(0)251/396 371-0"
+              },
+              "address": {
+                "deliveryPoint": "Martin-Luther-King-Weg 24",
+                "city": "Münster",
+                "postalCode": "48155",
+                "country": "Germany",
+                "electronicMailAddress": "info@52north.org"
+              },
+              "onlineResource": {
+                "href": "http://52north.org/swe"
+              }
+            }
+          }
+        }
+      }
+    },
+    "outputs": {
+      "OutputList": {
+        "output": [
+          {
+            "name": "SULPHUR DIOXIDE AVG",
+            "Quantity": {
+              "definition": "http://sensors.portdebarcelona.cat/def/weather/properties#01",
+              "uom": {
+                "code": "µg/m3"
+              }
+            }
+          },
+          {
+            "name": "Sulphur Dioxide Max",
+            "Quantity": {
+              "definition": "http://sensors.portdebarcelona.cat/def/weather/properties#01M",
+              "uom": {
+                "code": "µg/m3"
+              }
+            }
+          },
+          {
+            "name": "Sulphur Dioxide Min",
+            "Quantity": {
+              "definition": "http://sensors.portdebarcelona.cat/def/weather/properties#01N",
+              "uom": {
+                "code": "µg/m3"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

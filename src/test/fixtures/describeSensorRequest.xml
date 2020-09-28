@@ -1,0 +1,7 @@
+<swes:DescribeSensor
+        xmlns:swes="http://www.opengis.net/swes/2.0"
+        service="SOS"
+        version="2.0.0">
+    <swes:procedure>http://sensors.portdebarcelona.cat/def/weather/procedure</swes:procedure>
+    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+</swes:DescribeSensor>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<swes:DescribeSensorResponse xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gml1="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/swe/1.0.1 http://schemas.opengis.net/sweCommon/1.0.1/swe.xsd http://www.opengis.net/gml http://schemas.opengis.net/gml/3.1.1/base/gml.xsd http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swesDescribeSensor.xsd http://inspire.ec.europa.eu/schemas/ef/4.0 http://inspire.ec.europa.eu/schemas/ef/4.0/EnvironmentalMonitoringFacilities.xsd http://www.opengis.net/sensorML/1.0.1 http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd">
+    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+    <swes:description>
+        <swes:SensorDescription>
+            <swes:validTime>
+                <gml:TimePeriod gml:id="tp_03577E277DDB5457DF80D648B168EEFAC43A76EC">
+                    <gml:beginPosition>2020-08-03T15:44:19.548Z</gml:beginPosition>
+                    <gml:endPosition indeterminatePosition="unknown"/>
+                </gml:TimePeriod>
+            </swes:validTime>
+            <swes:data>
+                <sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" version="1.0.1">
+                    <sml:member>
+                        <sml:System xmlns:swe="http://www.opengis.net/swe/1.0.1">
+                            <sml:keywords>
+                                <sml:KeywordList>
+                                    <sml:keyword>Weather - Port de Barcelona</sml:keyword>
+                                    <sml:keyword>Port de Barcelona Weather Station Network</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/procedure</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/offerings#1M</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/offerings#10M</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/offerings#30M</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/features#01</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/features#02</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/properties#01</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/properties#01M</sml:keyword>
+                                    <sml:keyword>http://sensors.portdebarcelona.cat/def/weather/properties#01N</sml:keyword>
+                                </sml:KeywordList>
+                            </sml:keywords>
+                            <sml:identification>
+                                <sml:IdentifierList>
+                                    <sml:identifier name="uniqueID">
+                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
+                                            <sml:value>http://sensors.portdebarcelona.cat/def/weather/procedure</sml:value>
+                                        </sml:Term>
+                                    </sml:identifier>
+                                    <sml:identifier name="shortName">
+                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
+                                            <sml:value>Weather - Port de Barcelona</sml:value>
+                                        </sml:Term>
+                                    </sml:identifier>
+                                    <sml:identifier name="longName">
+                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
+                                            <sml:value>Port de Barcelona Weather Station Network</sml:value>
+                                        </sml:Term>
+                                    </sml:identifier>
+                                </sml:IdentifierList>
+                            </sml:identification>
+                            <sml:validTime>
+                                <gml1:TimePeriod>
+                                    <gml1:beginPosition>2020-08-03T15:44:19.548Z</gml1:beginPosition>
+                                    <gml1:endPosition indeterminatePosition="unknown"/>
+                                </gml1:TimePeriod>
+                            </sml:validTime>
+                            <sml:capabilities name="observedBBOX">
+                                <swe:DataRecord>
+                                    <swe:field name="observedBBOX">
+                                        <swe:Envelope definition="urn:ogc:def:property:OGC:1.0:observedBBOX" referenceFrame="4326">
+                                            <swe:lowerCorner>
+                                                <swe:Vector>
+                                                    <swe:coordinate name="easting">
+                                                        <swe:Quantity axisID="x">
+                                                            <swe:uom code="degree"/>
+                                                            <swe:value>2.13088</swe:value>
+                                                        </swe:Quantity>
+                                                    </swe:coordinate>
+                                                    <swe:coordinate name="northing">
+                                                        <swe:Quantity axisID="y">
+                                                            <swe:uom code="degree"/>
+                                                            <swe:value>41.30755</swe:value>
+                                                        </swe:Quantity>
+                                                    </swe:coordinate>
+                                                </swe:Vector>
+                                            </swe:lowerCorner>
+                                            <swe:upperCorner>
+                                                <swe:Vector>
+                                                    <swe:coordinate name="easting">
+                                                        <swe:Quantity axisID="x">
+                                                            <swe:uom code="degree"/>
+                                                            <swe:value>2.18234</swe:value>
+                                                        </swe:Quantity>
+                                                    </swe:coordinate>
+                                                    <swe:coordinate name="northing">
+                                                        <swe:Quantity axisID="y">
+                                                            <swe:uom code="degree"/>
+                                                            <swe:value>41.38001</swe:value>
+                                                        </swe:Quantity>
+                                                    </swe:coordinate>
+                                                </swe:Vector>
+                                            </swe:upperCorner>
+                                        </swe:Envelope>
+                                    </swe:field>
+                                </swe:DataRecord>
+                            </sml:capabilities>
+                            <sml:capabilities name="featuresOfInterest">
+                                <swe:SimpleDataRecord>
+                                    <swe:field name="featureOfInterestID">
+                                        <swe:Text definition="http://www.opengis.net/def/featureOfInterest/identifier">
+                                            <gml1:name codeSpace="http://www.opengis.net/def/nil/OGC/0/unknown">Dispensari</gml1:name>
+                                            <swe:value>http://sensors.portdebarcelona.cat/def/weather/features#01</swe:value>
+                                        </swe:Text>
+                                    </swe:field>
+                                    <swe:field name="featureOfInterestID">
+                                        <swe:Text definition="http://www.opengis.net/def/featureOfInterest/identifier">
+                                            <gml1:name codeSpace="http://www.opengis.net/def/nil/OGC/0/unknown">Sirena</gml1:name>
+                                            <swe:value>http://sensors.portdebarcelona.cat/def/weather/features#02</swe:value>
+                                        </swe:Text>
+                                    </swe:field>
+                                </swe:SimpleDataRecord>
+                            </sml:capabilities>
+                            <sml:capabilities name="offerings">
+                                <swe:SimpleDataRecord>
+                                    <swe:field name="Weather: 10-minute measures">
+                                        <swe:Text definition="http://www.opengis.net/def/offering/identifier">
+                                            <gml1:name codeSpace="eng">Weather: 10-minute measures</gml1:name>
+                                            <swe:value>http://sensors.portdebarcelona.cat/def/weather/offerings#10M</swe:value>
+                                        </swe:Text>
+                                    </swe:field>
+                                    <swe:field name="Weather: 1-minute measures">
+                                        <swe:Text definition="http://www.opengis.net/def/offering/identifier">
+                                            <gml1:name codeSpace="eng">Weather: 1-minute measures</gml1:name>
+                                            <swe:value>http://sensors.portdebarcelona.cat/def/weather/offerings#1M</swe:value>
+                                        </swe:Text>
+                                    </swe:field>
+                                    <swe:field name="Weather: 30-minute measures">
+                                        <swe:Text definition="http://www.opengis.net/def/offering/identifier">
+                                            <gml1:name codeSpace="eng">Weather: 30-minute measures</gml1:name>
+                                            <swe:value>http://sensors.portdebarcelona.cat/def/weather/offerings#30M</swe:value>
+                                        </swe:Text>
+                                    </swe:field>
+                                </swe:SimpleDataRecord>
+                            </sml:capabilities>
+                            <sml:contact>
+                                <sml:ContactList>
+                                    <sml:member>
+                                        <sml:ResponsibleParty>
+                                            <sml:individualName>TBA</sml:individualName>
+                                            <sml:organizationName>52North</sml:organizationName>
+                                            <sml:positionName>TBA</sml:positionName>
+                                            <sml:contactInfo>
+                                                <sml:phone>
+                                                    <sml:voice>+49(0)251/396 371-0</sml:voice>
+                                                </sml:phone>
+                                                <sml:address>
+                                                    <sml:deliveryPoint>Martin-Luther-King-Weg 24</sml:deliveryPoint>
+                                                    <sml:city>Münster</sml:city>
+                                                    <sml:postalCode>48155</sml:postalCode>
+                                                    <sml:country>Germany</sml:country>
+                                                    <sml:electronicMailAddress>info@52north.org</sml:electronicMailAddress>
+                                                </sml:address>
+                                                <sml:onlineResource xlink:href="http://52north.org/swe"/>
+                                            </sml:contactInfo>
+                                        </sml:ResponsibleParty>
+                                    </sml:member>
+                                </sml:ContactList>
+                            </sml:contact>
+                            <sml:outputs>
+                                <sml:OutputList>
+                                    <sml:output name="SULPHUR DIOXIDE AVG">
+                                        <swe:Quantity definition="http://sensors.portdebarcelona.cat/def/weather/properties#01">
+                                            <swe:uom code="µg/m3"/>
+                                        </swe:Quantity>
+                                    </sml:output>
+                                    <sml:output name="Sulphur Dioxide Max">
+                                        <swe:Quantity definition="http://sensors.portdebarcelona.cat/def/weather/properties#01M">
+                                            <swe:uom code="µg/m3"/>
+                                        </swe:Quantity>
+                                    </sml:output>
+                                    <sml:output name="Sulphur Dioxide Min">
+                                        <swe:Quantity definition="http://sensors.portdebarcelona.cat/def/weather/properties#01N">
+                                            <swe:uom code="µg/m3"/>
+                                        </swe:Quantity>
+                                    </sml:output>
+                                </sml:OutputList>
+                            </sml:outputs>
+                        </sml:System>
+                    </sml:member>
+                </sml:SensorML>
+            </swes:data>
+        </swes:SensorDescription>
+    </swes:description>
+</swes:DescribeSensorResponse>
