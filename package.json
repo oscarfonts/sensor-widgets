@@ -12,7 +12,7 @@
     "test": "npm run test:lint && npm run test:karma",
     "start": "webpack-dev-server --env.dev --open",
     "build": "npm run test && webpack --env.prod",
-    "deploy": "npm run build && && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "repository": {
     "type": "git",

@@ -25,7 +25,7 @@ beforeEach(() => {
 
 describe('SOS', () => {
   describe('#getCapabilities()', () => {
-    it('should return a well-formatted capabilities object',() => {
+    it('should return a well-formatted capabilities object', () => {
       // GIVEN
       fakeServer.respondWith('POST', '/sos', [200, { 'Content-Type': 'application/xml' }, getCapabilitiesXmlResponse]);
       const onSuccess = sinon.spy();
