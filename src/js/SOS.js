@@ -37,10 +37,10 @@ export default {
           procedure: toArray(offering.procedure),
           procedureDescriptionFormat: toArray(offering.procedureDescriptionFormat),
           observableProperty: toArray(offering.observableProperty),
-          relatedFeature: offering.relatedFeature.map((feature) => ({
+          relatedFeature: offering.relatedFeature ? offering.relatedFeature.map((feature) => ({
             featureOfInterest: feature.FeatureRelationship.target.href,
             role: [],
-          })),
+          })) : undefined,
           observedArea: {
             lowerLeft: offering.observedArea.Envelope.lowerCorner.split(' ').map((coord) => Number(coord)),
             upperRight: offering.observedArea.Envelope.upperCorner.split(' ').map((coord) => Number(coord)),
