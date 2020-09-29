@@ -128,25 +128,20 @@ export default {
     return this;
   },
 
-  getDataAvailability(procedure, offering, features, properties, callback, errorHandler) {
+  getDataAvailability(procedure, callback, errorHandler) {
     const request = {
-      request: 'GetDataAvailability',
+      'sos:GetDataAvailability': {
+        '@xmlns:sos': 'http://www.opengis.net/sos/2.0',
+        '@service': 'SOS',
+        '@version': '2.0.0',
+        'sos:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
+      },
     };
-    if (procedure) {
-      request.procedure = procedure;
-    }
-    if (offering) {
-      request.offering = offering;
-    }
-    if (features && features.length) {
-      request.featureOfInterest = features;
-    }
-    if (properties && properties.length) {
-      request.observedProperty = properties;
-    }
 
-    this._send_json(request, ({ dataAvailability }) => {
-      callback(dataAvailability);
+    this._send_xml(request, (response) => {
+      // Convert the description to a JSON object
+      const cleanResponse = response.GetDataAvailabilityResponse.dataAvailabilityMember;
+      callback(cleanResponse);
     }, errorHandler);
 
     return this;

@@ -15,6 +15,10 @@ import getFeatureOfInterestXmlRequest from './fixtures/getFeatureOfInterestReque
 import getFeatureOfInterestXmlResponse from './fixtures/getFeatureOfInterestResponse.xml';
 import getFeatureOfInterestJsonResponse from './fixtures/getFeatureOfInterestResponse.json';
 
+import getDataAvailabilityXmlRequest from './fixtures/getDataAvailabilityRequest.xml';
+import getDataAvailabilityXmlResponse from './fixtures/getDataAvailabilityResponse.xml';
+import getDataAvailabilityJsonResponse from './fixtures/getDataAvailabilityResponse.json';
+
 const removeWhiteSpace = (str) => str.replace(/\s+/g, ' ').replace(/>[\t ]+</g, '><').trim();
 
 let fakeServer;
@@ -86,6 +90,28 @@ describe('SOS', () => {
       expect(fakeServer.requests).to.have.lengthOf(1);
       expect(fakeServer.requests[0].requestBody)
         .to.equal(removeWhiteSpace(getFeatureOfInterestXmlRequest));
+    });
+  });
+
+  describe('#getDataAvailability()', () => {
+    it('should return a well-formatted dataAvailabilityMember collection object', () => {
+      // GIVEN
+      const givenProcedure = 'http://sensors.portdebarcelona.cat/def/weather/procedure';
+      fakeServer.respondWith('POST', '/sos', [200, { 'Content-Type': 'application/xml' }, getDataAvailabilityXmlResponse]);
+      const onSuccess = sinon.spy();
+      const onError = sinon.spy();
+
+      // WHEN
+      SOS.setUrl('/sos').getDataAvailability(givenProcedure, onSuccess, onError);
+      fakeServer.respond();
+
+      // THEN
+      sinon.assert.calledWith(onSuccess, getDataAvailabilityJsonResponse);
+      sinon.assert.notCalled(onError);
+
+      expect(fakeServer.requests).to.have.lengthOf(1);
+      expect(fakeServer.requests[0].requestBody)
+        .to.equal(removeWhiteSpace(getDataAvailabilityXmlRequest));
     });
   });
 });
