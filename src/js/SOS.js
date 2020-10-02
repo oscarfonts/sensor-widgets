@@ -140,11 +140,38 @@ export default {
 
     this._send_xml(request, (response) => {
       // Convert the description to a JSON object
-      const cleanResponse = response.GetDataAvailabilityResponse.dataAvailabilityMember;
+      const members = response.GetDataAvailabilityResponse.dataAvailabilityMember;
+      const cleanResponse = this._transform_times(members);
+
       callback(cleanResponse);
     }, errorHandler);
 
     return this;
+  },
+
+  _format_timeperiod(tp) {
+    return [tp['beginPosition'], tp['endPosition']];
+  },
+
+  _transform_times(members) {
+    let dictionary = []
+    for (let i = 0; i < members.length; i++) {
+      // save tp
+      const phenomenon_time = members[i]['phenomenonTime'];
+      if(phenomenon_time['TimePeriod']) {
+        // reformat tp
+        let formatted_tp = this._format_timeperiod(phenomenon_time['TimePeriod'])
+        members[i]['phenomenonTime'] = formatted_tp
+        // if id, save it in the dict
+        if (phenomenon_time['TimePeriod'].id) dictionary[`#${phenomenon_time['TimePeriod'].id}`] = formatted_tp;
+      }
+
+      // if link, get it
+      if(phenomenon_time.href) {
+        members[i]['phenomenonTime'] = dictionary[phenomenon_time.href];
+      }
+    }
+    return members
   },
 
   getObservation(offering, features, properties, time, callback, errorHandler) {
