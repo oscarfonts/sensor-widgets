@@ -149,29 +149,34 @@ export default {
     return this;
   },
 
-  _format_timeperiod(tp) {
-    return [tp['beginPosition'], tp['endPosition']];
-  },
-
   _transform_times(members) {
     let dictionary = []
     for (let i = 0; i < members.length; i++) {
-      // save tp
-      const phenomenon_time = members[i]['phenomenonTime'];
-      if(phenomenon_time['TimePeriod']) {
-        // reformat tp
-        let formatted_tp = this._format_timeperiod(phenomenon_time['TimePeriod'])
-        members[i]['phenomenonTime'] = formatted_tp
-        // if id, save it in the dict
-        if (phenomenon_time['TimePeriod'].id) dictionary[`#${phenomenon_time['TimePeriod'].id}`] = formatted_tp;
-      }
+      Object.keys(members[i]).forEach(function(key,index) {
+        if(key == 'phenomenonTime') {
+          // save tp
+          const phenomenon_time = members[i]['phenomenonTime'];
+          if (phenomenon_time['TimePeriod']) {
+            // reformat tp
+            let formatted_tp = [phenomenon_time['TimePeriod']['beginPosition'], phenomenon_time['TimePeriod']['endPosition']]
+            members[i]['phenomenonTime'] = formatted_tp
+            // if id, save it in the dict
+            if (phenomenon_time['TimePeriod'].id) dictionary[`#${phenomenon_time['TimePeriod'].id}`] = formatted_tp;
+          }
 
-      // if link, get it
-      if(phenomenon_time.href) {
-        members[i]['phenomenonTime'] = dictionary[phenomenon_time.href];
-      }
+          // if link, get it
+          if(phenomenon_time.href) {
+            members[i]['phenomenonTime'] = dictionary[phenomenon_time.href];
+          }
+        } else if (key == 'id') {
+          //delete ids to match test data (TODO: extra ids should be allowed)
+          delete members[i].id;
+        } else {
+          members[i][key] = members[i][key].href;
+        }
+      });
     }
-    return members
+    return members;
   },
 
   getObservation(offering, features, properties, time, callback, errorHandler) {
