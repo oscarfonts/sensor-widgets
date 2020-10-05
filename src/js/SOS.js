@@ -52,10 +52,13 @@ function sendXml(url, request, onSuccess, onError) {
       } catch (e) {
         // OK, not XML
       }
-      if (xhr.status === 200) {
+      if (xhr.status === 200 && !response.ExceptionReport) {
         onSuccess.call(null, resolveXmlLocalHrefs(response));
       } else if (onError) {
-        onError.call(null, xhr.statusText, url, request, response);
+        const errorMessage = response.ExceptionReport
+          ? response.ExceptionReport.Exception.ExceptionText
+          : xhr.statusText;
+        onError.call(null, errorMessage, url, request, response);
       }
     }
   };
@@ -64,34 +67,6 @@ function sendXml(url, request, onSuccess, onError) {
   xhr.setRequestHeader('Content-Type', 'application/xml');
   xhr.setRequestHeader('Accept', 'application/xml');
   xhr.send(XML.write(request));
-}
-
-function sendJson(url, request, onSuccess, onError) {
-  request.service = 'SOS';
-  request.version = '2.0.0';
-
-  const xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4) {
-      let response = xhr.responseText;
-      try {
-        response = JSON.parse(response);
-      } catch (e) {
-        // OK, not JSON
-      }
-      if (xhr.status === 200) {
-        onSuccess.call(null, response);
-      } else if (onError) {
-        onError.call(null, xhr.statusText, url, request, response);
-      }
-    }
-  };
-
-  xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.setRequestHeader('Accept', 'application/json');
-  xhr.send(JSON.stringify(request));
 }
 
 export default {
@@ -191,7 +166,7 @@ export default {
     };
 
     sendXml(this._url, request, (response) => {
-      const cleanResponse = response.GetFeatureOfInterestResponse.featureMember
+      const cleanResponse = toArray(response.GetFeatureOfInterestResponse.featureMember)
         .map((feature) => feature.SF_SpatialSamplingFeature)
         .map((feature) => ({
           identifier: {
@@ -231,7 +206,7 @@ export default {
     };
 
     sendXml(this._url, request, (response) => {
-      const cleanResponse = response.GetDataAvailabilityResponse.dataAvailabilityMember
+      const cleanResponse = toArray(response.GetDataAvailabilityResponse.dataAvailabilityMember)
         .map((member) => ({
           featureOfInterest: member.featureOfInterest.href,
           procedure: member.procedure.href,
@@ -249,41 +224,74 @@ export default {
   },
 
   getObservation(offering, features, properties, time, callback, errorHandler) {
+    let temporalFilter;
+    if (time) {
+      if (time.length && time.length === 2) {
+        temporalFilter = {
+          'fes:During': {
+            'fes:ValueReference': 'resultTime',
+            'gml:TimePeriod': {
+              '@gml:id': 'tp_1',
+              'gml:beginPosition': time[0],
+              'gml:endPosition': time[1],
+            },
+          },
+        };
+      } else {
+        temporalFilter = {
+          'fes:TEquals': {
+            'fes:ValueReference': 'resultTime',
+            'gml:TimeInstant': {
+              '@gml:id': 'ti_1',
+              'gml:timePosition': time,
+            },
+          },
+        };
+      }
+    }
+
     const request = {
-      request: 'GetObservation',
+      'sos:GetObservation': {
+        '@xmlns:sos': 'http://www.opengis.net/sos/2.0',
+        '@xmlns:fes': 'http://www.opengis.net/fes/2.0',
+        '@xmlns:gml': 'http://www.opengis.net/gml/3.2',
+        '@service': 'SOS',
+        '@version': '2.0.0',
+        ...(offering && { 'sos:offering': offering }),
+        ...(properties && properties.length && { 'sos:observedProperty': properties }),
+        ...(temporalFilter && { 'sos:temporalFilter': temporalFilter }),
+        ...(features && features.length && { 'sos:featureOfInterest': features }),
+      },
     };
 
-    if (offering) {
-      request.offering = offering;
-    }
-
-    if (features && features.length) {
-      request.featureOfInterest = features;
-    }
-
-    if (properties && properties.length) {
-      request.observedProperty = properties;
-    }
-
-    if (time) {
-      let operation;
-      if (time.length && time.length === 2) {
-        // Time Range
-        operation = 'during';
-      } else {
-        // Time Instant
-        operation = 'equals';
-      }
-      const filter = {};
-      filter[operation] = {
-        ref: 'om:resultTime',
-        value: time,
-      };
-      request.temporalFilter = [filter];
-    }
-
-    sendJson(this._url, request, ({ observations }) => {
-      callback(observations);
+    sendXml(this._url, request, (response) => {
+      const cleanResponse = toArray(response.GetObservationResponse.observationData)
+        .map((observation) => observation.OM_Observation)
+        .map((observation) => ({
+          type: observation.type.href,
+          procedure: observation.procedure.href,
+          observableProperty: observation.observedProperty.href,
+          featureOfInterest: {
+            identifier: {
+              codespace: 'http://www.opengis.net/def/nil/OGC/0/unknown',
+              value: observation.featureOfInterest.href,
+            },
+            name: {
+              codespace: 'http://www.opengis.net/def/nil/OGC/0/unknown',
+              value: observation.featureOfInterest.title,
+            },
+          },
+          phenomenonTime: observation.phenomenonTime.TimeInstant
+            ? observation.phenomenonTime.TimeInstant.timePosition
+            : [observation.phenomenonTime.TimePeriod.beginPosition,
+              observation.phenomenonTime.TimePeriod.endPosition],
+          resultTime: observation.resultTime.TimeInstant.timePosition,
+          result: {
+            uom: observation.result.uom,
+            value: observation.result['#text'],
+          },
+        }));
+      callback(cleanResponse);
     }, errorHandler);
 
     return this;
