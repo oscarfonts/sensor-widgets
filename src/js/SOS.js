@@ -4,6 +4,95 @@ import XML from './XML';
 
 export const isArray = (obj) => Object.prototype.toString.call(obj) === '[object Array]';
 export const toArray = (payload) => (isArray(payload) ? payload : [payload]);
+export const isObject = (val) => (typeof val === 'object');
+
+function resolveXmlLocalHrefs(document) {
+  const hrefs = {};
+
+  const resolve = (part) => {
+    if (isArray(part)) {
+      return part.map((item) => resolve(item));
+    }
+
+    if (!isObject(part)) {
+      return part;
+    }
+
+    const resolvedObject = {};
+
+    Object.entries(part).forEach(([key, value]) => {
+      if (value.id) {
+        hrefs[value.id] = { [key]: resolve(value) };
+      }
+      if (value.href && value.href.startsWith('#')) {
+        const { href, ...val } = value;
+        resolvedObject[key] = {
+          ...val,
+          ...hrefs[href.substring(1)],
+        };
+      } else {
+        resolvedObject[key] = resolve(value);
+      }
+    });
+
+    return resolvedObject;
+  };
+
+  return resolve(document);
+}
+
+function sendXml(url, request, onSuccess, onError) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      let response = xhr.responseText;
+      try {
+        response = XML.read(response, true);
+      } catch (e) {
+        // OK, not XML
+      }
+      if (xhr.status === 200) {
+        onSuccess.call(null, resolveXmlLocalHrefs(response));
+      } else if (onError) {
+        onError.call(null, xhr.statusText, url, request, response);
+      }
+    }
+  };
+
+  xhr.open('POST', url, true);
+  xhr.setRequestHeader('Content-Type', 'application/xml');
+  xhr.setRequestHeader('Accept', 'application/xml');
+  xhr.send(XML.write(request));
+}
+
+function sendJson(url, request, onSuccess, onError) {
+  request.service = 'SOS';
+  request.version = '2.0.0';
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      let response = xhr.responseText;
+      try {
+        response = JSON.parse(response);
+      } catch (e) {
+        // OK, not JSON
+      }
+      if (xhr.status === 200) {
+        onSuccess.call(null, response);
+      } else if (onError) {
+        onError.call(null, xhr.statusText, url, request, response);
+      }
+    }
+  };
+
+  xhr.open('POST', url, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader('Accept', 'application/json');
+  xhr.send(JSON.stringify(request));
+}
 
 export default {
   _url: null,
@@ -28,7 +117,7 @@ export default {
       },
     };
 
-    this._send_xml(request, (response) => {
+    sendXml(this._url, request, (response) => {
       const cleanResponse = response.Capabilities.contents.Contents.offering
         .map((offering) => offering.ObservationOffering)
         .map((offering) => ({
@@ -81,7 +170,7 @@ export default {
       },
     };
 
-    this._send_xml(request, (response) => {
+    sendXml(this._url, request, (response) => {
       // Convert the SensorML description to a JSON object
       const cleanResponse = response.DescribeSensorResponse.description
         .SensorDescription.data.SensorML.member;
@@ -101,7 +190,7 @@ export default {
       },
     };
 
-    this._send_xml(request, (response) => {
+    sendXml(this._url, request, (response) => {
       const cleanResponse = response.GetFeatureOfInterestResponse.featureMember
         .map((feature) => feature.SF_SpatialSamplingFeature)
         .map((feature) => ({
@@ -134,76 +223,29 @@ export default {
         '@service': 'SOS',
         '@version': '2.0.0',
         'gda:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
+        ...(procedure && { 'gda:procedure': procedure }),
+        ...(offering && { 'gda:offering': offering }),
+        ...(features && features.length && { 'gda:featureOfInterest': features }),
+        ...(properties && properties.length && { 'gda:observedProperty': properties }),
       },
     };
 
-    if (procedure) {
-      request['gda:GetDataAvailability'] = {
-        ...request['gda:GetDataAvailability'],
-        'gda:procedure': procedure,
-      };
-    }
-    if (offering) {
-      request['gda:GetDataAvailability'] = {
-        ...request['gda:GetDataAvailability'],
-        'gda:offering': offering,
-      };
-    }
-    if (features && features.length) {
-      request['gda:GetDataAvailability'] = {
-        ...request['gda:GetDataAvailability'],
-        'gda:featureOfInterest': features,
-      };
-    }
-    if (properties && properties.length) {
-      request['gda:GetDataAvailability'] = {
-        ...request['gda:GetDataAvailability'],
-        'gda:observedProperty': properties,
-      };
-    }
-
-    this._send_xml(request, (response) => {
-      // Convert the description to a JSON object
-      const members = response.GetDataAvailabilityResponse.dataAvailabilityMember;
-      const cleanResponse = this._transform_attributes(members);
+    sendXml(this._url, request, (response) => {
+      const cleanResponse = response.GetDataAvailabilityResponse.dataAvailabilityMember
+        .map((member) => ({
+          featureOfInterest: member.featureOfInterest.href,
+          procedure: member.procedure.href,
+          observedProperty: member.observedProperty.href,
+          phenomenonTime: [
+            member.phenomenonTime.TimePeriod.beginPosition,
+            member.phenomenonTime.TimePeriod.endPosition,
+          ],
+        }));
 
       callback(cleanResponse);
     }, errorHandler);
 
     return this;
-  },
-
-  _transform_attributes(members) {
-    const dictionary = [];
-
-    return members.map((member) => {
-      const newMember = { ...member };
-      Object.keys(newMember).forEach((key) => {
-        if (key === 'phenomenonTime') {
-          // save tp
-          const phenomenonTime = member[key];
-          if (phenomenonTime.TimePeriod) {
-            // reformat tp
-            const formattedTp = [phenomenonTime.TimePeriod.beginPosition,
-              phenomenonTime.TimePeriod.endPosition];
-            newMember[key] = formattedTp;
-            // if id, save it in the dict
-            if (phenomenonTime.TimePeriod.id) dictionary[`#${phenomenonTime.TimePeriod.id}`] = formattedTp;
-          }
-
-          // if link, get it
-          if (phenomenonTime.href) {
-            newMember[key] = dictionary[phenomenonTime.href];
-          }
-        } else if (key === 'id') {
-          // delete ids to match test data (TODO: extra ids should be allowed)
-          delete newMember.id;
-        } else {
-          newMember[key] = member[key].href;
-        }
-      });
-      return newMember;
-    });
   },
 
   getObservation(offering, features, properties, time, callback, errorHandler) {
@@ -240,79 +282,10 @@ export default {
       request.temporalFilter = [filter];
     }
 
-    this._send_json(request, ({ observations }) => {
+    sendJson(this._url, request, ({ observations }) => {
       callback(observations);
     }, errorHandler);
 
     return this;
-  },
-
-  _send_json(request, onSuccess, onError) {
-    request.service = 'SOS';
-    request.version = '2.0.0';
-
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        let response = xhr.responseText;
-        try {
-          response = JSON.parse(response);
-        } catch (e) {
-          // OK, not JSON
-        }
-        if (xhr.status === 200) {
-          onSuccess.call(this, response);
-        } else {
-          const e = {
-            status: xhr.statusText,
-            url: this._url,
-            request,
-            response,
-          };
-          if (onError) {
-            onError.call(this, e.status, e.url, e.request, e.response);
-          }
-        }
-      }
-    };
-
-    xhr.open('POST', this._url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.send(JSON.stringify(request));
-  },
-
-  _send_xml(request, onSuccess, onError) {
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        let response = xhr.responseText;
-        try {
-          response = XML.read(response, true);
-        } catch (e) {
-          // OK, not XML
-        }
-        if (xhr.status === 200) {
-          onSuccess.call(this, response);
-        } else {
-          const e = {
-            status: xhr.statusText,
-            url: this._url,
-            request,
-            response,
-          };
-          if (onError) {
-            onError.call(this, e.status, e.url, e.request, e.response);
-          }
-        }
-      }
-    };
-
-    xhr.open('POST', this._url, true);
-    xhr.setRequestHeader('Content-Type', 'application/xml');
-    xhr.setRequestHeader('Accept', 'application/xml');
-    xhr.send(XML.write(request));
   },
 };
