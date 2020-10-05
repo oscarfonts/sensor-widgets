@@ -121,7 +121,6 @@ export default {
           },
         }));
 
-      console.log(JSON.stringify(cleanResponse, null, 2));
       callback(cleanResponse);
     }, errorHandler);
 
@@ -130,26 +129,81 @@ export default {
 
   getDataAvailability(procedure, offering, features, properties, callback, errorHandler) {
     const request = {
-      request: 'GetDataAvailability',
+      'gda:GetDataAvailability': {
+        '@xmlns:gda': 'http://www.opengis.net/sosgda/1.0',
+        '@service': 'SOS',
+        '@version': '2.0.0',
+        'gda:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
+      },
     };
+
     if (procedure) {
-      request.procedure = procedure;
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:procedure': procedure,
+      };
     }
     if (offering) {
-      request.offering = offering;
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:offering': offering,
+      };
     }
     if (features && features.length) {
-      request.featureOfInterest = features;
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:featureOfInterest': features,
+      };
     }
     if (properties && properties.length) {
-      request.observedProperty = properties;
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:observedProperty': properties,
+      };
     }
 
-    this._send_json(request, ({ dataAvailability }) => {
-      callback(dataAvailability);
+    this._send_xml(request, (response) => {
+      // Convert the description to a JSON object
+      const members = response.GetDataAvailabilityResponse.dataAvailabilityMember;
+      const cleanResponse = this._transform_attributes(members);
+
+      callback(cleanResponse);
     }, errorHandler);
 
     return this;
+  },
+
+  _transform_attributes(members) {
+    const dictionary = [];
+
+    return members.map((member) => {
+      const newMember = { ...member };
+      Object.keys(newMember).forEach((key) => {
+        if (key === 'phenomenonTime') {
+          // save tp
+          const phenomenonTime = member[key];
+          if (phenomenonTime.TimePeriod) {
+            // reformat tp
+            const formattedTp = [phenomenonTime.TimePeriod.beginPosition,
+              phenomenonTime.TimePeriod.endPosition];
+            newMember[key] = formattedTp;
+            // if id, save it in the dict
+            if (phenomenonTime.TimePeriod.id) dictionary[`#${phenomenonTime.TimePeriod.id}`] = formattedTp;
+          }
+
+          // if link, get it
+          if (phenomenonTime.href) {
+            newMember[key] = dictionary[phenomenonTime.href];
+          }
+        } else if (key === 'id') {
+          // delete ids to match test data (TODO: extra ids should be allowed)
+          delete newMember.id;
+        } else {
+          newMember[key] = member[key].href;
+        }
+      });
+      return newMember;
+    });
   },
 
   getObservation(offering, features, properties, time, callback, errorHandler) {

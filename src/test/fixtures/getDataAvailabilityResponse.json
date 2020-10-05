@@ -1,0 +1,29 @@
+[
+  {
+    "featureOfInterest" : "http://sensors.portdebarcelona.cat/def/weather/features#01",
+    "procedure" : "http://sensors.portdebarcelona.cat/def/weather/procedure",
+    "observedProperty" : "http://sensors.portdebarcelona.cat/def/weather/properties#30N",
+    "phenomenonTime" : [
+      "2020-08-03T16:10:00.000Z",
+      "2020-09-28T15:50:00.000Z"
+    ]
+  },
+  {
+    "featureOfInterest" : "http://sensors.portdebarcelona.cat/def/weather/features#01",
+    "procedure" : "http://sensors.portdebarcelona.cat/def/weather/procedure",
+    "observedProperty" : "http://sensors.portdebarcelona.cat/def/weather/properties#30M",
+    "phenomenonTime" : [
+      "2020-08-03T16:10:00.000Z",
+      "2020-09-28T15:50:00.000Z"
+    ]
+  },
+  {
+    "featureOfInterest" : "http://sensors.portdebarcelona.cat/def/weather/features#01",
+    "procedure" : "http://sensors.portdebarcelona.cat/def/weather/procedure",
+    "observedProperty" : "http://sensors.portdebarcelona.cat/def/weather/properties#30",
+    "phenomenonTime" : [
+      "2020-08-03T16:10:00.000Z",
+      "2020-09-28T15:50:00.000Z"
+    ]
+  }
+]

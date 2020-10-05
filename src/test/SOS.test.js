@@ -15,6 +15,10 @@ import getFeatureOfInterestXmlRequest from './fixtures/getFeatureOfInterestReque
 import getFeatureOfInterestXmlResponse from './fixtures/getFeatureOfInterestResponse.xml';
 import getFeatureOfInterestJsonResponse from './fixtures/getFeatureOfInterestResponse.json';
 
+import getDataAvailabilityXmlRequest from './fixtures/getDataAvailabilityRequest.xml';
+import getDataAvailabilityXmlResponse from './fixtures/getDataAvailabilityResponse.xml';
+import getDataAvailabilityJsonResponse from './fixtures/getDataAvailabilityResponse.json';
+
 const removeWhiteSpace = (str) => str.replace(/\s+/g, ' ').replace(/>[\t ]+</g, '><').trim();
 
 let fakeServer;
@@ -40,7 +44,7 @@ describe('SOS', () => {
       sinon.assert.notCalled(onError);
 
       expect(fakeServer.requests).to.have.lengthOf(1);
-      expect(fakeServer.requests[0].requestBody)
+      expect(removeWhiteSpace(fakeServer.requests[0].requestBody))
         .to.equal(removeWhiteSpace(getCapabilitiesXmlRequest));
     });
   });
@@ -62,7 +66,7 @@ describe('SOS', () => {
       sinon.assert.notCalled(onError);
 
       expect(fakeServer.requests).to.have.lengthOf(1);
-      expect(fakeServer.requests[0].requestBody)
+      expect(removeWhiteSpace(fakeServer.requests[0].requestBody))
         .to.equal(removeWhiteSpace(describeSensorXmlRequest));
     });
   });
@@ -84,8 +88,39 @@ describe('SOS', () => {
       sinon.assert.notCalled(onError);
 
       expect(fakeServer.requests).to.have.lengthOf(1);
-      expect(fakeServer.requests[0].requestBody)
+      expect(removeWhiteSpace(fakeServer.requests[0].requestBody))
         .to.equal(removeWhiteSpace(getFeatureOfInterestXmlRequest));
+    });
+  });
+
+  describe('#getDataAvailability()', () => {
+    it('should return a well-formatted dataAvailabilityMember collection object', () => {
+      // GIVEN
+      const givenProcedure = 'http://sensors.portdebarcelona.cat/def/weather/procedure';
+      const givenOffering = 'http://sensors.portdebarcelona.cat/def/weather/offerings#10M';
+      const givenFeatures = [
+        'http://sensors.portdebarcelona.cat/def/weather/features#01',
+      ];
+      const givenProperties = [
+        'http://sensors.portdebarcelona.cat/def/weather/properties#30',
+        'http://sensors.portdebarcelona.cat/def/weather/properties#30M',
+        'http://sensors.portdebarcelona.cat/def/weather/properties#30N',
+      ];
+      fakeServer.respondWith('POST', '/sos', [200, { 'Content-Type': 'application/xml' }, getDataAvailabilityXmlResponse]);
+      const onSuccess = sinon.spy();
+      const onError = sinon.spy();
+
+      // WHEN
+      SOS.setUrl('/sos').getDataAvailability(givenProcedure, givenOffering, givenFeatures, givenProperties, onSuccess, onError);
+      fakeServer.respond();
+
+      // THEN
+      sinon.assert.calledWith(onSuccess, getDataAvailabilityJsonResponse);
+      sinon.assert.notCalled(onError);
+
+      expect(fakeServer.requests).to.have.lengthOf(1);
+      expect(removeWhiteSpace(fakeServer.requests[0].requestBody))
+        .to.equal(removeWhiteSpace(getDataAvailabilityXmlRequest));
     });
   });
 });

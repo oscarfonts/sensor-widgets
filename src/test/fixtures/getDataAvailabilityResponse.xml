@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gda:GetDataAvailabilityResponse xmlns:gda="http://www.opengis.net/sosgda/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/ef/4.0 http://inspire.ec.europa.eu/schemas/ef/4.0/EnvironmentalMonitoringFacilities.xsd http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd http://www.opengis.net/sosgda/1.0 http://waterml2.org/schemas/gda/1.0/gda.xsd">
+    <gda:dataAvailabilityMember gml:id="dam_1">
+        <gda:procedure xlink:href="http://sensors.portdebarcelona.cat/def/weather/procedure" xlink:title="Weather - Port de Barcelona"/>
+        <gda:observedProperty xlink:href="http://sensors.portdebarcelona.cat/def/weather/properties#30N" xlink:title="Wind Speed MIN"/>
+        <gda:featureOfInterest xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#01" xlink:title="Dispensari"/>
+        <gda:phenomenonTime>
+            <gml:TimePeriod gml:id="tp_1">
+                <gml:beginPosition>2020-08-03T16:10:00.000Z</gml:beginPosition>
+                <gml:endPosition>2020-09-28T15:50:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+        </gda:phenomenonTime>
+    </gda:dataAvailabilityMember>
+    <gda:dataAvailabilityMember gml:id="dam_2">
+        <gda:procedure xlink:href="http://sensors.portdebarcelona.cat/def/weather/procedure" xlink:title="Weather - Port de Barcelona"/>
+        <gda:observedProperty xlink:href="http://sensors.portdebarcelona.cat/def/weather/properties#30M" xlink:title="Maximum wind speed"/>
+        <gda:featureOfInterest xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#01" xlink:title="Dispensari"/>
+        <gda:phenomenonTime xlink:href="#tp_1"/>
+    </gda:dataAvailabilityMember>
+    <gda:dataAvailabilityMember gml:id="dam_3">
+        <gda:procedure xlink:href="http://sensors.portdebarcelona.cat/def/weather/procedure" xlink:title="Weather - Port de Barcelona"/>
+        <gda:observedProperty xlink:href="http://sensors.portdebarcelona.cat/def/weather/properties#30" xlink:title="Wind Speed"/>
+        <gda:featureOfInterest xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#01" xlink:title="Dispensari"/>
+        <gda:phenomenonTime xlink:href="#tp_1"/>
+    </gda:dataAvailabilityMember>
+</gda:GetDataAvailabilityResponse>
