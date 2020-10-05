@@ -121,22 +121,46 @@ export default {
           },
         }));
 
-      console.log(JSON.stringify(cleanResponse, null, 2));
       callback(cleanResponse);
     }, errorHandler);
 
     return this;
   },
 
-  getDataAvailability(procedure, callback, errorHandler) {
+  getDataAvailability(procedure, offering, features, properties, callback, errorHandler) {
     const request = {
-      'sos:GetDataAvailability': {
-        '@xmlns:sos': 'http://www.opengis.net/sos/2.0',
+      'gda:GetDataAvailability': {
+        '@xmlns:gda': 'http://www.opengis.net/sosgda/1.0',
         '@service': 'SOS',
         '@version': '2.0.0',
-        'sos:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
+        'gda:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
       },
     };
+
+    if (procedure) {
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:procedure': procedure,
+      };
+    }
+    if (offering) {
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:offering': offering,
+      };
+    }
+    if (features && features.length) {
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:featureOfInterest': features,
+      };
+    }
+    if (properties && properties.length) {
+      request['gda:GetDataAvailability'] = {
+        ...request['gda:GetDataAvailability'],
+        'gda:observedProperty': properties,
+      };
+    }
 
     this._send_xml(request, (response) => {
       // Convert the description to a JSON object
@@ -150,33 +174,36 @@ export default {
   },
 
   _transform_attributes(members) {
-    let dictionary = []
-    for (let i = 0; i < members.length; i++) {
-      Object.keys(members[i]).forEach(function(key) {
-        if(key == 'phenomenonTime') {
+    const dictionary = [];
+
+    return members.map((member) => {
+      const newMember = { ...member };
+      Object.keys(newMember).forEach((key) => {
+        if (key === 'phenomenonTime') {
           // save tp
-          const phenomenon_time = members[i][key];
-          if (phenomenon_time['TimePeriod']) {
+          const phenomenonTime = member[key];
+          if (phenomenonTime.TimePeriod) {
             // reformat tp
-            let formatted_tp = [phenomenon_time['TimePeriod']['beginPosition'], phenomenon_time['TimePeriod']['endPosition']]
-            members[i][key] = formatted_tp
+            const formattedTp = [phenomenonTime.TimePeriod.beginPosition,
+              phenomenonTime.TimePeriod.endPosition];
+            newMember[key] = formattedTp;
             // if id, save it in the dict
-            if (phenomenon_time['TimePeriod'].id) dictionary[`#${phenomenon_time['TimePeriod'].id}`] = formatted_tp;
+            if (phenomenonTime.TimePeriod.id) dictionary[`#${phenomenonTime.TimePeriod.id}`] = formattedTp;
           }
 
           // if link, get it
-          if(phenomenon_time.href) {
-            members[i][key] = dictionary[phenomenon_time.href];
+          if (phenomenonTime.href) {
+            newMember[key] = dictionary[phenomenonTime.href];
           }
-        } else if (key == 'id') {
-          //delete ids to match test data (TODO: extra ids should be allowed)
-          delete members[i].id;
+        } else if (key === 'id') {
+          // delete ids to match test data (TODO: extra ids should be allowed)
+          delete newMember.id;
         } else {
-          members[i][key] = members[i][key].href;
+          newMember[key] = member[key].href;
         }
       });
-    }
-    return members;
+      return newMember;
+    });
   },
 
   getObservation(offering, features, properties, time, callback, errorHandler) {
