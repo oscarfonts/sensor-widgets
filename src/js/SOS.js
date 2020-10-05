@@ -141,7 +141,7 @@ export default {
     this._send_xml(request, (response) => {
       // Convert the description to a JSON object
       const members = response.GetDataAvailabilityResponse.dataAvailabilityMember;
-      const cleanResponse = this._transform_times(members);
+      const cleanResponse = this._transform_attributes(members);
 
       callback(cleanResponse);
     }, errorHandler);
@@ -149,24 +149,24 @@ export default {
     return this;
   },
 
-  _transform_times(members) {
+  _transform_attributes(members) {
     let dictionary = []
     for (let i = 0; i < members.length; i++) {
-      Object.keys(members[i]).forEach(function(key,index) {
+      Object.keys(members[i]).forEach(function(key) {
         if(key == 'phenomenonTime') {
           // save tp
-          const phenomenon_time = members[i]['phenomenonTime'];
+          const phenomenon_time = members[i][key];
           if (phenomenon_time['TimePeriod']) {
             // reformat tp
             let formatted_tp = [phenomenon_time['TimePeriod']['beginPosition'], phenomenon_time['TimePeriod']['endPosition']]
-            members[i]['phenomenonTime'] = formatted_tp
+            members[i][key] = formatted_tp
             // if id, save it in the dict
             if (phenomenon_time['TimePeriod'].id) dictionary[`#${phenomenon_time['TimePeriod'].id}`] = formatted_tp;
           }
 
           // if link, get it
           if(phenomenon_time.href) {
-            members[i]['phenomenonTime'] = dictionary[phenomenon_time.href];
+            members[i][key] = dictionary[phenomenon_time.href];
           }
         } else if (key == 'id') {
           //delete ids to match test data (TODO: extra ids should be allowed)
