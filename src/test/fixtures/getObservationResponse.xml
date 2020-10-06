@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:GetObservationResponse xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:om="http://www.opengis.net/om/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetObservation.xsd http://inspire.ec.europa.eu/schemas/ef/4.0 http://inspire.ec.europa.eu/schemas/ef/4.0/EnvironmentalMonitoringFacilities.xsd http://www.opengis.net/om/2.0 http://schemas.opengis.net/om/2.0/observation.xsd">
+    <sos:observationData>
+        <om:OM_Observation gml:id="o_12762013">
+            <om:type xlink:href="http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement"/>
+            <om:phenomenonTime>
+                <gml:TimeInstant gml:id="phenomenonTime_12762013">
+                    <gml:timePosition>2020-10-05T16:06:00.000Z</gml:timePosition>
+                </gml:TimeInstant>
+            </om:phenomenonTime>
+            <om:resultTime xlink:href="#phenomenonTime_12762013"/>
+            <om:procedure xlink:href="http://sensors.portdebarcelona.cat/def/weather/procedure" xlink:title="Weather - Port de Barcelona"/>
+            <om:observedProperty xlink:href="http://sensors.portdebarcelona.cat/def/weather/properties#31" xlink:title="Wind direction"/>
+            <om:featureOfInterest xlink:href="http://sensors.portdebarcelona.cat/def/weather/features#02" xlink:title="Sirena"/>
+            <om:result xmlns:ns="http://www.opengis.net/gml/3.2" uom="º" xsi:type="ns:MeasureType">83.0</om:result>
+        </om:OM_Observation>
+    </sos:observationData>
+</sos:GetObservationResponse>
