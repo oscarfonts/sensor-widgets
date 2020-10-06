@@ -19,6 +19,10 @@ import getDataAvailabilityXmlRequest from './fixtures/getDataAvailabilityRequest
 import getDataAvailabilityXmlResponse from './fixtures/getDataAvailabilityResponse.xml';
 import getDataAvailabilityJsonResponse from './fixtures/getDataAvailabilityResponse.json';
 
+import getObservationXmlRequest from './fixtures/getObservationRequest.xml';
+import getObservationXmlResponse from './fixtures/getObservationResponse.xml';
+import getObservationJsonResponse from './fixtures/getObservationResponse.json';
+
 const removeWhiteSpace = (str) => str.replace(/\s+/g, ' ').replace(/>[\t ]+</g, '><').trim();
 
 let fakeServer;
@@ -121,6 +125,35 @@ describe('SOS', () => {
       expect(fakeServer.requests).to.have.lengthOf(1);
       expect(removeWhiteSpace(fakeServer.requests[0].requestBody))
         .to.equal(removeWhiteSpace(getDataAvailabilityXmlRequest));
+    });
+  });
+
+  describe('#getObservation()', () => {
+    it('should return a well-formatted collection of observations', () => {
+      // GIVEN
+      const givenOffering = 'http://sensors.portdebarcelona.cat/def/weather/offerings#1M';
+      const givenFeatures = [
+        'http://sensors.portdebarcelona.cat/def/weather/features#02',
+      ];
+      const givenProperties = [
+        'http://sensors.portdebarcelona.cat/def/weather/properties#31',
+      ];
+      const givenTime = 'latest';
+      fakeServer.respondWith('POST', '/sos', [200, { 'Content-Type': 'application/xml' }, getObservationXmlResponse]);
+      const onSuccess = sinon.spy();
+      const onError = sinon.spy();
+
+      // WHEN
+      SOS.setUrl('/sos').getObservation(givenOffering, givenFeatures, givenProperties, givenTime, onSuccess, onError);
+      fakeServer.respond();
+
+      // THEN
+      sinon.assert.calledWith(onSuccess, getObservationJsonResponse);
+      sinon.assert.notCalled(onError);
+
+      expect(fakeServer.requests).to.have.lengthOf(1);
+      expect(removeWhiteSpace(fakeServer.requests[0].requestBody))
+        .to.equal(removeWhiteSpace(getObservationXmlRequest));
     });
   });
 });

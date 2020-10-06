@@ -288,7 +288,7 @@ export default {
           resultTime: observation.resultTime.TimeInstant.timePosition,
           result: {
             uom: observation.result.uom,
-            value: observation.result['#text'],
+            value: Number(observation.result['#text']),
           },
         }));
       callback(cleanResponse);
