@@ -102,10 +102,12 @@ export default {
           procedure: toArray(offering.procedure),
           procedureDescriptionFormat: toArray(offering.procedureDescriptionFormat),
           observableProperty: toArray(offering.observableProperty),
-          relatedFeature: offering.relatedFeature ? offering.relatedFeature.map((feature) => ({
-            featureOfInterest: feature.FeatureRelationship.target.href,
-            role: [],
-          })) : undefined,
+          relatedFeature: offering.relatedFeature
+            ? toArray(offering.relatedFeature).map((feature) => ({
+              featureOfInterest: feature.FeatureRelationship.target.href,
+              role: [],
+            }))
+            : undefined,
           observedArea: {
             lowerLeft: offering.observedArea.Envelope.lowerCorner.split(' ').map((coord) => Number(coord)),
             upperRight: offering.observedArea.Envelope.upperCorner.split(' ').map((coord) => Number(coord)),
@@ -265,33 +267,36 @@ export default {
     };
 
     sendXml(this._url, request, (response) => {
-      const cleanResponse = toArray(response.GetObservationResponse.observationData)
-        .map((observation) => observation.OM_Observation)
-        .map((observation) => ({
-          type: observation.type.href,
-          procedure: observation.procedure.href,
-          observableProperty: observation.observedProperty.href,
-          featureOfInterest: {
-            identifier: {
-              codespace: 'http://www.opengis.net/def/nil/OGC/0/unknown',
-              value: observation.featureOfInterest.href,
+      if (!response.GetObservationResponse.observationData) {
+        callback([]);
+      } else {
+        const cleanResponse = toArray(response.GetObservationResponse.observationData)
+          .map((observation) => observation.OM_Observation)
+          .map((observation) => ({
+            procedure: observation.procedure.href,
+            observableProperty: observation.observedProperty.href,
+            featureOfInterest: {
+              identifier: {
+                codespace: 'http://www.opengis.net/def/nil/OGC/0/unknown',
+                value: observation.featureOfInterest.href,
+              },
+              name: {
+                codespace: 'http://www.opengis.net/def/nil/OGC/0/unknown',
+                value: observation.featureOfInterest.title,
+              },
             },
-            name: {
-              codespace: 'http://www.opengis.net/def/nil/OGC/0/unknown',
-              value: observation.featureOfInterest.title,
+            phenomenonTime: observation.phenomenonTime.TimeInstant
+              ? observation.phenomenonTime.TimeInstant.timePosition
+              : [observation.phenomenonTime.TimePeriod.beginPosition,
+                observation.phenomenonTime.TimePeriod.endPosition],
+            resultTime: observation.resultTime.TimeInstant.timePosition,
+            result: {
+              uom: observation.result.uom,
+              value: Number(observation.result['#text']),
             },
-          },
-          phenomenonTime: observation.phenomenonTime.TimeInstant
-            ? observation.phenomenonTime.TimeInstant.timePosition
-            : [observation.phenomenonTime.TimePeriod.beginPosition,
-              observation.phenomenonTime.TimePeriod.endPosition],
-          resultTime: observation.resultTime.TimeInstant.timePosition,
-          result: {
-            uom: observation.result.uom,
-            value: Number(observation.result['#text']),
-          },
-        }));
-      callback(cleanResponse);
+          }));
+        callback(cleanResponse);
+      }
     }, errorHandler);
 
     return this;

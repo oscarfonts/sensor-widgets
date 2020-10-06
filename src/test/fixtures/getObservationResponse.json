@@ -1,6 +1,5 @@
 [
   {
-    "type" : "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
     "procedure" : "http://sensors.portdebarcelona.cat/def/weather/procedure",
     "observableProperty" : "http://sensors.portdebarcelona.cat/def/weather/properties#31",
     "featureOfInterest" : {
