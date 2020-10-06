@@ -26,6 +26,7 @@ function resolveXmlLocalHrefs(document) {
       }
       if (value.href && value.href.startsWith('#')) {
         const { href, ...val } = value;
+
         resolvedObject[key] = {
           ...val,
           ...hrefs[href.substring(1)],
@@ -197,7 +198,6 @@ export default {
         '@xmlns:gda': 'http://www.opengis.net/sosgda/1.0',
         '@service': 'SOS',
         '@version': '2.0.0',
-        'gda:procedure': 'http://sensors.portdebarcelona.cat/def/weather/procedure',
         ...(procedure && { 'gda:procedure': procedure }),
         ...(offering && { 'gda:offering': offering }),
         ...(features && features.length && { 'gda:featureOfInterest': features }),
