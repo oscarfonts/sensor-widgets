@@ -2,6 +2,7 @@
 <head>
     <title>Sensor Widgets Simple Example</title>
     <script src="../SensorWidgets.js"></script>
+    <script src="../config.js"></script>
 </head>
 <body>
     <div id="widget-container" style="height:50%"></div>
@@ -38,7 +39,7 @@
         }
 
         new SensorWidget('timechart', {
-           "service": "https://demo.geomatico.es/52n-sos/service",
+           "service":  window.sosUrl ? window.sosUrl : '/52n-sos/service',
            "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#30M",
            "title": "Temperature",
            "features": [
@@ -56,7 +57,7 @@
         }, document.getElementById('widget-container'));
 
         new SensorWidget('timechart', {
-           "service": "https://demo.geomatico.es/52n-sos/service",
+           "service":  window.sosUrl ? window.sosUrl : '/52n-sos/service',
            "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#30M",
            "title": "Wind Speed",
            "features": [

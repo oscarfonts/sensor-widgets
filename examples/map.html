@@ -2,9 +2,10 @@
 <head>
     <title>Map Widget Example</title>
     <script src="../SensorWidgets.js"></script>
+    <script src="../config.js"></script>
     <script>
         SensorWidget('map', {
-            "service": "https://demo.geomatico.es/52n-sos/service",
+            "service": window.sosUrl ? window.sosUrl : '/52n-sos/service',
             "offering": "http://sensors.portdebarcelona.cat/def/weather/offerings#10M",
             "features": [
                 "http://sensors.portdebarcelona.cat/def/weather/features#10",
