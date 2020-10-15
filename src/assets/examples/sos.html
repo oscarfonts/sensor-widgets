@@ -2,9 +2,10 @@
 <head>
     <title>Sensor Widgets Simple Example</title>
     <script src="../SensorWidgets.js"></script>
+    <script src="../config.js"></script>
     <script>
         getSOS(function(SOS) {
-            SOS.setUrl("https://demo.geomatico.es/52n-sos/service");
+            SOS.setUrl(window.sosUrl ? window.sosUrl : '/52n-sos/service');
             SOS.getCapabilities(function(capabilities) {
                 document.getElementById("capabilities").innerHTML = JSON.stringify(capabilities, null, 2);
             });
