@@ -87,7 +87,7 @@ Query is sent via AJAX, and one of the two callback functions is called:
 
 Simple usage example::
 
-    SOS.setUrl("http://demo.geomati.co/sos/json");
+    SOS.setUrl("http://demo.geomatico.es/52n-sos/service");
     SOS.getCapabilities(function(contents) {
         console.log("Service has " + contents.length + " offerings.");
     });

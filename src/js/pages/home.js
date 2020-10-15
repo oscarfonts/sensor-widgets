@@ -79,14 +79,12 @@ const quickRefresh = 15; // seconds
 const slowRefresh = 120; // seconds
 
 let now = new Date();
-// var now = new Date(2012, 5, 11, 3, 0, 0);
 let threeHoursAgo = new Date(now.getTime() - 1000 * 60 * 60 * 3);
 let aDayAgo = new Date(now.getTime() - 1000 * 60 * 60 * 24);
 
 const defs = {
   service() {
-    return 'https://demo.geomatico.es/52n-sos/service';
-    // return "http://sensors.portdebarcelona.cat/sos/json";
+    return window.sosUrl ? window.sosUrl : '/52n-sos/service';
   },
   offering(p) {
     return `http://sensors.portdebarcelona.cat/def/weather/offerings#${p}`;

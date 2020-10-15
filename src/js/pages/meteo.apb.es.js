@@ -11,9 +11,7 @@ i18n.setLang('ca');
 
 const defs = {
   service() {
-    return 'https://demo.geomatico.es/52n-sos/service';
-    // return "http://172.17.4.37:8080/52n-sos/sos/json";
-    // return "/52n-sos/sos/json";
+    return window.sosUrl ? window.sosUrl : '/52n-sos/service';
   },
   offering(p) {
     return `http://sensors.portdebarcelona.cat/def/weather/offerings#${p}`;
